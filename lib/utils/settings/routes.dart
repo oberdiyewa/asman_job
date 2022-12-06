@@ -1,6 +1,6 @@
-import 'package:asmanshop/components/ui/screens/error_page.dart';
-import 'package:asmanshop/features/authentication/auth_bloc.dart';
-import 'package:asmanshop/utils/globals/enums.dart';
+import 'package:asman_work/components/ui/screens/error_page.dart';
+import 'package:asman_work/features/authentication/auth_bloc.dart';
+import 'package:asman_work/utils/globals/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

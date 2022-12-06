@@ -5,10 +5,10 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-import 'package:asmanshop/app/view/app.dart';
-import 'package:asmanshop/data/repository/auth_repository.dart';
-import 'package:asmanshop/data/repository/user_repository.dart';
-import 'package:asmanshop/features/counter/view/counter_page.dart';
+import 'package:asman_work/app/view/app.dart';
+import 'package:asman_work/data/repository/auth_repository.dart';
+import 'package:asman_work/data/repository/user_repository.dart';
+import 'package:asman_work/features/counter/view/counter_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

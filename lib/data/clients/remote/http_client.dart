@@ -1,5 +1,5 @@
-import 'package:asmanshop/data/clients/remote/interceptors/auth_interceptor.dart';
-import 'package:asmanshop/data/clients/remote/interceptors/log_interceptor.dart';
+import 'package:asman_work/data/clients/remote/interceptors/auth_interceptor.dart';
+import 'package:asman_work/data/clients/remote/interceptors/log_interceptor.dart';
 import 'package:dio/dio.dart';
 
 class DioClient {

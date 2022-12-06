@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:asmanshop/l10n/l10n.dart';
+import 'package:asman_work/l10n/l10n.dart';
 
 import '../cubit/counter_cubit.dart';
 

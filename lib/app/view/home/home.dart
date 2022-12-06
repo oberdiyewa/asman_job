@@ -1,13 +1,9 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
-import 'package:asmanshop/app/view/helpers.dart';
-import 'package:asmanshop/app/view/home/search_work_tab.dart';
-import 'package:asmanshop/app/view/home/search_worker_tab.dart';
-import 'package:asmanshop/app/view/home/tabbar.dart';
+import 'package:asman_work/app/view/helpers.dart';
+import 'package:asman_work/app/view/home/tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
-
-import 'bottom_navbar.dart';
+import './bottom_navbar.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -20,7 +16,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TabController? tabController;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     tabController = TabController(length: 2, vsync: this);
     tabController!.addListener(() {
@@ -33,8 +28,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.yellow,
-        bottomNavigationBar: myBottomNavigationBar(context),
-        floatingActionButton: myFloatingActionButton(),
+        bottomNavigationBar: const CustomBottomBar(),
+        floatingActionButton: customFloatingActionButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: Stack(
           children: [
@@ -128,7 +123,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     );
   }
 
-  Container myFloatingActionButton() {
+  Container customFloatingActionButton() {
     return Container(
       width: 60,
       height: 60,

@@ -1,5 +1,5 @@
-import 'package:asmanshop/data/model/user.dart';
-import 'package:asmanshop/utils/globals/enums.dart';
+import 'package:asman_work/data/model/user.dart';
+import 'package:asman_work/utils/globals/enums.dart';
 import 'package:equatable/equatable.dart';
 
 class AuthenticationState extends Equatable {

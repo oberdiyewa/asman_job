@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:asmanshop/data/model/user.dart';
-import 'package:asmanshop/data/repository/auth_repository.dart';
-import 'package:asmanshop/data/repository/user_repository.dart';
-import 'package:asmanshop/features/authentication/auth_event.dart';
-import 'package:asmanshop/features/authentication/auth_state.dart';
-import 'package:asmanshop/utils/globals/enums.dart';
+import 'package:asman_work/data/model/user.dart';
+import 'package:asman_work/data/repository/auth_repository.dart';
+import 'package:asman_work/data/repository/user_repository.dart';
+import 'package:asman_work/features/authentication/auth_event.dart';
+import 'package:asman_work/features/authentication/auth_state.dart';
+import 'package:asman_work/utils/globals/enums.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 

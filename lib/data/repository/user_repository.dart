@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:asmanshop/data/model/user.dart';
+import 'package:asman_work/data/model/user.dart';
 
-import 'package:asmanshop/data/providers/remote/user_provider.dart';
+import 'package:asman_work/data/providers/remote/user_provider.dart';
 
 class UserRepository {
   User? _user;

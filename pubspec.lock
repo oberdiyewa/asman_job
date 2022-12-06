@@ -28,7 +28,7 @@ packages:
       path: "."
       ref: dev_oguljemal
       resolved-ref: d1222df3ecd5644d14cbf2353e3c3692e5ff7b80
-      url: "http://git.asmantiz.com/Koch/asman_flutter_uikit.git"
+      url: "https://git.asmantiz.com/Koch/asman_flutter_uikit.git"
     source: git
     version: "0.1.6"
   async:

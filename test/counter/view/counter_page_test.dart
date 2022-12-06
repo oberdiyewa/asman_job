@@ -5,8 +5,8 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-import 'package:asmanshop/features/counter/cubit/counter_cubit.dart';
-import 'package:asmanshop/features/counter/view/counter_page.dart';
+import 'package:asman_work/features/counter/cubit/counter_cubit.dart';
+import 'package:asman_work/features/counter/view/counter_page.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,4 +1,4 @@
-import 'package:asmanshop/utils/settings/extentions.dart';
+import 'package:asman_work/utils/settings/extentions.dart';
 import 'package:dio/dio.dart';
 
 class LoggerInterceptor extends Interceptor {
