@@ -2,12 +2,12 @@ import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 import '../helpers.dart';
 
 class CustomBottomBar extends StatefulWidget {
   const CustomBottomBar({super.key});
-
   @override
   State<CustomBottomBar> createState() => _CustomBottomBarState();
 }
@@ -50,6 +50,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                 InkWell(
                   onTap: () {
                     debugPrint('Search basyldy');
+                    GoRouter.of(context).push('/login');
                   },
                   child: SvgPicture.asset(
                     MyAsset.searchIcon,

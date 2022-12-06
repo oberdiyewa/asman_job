@@ -28,9 +28,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.yellow,
-        bottomNavigationBar: const CustomBottomBar(),
-        floatingActionButton: customFloatingActionButton(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: Stack(
           children: [
             Image.asset(MyAsset.mapImage),
@@ -119,6 +116,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             )
           ],
         ),
+        bottomNavigationBar: const CustomBottomBar(),
+        floatingActionButton: customFloatingActionButton(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
   }
