@@ -1,10 +1,11 @@
 import 'package:asmanshop/components/ui/screens/error_page.dart';
 import 'package:asmanshop/features/authentication/auth_bloc.dart';
-import 'package:asmanshop/features/home/home.dart';
-import 'package:asmanshop/features/login/login.dart';
 import 'package:asmanshop/utils/globals/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../app/view/home/home.dart';
+import '../../app/view/login/login.dart';
 
 class RouteConfigs {
   static GoRouter router(AuthenticationBloc bloc) => GoRouter(
@@ -22,7 +23,10 @@ class RouteConfigs {
         ],
         errorBuilder: (BuildContext context, GoRouterState state) =>
             ErrorScreen(state.error!),
-        redirect: (BuildContext context, GoRouterState state) {
+        /*
+        redirect:
+         
+         (BuildContext context, GoRouterState state) {
           // if the user is not logged in, they need to login
           final isLoggedIn =
               bloc.state.status == EnumAuthenticationStatus.authenticated;
@@ -33,6 +37,7 @@ class RouteConfigs {
           // no need to redirect at all
           return null;
         },
+        */
         refreshListenable: bloc,
       );
 }

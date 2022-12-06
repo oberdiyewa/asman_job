@@ -67,11 +67,11 @@ class _AppViewState extends State<AppView> {
 //           accentColor: const Color(0xFF13B9FF),
 //         ),
 //       ),
-      // localizationsDelegates: const [
-      //   AppLocalizations.delegate,
-      //   GlobalMaterialLocalizations.delegate,
-      // ],
-      // supportedLocales: AppLocalizations.supportedLocales,
+//       localizationsDelegates: const [
+//         AppLocalizations.delegate,
+//         GlobalMaterialLocalizations.delegate,
+//       ],
+//       supportedLocales: AppLocalizations.supportedLocales,
 //       home: const CounterPage(),
 //     );
 //   }
