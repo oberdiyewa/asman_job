@@ -32,7 +32,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.yellow,
+        backgroundColor: Colors.white,
         bottomNavigationBar: myBottomNavigationBar(context),
         floatingActionButton: myFloatingActionButton(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -93,7 +93,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 // snap: true,
                 builder: (context, scrollController) {
                   return Material(
-                    elevation: 10,
+                    // elevation: 0,
                     borderRadius:
                         const BorderRadius.vertical(top: Radius.circular(20)),
                     color: kcSecondaryTextColor,
@@ -102,15 +102,64 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          BoxText.headingOne('hi how are you'),
+                          const TextField(
+                            decoration: InputDecoration(),
+                          ),
                           Expanded(
                             child: ListView.builder(
                               controller: scrollController,
                               itemCount: 20,
                               itemBuilder: (context, index) {
-                                return ListTile(
-                                  title: BoxText.headingTwo('Index N-$index'),
-                                  // leading: ,
+                                return Column(
+                                  children: [
+                                    ListTile(
+                                      title: BoxText.headline('Satyjy gerek'),
+                                      // isThreeLine: true,
+                                      subtitle: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          verticalSpaceSmall,
+                                          const Text(
+                                            'Zaman market',
+                                            style: TextStyle(
+                                              color: kcHardGreyColor,
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 12,
+                                            ),
+                                          ),
+                                          verticalSpaceSmall,
+                                          Row(
+                                            children: const [
+                                              Text(
+                                                'Aşgabat, Taslama',
+                                                style: TextStyle(
+                                                  color: kcHardGreyColor,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 10,
+                                                ),
+                                              ),
+                                              horizontalSpaceRegular,
+                                              Text(
+                                                '3 km uzaklykda',
+                                                style: TextStyle(
+                                                  color: kcPrimaryColor,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      leading: Image.asset(MyAsset.avatarImage),
+                                    ),
+                                    const Divider(
+                                      indent: 3,
+                                      endIndent: 3,
+                                      thickness: 2,
+                                    ),
+                                  ],
                                 );
                               },
                             ),

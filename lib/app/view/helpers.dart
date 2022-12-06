@@ -8,4 +8,5 @@ abstract class MyAsset {
   static const searchWorkIcon = 'assets/icons/search_work.svg';
   static const mapImage = 'assets/images/map.png';
   static const refreshIcon = 'assets/icons/refresh.svg';
+  static const avatarImage = 'assets/images/avatar.png';
 }
