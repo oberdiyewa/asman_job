@@ -1,4 +1,4 @@
-abstract class MyAsset {
+abstract class Assets {
   static const homeIcon = 'assets/icons/home.svg';
   static const searchIcon = 'assets/icons/search.svg';
   static const personIcon = 'assets/icons/person.svg';
@@ -13,5 +13,4 @@ abstract class MyAsset {
   static const info = 'assets/icons/info.svg';
   static const notif = 'assets/icons/notif.svg';
   static const logout = 'assets/icons/logout.svg';
-  static const key = 'assets/icons/key.svg';
 }

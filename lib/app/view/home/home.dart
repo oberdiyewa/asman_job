@@ -60,7 +60,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SvgPicture.asset(MyAsset.refreshIcon),
+                    SvgPicture.asset(Assets.refreshIcon),
                     horizontalSpaceSmall,
                     BoxText.headingThree(
                       'Bu ugurda gözläň',
@@ -73,6 +73,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 height: 50,
                 margin: const EdgeInsets.only(top: 10),
                 child: TabBarView(
+                  physics: const NeverScrollableScrollPhysics(),
                   controller: tabController,
                   children: [
                     Container(
