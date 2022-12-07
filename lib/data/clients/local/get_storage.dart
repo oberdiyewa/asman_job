@@ -1,4 +1,4 @@
-import 'package:asmanshop/utils/globals/enums.dart';
+import 'package:asman_work/utils/globals/enums.dart';
 import 'package:get_storage/get_storage.dart';
 
 class StorageGet {

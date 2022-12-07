@@ -1,11 +1,11 @@
-name: asmanshop
-description: AsmanShop.
+name: asman_work
+description: asman_work.
 
 publish_to: 'none' 
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.6 <3.0.0"
+  sdk: ">=2.17.6 <3.3.1"
 
 dependencies:
   flutter:
@@ -14,7 +14,7 @@ dependencies:
     sdk: flutter
   asman_flutter_uikit:
     git:
-      url: http://git.asmantiz.com/Koch/asman_flutter_uikit.git
+      url: https://git.asmantiz.com/Koch/asman_flutter_uikit.git
       ref: dev_oguljemal
   bloc: ^8.1.0
   connectivity_plus:
@@ -25,6 +25,7 @@ dependencies:
   go_router: ^5.1.0
   intl: ^0.17.0
   flutter_svg: ^1.1.6
+  persistent_bottom_nav_bar: any
 
   
 dev_dependencies:

@@ -1,6 +1,5 @@
-import 'package:asmanshop/components/ui/screens/error_page.dart';
-import 'package:asmanshop/features/authentication/auth_bloc.dart';
-import 'package:asmanshop/utils/globals/enums.dart';
+import 'package:asman_work/components/ui/screens/error_page.dart';
+import 'package:asman_work/utils/globals/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -8,7 +7,7 @@ import '../../app/view/home/home.dart';
 import '../../app/view/login/login.dart';
 
 class RouteConfigs {
-  static GoRouter router(AuthenticationBloc bloc) => GoRouter(
+  static GoRouter router() => GoRouter(
         routes: <GoRoute>[
           GoRoute(
             path: '/',
@@ -38,6 +37,5 @@ class RouteConfigs {
           return null;
         },
         */
-        refreshListenable: bloc,
       );
 }

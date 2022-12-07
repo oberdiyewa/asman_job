@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:asmanshop/data/clients/local/get_storage.dart';
-import 'package:asmanshop/utils/globals/enums.dart';
-import 'package:asmanshop/utils/services/login_service.dart';
-import 'package:asmanshop/utils/settings/http_overrides.dart';
+import 'package:asman_work/data/clients/local/get_storage.dart';
+import 'package:asman_work/utils/globals/enums.dart';
+import 'package:asman_work/utils/services/login_service.dart';
+import 'package:asman_work/utils/settings/http_overrides.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';

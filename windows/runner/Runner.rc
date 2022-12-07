@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "asmanshop" "\0"
+            VALUE "FileDescription", "asman_work" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "asmanshop" "\0"
+            VALUE "InternalName", "asman_work" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "asmanshop.exe" "\0"
-            VALUE "ProductName", "asmanshop" "\0"
+            VALUE "OriginalFilename", "asman_work.exe" "\0"
+            VALUE "ProductName", "asman_work" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

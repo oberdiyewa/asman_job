@@ -2,7 +2,7 @@
 
 // import 'package:dio/dio.dart';
 
-// import 'package:asmanshop/data/clients/remote/interceptors/dio_connectivity_request_retrier.dart';
+// import 'package:asman_work/data/clients/remote/interceptors/dio_connectivity_request_retrier.dart';
 
 // class RetryOnConnectionChangeInterceptor extends Interceptor {
 //   RetryOnConnectionChangeInterceptor({

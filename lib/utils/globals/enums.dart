@@ -9,3 +9,10 @@ enum EnumAuthenticationStatus {
   authenticated,
   unauthenticated,
 }
+
+enum EnumScreenName {
+  home,
+  notifs,
+  profile,
+  favorites,
+}
