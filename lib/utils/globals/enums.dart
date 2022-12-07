@@ -12,7 +12,7 @@ enum EnumAuthenticationStatus {
 
 enum EnumScreenName {
   home,
+  search,
   notifs,
   profile,
-  favorites,
 }

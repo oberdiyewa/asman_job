@@ -14,4 +14,5 @@ abstract class MyAsset {
   static const notif = 'assets/icons/notif.svg';
   static const logout = 'assets/icons/logout.svg';
   static const key = 'assets/icons/key.svg';
+  static const searchNormalIcon = 'assets/icons/search-normal.svg';
 }
