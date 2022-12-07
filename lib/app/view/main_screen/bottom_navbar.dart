@@ -8,6 +8,7 @@ import '../helpers.dart';
 
 class CustomBottomBar extends StatefulWidget {
   const CustomBottomBar({super.key});
+  static int selectedIndex = 0;
   @override
   State<CustomBottomBar> createState() => _CustomBottomBarState();
 }
@@ -39,7 +40,8 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
               children: [
                 InkWell(
                   onTap: () {
-                    debugPrint('Home basyldy');
+                    CustomBottomBar.selectedIndex = 0;
+                    debugPrint('Home tapped');
                   },
                   child: SvgPicture.asset(
                     MyAsset.homeIcon,
@@ -49,7 +51,8 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                 ),
                 InkWell(
                   onTap: () {
-                    debugPrint('Search basyldy');
+                    CustomBottomBar.selectedIndex = 1;
+                    debugPrint('Search tapped');
                     GoRouter.of(context).push('/login');
                   },
                   child: SvgPicture.asset(
@@ -62,6 +65,10 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                   width: 10,
                 ),
                 InkWell(
+                  onTap: () {
+                    CustomBottomBar.selectedIndex = 2;
+                    debugPrint('Bookmarks tapped');
+                  },
                   child: SvgPicture.asset(
                     MyAsset.personIcon,
                     width: 24,
@@ -69,6 +76,10 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                   ),
                 ),
                 InkWell(
+                  onTap: () {
+                    debugPrint('Profile tapped');
+                    CustomBottomBar.selectedIndex = 3;
+                  },
                   child: SvgPicture.asset(
                     MyAsset.giftIcon,
                     width: 24,
