@@ -1,6 +1,9 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
+import 'package:asman_work/data/providers/logic/bottom_navigation_provider.dart';
+import 'package:asman_work/utils/globals/enums.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
@@ -15,6 +18,8 @@ class CustomBottomBar extends StatefulWidget {
 class _CustomBottomBarState extends State<CustomBottomBar> {
   @override
   Widget build(BuildContext context) {
+    final bottomData =
+        BlocProvider.of<BottomNavigationProvider>(context, listen: true);
     return Container(
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -40,6 +45,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                 InkWell(
                   onTap: () {
                     debugPrint('Home basyldy');
+                    bottomData.changeScreen(EnumScreenName.home);
                   },
                   child: SvgPicture.asset(
                     MyAsset.homeIcon,
@@ -50,7 +56,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                 InkWell(
                   onTap: () {
                     debugPrint('Search basyldy');
-                    GoRouter.of(context).push('/login');
+                    bottomData.changeScreen(EnumScreenName.search);
                   },
                   child: SvgPicture.asset(
                     MyAsset.searchIcon,
@@ -62,6 +68,9 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                   width: 10,
                 ),
                 InkWell(
+                  onTap: () {
+                    bottomData.changeScreen(EnumScreenName.notifs);
+                  },
                   child: SvgPicture.asset(
                     MyAsset.personIcon,
                     width: 24,
@@ -69,6 +78,9 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                   ),
                 ),
                 InkWell(
+                  onTap: () {
+                    bottomData.changeScreen(EnumScreenName.profile);
+                  },
                   child: SvgPicture.asset(
                     MyAsset.giftIcon,
                     width: 24,

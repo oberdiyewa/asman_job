@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../app/view/home/home.dart';
-import '../../app/view/login/login.dart';
 
 class RouteConfigs {
   static GoRouter router() => GoRouter(
@@ -13,11 +12,6 @@ class RouteConfigs {
             path: '/',
             builder: (BuildContext context, GoRouterState state) =>
                 const Home(),
-          ),
-          GoRoute(
-            path: '/login',
-            builder: (BuildContext context, GoRouterState state) =>
-                const LoginScreen(),
           ),
         ],
         errorBuilder: (BuildContext context, GoRouterState state) =>

@@ -1,3 +1,4 @@
+import 'package:asman_work/app/view/main/main_screen.dart';
 import 'package:asman_work/data/providers/logic/bottom_navigation_provider.dart';
 import 'package:asman_work/data/repository/user_repository.dart';
 import 'package:asman_work/l10n/l10n.dart';
@@ -33,9 +34,9 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: RouteConfigs.router(),
-      localizationsDelegates: const [
+    return const MaterialApp(
+      home: MainScreen(),
+      localizationsDelegates: [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate
