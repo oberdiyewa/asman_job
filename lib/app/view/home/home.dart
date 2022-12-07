@@ -2,6 +2,7 @@ import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/home/tabbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/plugin_api.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import './bottom_navbar.dart';
 
@@ -30,7 +31,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         backgroundColor: Colors.yellow,
         body: Stack(
           children: [
-            Image.asset(MyAsset.mapImage),
+            FlutterMap(options: MapOptions()),
             Column(
               children: [
                 MyTabBar(
