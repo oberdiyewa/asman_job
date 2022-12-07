@@ -5,6 +5,7 @@ abstract class MyAsset {
   static const giftIcon = 'assets/icons/gift.svg';
   static const menuIcon = 'assets/icons/menu.svg';
   static const personGreyIcon = 'assets/icons/person_grey.svg';
+  static const avatarImage = 'assets/images/avatar.png';
   static const searchWorkIcon = 'assets/icons/search_work.svg';
   static const mapImage = 'assets/images/map.png';
   static const refreshIcon = 'assets/icons/refresh.svg';
