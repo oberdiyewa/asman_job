@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:asman_work/data/clients/local/get_storage.dart';
 import 'package:asman_work/utils/globals/enums.dart';
-import 'package:asman_work/utils/services/login_service.dart';
 import 'package:asman_work/utils/settings/http_overrides.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,8 +21,6 @@ class InitialSettings {
     // );
     WidgetsFlutterBinding.ensureInitialized();
     await GetStorage.init();
-    final token = StorageGet().getValue<String>(EnumStorageKeys.userToken);
-    LoginService().login(token ?? '');
     HttpOverrides.global = MyHttpOverrides();
     await SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,

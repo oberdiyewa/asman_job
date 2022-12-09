@@ -3,6 +3,7 @@ import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/main/tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/plugin_api.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -49,17 +50,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 tabController: tabController,
               ),
               Container(
-                width: 165,
-                height: 25,
-                margin: const EdgeInsets.only(top: 5),
+                width: 165.w,
+                height: 25.h,
+                margin: EdgeInsets.only(top: 5.h),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20.w),
                   color: kcSecondaryTextColor,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SvgPicture.asset(MyAsset.refreshIcon),
+                    SvgPicture.asset(Assets.refreshIcon),
                     horizontalSpaceSmall,
                     BoxText.headingThree(
                       'Bu ugurda gözläň',
@@ -69,9 +70,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 ),
               ),
               Container(
-                height: 50,
-                margin: const EdgeInsets.only(top: 10),
+                height: 50.h,
+                margin: EdgeInsets.only(top: 10.h).r,
                 child: TabBarView(
+                  physics: const NeverScrollableScrollPhysics(),
                   controller: tabController,
                   children: [
                     Container(
@@ -81,7 +83,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     ),
                     Container(
                       width: screenWidth(context),
-                      height: 400,
+                      height: 400.h,
                       // color: Colors.green,
                     ),
                   ],
@@ -93,22 +95,66 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             child: DraggableScrollableSheet(
               initialChildSize: 0.4,
               minChildSize: 0.4,
-              maxChildSize: 0.9,
+              maxChildSize: 0.932,
               // snap: true,
               builder: (context, scrollController) {
                 return Material(
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(20.w)),
                   color: Colors.white,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Iň ýakyn işi tap',
-                          hintStyle: TextStyle(
-                            color: kcPrimaryColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
+                      //scroll line
+                      Center(
+                        child: Container(
+                          width: 50.w,
+                          height: 5.h,
+                          margin: EdgeInsets.only(top: 13.h),
+                          decoration: BoxDecoration(
+                            color: kcLightGreyColor,
+                            borderRadius: BorderRadius.circular(20.w),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: REdgeInsets.only(
+                          top: 10,
+                          left: 10,
+                          right: 10,
+                        ),
+                        child: SizedBox(
+                          height: 50.h,
+                          width: 370.w,
+                          child: TextField(
+                            decoration: InputDecoration(
+                              prefixIcon: Container(
+                                width: 15.w,
+                                height: 15.h,
+                                margin: EdgeInsets.only(
+                                  right: 14.w,
+                                  left: 12.w,
+                                ),
+                                child: SvgPicture.asset(
+                                  Assets.searchNormalIcon,
+                                ),
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10).w,
+                              ),
+                              hintText: 'Iň ýakyn işi tap',
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10).w,
+                                borderSide: const BorderSide(
+                                  color: kcPrimaryColor,
+                                ),
+                              ),
+                              hintStyle: TextStyle(
+                                color: kcPrimaryColor,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -127,23 +173,23 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                         CrossAxisAlignment.start,
                                     children: [
                                       verticalSpaceSmall,
-                                      const Text(
+                                      Text(
                                         'Zaman market',
                                         style: TextStyle(
                                           color: kcHardGreyColor,
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 12,
+                                          fontSize: 12.sp,
                                         ),
                                       ),
                                       verticalSpaceSmall,
                                       Row(
-                                        children: const [
+                                        children: [
                                           Text(
                                             'Aşgabat, Taslama',
                                             style: TextStyle(
                                               color: kcHardGreyColor,
                                               fontWeight: FontWeight.w600,
-                                              fontSize: 10,
+                                              fontSize: 10.sp,
                                             ),
                                           ),
                                           horizontalSpaceRegular,
@@ -152,14 +198,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                             style: TextStyle(
                                               color: kcPrimaryColor,
                                               fontWeight: FontWeight.w600,
-                                              fontSize: 12,
+                                              fontSize: 12.sp,
                                             ),
                                           ),
                                         ],
                                       ),
                                     ],
                                   ),
-                                  leading: Image.asset(MyAsset.avatarImage),
+                                  leading: Image.asset(Assets.avatarImage),
                                 ),
                                 const Divider(
                                   indent: 3,

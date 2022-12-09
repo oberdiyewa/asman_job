@@ -50,7 +50,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                     bottomData.changeScreen(EnumScreenName.home);
                   },
                   child: SvgPicture.asset(
-                    MyAsset.homeIcon,
+                    Assets.homeIcon,
                     width: 24,
                     height: 24,
                   ),
@@ -59,13 +59,11 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                   onTap: () {
                     CustomBottomBar.selectedIndex = 1;
                     debugPrint('Search tapped');
-                    GoRouter.of(context).push('/login');
 
-                    debugPrint('Search basyldy');
                     bottomData.changeScreen(EnumScreenName.search);
                   },
                   child: SvgPicture.asset(
-                    MyAsset.searchIcon,
+                    Assets.searchIcon,
                     width: 24,
                     height: 24,
                   ),
@@ -81,7 +79,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                     bottomData.changeScreen(EnumScreenName.notifs);
                   },
                   child: SvgPicture.asset(
-                    MyAsset.personIcon,
+                    Assets.personIcon,
                     width: 24,
                     height: 24,
                   ),
@@ -94,7 +92,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                     bottomData.changeScreen(EnumScreenName.profile);
                   },
                   child: SvgPicture.asset(
-                    MyAsset.giftIcon,
+                    Assets.giftIcon,
                     width: 24,
                     height: 24,
                   ),

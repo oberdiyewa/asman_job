@@ -43,7 +43,7 @@ class _MyTabBarState extends State<MyTabBar> {
                 child: Row(
                   children: [
                     SvgPicture.asset(
-                      MyAsset.searchWorkIcon,
+                      Assets.searchWorkIcon,
                       color: widget.tabController!.index == 0
                           ? kcSecondaryColor
                           : kcHardGreyColor,
@@ -57,7 +57,7 @@ class _MyTabBarState extends State<MyTabBar> {
                 child: Row(
                   children: [
                     SvgPicture.asset(
-                      MyAsset.personGreyIcon,
+                      Assets.personGreyIcon,
                       color: widget.tabController!.index == 1
                           ? kcSecondaryColor
                           : kcHardGreyColor,
