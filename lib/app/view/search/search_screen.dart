@@ -3,10 +3,8 @@ import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/main/tabbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_map/plugin_api.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:latlong2/latlong.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -33,38 +31,37 @@ class _SearchScreenState extends State<SearchScreen>
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
-      child: Stack(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            children: [
-              MyTabBar(
-                tabController: tabController,
-              ),
-              Container(
-                height: 50.h,
-                margin: EdgeInsets.only(top: 10.h).r,
-                child: TabBarView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  controller: tabController,
-                  children: [
-                    Container(
-                      width: screenWidth(context),
-                      height: screenHeight(context),
-                      // color: Colors.red,
-                    ),
-                    Container(
-                      width: screenWidth(context),
-                      height: 400.h,
-                      // color: Colors.green,
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          TabBarWidget(
+            tabController: tabController,
           ),
+          /*
+          Container(
+            height: 50.h,
+            margin: EdgeInsets.only(top: 10.h).r,
+            child: TabBarView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: tabController,
+              children: [
+                SizedBox(
+                  width: screenWidth(context),
+                  height: screenHeight(context),
+                  // color: Colors.red,
+                ),
+                SizedBox(
+                  width: screenWidth(context),
+                  height: 400.h,
+                  // color: Colors.green,
+                ),
+              ],
+            ),
+          ),
+          */
           Padding(
             padding: REdgeInsets.only(
-              top: 60,
+              top: 10,
               left: 10,
               right: 10,
             ),
@@ -105,62 +102,93 @@ class _SearchScreenState extends State<SearchScreen>
           ),
           Container(
             width: screenWidth(context),
-            height: 600.h,
-            margin: const EdgeInsets.only(top: 110).w,
+            height: 50.h,
+            margin: const EdgeInsets.only(
+              top: 1,
+            ).w,
             child: ListView.builder(
+              scrollDirection: Axis.horizontal,
               itemCount: 20,
               itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    ListTile(
-                      title: BoxText.headline('Satyjy gerek'),
-                      // isThreeLine: true,
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          verticalSpaceSmall,
-                          Text(
-                            'Zaman market',
-                            style: TextStyle(
-                              color: kcHardGreyColor,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                          verticalSpaceSmall,
-                          Row(
-                            children: [
-                              Text(
-                                'Aşgabat, Taslama',
-                                style: TextStyle(
-                                  color: kcHardGreyColor,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 10.sp,
-                                ),
-                              ),
-                              horizontalSpaceRegular,
-                              Text(
-                                '3 km uzaklykda',
-                                style: TextStyle(
-                                  color: kcPrimaryColor,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 12.sp,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      leading: Image.asset(Assets.avatarImage),
+                return Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(color: kcLightGreyColor),
+                      borderRadius: BorderRadius.circular(20).w),
+                  padding:
+                      REdgeInsets.only(left: 15, right: 15, top: 7, bottom: 7),
+                  margin: const EdgeInsets.only(left: 5, top: 17, bottom: 3).w,
+                  child: Center(
+                      child: Text(
+                    'Programmist $index',
+                    style: TextStyle(
+                      color: kcHardGreyColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12.sp,
                     ),
-                    const Divider(
-                      indent: 3,
-                      endIndent: 3,
-                      thickness: 2,
-                    ),
-                  ],
+                  )),
                 );
               },
+            ),
+          ),
+          Expanded(
+            child: Container(
+              width: screenWidth(context),
+              height: 600.h,
+              child: ListView.builder(
+                itemCount: 20,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      ListTile(
+                        title: BoxText.headline('Satyjy gerek'),
+                        // isThreeLine: true,
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            verticalSpaceSmall,
+                            Text(
+                              'Zaman market',
+                              style: TextStyle(
+                                color: kcHardGreyColor,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 12.sp,
+                              ),
+                            ),
+                            verticalSpaceSmall,
+                            Row(
+                              children: [
+                                Text(
+                                  'Aşgabat, Taslama',
+                                  style: TextStyle(
+                                    color: kcHardGreyColor,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 10.sp,
+                                  ),
+                                ),
+                                horizontalSpaceRegular,
+                                Text(
+                                  '3 km uzaklykda',
+                                  style: TextStyle(
+                                    color: kcPrimaryColor,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12.sp,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        leading: Image.asset(Assets.avatarImage),
+                      ),
+                      const Divider(
+                        indent: 3,
+                        endIndent: 3,
+                        thickness: 2,
+                      ),
+                    ],
+                  );
+                },
+              ),
             ),
           ),
         ],

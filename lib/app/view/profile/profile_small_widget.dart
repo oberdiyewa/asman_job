@@ -16,14 +16,14 @@ class ProfileSmallWidget extends StatelessWidget {
       width: screenWidth(context),
       padding: EdgeInsets.symmetric(
           vertical: screenHeight(context) * 0.025,
-          horizontal: screenWidth(context) * 0.025),
+          horizontal: screenWidth(context) * 0.025,),
       decoration: const BoxDecoration(color: Colors.white, boxShadow: [
         BoxShadow(
             blurRadius: 0.3,
             spreadRadius: 0.6,
             offset: Offset(0, 3),
-            color: kcLightGreyColor)
-      ]),
+            color: kcLightGreyColor,)
+      ],),
       child: Column(
         children: [
           Container(
@@ -46,7 +46,7 @@ class ProfileSmallWidget extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.only(
                           left: screenWidth(context) * 0.025,
-                          right: screenWidth(context) * 0.05),
+                          right: screenWidth(context) * 0.05,),
                       child: SvgPicture.asset(
                         Assets.profileBig,
                         width: screenWidth(context) * 0.05,
@@ -66,7 +66,7 @@ class ProfileSmallWidget extends StatelessWidget {
                                 child: BoxText.subheading(
                               'Yetmeyan maglumatlarynyzy dolduryn',
                               color: kcLightGreyColor,
-                            )),
+                            ),),
                             Expanded(
                               child: Row(children: [
                                 SizedBox(
@@ -78,8 +78,8 @@ class ProfileSmallWidget extends StatelessWidget {
                                   ),
                                 ),
                                 BoxText.subheading(' %0',
-                                    color: kcLightGreyColor)
-                              ]),
+                                    color: kcLightGreyColor,)
+                              ],),
                             )
                           ],
                         ),
@@ -90,8 +90,8 @@ class ProfileSmallWidget extends StatelessWidget {
               ],
             ),
           ),
-          Divider(),
-          ProfileOptionWidget(
+          const Divider(),
+          const ProfileOptionWidget(
             isVersion: false,
             label: 'Profile ginisleyin gor',
           )

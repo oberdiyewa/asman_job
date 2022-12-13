@@ -1,8 +1,6 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
-import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/profile/profile_small_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -27,7 +25,7 @@ class ProfileScreen extends StatelessWidget {
               color: kcLightestGreyColor,
               child: Column(
                 children: [
-                  ProfileSmallWidget(),
+                  const ProfileSmallWidget(),
                   SizedBox(
                     height: screenHeight(context) * 0.02,
                   ),

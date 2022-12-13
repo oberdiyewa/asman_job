@@ -1,9 +1,17 @@
 abstract class Assets {
-  static const homeIcon = 'assets/icons/home.svg';
-  static const searchIcon = 'assets/icons/search.svg';
-  static const personIcon = 'assets/icons/person.svg';
-  static const giftIcon = 'assets/icons/gift.svg';
-  static const menuIcon = 'assets/icons/menu.svg';
+  static const homeSelected = 'assets/icons/home_selected.svg';
+  static const homeUnselected = 'assets/icons/home_unselected.svg';
+
+  static const searchSelected = 'assets/icons/search_selected.svg';
+  static const searchUnselected = 'assets/icons/search_unselected.svg';
+
+  static const notifSelected = 'assets/icons/notif_selected.svg';
+  static const notifUnselected = 'assets/icons/notif_unselected.svg';
+
+  static const profileSelected = 'assets/icons/profile_selected.svg';
+  static const profileUnselected = 'assets/icons/profile_unselected.svg';
+
+  static const menuIcon = 'assets/images/menu_button.png';
   static const personGreyIcon = 'assets/icons/person_grey.svg';
   static const String avatarImage = 'assets/images/avatar.png';
   static const searchWorkIcon = 'assets/icons/search_work.svg';

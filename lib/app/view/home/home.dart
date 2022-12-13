@@ -46,7 +46,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
           Column(
             children: [
-              MyTabBar(
+              TabBarWidget(
                 tabController: tabController,
               ),
               Container(
@@ -76,12 +76,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   physics: const NeverScrollableScrollPhysics(),
                   controller: tabController,
                   children: [
-                    Container(
+                    SizedBox(
                       width: screenWidth(context),
                       height: screenHeight(context),
                       // color: Colors.red,
                     ),
-                    Container(
+                    SizedBox(
                       width: screenWidth(context),
                       height: 400.h,
                       // color: Colors.green,

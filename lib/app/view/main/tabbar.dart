@@ -1,18 +1,16 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
-
+import 'package:asman_work/app/view/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../helpers.dart';
-
-class MyTabBar extends StatefulWidget {
-  const MyTabBar({super.key, this.tabController});
+class TabBarWidget extends StatefulWidget {
+  const TabBarWidget({super.key, this.tabController});
   final TabController? tabController;
   @override
-  State<MyTabBar> createState() => _MyTabBarState();
+  State<TabBarWidget> createState() => _TabBarWidgetState();
 }
 
-class _MyTabBarState extends State<MyTabBar> {
+class _TabBarWidgetState extends State<TabBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Material(

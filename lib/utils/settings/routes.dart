@@ -1,10 +1,7 @@
-import 'package:asman_work/app/view/search/search_screen.dart';
+import 'package:asman_work/app/view/home/home.dart';
 import 'package:asman_work/components/ui/screens/error_page.dart';
-import 'package:asman_work/utils/globals/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../app/view/home/home.dart';
 
 class RouteConfigs {
   static GoRouter router() => GoRouter(

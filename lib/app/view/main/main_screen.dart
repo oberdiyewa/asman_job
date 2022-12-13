@@ -9,6 +9,9 @@ import 'package:asman_work/utils/globals/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../helpers.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -57,21 +60,19 @@ class _MainScreenState extends State<MainScreen> {
 
   Container customFloatingActionButton() {
     return Container(
-      width: 60.w,
-      height: 60.h,
-      decoration: BoxDecoration(
+      width: 80.w,
+      height: 80.h,
+      alignment: Alignment.bottomCenter,
+      decoration: const BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(color: Colors.white, width: 2),
+        image: DecorationImage(image: AssetImage(Assets.menuIcon)),
       ),
       child: FittedBox(
         child: FloatingActionButton(
           onPressed: () {},
-          backgroundColor: kcPrimaryColor,
-          elevation: 8,
-          child: const Icon(
-            Icons.rectangle,
-            color: kcSecondaryColor,
-          ),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          child: SvgPicture.asset(Assets.menuIcon),
         ),
       ),
     );

@@ -3,5 +3,5 @@ import 'package:flutter/material.dart';
 
 class CustomTheme {
   static ThemeData theme =
-      ThemeData(iconTheme: IconThemeData(color: kcPrimaryColor));
+      ThemeData(iconTheme: const IconThemeData(color: kcPrimaryColor));
 }

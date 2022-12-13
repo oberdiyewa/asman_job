@@ -1,13 +1,11 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
+import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/data/providers/logic/bottom_navigation_provider.dart';
 import 'package:asman_work/utils/globals/enums.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
-
-import '../helpers.dart';
 
 class CustomBottomBar extends StatefulWidget {
   const CustomBottomBar({super.key});
@@ -50,7 +48,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                     bottomData.changeScreen(EnumScreenName.home);
                   },
                   child: SvgPicture.asset(
-                    Assets.homeIcon,
+                    Assets.homeUnselected,
                     width: 24,
                     height: 24,
                   ),
@@ -63,7 +61,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                     bottomData.changeScreen(EnumScreenName.search);
                   },
                   child: SvgPicture.asset(
-                    Assets.searchIcon,
+                    Assets.searchUnselected,
                     width: 24,
                     height: 24,
                   ),
@@ -79,7 +77,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                     bottomData.changeScreen(EnumScreenName.notifs);
                   },
                   child: SvgPicture.asset(
-                    Assets.personIcon,
+                    Assets.notifUnselected,
                     width: 24,
                     height: 24,
                   ),
@@ -92,7 +90,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
                     bottomData.changeScreen(EnumScreenName.profile);
                   },
                   child: SvgPicture.asset(
-                    Assets.giftIcon,
+                    Assets.profileUnselected,
                     width: 24,
                     height: 24,
                   ),
@@ -101,6 +99,17 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Container makeUnderline() {
+    return Container(
+      width: 24.w,
+      height: 4.h,
+      decoration: BoxDecoration(
+        color: kcPrimaryColor,
+        borderRadius: BorderRadius.circular(10),
       ),
     );
   }
