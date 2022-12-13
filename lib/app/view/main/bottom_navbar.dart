@@ -7,14 +7,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-class CustomBottomBar extends StatefulWidget {
-  const CustomBottomBar({super.key});
-  static int selectedIndex = 0;
-  @override
-  State<CustomBottomBar> createState() => _CustomBottomBarState();
+class NavBarItem {
+  NavBarItem(this.selectedIconPath, this.unSelectedIconPath, this.view,
+      {required this.label});
+
+  final String selectedIconPath;
+  final String unSelectedIconPath;
+  final Widget view;
+  final EnumScreenName label;
 }
 
-class _CustomBottomBarState extends State<CustomBottomBar> {
+class CustomBottomBar extends StatelessWidget {
+  const CustomBottomBar({super.key, required this.items});
+  // static int selectedIndex = 0;
+  final List<NavBarItem> items;
   @override
   Widget build(BuildContext context) {
     final bottomData =
@@ -40,62 +46,45 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
             // notchMargin: 2,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                InkWell(
-                  onTap: () {
-                    debugPrint('Home tapped');
-
-                    bottomData.changeScreen(EnumScreenName.home);
-                  },
-                  child: SvgPicture.asset(
-                    Assets.homeUnselected,
-                    width: 24,
-                    height: 24,
+              children: items.map((navBar) {
+                final index = items.indexOf(navBar);
+                final isSelected = bottomData.state == navBar.label;
+                debugPrint('bottomData: ${bottomData.state}');
+                final icon = isSelected
+                    ? navBar.selectedIconPath
+                    : navBar.unSelectedIconPath;
+                return Padding(
+                  padding: EdgeInsets.only(
+                    right: index == 1 ? 30 : 0,
+                    left: index == 2 ? 30 : 0,
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    CustomBottomBar.selectedIndex = 1;
-                    debugPrint('Search tapped');
-
-                    bottomData.changeScreen(EnumScreenName.search);
-                  },
-                  child: SvgPicture.asset(
-                    Assets.searchUnselected,
-                    width: 24,
-                    height: 24,
+                  child: GestureDetector(
+                    onTap: () {
+                      if (!isSelected) {
+                        context
+                            .read<BottomNavigationProvider>()
+                            .changeScreen(navBar.label);
+                      }
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (isSelected == true) verticalSpaceTiny,
+                        SvgPicture.asset(
+                          icon,
+                          width: 24.w,
+                          height: 24.h,
+                        ),
+                        if (isSelected == true)
+                          SizedBox(
+                            height: 7.h,
+                          ),
+                        if (isSelected == true) makeUnderline(),
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                InkWell(
-                  onTap: () {
-                    CustomBottomBar.selectedIndex = 2;
-                    debugPrint('Bookmarks tapped');
-
-                    bottomData.changeScreen(EnumScreenName.notifs);
-                  },
-                  child: SvgPicture.asset(
-                    Assets.notifUnselected,
-                    width: 24,
-                    height: 24,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    debugPrint('Profile tapped');
-                    CustomBottomBar.selectedIndex = 3;
-
-                    bottomData.changeScreen(EnumScreenName.profile);
-                  },
-                  child: SvgPicture.asset(
-                    Assets.profileUnselected,
-                    width: 24,
-                    height: 24,
-                  ),
-                ),
-              ],
+                );
+              }).toList(),
             ),
           ),
         ),
@@ -105,12 +94,10 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
 
   Container makeUnderline() {
     return Container(
-      width: 24.w,
-      height: 4.h,
+      height: 2.h,
+      width: 25.w,
       decoration: BoxDecoration(
-        color: kcPrimaryColor,
-        borderRadius: BorderRadius.circular(10),
-      ),
+          borderRadius: BorderRadius.circular(10), color: kcPrimaryColor),
     );
   }
 }

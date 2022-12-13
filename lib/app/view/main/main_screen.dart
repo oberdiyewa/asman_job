@@ -34,12 +34,31 @@ class _MainScreenState extends State<MainScreen> {
     }
   }
 
-  List<Widget> bodies = const [
-    Home(),
-    SearchScreen(),
-    AddNotifScreen(),
-    ProfileScreen()
+  List<NavBarItem> items = [
+    NavBarItem(Assets.homeSelected, Assets.homeUnselected, Home(),
+        label: EnumScreenName.home),
+    NavBarItem(Assets.searchSelected, Assets.searchUnselected, SearchScreen(),
+        label: EnumScreenName.search),
+    NavBarItem(
+      Assets.notifSelected,
+      Assets.notifUnselected,
+      AddNotifScreen(),
+      label: EnumScreenName.notifs,
+    ),
+    NavBarItem(
+      Assets.profileSelected,
+      Assets.profileUnselected,
+      ProfileScreen(),
+      label: EnumScreenName.profile,
+    ),
   ];
+
+  // List<Widget> bodies = const [
+  //   Home(),
+  //   SearchScreen(),
+  //   AddNotifScreen(),
+  //   ProfileScreen()
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +69,11 @@ class _MainScreenState extends State<MainScreen> {
       body: SizedBox(
         width: 390.w,
         height: 844.h,
-        child: bodies[getBodyIndex(bottomData.state)],
+        child: items[getBodyIndex(bottomData.state)].view,
       ),
-      bottomNavigationBar: const CustomBottomBar(),
+      bottomNavigationBar: CustomBottomBar(
+        items: items,
+      ),
       floatingActionButton: customFloatingActionButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

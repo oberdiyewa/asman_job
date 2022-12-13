@@ -22,7 +22,7 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => BottomNavigationProvider(EnumScreenName.home),
+          create: (_) => BottomNavigationProvider(),
         ),
       ],
       child: const AppView(),
