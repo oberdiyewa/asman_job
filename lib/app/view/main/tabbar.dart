@@ -1,6 +1,7 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class TabBarWidget extends StatefulWidget {
@@ -17,20 +18,20 @@ class _TabBarWidgetState extends State<TabBarWidget> {
       child: Align(
         alignment: Alignment.topCenter,
         child: Container(
-          width: 350,
-          height: 40,
-          padding: const EdgeInsets.all(4),
-          margin: const EdgeInsets.only(top: 10),
+          width: 350.w,
+          height: 40.h,
+          padding: const EdgeInsets.all(4).w,
+          margin: const EdgeInsets.only(top: 10).w,
           decoration: BoxDecoration(
             color: kcSecondaryTextColor,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(20).w,
           ),
           child: TabBar(
             labelColor: kcSecondaryColor,
             unselectedLabelColor: kcHardGreyColor,
             indicator: ShapeDecoration(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(20).w,
               ),
               color: kcPrimaryColor,
             ),

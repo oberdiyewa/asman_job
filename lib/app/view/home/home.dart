@@ -1,11 +1,14 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
+import 'package:asman_work/app/view/home/detail_info.dart';
 import 'package:asman_work/app/view/main/tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/plugin_api.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:latlong2/latlong.dart';
+
+import 'listview_builder.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -49,26 +52,27 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               TabBarWidget(
                 tabController: tabController,
               ),
-              Container(
-                width: 165.w,
-                height: 25.h,
-                margin: EdgeInsets.only(top: 5.h),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20.w),
-                  color: kcSecondaryTextColor,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(Assets.refreshIcon),
-                    horizontalSpaceSmall,
-                    BoxText.headingThree(
-                      'Bu ugurda gözläň',
-                      color: kcPrimaryColor,
-                    )
-                  ],
-                ),
-              ),
+              //bu ugurda gozlan diyen yer
+              // Container(
+              //   width: 165.w,
+              //   height: 25.h,
+              //   margin: EdgeInsets.only(top: 5.h),
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(20.w),
+              //     color: kcSecondaryTextColor,
+              //   ),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: [
+              //       SvgPicture.asset(Assets.refreshIcon),
+              //       horizontalSpaceSmall,
+              //       BoxText.headingThree(
+              //         'Bu ugurda gözläň',
+              //         color: kcPrimaryColor,
+              //       )
+              //     ],
+              //   ),
+              // ),
               Container(
                 height: 50.h,
                 margin: EdgeInsets.only(top: 10.h).r,
@@ -159,62 +163,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         ),
                       ),
                       Expanded(
-                        child: ListView.builder(
-                          controller: scrollController,
-                          itemCount: 20,
-                          itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                ListTile(
-                                  title: BoxText.headline('Satyjy gerek'),
-                                  // isThreeLine: true,
-                                  subtitle: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      verticalSpaceSmall,
-                                      Text(
-                                        'Zaman market',
-                                        style: TextStyle(
-                                          color: kcHardGreyColor,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 12.sp,
-                                        ),
-                                      ),
-                                      verticalSpaceSmall,
-                                      Row(
-                                        children: [
-                                          Text(
-                                            'Aşgabat, Taslama',
-                                            style: TextStyle(
-                                              color: kcHardGreyColor,
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 10.sp,
-                                            ),
-                                          ),
-                                          horizontalSpaceRegular,
-                                          Text(
-                                            '3 km uzaklykda',
-                                            style: TextStyle(
-                                              color: kcPrimaryColor,
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 12.sp,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  leading: Image.asset(Assets.avatarImage),
-                                ),
-                                const Divider(
-                                  indent: 3,
-                                  endIndent: 3,
-                                  thickness: 2,
-                                ),
-                              ],
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push<dynamic>(
+                              context,
+                              MaterialPageRoute<dynamic>(
+                                builder: (context) => const DetailInfo(),
+                              ),
                             );
                           },
+                          child: makeListviewBuilder(scrollController, 20),
                         ),
                       ),
                     ],

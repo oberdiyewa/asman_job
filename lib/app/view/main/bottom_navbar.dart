@@ -26,7 +26,8 @@ class CustomBottomBar extends StatelessWidget {
     final bottomData =
         BlocProvider.of<BottomNavigationProvider>(context, listen: true);
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
+        // border: Border.all(color: Colors.black),
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(30),
           topLeft: Radius.circular(30),
@@ -39,7 +40,7 @@ class CustomBottomBar extends StatelessWidget {
         ),
         child: SizedBox(
           width: screenWidth(context),
-          height: 50,
+          height: 50.h,
           child: BottomAppBar(
             color: Colors.white,
             // shape: const CircularNotchedRectangle(),
@@ -49,7 +50,7 @@ class CustomBottomBar extends StatelessWidget {
               children: items.map((navBar) {
                 final index = items.indexOf(navBar);
                 final isSelected = bottomData.state == navBar.label;
-                debugPrint('bottomData: ${bottomData.state}');
+                // debugPrint('bottomData: ${bottomData.state}');
                 final icon = isSelected
                     ? navBar.selectedIconPath
                     : navBar.unSelectedIconPath;

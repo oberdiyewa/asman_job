@@ -22,5 +22,14 @@ abstract class Assets {
   static const notif = 'assets/icons/notif.svg';
   static const logout = 'assets/icons/logout.svg';
   static const key = 'assets/icons/key.svg';
+
   static const searchNormalIcon = 'assets/icons/search-normal.svg';
+  static const empty = 'assets/icons/empty.svg';
+  static const favouriteIcon = 'assets/icons/favourite.svg';
+  static const backIcon = 'assets/icons/arrow_back.svg';
+  static const calendarIcon = 'assets/icons/calendar.svg';
+  static const detailImage = 'assets/icons/detail_image.svg';
+  static const callIcon = 'assets/icons/call.svg';
+  static const radioButton = 'assets/icons/radio_button.svg';
+  static const addIcon = 'assets/icons/+.svg';
 }

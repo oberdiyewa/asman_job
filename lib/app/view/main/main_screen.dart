@@ -1,5 +1,5 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
-import 'package:asman_work/app/view/add_notif/add_notif_screen.dart';
+import 'package:asman_work/app/view/notification_screen/notif_screen.dart';
 import 'package:asman_work/app/view/home/home.dart';
 import 'package:asman_work/app/view/main/bottom_navbar.dart';
 import 'package:asman_work/app/view/profile/profile_screen.dart';
@@ -42,7 +42,7 @@ class _MainScreenState extends State<MainScreen> {
     NavBarItem(
       Assets.notifSelected,
       Assets.notifUnselected,
-      AddNotifScreen(),
+      NotificationScreen(),
       label: EnumScreenName.notifs,
     ),
     NavBarItem(
@@ -65,7 +65,9 @@ class _MainScreenState extends State<MainScreen> {
     final bottomData =
         BlocProvider.of<BottomNavigationProvider>(context, listen: true);
     return Scaffold(
+      extendBody: true,
       backgroundColor: Colors.white,
+      // resizeToAvoidBottomInset: false,
       body: SizedBox(
         width: 390.w,
         height: 844.h,

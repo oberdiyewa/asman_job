@@ -15,15 +15,20 @@ class ProfileSmallWidget extends StatelessWidget {
       ),
       width: screenWidth(context),
       padding: EdgeInsets.symmetric(
-          vertical: screenHeight(context) * 0.025,
-          horizontal: screenWidth(context) * 0.025,),
-      decoration: const BoxDecoration(color: Colors.white, boxShadow: [
-        BoxShadow(
+        vertical: screenHeight(context) * 0.025,
+        horizontal: screenWidth(context) * 0.025,
+      ),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
             blurRadius: 0.3,
             spreadRadius: 0.6,
             offset: Offset(0, 3),
-            color: kcLightGreyColor,)
-      ],),
+            color: kcLightGreyColor,
+          )
+        ],
+      ),
       child: Column(
         children: [
           Container(
@@ -45,8 +50,9 @@ class ProfileSmallWidget extends StatelessWidget {
                   children: [
                     Container(
                       margin: EdgeInsets.only(
-                          left: screenWidth(context) * 0.025,
-                          right: screenWidth(context) * 0.05,),
+                        left: screenWidth(context) * 0.025,
+                        right: screenWidth(context) * 0.05,
+                      ),
                       child: SvgPicture.asset(
                         Assets.profileBig,
                         width: screenWidth(context) * 0.05,
@@ -63,23 +69,28 @@ class ProfileSmallWidget extends StatelessWidget {
                           children: [
                             BoxText.headingTwo('Profile barada ginisleyin'),
                             FittedBox(
-                                child: BoxText.subheading(
-                              'Yetmeyan maglumatlarynyzy dolduryn',
-                              color: kcLightGreyColor,
-                            ),),
+                              child: BoxText.subheading(
+                                'Yetmeyan maglumatlarynyzy dolduryn',
+                                color: kcLightGreyColor,
+                              ),
+                            ),
                             Expanded(
-                              child: Row(children: [
-                                SizedBox(
-                                  width: screenWidth(context) * 0.5,
-                                  child: LinearProgressIndicator(
-                                    minHeight: screenHeight(context) * 0.01,
-                                    value: 0,
-                                    color: kcSecondaryColor,
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: screenWidth(context) * 0.5,
+                                    child: LinearProgressIndicator(
+                                      minHeight: screenHeight(context) * 0.01,
+                                      value: 0,
+                                      color: kcSecondaryColor,
+                                    ),
                                   ),
-                                ),
-                                BoxText.subheading(' %0',
-                                    color: kcLightGreyColor,)
-                              ],),
+                                  BoxText.subheading(
+                                    ' %0',
+                                    color: kcLightGreyColor,
+                                  )
+                                ],
+                              ),
                             )
                           ],
                         ),
