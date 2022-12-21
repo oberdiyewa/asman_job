@@ -16,7 +16,7 @@ class RouteConfigs {
           GoRoute(
             path: '/add_notif',
             builder: (BuildContext context, GoRouterState state) =>
-                const AddNotification(),
+                const AddForWorkerNotif(),
           ),
         ],
         errorBuilder: (BuildContext context, GoRouterState state) =>

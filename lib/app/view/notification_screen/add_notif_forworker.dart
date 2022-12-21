@@ -1,19 +1,20 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
+import 'package:asman_work/app/view/notification_screen/add_address_worker.dart';
 import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-class AddNotification extends StatefulWidget {
-  const AddNotification({super.key});
+class AddForWorkerNotif extends StatefulWidget {
+  const AddForWorkerNotif({super.key});
 
   @override
-  State<AddNotification> createState() => _AddNotificationState();
+  State<AddForWorkerNotif> createState() => _AddForWorkerNotifState();
 }
 
-class _AddNotificationState extends State<AddNotification> {
+class _AddForWorkerNotifState extends State<AddForWorkerNotif> {
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
@@ -23,8 +24,13 @@ class _AddNotificationState extends State<AddNotification> {
         elevation: 0,
         leading: Padding(
           padding: REdgeInsets.all(20.0),
-          child: SvgPicture.asset(
-            Assets.backIcon,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: SvgPicture.asset(
+              Assets.backIcon,
+            ),
           ),
         ),
         title: BoxText.headline(
@@ -100,16 +106,26 @@ class _AddNotificationState extends State<AddNotification> {
             ),
           ),
           const SectionName(
-            headlineWord: 'Giňişleýin adressiňiz',
+            headlineWord: 'Giňişleýin salgyňyz',
           ),
           AddSection(
             widget: Row(
               children: [
-                AddButton(),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push<dynamic>(
+                      context,
+                      MaterialPageRoute<dynamic>(
+                        builder: (context) => const AddAddressWorker(),
+                      ),
+                    );
+                  },
+                  child: const AddButton(),
+                ),
                 horizontalSpaceSmall,
                 horizontalSpaceSmall,
                 BoxText.headline(
-                  'Adress goş',
+                  'Salgy goş',
                   color: kcPrimaryColor,
                 )
               ],
@@ -119,7 +135,7 @@ class _AddNotificationState extends State<AddNotification> {
           AddSection(
               widget: Row(
                 children: [
-                  AddButton(),
+                  const AddButton(),
                   horizontalSpaceSmall,
                   horizontalSpaceSmall,
                   BoxText.headline(
@@ -142,6 +158,100 @@ class _AddNotificationState extends State<AddNotification> {
                 )
               ],
             ),
+          ),
+          const SectionName(
+            headlineWord: 'Iş tertibi saýla',
+          ),
+          AddSection(
+            widget: Center(
+              child: BoxText.headline(
+                'Saýlaň (Doly iş güni, Ýarym iş güni we ş.m) ',
+                color: kcPrimaryColor,
+              ),
+            ),
+          ),
+          const SectionName(
+            headlineWord: 'Ýaş derejesini saýla',
+          ),
+          AddSection(
+            widget: BoxText.headline('later'),
+          ),
+          const SectionName(
+            headlineWord: 'Aýlyk haky',
+          ),
+          AddSection(
+            widget: SizedBox(
+              height: 50.h,
+              width: 339.w,
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      color: kcLightestGreyColor,
+                    ),
+                    borderRadius: BorderRadius.circular(10).w,
+                  ),
+                  hintText: 'Ýazyň...',
+                  contentPadding: REdgeInsets.only(left: 34),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10).w,
+                    borderSide: const BorderSide(
+                      color: kcHardGreyColor,
+                    ),
+                  ),
+                  hintStyle: TextStyle(
+                    color: kcHardGreyColor,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SectionName(
+            headlineWord: 'Surat goş',
+          ),
+          AddSection(
+            widget: Row(
+              children: [
+                AddButton(),
+                horizontalSpaceSmall,
+                horizontalSpaceSmall,
+                BoxText.headline(
+                  'Surat goşuň',
+                  color: kcPrimaryColor,
+                )
+              ],
+            ),
+          ),
+          const SectionName(
+            headlineWord: 'Online wagty',
+          ),
+          const AddSection(
+            widget: Text('slider'),
+          ),
+          const SectionName(
+            headlineWord: 'Bildiriş barada goşmaça maglumaty',
+          ),
+          const AddSection(
+            customHeight: 100,
+            widget: TextField(
+              maxLines: 8,
+              decoration: InputDecoration.collapsed(
+                hintText: 'Goşmaça bildirişleriňizi şu ýere ýazyp bilersiňiz',
+                hintStyle: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                  color: kcHardGreyColor,
+                ),
+              ),
+            ),
+          ),
+          const SectionName(
+            headlineWord: ' ',
+          ),
+          const AddSection(
+            widget: BoxButton.block(title: 'Bildiriş goş'),
           )
         ],
       ),

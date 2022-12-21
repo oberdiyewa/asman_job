@@ -4,9 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddSection extends StatelessWidget {
-  const AddSection({super.key, this.widget, this.onTap});
+  const AddSection({
+    super.key,
+    this.widget,
+    this.onTap,
+    this.customHeight = 80,
+  });
   final Widget? widget;
   final VoidCallback? onTap;
+  final double customHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +20,7 @@ class AddSection extends StatelessWidget {
       onTap: onTap,
       child: Container(
           width: screenWidth(context),
-          height: 80.h,
+          height: customHeight.h,
           padding: REdgeInsets.only(top: 10, bottom: 10, left: 23, right: 28),
           decoration: const BoxDecoration(
             color: Color.fromRGBO(255, 254, 254, 1),

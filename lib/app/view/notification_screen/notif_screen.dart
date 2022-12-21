@@ -1,7 +1,7 @@
 // ignore: eol_at_end_of_file
 import 'package:asman_flutter_uikit/box_ui2.dart';
-import 'package:asman_work/app/view/notification_screen/applied_section_tabbar.dart';
-import 'package:asman_work/app/view/notification_screen/notif_section_tabbar.dart';
+import 'package:asman_work/app/view/notification_screen/search_worker_tabbar.dart';
+import 'package:asman_work/app/view/notification_screen/search_work_tabbar.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/main/tabbar.dart';
 import 'package:flutter/material.dart';
@@ -54,8 +54,8 @@ class _NotificationScreenState extends State<NotificationScreen>
               child: TabBarView(
                 controller: tabController,
                 children: const [
-                  NotificationSectionTabbar(),
-                  AppliedSectionTabbar(),
+                  WorkSectionTabbar(),
+                  WorkerSectionTabbar(),
                 ],
               ),
             ),
