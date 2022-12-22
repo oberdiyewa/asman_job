@@ -16,6 +16,7 @@ class AddAddressWorker extends StatefulWidget {
 class _AddAddressWorkerState extends State<AddAddressWorker> {
   @override
   Widget build(BuildContext context) {
+    var _textController = TextEditingController();
     return Scaffold(
       backgroundColor: const Color.fromRGBO(241, 241, 241, 1),
       appBar: AppBar(
@@ -54,6 +55,7 @@ class _AddAddressWorkerState extends State<AddAddressWorker> {
                 height: 50.h,
                 width: 380.w,
                 child: TextField(
+                  controller: _textController,
                   decoration: InputDecoration(
                     prefixIcon: Container(
                       width: 15.w,
@@ -70,6 +72,10 @@ class _AddAddressWorkerState extends State<AddAddressWorker> {
                     //   borderRadius: BorderRadius.circular(10).w,
                     // ),
                     hintText: 'Salgy gözle',
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.all(17),
+                      child: SvgPicture.asset(Assets.clear),
+                    ),
                     hintStyle: TextStyle(
                       color: kcHardGreyColor,
                       fontSize: 14.sp,

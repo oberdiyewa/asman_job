@@ -22,6 +22,7 @@ abstract class Assets {
   static const notif = 'assets/icons/notif.svg';
   static const logout = 'assets/icons/logout.svg';
   static const key = 'assets/icons/key.svg';
+  static const clear = 'assets/icons/clear.svg';
 
   static const searchNormalIcon = 'assets/icons/search-normal.svg';
   static const empty = 'assets/icons/empty.svg';
