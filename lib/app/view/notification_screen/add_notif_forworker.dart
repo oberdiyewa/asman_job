@@ -162,13 +162,8 @@ class _AddForWorkerNotifState extends State<AddForWorkerNotif> {
           const SectionName(
             headlineWord: 'Iş tertibi saýla',
           ),
-          AddSection(
-            widget: Center(
-              child: BoxText.headline(
-                'Saýlaň (Doly iş güni, Ýarym iş güni we ş.m) ',
-                color: kcPrimaryColor,
-              ),
-            ),
+          const AddSection(
+            widget: DropDownWidget(),
           ),
           const SectionName(
             headlineWord: 'Ýaş derejesini saýla',

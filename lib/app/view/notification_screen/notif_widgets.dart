@@ -50,3 +50,38 @@ class AddButton extends StatelessWidget {
     );
   }
 }
+
+const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
+
+class DropDownWidget extends StatefulWidget {
+  const DropDownWidget({super.key});
+
+  @override
+  State<DropDownWidget> createState() => _DropDownWidgetState();
+}
+
+class _DropDownWidgetState extends State<DropDownWidget> {
+  String selectedItem = 'bla bla';
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: SizedBox(
+        width: 240,
+        child: DropdownButton<String>(
+          onChanged: (item) => setState(() => selectedItem = item!),
+          icon: const Icon(Icons.arrow_downward),
+          elevation: 10,
+          value: selectedItem,
+          items: list
+              .map<DropdownMenuItem<String>>(
+                (String item) => DropdownMenuItem<String>(
+                  value: item,
+                  child: Text(item),
+                ),
+              )
+              .toList(),
+        ),
+      ),
+    );
+  }
+}

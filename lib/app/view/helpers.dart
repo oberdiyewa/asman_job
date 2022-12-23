@@ -33,4 +33,7 @@ abstract class Assets {
   static const callIcon = 'assets/icons/call.svg';
   static const radioButton = 'assets/icons/radio_button.svg';
   static const addIcon = 'assets/icons/+.svg';
+
+  static const gps = 'assets/icons/gps.svg';
+  static const map = 'assets/icons/map.svg';
 }

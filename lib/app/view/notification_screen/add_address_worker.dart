@@ -40,17 +40,17 @@ class _AddAddressWorkerState extends State<AddAddressWorker> {
         backgroundColor: kcPrimaryColor,
       ),
       body: AddSection(
-        customHeight: 150,
+        customHeight: 160,
         widget: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
               padding: REdgeInsets.only(
-                top: 10,
-                // left: 10,
-                // right: 10,
-              ),
+                  // top: 10,
+                  // left: 10,
+                  // right: 10,
+                  ),
               child: SizedBox(
                 height: 50.h,
                 width: 380.w,
@@ -58,8 +58,8 @@ class _AddAddressWorkerState extends State<AddAddressWorker> {
                   controller: _textController,
                   decoration: InputDecoration(
                     prefixIcon: Container(
-                      width: 15.w,
-                      height: 15.h,
+                      width: 17.w,
+                      height: 17.h,
                       margin: EdgeInsets.only(
                         right: 14.w,
                         left: 12.w,
@@ -85,6 +85,32 @@ class _AddAddressWorkerState extends State<AddAddressWorker> {
                 ),
               ),
             ),
+            Padding(
+              padding: REdgeInsets.only(top: 16),
+              child: Row(
+                children: [
+                  SvgPicture.asset(Assets.map),
+                  horizontalSpaceMedium,
+                  const Text(
+                    'Kartada saýla',
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: REdgeInsets.only(top: 16),
+              child: Row(
+                children: [
+                  SvgPicture.asset(Assets.gps),
+                  horizontalSpaceMedium,
+                  const Text(
+                    'Meniň ýerleşýän ýerim',
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                  )
+                ],
+              ),
+            )
           ],
         ),
       ),
