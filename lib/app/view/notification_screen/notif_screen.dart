@@ -1,12 +1,9 @@
 // ignore: eol_at_end_of_file
 import 'package:asman_flutter_uikit/box_ui2.dart';
-import 'package:asman_work/app/view/notification_screen/search_worker_tabbar.dart';
-import 'package:asman_work/app/view/notification_screen/search_work_tabbar.dart';
-import 'package:asman_work/app/view/helpers.dart';
-import 'package:asman_work/app/view/main/tabbar.dart';
+import 'package:asman_work/app/view/notification_screen/search_work/search_work_tabbar.dart';
+import 'package:asman_work/app/view/notification_screen/search_worker/search_worker_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class NotificationScreen extends StatefulWidget {
   const NotificationScreen({super.key});

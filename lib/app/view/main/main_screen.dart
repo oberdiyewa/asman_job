@@ -64,6 +64,9 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     final bottomData =
         BlocProvider.of<BottomNavigationProvider>(context, listen: true);
+
+    final bottomPadding = MediaQuery.of(context).viewInsets.bottom;
+    final keyboardIsOpened = bottomPadding != 0.0;
     return Scaffold(
       extendBody: true,
       backgroundColor: Colors.white,
@@ -76,7 +79,10 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: CustomBottomBar(
         items: items,
       ),
-      floatingActionButton: customFloatingActionButton(),
+      floatingActionButton: Visibility(
+        visible: !keyboardIsOpened,
+        child: customFloatingActionButton(),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }

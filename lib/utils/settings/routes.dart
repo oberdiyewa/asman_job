@@ -3,8 +3,6 @@ import 'package:asman_work/components/ui/screens/error_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../app/view/notification_screen/add_notification.dart';
-
 class RouteConfigs {
   static GoRouter router() => GoRouter(
         routes: <GoRoute>[
@@ -12,11 +10,6 @@ class RouteConfigs {
             path: '/',
             builder: (BuildContext context, GoRouterState state) =>
                 const Home(),
-          ),
-          GoRoute(
-            path: '/add_notif',
-            builder: (BuildContext context, GoRouterState state) =>
-                const AddForWorkerNotif(),
           ),
         ],
         errorBuilder: (BuildContext context, GoRouterState state) =>

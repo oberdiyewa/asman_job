@@ -1,20 +1,21 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
-import 'package:asman_work/app/view/notification_screen/add_address_worker.dart';
 import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-class AddForWorkerNotif extends StatefulWidget {
-  const AddForWorkerNotif({super.key});
+import '../search_work/add_address_worker.dart';
+
+class AddForWorkNotif extends StatefulWidget {
+  const AddForWorkNotif({super.key});
 
   @override
-  State<AddForWorkerNotif> createState() => _AddForWorkerNotifState();
+  State<AddForWorkNotif> createState() => _AddForWorkNotifState();
 }
 
-class _AddForWorkerNotifState extends State<AddForWorkerNotif> {
+class _AddForWorkNotifState extends State<AddForWorkNotif> {
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
@@ -162,9 +163,7 @@ class _AddForWorkerNotifState extends State<AddForWorkerNotif> {
           const SectionName(
             headlineWord: 'Iş tertibi saýla',
           ),
-          const AddSection(
-            widget: DropDownWidget(),
-          ),
+          AddSection(widget: Text('data')),
           const SectionName(
             headlineWord: 'Ýaş derejesini saýla',
           ),

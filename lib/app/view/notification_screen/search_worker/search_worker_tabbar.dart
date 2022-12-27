@@ -1,19 +1,20 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
-import 'package:asman_work/app/view/notification_screen/add_notif_forworker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-class WorkSectionTabbar extends StatefulWidget {
-  const WorkSectionTabbar({super.key});
+import '../search_work/add_notif_forworker.dart';
+
+class WorkerSectionTabbar extends StatefulWidget {
+  const WorkerSectionTabbar({super.key});
 
   @override
-  State<WorkSectionTabbar> createState() => _WorkSectionTabbarState();
+  State<WorkerSectionTabbar> createState() => _WorkerSectionTabbarState();
 }
 
-class _WorkSectionTabbarState extends State<WorkSectionTabbar> {
+class _WorkerSectionTabbarState extends State<WorkerSectionTabbar> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,13 +36,12 @@ class _WorkSectionTabbarState extends State<WorkSectionTabbar> {
           BoxButton.large(
             title: 'Bildiriş ber',
             onTap: () {
-              debugPrint('bildirish ber');
-              // Navigator.push<dynamic>(
-              //   context,
-              //   MaterialPageRoute<dynamic>(
-              //     builder: (context) => const AddForWorkerNotif(),
-              //   ),
-              // );
+              Navigator.push<dynamic>(
+                context,
+                MaterialPageRoute<dynamic>(
+                  builder: (context) => const AddForWorkerNotif(),
+                ),
+              );
             },
           )
         ],
