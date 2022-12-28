@@ -8,10 +8,6 @@ environment:
   sdk: ">=2.17.6 <3.3.1"
 
 dependencies:
-  flutter:
-    sdk: flutter
-  flutter_localizations:
-    sdk: flutter
   asman_flutter_uikit:
     git:
       url: https://git.asmantiz.com/Koch/asman_flutter_uikit.git
@@ -20,15 +16,19 @@ dependencies:
   connectivity_plus: any
   dio: any
   equatable: ^2.0.5
-  flutter_screenutil: ^5.6.0
+  flutter:
+    sdk: flutter
   flutter_bloc: ^8.1.1
+  flutter_localizations:
+    sdk: flutter
+  flutter_map: ^2.2.0
+  flutter_screenutil: ^5.6.0
+  flutter_svg: ^1.1.6
   get_storage: ^2.0.3
   go_router: ^5.1.0
-  latlong2: ^0.8.1
   intl: ^0.17.0
-  flutter_svg: ^1.1.6
+  latlong2: ^0.8.1
   location: ^4.4.0
-  flutter_map: ^2.2.0
   persistent_bottom_nav_bar: any
   
 
@@ -45,10 +45,17 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  generate: true
 
   assets:
     - assets/icons/
     - assets/images/
-  generate: true
+
+  fonts:
+    - family: JobIcons
+      fonts: 
+        - asset: assets/icons/fonts/JobIcons.ttf
+  
+
 
   
