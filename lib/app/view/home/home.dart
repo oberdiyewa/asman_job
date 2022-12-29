@@ -107,6 +107,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       BorderRadius.vertical(top: Radius.circular(20.w)),
                   color: Colors.white,
                   child: Column(
+                    // controller: scrollController,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       //scroll line
