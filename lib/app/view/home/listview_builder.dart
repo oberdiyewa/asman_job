@@ -9,6 +9,8 @@ ListView makeListviewBuilder(ScrollController scrollController, int itemCount) {
     shrinkWrap: true,
     controller: scrollController,
     itemCount: itemCount,
+    shrinkWrap: true,
+    physics: ScrollPhysics(),
     itemBuilder: (context, index) {
       return Column(
         children: [
