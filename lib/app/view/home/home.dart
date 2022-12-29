@@ -102,85 +102,176 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               maxChildSize: 0.932,
               // snap: true,
               builder: (context, scrollController) {
-                return Material(
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(20.w)),
-                  color: Colors.white,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //scroll line
-                      Center(
-                        child: Container(
-                          width: 50.w,
-                          height: 5.h,
-                          margin: EdgeInsets.only(top: 13.h),
-                          decoration: BoxDecoration(
-                            color: kcLightGreyColor,
-                            borderRadius: BorderRadius.circular(20.w),
-                          ),
+                List<Widget> _sliverList(int size) {
+                  final widgetList = <Widget>[
+                    SliverAppBar(
+                      shape: const ContinuousRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(20),
                         ),
                       ),
-                      Padding(
-                        padding: REdgeInsets.only(
-                          top: 10,
-                          left: 10,
-                          right: 10,
-                        ),
-                        child: SizedBox(
-                          height: 50.h,
-                          width: 370.w,
-                          child: TextField(
-                            decoration: InputDecoration(
-                              prefixIcon: Container(
-                                width: 15.w,
-                                height: 15.h,
-                                margin: EdgeInsets.only(
-                                  right: 14.w,
-                                  left: 12.w,
-                                ),
-                                child: SvgPicture.asset(
-                                  Assets.searchNormalIcon,
-                                ),
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10).w,
-                              ),
-                              hintText: 'Iň ýakyn işi tap',
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10).w,
-                                borderSide: const BorderSide(
-                                  color: kcPrimaryColor,
-                                ),
-                              ),
-                              hintStyle: TextStyle(
-                                color: kcPrimaryColor,
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ),
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      pinned: true,
+                      flexibleSpace: slidingPanelAppBar(),
+                    ),
+                    SliverFixedExtentList(
+                      itemExtent: 100,
+                      delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                          return itemWidget(context);
+                        },
+                        childCount: size,
                       ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.push<dynamic>(
-                              context,
-                              MaterialPageRoute<dynamic>(
-                                builder: (context) => const DetailInfo(),
-                              ),
-                            );
-                          },
-                          child: makeListviewBuilder(scrollController, 20),
-                        ),
-                      ),
-                    ],
-                  ),
+                    )
+                  ];
+
+                  return widgetList;
+                }
+
+                return CustomScrollView(
+                  clipBehavior: Clip.antiAlias,
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
+                  controller: scrollController,
+                  slivers: _sliverList(20),
                 );
               },
             ),
           )
+        ],
+      ),
+    );
+  }
+
+  Widget itemWidget(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push<dynamic>(
+          context,
+          MaterialPageRoute<dynamic>(
+            builder: (context) => const DetailInfo(),
+          ),
+        );
+      },
+      child: Material(
+        color: Colors.white,
+        child: Column(
+          children: [
+            ListTile(
+              title: BoxText.headline('Satyjy gerek'),
+              // isThreeLine: true,
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  verticalSpaceSmall,
+                  Text(
+                    'Zaman market',
+                    style: TextStyle(
+                      color: kcHardGreyColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12.sp,
+                    ),
+                  ),
+                  verticalSpaceSmall,
+                  Row(
+                    children: [
+                      Text(
+                        'Aşgabat, Taslama',
+                        style: TextStyle(
+                          color: kcHardGreyColor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 10.sp,
+                        ),
+                      ),
+                      horizontalSpaceRegular,
+                      Text(
+                        '3 km uzaklykda',
+                        style: TextStyle(
+                          color: kcPrimaryColor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              leading: Image.asset(Assets.avatarImage),
+            ),
+            const Divider(
+              indent: 3,
+              endIndent: 3,
+              thickness: 2,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget slidingPanelAppBar() {
+    return Material(
+      borderRadius: const BorderRadius.vertical(
+        top: Radius.circular(20),
+      ),
+      color: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          //scroll line
+          Center(
+            child: Container(
+              margin: EdgeInsets.only(top: 13.h),
+              width: 50.w,
+              height: 5.h,
+              decoration: BoxDecoration(
+                color: kcLightGreyColor,
+                borderRadius: BorderRadius.circular(20.w),
+              ),
+            ),
+          ),
+          Padding(
+            padding: REdgeInsets.only(
+              top: 10,
+              left: 10,
+              right: 10,
+            ),
+            child: SizedBox(
+              height: 50.h,
+              width: 370.w,
+              child: TextField(
+                decoration: InputDecoration(
+                  prefixIcon: Container(
+                    width: 15.w,
+                    height: 15.h,
+                    margin: EdgeInsets.only(
+                      right: 14.w,
+                      left: 12.w,
+                    ),
+                    child: SvgPicture.asset(
+                      Assets.searchNormalIcon,
+                    ),
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10).w,
+                  ),
+                  hintText: 'Iň ýakyn işi tap',
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10).w,
+                    borderSide: const BorderSide(
+                      color: kcPrimaryColor,
+                    ),
+                  ),
+                  hintStyle: TextStyle(
+                    color: kcPrimaryColor,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

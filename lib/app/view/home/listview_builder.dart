@@ -1,12 +1,12 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../helpers.dart';
+import 'package:asman_work/app/view/helpers.dart';
 
 ListView makeListviewBuilder(ScrollController scrollController, int itemCount) {
   return ListView.builder(
+    shrinkWrap: true,
     controller: scrollController,
     itemCount: itemCount,
     itemBuilder: (context, index) {
