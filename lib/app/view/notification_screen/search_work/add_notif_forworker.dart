@@ -70,42 +70,28 @@ class _AddForWorkerNotifState extends State<AddForWorkerNotif> {
                 ),
                 horizontalSpaceSmall,
                 horizontalSpaceTiny,
-                BoxText.body('Işgär gözleýän')
+                BoxText.body('Iş gözleýän')
+              ],
+            ),
+          ),
+          const SectionName(headlineWord: 'Wezipe'),
+          AddSection(
+            widget: Row(
+              children: [
+                AddButton(),
+                horizontalSpaceSmall,
+                horizontalSpaceSmall,
+                BoxText.headline(
+                  'Wezipe goş',
+                  color: kcPrimaryColor,
+                )
               ],
             ),
           ),
           const SectionName(
-            headlineWord: 'Ady',
+            headlineWord: 'Iş tertibi saýla',
           ),
-          AddSection(
-            widget: SizedBox(
-              height: 50.h,
-              width: 339.w,
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: kcLightestGreyColor,
-                    ),
-                    borderRadius: BorderRadius.circular(10).w,
-                  ),
-                  hintText: 'Ýazyň...',
-                  contentPadding: REdgeInsets.only(left: 34),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10).w,
-                    borderSide: const BorderSide(
-                      color: kcHardGreyColor,
-                    ),
-                  ),
-                  hintStyle: TextStyle(
-                    color: kcHardGreyColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
-            ),
-          ),
+          AddSection(widget: Text('data')),
           const SectionName(
             headlineWord: 'Giňişleýin salgyňyz',
           ),
@@ -146,78 +132,6 @@ class _AddForWorkerNotifState extends State<AddForWorkerNotif> {
                 ],
               ),
               onTap: () {}),
-          const SectionName(headlineWord: 'Wezipän ady'),
-          AddSection(
-            widget: Row(
-              children: [
-                AddButton(),
-                horizontalSpaceSmall,
-                horizontalSpaceSmall,
-                BoxText.headline(
-                  'Wezipe goş',
-                  color: kcPrimaryColor,
-                )
-              ],
-            ),
-          ),
-          const SectionName(
-            headlineWord: 'Iş tertibi saýla',
-          ),
-          AddSection(widget: Text('data')),
-          const SectionName(
-            headlineWord: 'Ýaş derejesini saýla',
-          ),
-          AddSection(
-            widget: BoxText.headline('later'),
-          ),
-          const SectionName(
-            headlineWord: 'Aýlyk haky',
-          ),
-          AddSection(
-            widget: SizedBox(
-              height: 50.h,
-              width: 339.w,
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: kcLightestGreyColor,
-                    ),
-                    borderRadius: BorderRadius.circular(10).w,
-                  ),
-                  hintText: 'Ýazyň...',
-                  contentPadding: REdgeInsets.only(left: 34),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10).w,
-                    borderSide: const BorderSide(
-                      color: kcHardGreyColor,
-                    ),
-                  ),
-                  hintStyle: TextStyle(
-                    color: kcHardGreyColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SectionName(
-            headlineWord: 'Surat goş',
-          ),
-          AddSection(
-            widget: Row(
-              children: [
-                AddButton(),
-                horizontalSpaceSmall,
-                horizontalSpaceSmall,
-                BoxText.headline(
-                  'Surat goşuň',
-                  color: kcPrimaryColor,
-                )
-              ],
-            ),
-          ),
           const SectionName(
             headlineWord: 'Online wagty',
           ),
