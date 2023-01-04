@@ -36,4 +36,6 @@ abstract class Assets {
 
   static const gps = 'assets/icons/gps.svg';
   static const map = 'assets/icons/map.svg';
+  static const dot = 'assets/icons/dot.svg';
+  static const liked = 'assets/icons/liked.svg';
 }

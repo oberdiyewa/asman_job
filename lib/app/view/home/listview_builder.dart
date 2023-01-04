@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:asman_work/app/view/helpers.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 ListView makeListviewBuilder(ScrollController scrollController, int itemCount) {
   return ListView.builder(
-    shrinkWrap: true,
     controller: scrollController,
     itemCount: itemCount,
     shrinkWrap: true,
@@ -15,6 +15,7 @@ ListView makeListviewBuilder(ScrollController scrollController, int itemCount) {
       return Column(
         children: [
           ListTile(
+            contentPadding: EdgeInsets.zero,
             title: BoxText.headline('Satyjy gerek'),
             // isThreeLine: true,
             subtitle: Column(
@@ -40,7 +41,9 @@ ListView makeListviewBuilder(ScrollController scrollController, int itemCount) {
                         fontSize: 10.sp,
                       ),
                     ),
-                    horizontalSpaceRegular,
+                    horizontalSpaceTiny,
+                    SvgPicture.asset(Assets.dot),
+                    horizontalSpaceTiny,
                     Text(
                       '3 km uzaklykda',
                       style: TextStyle(
@@ -54,11 +57,23 @@ ListView makeListviewBuilder(ScrollController scrollController, int itemCount) {
               ],
             ),
             leading: Image.asset(Assets.avatarImage),
+            trailing: Column(
+              children: [
+                Text(
+                  '3 sagat öň',
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w400,
+                    color: kcHardGreyColor,
+                  ),
+                ),
+              ],
+            ),
           ),
           const Divider(
             indent: 3,
             endIndent: 3,
-            thickness: 2,
+            thickness: 1,
           ),
         ],
       );

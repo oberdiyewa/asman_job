@@ -102,33 +102,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               maxChildSize: 0.932,
               // snap: true,
               builder: (context, scrollController) {
-<<<<<<< HEAD
                 List<Widget> _sliverList(int size) {
                   final widgetList = <Widget>[
                     SliverAppBar(
                       shape: const ContinuousRectangleBorder(
                         borderRadius: BorderRadius.vertical(
                           top: Radius.circular(20),
-=======
-                return Material(
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(20.w)),
-                  color: Colors.white,
-                  child: Column(
-                    // controller: scrollController,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //scroll line
-                      Center(
-                        child: Container(
-                          width: 50.w,
-                          height: 5.h,
-                          margin: EdgeInsets.only(top: 13.h),
-                          decoration: BoxDecoration(
-                            color: kcLightGreyColor,
-                            borderRadius: BorderRadius.circular(20.w),
-                          ),
->>>>>>> d515d1e (added new plugin)
                         ),
                       ),
                       backgroundColor: Colors.transparent,
@@ -205,7 +184,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           fontSize: 10.sp,
                         ),
                       ),
-                      horizontalSpaceRegular,
+                      horizontalSpaceTiny,
+                      SvgPicture.asset(Assets.dot),
+                      horizontalSpaceTiny,
                       Text(
                         '3 km uzaklykda',
                         style: TextStyle(
@@ -219,6 +200,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 ],
               ),
               leading: Image.asset(Assets.avatarImage),
+              trailing: Column(
+                children: [
+                  Text(
+                    '3 sagat öň',
+                    style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w400,
+                      color: kcHardGreyColor,
+                    ),
+                  ),
+                ],
+              ),
             ),
             const Divider(
               indent: 3,
@@ -298,5 +291,3 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     );
   }
 }
-
-//38.1234, 58.0823
