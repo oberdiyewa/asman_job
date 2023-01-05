@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:asman_work/utils/globals/enums.dart';
 import 'package:flutter/foundation.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 @immutable
 class Address {
@@ -30,7 +30,7 @@ class Address {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      EnumVacancyApiFields.address.name: address,
+      EnumVacancyDetailApiFields.address.name: address,
       EnumVacancyApiFields.title.name: title,
       EnumVacancyApiFields.point.name: point
           .map<Map<String, double>>(
@@ -42,7 +42,7 @@ class Address {
 
   factory Address.fromMap(Map<String, dynamic> map) {
     return Address(
-      address: map[EnumVacancyApiFields.address.name] as String,
+      address: map[EnumVacancyDetailApiFields.address.name] as String,
       title: map[EnumVacancyApiFields.title.name] as String,
       point: List<LatLng>.from(
         (map[EnumVacancyApiFields.point.name] as List<Map<String, double>>)

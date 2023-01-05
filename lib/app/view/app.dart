@@ -1,8 +1,10 @@
+import 'package:asman_work/app/view/home/bloc/public_vacancy_bloc/public_vacancy_bloc.dart';
+import 'package:asman_work/app/view/home/bloc/tab_controller_cubit/tab_controller_cubit.dart';
 import 'package:asman_work/app/view/main/main_screen.dart';
 import 'package:asman_work/data/providers/logic/bottom_navigation_provider.dart';
 import 'package:asman_work/data/repository/user_repository.dart';
+import 'package:asman_work/data/repository/vacancy_repository.dart';
 import 'package:asman_work/l10n/l10n.dart';
-import 'package:asman_work/utils/globals/enums.dart';
 import 'package:asman_work/utils/settings/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +26,16 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (_) => BottomNavigationProvider(),
         ),
+        BlocProvider(
+          lazy: false,
+          create: (_) => PublicVacancyBloc(
+            VacancyRepository(),
+          )..add(PublicVacancyFetchEvent()),
+        ),
+        BlocProvider(
+          lazy: false,
+          create: (_) => TabControllerCubit(),
+        )
       ],
       child: const AppView(),
     );

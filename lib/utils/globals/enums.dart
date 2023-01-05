@@ -20,21 +20,17 @@ enum EnumScreenName {
 }
 
 enum EnumVacancyApiFields {
+  id,
   title,
   employer_title,
-  contact_phone,
-  emp_type,
-  description,
-  industry_id,
-  salary_from,
-  salary_to,
-  expiration_days,
-  avatar_number,
-  image,
-  // Address fields
-  address,
+  region,
+  distance,
+  avatar_url,
   point,
+  created_at,
 }
+
+enum EnumVacancyDetailApiFields { address }
 
 enum EnumProfileApiFields {
   name,

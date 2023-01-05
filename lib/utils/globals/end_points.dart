@@ -5,8 +5,8 @@ class APIEndPoints {
   static const String loginUserPost = '/api/login';
   static const String notesGet = '/posts';
 
-  static const String kHost = 'itop-api.asmanexpress.com';
-  static const String kApiPath = 'api';
+  static const String kBaseUrl = 'https://itop-api.asmanexpress.com';
+  static const String kApiPath = '/api';
 
   // Service's paths
   static const String kGoogleAddressreverse =
@@ -81,7 +81,7 @@ class APIEndPoints {
         return '$kApiPath/users/vacancy/${path.name}/$id';
       case EnumUserVacancyPaths.list:
       case EnumUserVacancyPaths.search:
-        return '$kApiPath/users/vacancy/${path.name}';
+        return '/users/vacancy/${path.name}';
       // ignore: no_default_cases
       default:
         return id == null
@@ -105,13 +105,3 @@ enum EnumUserVacancyPaths {
   none,
   search,
 }
-
-Uri uri(String path, {Map<String, dynamic>? queryParameters, String? query}) =>
-    Uri(
-      scheme: 'https',
-      host: APIEndPoints.kHost,
-      path: '/$path',
-      queryParameters: queryParameters == null || queryParameters.isEmpty
-          ? null
-          : queryParameters,
-    );
