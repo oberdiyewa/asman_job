@@ -7,15 +7,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:latlong2/latlong.dart';
 
-class DetailInfo extends StatefulWidget {
-  const DetailInfo({super.key});
+class DetailInfoJob extends StatefulWidget {
+  const DetailInfoJob({super.key});
 
   @override
-  State<DetailInfo> createState() => _DetailInfoState();
+  State<DetailInfoJob> createState() => _DetailInfoJobState();
 }
 
-class _DetailInfoState extends State<DetailInfo> {
+class _DetailInfoJobState extends State<DetailInfoJob> {
   MapController? mapController;
+  bool isLiked = false;
 
   @override
   void initState() {
@@ -26,6 +27,7 @@ class _DetailInfoState extends State<DetailInfo> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(isLiked.toString());
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
@@ -133,7 +135,12 @@ class _DetailInfoState extends State<DetailInfo> {
                             Padding(
                               padding: REdgeInsets.only(left: 140),
                               // alignment: Alignment.,
-                              child: SvgPicture.asset(Assets.favouriteIcon),
+                              child: GestureDetector(
+                                onTap: () => setState(() => isLiked = !isLiked),
+                                child: isLiked == false
+                                    ? SvgPicture.asset(Assets.favouriteIcon)
+                                    : SvgPicture.asset(Assets.liked),
+                              ),
                             ),
                           ],
                         ),

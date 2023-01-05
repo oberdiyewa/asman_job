@@ -1,6 +1,7 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
-import 'package:asman_work/app/view/home/detail_info.dart';
+import 'package:asman_work/app/view/home/detail_infoJob.dart';
+import 'package:asman_work/app/view/home/detail_infoWorker.dart';
 import 'package:asman_work/app/view/main/tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/plugin_api.dart';
@@ -150,7 +151,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         Navigator.push<dynamic>(
           context,
           MaterialPageRoute<dynamic>(
-            builder: (context) => const DetailInfo(),
+            builder: (context) => const DetailInfoWorker(),
           ),
         );
       },
