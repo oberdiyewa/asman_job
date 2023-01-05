@@ -1,0 +1,230 @@
+{
+  "project_info": {
+    "project_number": "787857623748",
+    "firebase_url": "https://asmantiz-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "asmantiz",
+    "storage_bucket": "asmantiz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787857623748:android:d2fdd5110af68625a41791",
+        "android_client_info": {
+          "package_name": "com.amg_rider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787857623748-7a79d6n02l4na8rjn639r7j0ppvu7km1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.amg_rider",
+            "certificate_hash": "226ff5cb25a8bfd06a6498b201c45b44f75d5a63"
+          }
+        },
+        {
+          "client_id": "787857623748-eppg8a2tap7a832g748vjhv9bm9cjp94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAywAntvnlbJ47gQ0_e5IQiF93PD25WPT4"
+        },
+        {
+          "current_key": "AIzaSyBU4KO-rvKNQVswgjYFxMW64SQusFyVCrs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787857623748-eppg8a2tap7a832g748vjhv9bm9cjp94.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "787857623748-gu2g8c7e0j971jqu2b7k5c4ov2vokgai.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.asman.superapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787857623748:android:efca7d2986f4b9e3a41791",
+        "android_client_info": {
+          "package_name": "com.amm_rider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787857623748-d98ihksfc2d250brop3tv4iuk02nbt5p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.amm_rider",
+            "certificate_hash": "226ff5cb25a8bfd06a6498b201c45b44f75d5a63"
+          }
+        },
+        {
+          "client_id": "787857623748-eppg8a2tap7a832g748vjhv9bm9cjp94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAywAntvnlbJ47gQ0_e5IQiF93PD25WPT4"
+        },
+        {
+          "current_key": "AIzaSyBU4KO-rvKNQVswgjYFxMW64SQusFyVCrs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787857623748-eppg8a2tap7a832g748vjhv9bm9cjp94.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "787857623748-gu2g8c7e0j971jqu2b7k5c4ov2vokgai.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.asman.superapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787857623748:android:d89e5f034981c3b0a41791",
+        "android_client_info": {
+          "package_name": "com.asman.superapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787857623748-eppg8a2tap7a832g748vjhv9bm9cjp94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAywAntvnlbJ47gQ0_e5IQiF93PD25WPT4"
+        },
+        {
+          "current_key": "AIzaSyBU4KO-rvKNQVswgjYFxMW64SQusFyVCrs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787857623748-eppg8a2tap7a832g748vjhv9bm9cjp94.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "787857623748-gu2g8c7e0j971jqu2b7k5c4ov2vokgai.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.asman.superapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787857623748:android:1f2852475335f00aa41791",
+        "android_client_info": {
+          "package_name": "com.asmantiz.picker.asman.mega"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787857623748-7u7u3s1bdflsp69kf9j95k30d7gf9pda.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.asmantiz.picker.asman.mega",
+            "certificate_hash": "9a77633281dcf1b72ae09aafaf07354cef9e856f"
+          }
+        },
+        {
+          "client_id": "787857623748-eppg8a2tap7a832g748vjhv9bm9cjp94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAywAntvnlbJ47gQ0_e5IQiF93PD25WPT4"
+        },
+        {
+          "current_key": "AIzaSyBU4KO-rvKNQVswgjYFxMW64SQusFyVCrs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787857623748-eppg8a2tap7a832g748vjhv9bm9cjp94.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "787857623748-gu2g8c7e0j971jqu2b7k5c4ov2vokgai.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.asman.superapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787857623748:android:b3c7c5cde9fc0711a41791",
+        "android_client_info": {
+          "package_name": "com.asmantiz.picker.asman.mini"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787857623748-eppg8a2tap7a832g748vjhv9bm9cjp94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAywAntvnlbJ47gQ0_e5IQiF93PD25WPT4"
+        },
+        {
+          "current_key": "AIzaSyBU4KO-rvKNQVswgjYFxMW64SQusFyVCrs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787857623748-eppg8a2tap7a832g748vjhv9bm9cjp94.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "787857623748-gu2g8c7e0j971jqu2b7k5c4ov2vokgai.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.asman.superapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

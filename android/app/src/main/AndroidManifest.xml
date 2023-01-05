@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.asman_work">
+    package="com.asman.superapp">
    <application
         android:label="Asman Work"
         android:name="${applicationName}"
@@ -30,6 +30,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyBEyUHQuUW44UQ0hafd43pooV-Z9YszHgg"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

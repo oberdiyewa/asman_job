@@ -1,5 +1,4 @@
-import 'package:asman_work/data/clients/remote/interceptors/auth_interceptor.dart';
-import 'package:asman_work/data/clients/remote/interceptors/log_interceptor.dart';
+import 'package:asman_work/data/clients/remote/interceptor.dart';
 import 'package:dio/dio.dart';
 
 class DioClient {
@@ -24,9 +23,25 @@ class DioClient {
 
   late final Dio _dio;
 
-  Future<Response<dynamic>> get({required int id}) async {
-    final response = await _dio.get<dynamic>('/users/$id');
-    return response;
+  Future<Response<dynamic>> get(
+    String path, {
+    Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
+  }) async {
+    try {
+      final response = await _dio
+          .get<dynamic>(
+            path,
+            queryParameters: queryParameters,
+            options: Options(
+              headers: headers,
+            ),
+          )
+          .catchError((dynamic err) {});
+      return response;
+    } on DioError {
+      rethrow;
+    }
   }
 
   Future<Response<dynamic>> post({

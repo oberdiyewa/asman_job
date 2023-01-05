@@ -1,7 +1,8 @@
-import 'package:asman_flutter_uikit/box_ui2.dart';
-import 'package:asman_work/app/view/notification_screen/notif_screen.dart';
+import 'package:asman_work/app/view/helpers.dart';
+import 'package:asman_work/app/view/home/bloc/tab_controller_cubit/tab_controller_cubit.dart';
 import 'package:asman_work/app/view/home/home.dart';
 import 'package:asman_work/app/view/main/bottom_navbar.dart';
+import 'package:asman_work/app/view/notification_screen/notif_screen.dart';
 import 'package:asman_work/app/view/profile/profile_screen.dart';
 import 'package:asman_work/app/view/search/search_screen.dart';
 import 'package:asman_work/data/providers/logic/bottom_navigation_provider.dart';
@@ -10,8 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../helpers.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -76,12 +75,27 @@ class _MainScreenState extends State<MainScreen> {
         height: 844.h,
         child: items[getBodyIndex(bottomData.state)].view,
       ),
-      bottomNavigationBar: CustomBottomBar(
-        items: items,
+      bottomNavigationBar:
+          BlocBuilder<TabControllerCubit, EnumDraggableSheetState>(
+        builder: (context, state) {
+          if (state == EnumDraggableSheetState.detail) {
+            return const SizedBox.shrink();
+          } else {
+            return CustomBottomBar(
+              items: items,
+            );
+          }
+        },
       ),
-      floatingActionButton: Visibility(
-        visible: !keyboardIsOpened,
-        child: customFloatingActionButton(),
+      floatingActionButton:
+          BlocBuilder<TabControllerCubit, EnumDraggableSheetState>(
+        builder: (context, state) {
+          if (state == EnumDraggableSheetState.detail || keyboardIsOpened) {
+            return const SizedBox.shrink();
+          } else {
+            return customFloatingActionButton();
+          }
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
