@@ -2,10 +2,8 @@ import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/home/listview_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:latlong2/latlong.dart';
 
 class DetailInfoJob extends StatefulWidget {
   const DetailInfoJob({super.key});
@@ -15,14 +13,12 @@ class DetailInfoJob extends StatefulWidget {
 }
 
 class _DetailInfoJobState extends State<DetailInfoJob> {
-  MapController? mapController;
   bool isLiked = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    mapController = MapController();
   }
 
   @override
@@ -33,17 +29,6 @@ class _DetailInfoJobState extends State<DetailInfoJob> {
         padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
         child: Stack(
           children: [
-            FlutterMap(
-              layers: [
-                TileLayerOptions(
-                  urlTemplate: 'https://geo.asmantiz.com/tile/{z}/{x}/{y}.png',
-                )
-              ],
-              mapController: mapController,
-              options: MapOptions(
-                center: LatLng(38.1234, 58.0823),
-              ),
-            ),
             Positioned(
               left: 20,
               top: 20,
@@ -388,17 +373,3 @@ class _DetailInfoJobState extends State<DetailInfoJob> {
     );
   }
 }
-
-
-/*
-dialog(context,
-                                    button1:
-                                        const BoxButton.medium(title: 'OK'),
-                                    contentText: Center(
-                                      child: BoxText.headingThree(
-                                        'Hormatly musderi, programma upjunciligmiz hic hilli jogapkarcilik cekmeyanligni size duyduryarys ',
-                                        color: kcHardGreyColor,
-                                      ),
-                                    ));
-
-*/
