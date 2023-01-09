@@ -11,7 +11,7 @@ import 'app_draggable_scrollable_sheet.dart.dart';
 class DraggableDetailScreen extends StatelessWidget {
   const DraggableDetailScreen({
     super.key, required this.scrollController
-  });
+  }); 
    final ScrollController scrollController;
   @override
   Widget build(BuildContext context) {

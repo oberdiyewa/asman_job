@@ -39,4 +39,5 @@ abstract class Assets {
   static const dot = 'assets/icons/dot.svg';
   static const liked = 'assets/icons/liked.svg';
   static const filter = 'assets/icons/filter.svg';
+  static const showLocation = 'assets/icons/show_location.svg';
 }
