@@ -17,6 +17,19 @@ enum SelectedPlace {
   ahal,
 }
 
+class Choice {
+  final String name;
+  final bool? selected;
+  Choice(this.name, [this.selected = false]);
+
+  Choice copy({
+    String? name,
+    bool? selected,
+  }) {
+    return Choice(name ?? this.name, selected ?? this.selected);
+  }
+}
+
 class FilterScreen extends StatefulWidget {
   const FilterScreen({super.key});
 
@@ -25,15 +38,71 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreenState extends State<FilterScreen> {
-  bool isRecentNotifsFirst = false;
-  bool isOldNotifsFirst = false;
-  bool isSortByPlace = false;
+  bool isAnySelected = true;
 
-  SelectedPlace? _place = SelectedPlace.ashgabat;
+  List<Choice> choices = [
+    Choice('Soňky bildirişler öňde goý'),
+    Choice('Öňki bildirişleri öňde goý'),
+    Choice('Ýerleşýän ýeri boýunça tertiple'),
+  ];
+  List<Choice> districts = [
+    Choice('Ashgabat'),
+    Choice('Ahal'),
+    Choice('Mary'),
+    Choice('Balkan'),
+    Choice('Lebap'),
+    Choice('Dashoguz')
+  ];
+
+  void _selectChoice(Choice c) {
+    final newList = List<Choice>.from(choices);
+    isAnySelected = false;
+
+    for (var i = 0; i < newList.length; i++) {
+      final item = newList[i];
+
+      if (item.name == c.name && item.selected == true) {
+        return;
+      } else if (item.name == c.name && item.selected == false) {
+        newList[i] = item.copy(selected: true);
+        continue;
+      }
+
+      // unselect all others
+      newList[i] = item.copy(selected: false);
+    }
+
+    // update state
+    choices = newList;
+    setState(() {});
+  }
+
+  void selectDistrict(Choice c) {
+    final newList = List<Choice>.from(districts);
+
+    for (var i = 0; i < newList.length; i++) {
+      final item = newList[i];
+
+      if (item.name == c.name && item.selected == true) {
+        return;
+      } else if (item.name == c.name && item.selected == false) {
+        newList[i] = item.copy(selected: true);
+        continue;
+      }
+
+      // unselect all others
+      newList[i] = item.copy(selected: false);
+    }
+
+    // update state
+    districts = newList;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(241, 241, 241, 1),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         leading: Padding(
@@ -55,136 +124,70 @@ class _FilterScreenState extends State<FilterScreen> {
         backgroundColor: kcPrimaryColor,
       ),
       body: Column(
-        // crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          verticalSpaceSmall,
-          verticalSpaceTiny,
-          AddSection(
-            customHeight: 368,
-            widget: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Checkbox(
-                      side: const BorderSide(color: kcPrimaryColor, width: 2),
-                      checkColor: Colors.white,
-                      activeColor: kcPrimaryColor,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          isRecentNotifsFirst = value!;
-                        });
-                      },
-                      value: isRecentNotifsFirst,
-                    ),
-                    // horizontalSpaceSmall,
-                    const Text(
-                      'Soňky bildirişler öňde goý',
-                      style: TextStyle(
-                        color: kcPrimaryTextColor,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    )
-                  ],
-                ),
-                // verticalSpaceRegular,
-                Row(
-                  children: [
-                    Checkbox(
-                      side: const BorderSide(color: kcPrimaryColor, width: 2),
-                      checkColor: Colors.white,
-                      activeColor: kcPrimaryColor,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          isOldNotifsFirst = value!;
-                        });
-                      },
-                      value: isOldNotifsFirst,
-                    ),
-                    // horizontalSpaceSmall,
-                    const Text(
-                      'Öňki bildirişleri öňde goý',
-                      style: TextStyle(
-                        color: kcPrimaryTextColor,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    )
-                  ],
-                ),
-                Row(
-                  children: [
-                    Checkbox(
-                      side: const BorderSide(color: kcPrimaryColor, width: 2),
-                      checkColor: Colors.white,
-                      activeColor: kcPrimaryColor,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          isSortByPlace = value!;
-                        });
-                      },
-                      value: isSortByPlace,
-                    ),
-                    // horizontalSpaceSmall,
-                    const Text(
-                      'Ýerleşýän ýeri boýunça tertiple',
-                      style: TextStyle(
-                        color: kcPrimaryTextColor,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    )
-                  ],
-                ),
-                Padding(
-                  padding: REdgeInsets.only(left: 40),
-                  child: Column(
+          Column(
+            children: [
+              Column(
+                children: choices.map((choice) {
+                  return Row(
                     children: [
-                      Row(
-                        children: [
-                          Radio<SelectedPlace>(
-                            activeColor: kcPrimaryColor,
-                            value: SelectedPlace.ashgabat,
-                            groupValue: _place,
-                            onChanged: (SelectedPlace? value) {
-                              setState(() {
-                                _place = value;
-                              });
-                            },
-                          ),
-                          // horizontalSpaceSmall,
-                          const Text(
-                            'Aşgabat',
-                            style:
-                                TextStyle(color: kcHardGreyColor, fontSize: 12),
-                          ),
-                        ],
+                      Checkbox(
+                        activeColor: kcPrimaryColor,
+                        side: BorderSide(width: 1.5, color: kcPrimaryColor),
+                        value: choice.selected,
+                        onChanged: (v) => _selectChoice(choice),
                       ),
-                      Row(
-                        children: [
-                          Radio<SelectedPlace>(
-                            activeColor: kcPrimaryColor,
-                            value: SelectedPlace.ahal,
-                            groupValue: _place,
-                            onChanged: (SelectedPlace? value) {
-                              setState(() {
-                                _place = value;
-                              });
-                            },
-                          ),
-                          // horizontalSpaceSmall,
-                          const Text(
-                            'Ahal',
-                            style:
-                                TextStyle(color: kcHardGreyColor, fontSize: 12),
-                          ),
-                        ],
+                      // horizontalSpaceSmall,
+                      Text(
+                        choice.name,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400, fontSize: 14.sp),
                       ),
                     ],
-                  ),
+                  );
+                }).toList(),
+              ),
+              if (choices[2].selected == false)
+                const SizedBox(
+                  height: 60,
                 )
-              ],
+              else
+                const SizedBox(),
+              Padding(
+                padding: REdgeInsets.only(left: 50),
+                child: Visibility(
+                  visible: choices[2].selected == true,
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 500),
+                    child: Column(
+                      children: districts.map((e) {
+                        return Row(
+                          children: [
+                            CustomRadioWidget<dynamic>(
+                              isSelected: e.selected!,
+                              onChanged: () => selectDistrict(e),
+                            ),
+                            horizontalSpaceSmall,
+                            Text(e.name),
+                          ],
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: REdgeInsets.all(8),
+            child: BoxButton.block(
+              title: 'Tertiple',
+              disabled: isAnySelected,
+              onTap: () {
+                isAnySelected == false ? Navigator.pop(context) : null;
+              },
             ),
           )
         ],

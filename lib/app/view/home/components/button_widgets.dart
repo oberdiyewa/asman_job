@@ -1,9 +1,8 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
+import 'package:asman_work/app/view/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../helpers.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({super.key});
@@ -45,57 +44,49 @@ class FindMyLocationWidget extends StatelessWidget {
 }
 
 class CustomRadioWidget<T> extends StatelessWidget {
-  final T value;
-  final T groupValue;
-  final ValueChanged<T> onChanged;
+  const CustomRadioWidget({
+    super.key,
+    // required this.value,
+    // required this.groupValue,
+    // required this.onChanged,
+    this.width = 16,
+    this.height = 16,
+    required this.isSelected,
+    required this.onChanged,
+  });
+  // final T value;
+  // final T groupValue;
+  final Function()? onChanged;
   final double width;
   final double height;
-
-  const CustomRadioWidget(
-      {required this.value,
-      required this.groupValue,
-      required this.onChanged,
-      this.width = 32,
-      this.height = 32});
+  final bool isSelected;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: GestureDetector(
-        onTap: () {
-          onChanged(this.value);
-        },
-        child: Container(
-          height: this.height,
-          width: this.width,
-          decoration: ShapeDecoration(
-            shape: CircleBorder(),
-            gradient: LinearGradient(
-              colors: [
-                Color(0xFF49EF3E),
-                Color(0xFF06D89A),
-              ],
-            ),
-          ),
-          child: Center(
-            child: Container(
-              height: this.height - 8,
-              width: this.width - 8,
-              decoration: ShapeDecoration(
-                shape: CircleBorder(),
-                gradient: LinearGradient(
-                  colors: value == groupValue
-                      ? [
-                          Color(0xFFE13684),
-                          Color(0xFFFF6EEC),
-                        ]
-                      : [
-                          Theme.of(context).scaffoldBackgroundColor,
-                          Theme.of(context).scaffoldBackgroundColor,
-                        ],
-                ),
-              ),
+    return GestureDetector(
+      onTap: onChanged,
+      child: Container(
+        margin: REdgeInsets.only(top: 5, bottom: 5),
+        height: height,
+        width: width,
+        decoration: const BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromRGBO(1, 1, 1, 0.25),
+              blurRadius: 1.4,
+              offset: Offset(0, 0.7),
+            )
+          ],
+          color: Colors.white,
+          shape: BoxShape.circle,
+        ),
+        child: Center(
+          child: Container(
+            height: height - 5,
+            width: width - 5,
+            decoration: ShapeDecoration(
+              color: isSelected == true ? kcPrimaryColor : Colors.white,
+              shape: const CircleBorder(),
             ),
           ),
         ),
