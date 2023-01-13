@@ -9,10 +9,12 @@ class AddSection extends StatelessWidget {
     this.widget,
     this.onTap,
     this.customHeight = 80,
+    this.hasChildren = false,
   });
   final Widget? widget;
   final VoidCallback? onTap;
   final double customHeight;
+  final bool hasChildren;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class AddSection extends StatelessWidget {
       onTap: onTap,
       child: Container(
           width: screenWidth(context),
-          height: customHeight.h,
+          height: hasChildren ? customHeight.h : null,
           padding: REdgeInsets.only(top: 10, bottom: 10, left: 23, right: 28),
           decoration: const BoxDecoration(
             color: Color.fromRGBO(255, 254, 254, 1),

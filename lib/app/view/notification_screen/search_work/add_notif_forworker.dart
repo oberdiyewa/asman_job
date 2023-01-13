@@ -1,6 +1,7 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
+import 'package:asman_work/app/view/notification_screen/search_work/add_profession.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,6 +18,9 @@ class AddForWorkerNotif extends StatefulWidget {
 
 class _AddForWorkerNotifState extends State<AddForWorkerNotif> {
   bool isChecked = false;
+  bool isMounted = false;
+  String finalResult = 'Wezipe gosh';
+  bool _customTileExpanded = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,23 +79,63 @@ class _AddForWorkerNotifState extends State<AddForWorkerNotif> {
             ),
           ),
           const SectionName(headlineWord: 'Wezipe'),
-          AddSection(
-            widget: Row(
-              children: [
-                AddButton(),
-                horizontalSpaceSmall,
-                horizontalSpaceSmall,
-                BoxText.headline(
-                  'Wezipe goş',
-                  color: kcPrimaryColor,
-                )
-              ],
+          if (isMounted == false)
+            AddSection(
+              widget: Row(
+                children: [
+                  GestureDetector(
+                      onTap: () {
+                        selectProfessionAndReturnResult(context);
+                      },
+                      child: const AddButton()),
+                  horizontalSpaceSmall,
+                  horizontalSpaceSmall,
+                  BoxText.headline(
+                    finalResult,
+                    color: kcPrimaryColor,
+                  )
+                ],
+              ),
+            )
+          else
+            AddSection(
+              widget: Container(
+                width: 339.w,
+                height: 50.h,
+                margin: REdgeInsets.fromLTRB(1, 1, 1, 1),
+                padding:
+                    REdgeInsets.only(top: 10, bottom: 10, left: 23, right: 20),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(color: kcLightestGreyColor)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    BoxText.body(finalResult),
+                    GestureDetector(
+                      onTap: () {
+                        selectProfessionAndReturnResult(context);
+                      },
+                      child: const Icon(
+                        Icons.edit,
+                        color: kcPrimaryColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
           const SectionName(
             headlineWord: 'Iş tertibi saýla',
           ),
-          AddSection(widget: Text('data')),
+          AddSection(
+            // hasChildren: true,
+            customHeight: 90,
+            widget: ExpansionTile(
+              title: Text('This should expand and/or collapse'),
+              children: List.generate(5, (index) => Text('Child ${index + 1}')),
+            ),
+          ),
           const SectionName(
             headlineWord: 'Giňişleýin salgyňyz',
           ),
@@ -164,5 +208,19 @@ class _AddForWorkerNotifState extends State<AddForWorkerNotif> {
         ],
       ),
     );
+  }
+
+  Future<void> selectProfessionAndReturnResult(BuildContext context) async {
+    final result = await Navigator.push<String>(
+      context,
+      MaterialPageRoute<String>(builder: (context) => const AddProfession()),
+    );
+    debugPrint(result.toString());
+    if (mounted) {
+      setState(() {
+        isMounted = true;
+        finalResult = result as String;
+      });
+    }
   }
 }
