@@ -9,6 +9,19 @@ import 'package:flutter_svg/svg.dart';
 
 import 'add_address_worker.dart';
 
+class ChoiceWorkType {
+  final String name;
+  final bool? selected;
+  ChoiceWorkType(this.name, [this.selected = false]);
+
+  ChoiceWorkType copy({
+    String? name,
+    bool? selected,
+  }) {
+    return ChoiceWorkType(name ?? this.name, selected ?? this.selected);
+  }
+}
+
 class AddForWorkerNotif extends StatefulWidget {
   const AddForWorkerNotif({super.key});
 
@@ -19,8 +32,42 @@ class AddForWorkerNotif extends StatefulWidget {
 class _AddForWorkerNotifState extends State<AddForWorkerNotif> {
   bool isChecked = false;
   bool isMounted = false;
+  bool isExpand = false;
+  String selectedWorkType = 'Saýlaň (Doly iş güni, Ýarym iş güni we ş.m)';
   String finalResult = 'Wezipe gosh';
   bool _customTileExpanded = false;
+  List<ChoiceWorkType> workTypes = [
+    ChoiceWorkType('Doly iş güni'),
+    ChoiceWorkType('Ýarym iş güni'),
+    ChoiceWorkType('Möwsümleýin'),
+    ChoiceWorkType('Meýletin'),
+    ChoiceWorkType('Tejribe '),
+    ChoiceWorkType('Taslama esasynda'),
+    ChoiceWorkType('Uzakdan işlemek '),
+  ];
+
+  void _selectChoice(ChoiceWorkType c) {
+    final newList = List<ChoiceWorkType>.from(workTypes);
+
+    for (var i = 0; i < newList.length; i++) {
+      final item = newList[i];
+
+      if (item.name == c.name && item.selected == true) {
+        return;
+      } else if (item.name == c.name && item.selected == false) {
+        newList[i] = item.copy(selected: true);
+        continue;
+      }
+
+      // unselect all others
+      newList[i] = item.copy(selected: false);
+    }
+    selectedWorkType = c.name;
+    // update state
+    workTypes = newList;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -132,8 +179,47 @@ class _AddForWorkerNotifState extends State<AddForWorkerNotif> {
             // hasChildren: true,
             customHeight: 90,
             widget: ExpansionTile(
-              title: Text('This should expand and/or collapse'),
-              children: List.generate(5, (index) => Text('Child ${index + 1}')),
+              onExpansionChanged: (bool isExapnd) {
+                setState(() {
+                  isExpand = isExapnd;
+                });
+              },
+              title: isExpand
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        BoxText.headline(
+                          'Birini saýlaň',
+                          color: kcHardGreyColor,
+                        ),
+                        Divider()
+                      ],
+                    )
+                  : BoxText.headline(
+                      selectedWorkType,
+                      color: kcPrimaryColor,
+                    ),
+              children: workTypes.map((choice) {
+                return Row(
+                  children: [
+                    Checkbox(
+                      activeColor: kcPrimaryColor,
+                      side: const BorderSide(
+                        width: 1.5,
+                        color: Color.fromRGBO(62, 82, 188, 0.25),
+                      ),
+                      value: choice.selected,
+                      onChanged: (v) => _selectChoice(choice),
+                    ),
+                    // horizontalSpaceSmall,
+                    Text(
+                      choice.name,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w400, fontSize: 14.sp),
+                    ),
+                  ],
+                );
+              }).toList(),
             ),
           ),
           const SectionName(

@@ -14,16 +14,16 @@ enum SelectedPlace {
   ahal,
 }
 
-class Choice {
+class ChoiceFilter {
   final String name;
   final bool? selected;
-  Choice(this.name, [this.selected = false]);
+  ChoiceFilter(this.name, [this.selected = false]);
 
-  Choice copy({
+  ChoiceFilter copy({
     String? name,
     bool? selected,
   }) {
-    return Choice(name ?? this.name, selected ?? this.selected);
+    return ChoiceFilter(name ?? this.name, selected ?? this.selected);
   }
 }
 
@@ -37,22 +37,22 @@ class FilterScreen extends StatefulWidget {
 class _FilterScreenState extends State<FilterScreen> {
   bool isAnySelected = true;
 
-  List<Choice> choices = [
-    Choice('Soňky bildirişler öňde goý'),
-    Choice('Öňki bildirişleri öňde goý'),
-    Choice('Ýerleşýän ýeri boýunça tertiple'),
+  List<ChoiceFilter> choices = [
+    ChoiceFilter('Soňky bildirişler öňde goý'),
+    ChoiceFilter('Öňki bildirişleri öňde goý'),
+    ChoiceFilter('Ýerleşýän ýeri boýunça tertiple'),
   ];
-  List<Choice> districts = [
-    Choice('Ashgabat'),
-    Choice('Ahal'),
-    Choice('Mary'),
-    Choice('Balkan'),
-    Choice('Lebap'),
-    Choice('Dashoguz')
+  List<ChoiceFilter> districts = [
+    ChoiceFilter('Ashgabat'),
+    ChoiceFilter('Ahal'),
+    ChoiceFilter('Mary'),
+    ChoiceFilter('Balkan'),
+    ChoiceFilter('Lebap'),
+    ChoiceFilter('Dashoguz')
   ];
 
-  void _selectChoice(Choice c) {
-    final newList = List<Choice>.from(choices);
+  void _selectChoice(ChoiceFilter c) {
+    final newList = List<ChoiceFilter>.from(choices);
     isAnySelected = false;
 
     for (var i = 0; i < newList.length; i++) {
@@ -74,8 +74,8 @@ class _FilterScreenState extends State<FilterScreen> {
     setState(() {});
   }
 
-  void selectDistrict(Choice c) {
-    final newList = List<Choice>.from(districts);
+  void selectDistrict(ChoiceFilter c) {
+    final newList = List<ChoiceFilter>.from(districts);
 
     for (var i = 0; i < newList.length; i++) {
       final item = newList[i];
