@@ -1,6 +1,7 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
+import 'package:asman_work/app/view/notification_screen/search_work/add_phone.dart';
 import 'package:asman_work/app/view/notification_screen/search_work/add_profession.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
 import 'package:flutter/material.dart';
@@ -33,8 +34,11 @@ class _AddForWorkerNotifState extends State<AddForWorkerNotif> {
   bool isChecked = false;
   bool isMounted = false;
   bool isExpand = false;
+  bool isMountedforPhone = false;
+
   String selectedWorkType = 'Saýlaň (Doly iş güni, Ýarym iş güni we ş.m)';
   String finalResult = 'Wezipe gosh';
+  String phoneNumber = 'Telefon belgi goş';
   bool _customTileExpanded = false;
   List<ChoiceWorkType> workTypes = [
     ChoiceWorkType('Doly iş güni'),
@@ -252,7 +256,16 @@ class _AddForWorkerNotifState extends State<AddForWorkerNotif> {
           AddSection(
               widget: Row(
                 children: [
-                  const AddButton(),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.push<dynamic>(
+                          context,
+                          MaterialPageRoute<dynamic>(
+                            builder: (context) => const AddPhoneNumber(),
+                          ),
+                        );
+                      },
+                      child: const AddButton()),
                   horizontalSpaceSmall,
                   horizontalSpaceSmall,
                   BoxText.headline(
@@ -306,6 +319,20 @@ class _AddForWorkerNotifState extends State<AddForWorkerNotif> {
       setState(() {
         isMounted = true;
         finalResult = result as String;
+      });
+    }
+  }
+
+  Future<void> getPhoneNumberAndReturnResult(BuildContext context) async {
+    final result = await Navigator.push<String>(
+      context,
+      MaterialPageRoute<String>(builder: (context) => const AddPhoneNumber()),
+    );
+
+    if (mounted) {
+      setState(() {
+        isMountedforPhone = true;
+        phoneNumber = result as String;
       });
     }
   }
