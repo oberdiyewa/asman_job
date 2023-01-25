@@ -22,7 +22,7 @@ class AddSection extends StatelessWidget {
       onTap: onTap,
       child: Container(
           width: screenWidth(context),
-          height: hasChildren ? customHeight.h : null,
+          height: hasChildren ? null : customHeight.h,
           padding: REdgeInsets.only(top: 10, bottom: 10, left: 23, right: 28),
           decoration: const BoxDecoration(
             color: Color.fromRGBO(255, 254, 254, 1),

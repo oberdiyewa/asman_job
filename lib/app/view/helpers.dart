@@ -13,7 +13,7 @@ abstract class Assets {
 
   static const menuIcon = 'assets/images/menu_button.png';
   static const personGreyIcon = 'assets/icons/person_grey.svg';
-  static const String avatarImage = 'assets/images/avatar.png';
+  static const avatarImage = 'assets/images/avatar.png';
   static const searchWorkIcon = 'assets/icons/search_work.svg';
   static const mapImage = 'assets/images/map.png';
   static const refreshIcon = 'assets/icons/refresh.svg';
@@ -40,4 +40,7 @@ abstract class Assets {
   static const liked = 'assets/icons/liked.svg';
   static const filter = 'assets/icons/filter.svg';
   static const showLocation = 'assets/icons/show_location.svg';
+  static const phone = 'assets/icons/phone_number.svg';
+  static const infoIcon = 'assets/icons/info_circle.svg';
+
 }

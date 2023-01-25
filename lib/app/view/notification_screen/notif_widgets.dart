@@ -24,6 +24,33 @@ class SectionName extends StatelessWidget {
   }
 }
 
+class PhoneButton extends StatelessWidget {
+  const PhoneButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 30.w,
+      height: 30.h,
+      padding: REdgeInsets.symmetric(vertical: 4, horizontal: 5),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(3),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromRGBO(0, 0, 0, 0.1),
+            blurRadius: 1.2,
+            offset: Offset(0, 0.6),
+          )
+        ],
+      ),
+      child: SvgPicture.asset(Assets.phone),
+    );
+  }
+}
+
 class AddButton extends StatelessWidget {
   const AddButton({
     Key? key,
@@ -38,7 +65,7 @@ class AddButton extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(3),
         color: Colors.white,
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Color.fromRGBO(0, 0, 0, 0.1),
             blurRadius: 1.2,
@@ -51,4 +78,142 @@ class AddButton extends StatelessWidget {
   }
 }
 
-const List<String> list = <String>['One', 'Two', 'Three', 'Four'];
+class SliderWidget extends StatefulWidget {
+  const SliderWidget({super.key});
+
+  @override
+  State<SliderWidget> createState() => _SliderWidgetState();
+}
+
+class _SliderWidgetState extends State<SliderWidget> {
+  static double currentSliderValue = 1;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 5),
+          child: BoxText.headline(
+            '${currentSliderValue.round()} gün',
+            color: kcPrimaryColor,
+          ),
+        ),
+        Theme(
+          data: Theme.of(context).copyWith(
+              sliderTheme:
+                  const SliderThemeData(valueIndicatorColor: kcPrimaryColor)),
+          child: Slider(
+            value: currentSliderValue,
+            max: 60,
+            divisions: 60,
+            thumbColor: kcPrimaryColor,
+            activeColor: kcPrimaryColor,
+            min: 1,
+            label: '${currentSliderValue.round()} gün',
+            onChanged: (double value) {
+              setState(() {
+                currentSliderValue = value;
+              });
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+Future<void> dialog(BuildContext context,
+    {required Widget button1,
+    required Widget contentText,
+    Widget? button2}) async {
+  return await showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          content: SizedBox(
+            width: 160,
+            height: 80,
+            child: Center(child: contentText),
+          ),
+          actions: (button2 == null) ? [button1] : [button1, button2],
+          actionsAlignment: MainAxisAlignment.spaceEvenly,
+          actionsPadding: const EdgeInsets.only(bottom: 15),
+          elevation: 5,
+          scrollable: true,
+        );
+      });
+}
+
+class CustomInputField extends StatelessWidget {
+  final TextEditingController controller;
+  final String placeholder;
+  final Widget? leading;
+  final Widget? trailing;
+  final void Function()? trailingtapped;
+  final bool password;
+  final Color? borderColor;
+  // final double? height;
+  final double? width;
+  final circularBorder = OutlineInputBorder(
+    borderRadius: BorderRadius.circular(8),
+  );
+
+  CustomInputField(
+      {super.key,
+      required this.controller,
+      this.placeholder = '',
+      this.leading,
+      this.trailing,
+      // this.height = 45,
+      this.width = 85,
+      this.borderColor = kcHardGreyColor,
+      this.trailingtapped,
+      this.password = false});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      //  height: height?.h,
+      width: width?.w,
+      child: TextField(
+        controller: controller,
+        style: const TextStyle(height: 1),
+        obscureText: password,
+        decoration: InputDecoration(
+            hintText: placeholder,
+            hintStyle: const TextStyle(
+                color: kcPrimaryTextColor,
+                fontSize: 14,
+                fontWeight: FontWeight.w400),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+            filled: true,
+            fillColor: kcSecondaryTextColor,
+            prefixIcon: leading,
+            suffixIcon: trailing != null
+                ? GestureDetector(
+                    onTap: trailingtapped,
+                    child: trailing,
+                  )
+                : null,
+            border: circularBorder.copyWith(
+              borderSide: BorderSide(color: borderColor!),
+            ),
+            errorBorder: circularBorder.copyWith(
+              borderSide: const BorderSide(color: Colors.red),
+            ),
+            focusedBorder: circularBorder.copyWith(
+                borderSide: const BorderSide(color: kcPrimaryColor)),
+            enabledBorder: circularBorder.copyWith(
+                borderSide: const BorderSide(color: kcLightGreyColor))),
+      ),
+    );
+  }
+}

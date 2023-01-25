@@ -11,7 +11,8 @@ dependencies:
   asman_flutter_uikit:
     git:
       url: https://git.asmantiz.com/Koch/asman_flutter_uikit.git
-      ref: dev_oguljemal
+      ref: c415fb37ee859be67ce0f04980fa08f7507cb756
+
   bloc: ^8.1.0
   cached_network_image: ^3.2.3
   connectivity_plus: any

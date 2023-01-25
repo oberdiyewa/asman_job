@@ -51,7 +51,7 @@ class _AddPhoneNumberState extends State<AddPhoneNumber> {
             verticalSpaceSmall,
             verticalSpaceTiny,
             AddSection(
-              customHeight: 190,
+              customHeight: 220,
               widget: Padding(
                 padding: REdgeInsets.only(top: 14, bottom: 16),
                 child: Column(
@@ -92,7 +92,7 @@ class _AddPhoneNumberState extends State<AddPhoneNumber> {
                         ),
                       ],
                     ),
-                    verticalSpaceMedium,
+                    verticalSpaceRegular,
                     Row(
                       children: [
                         CustomRadioWidget<dynamic>(
@@ -112,7 +112,7 @@ class _AddPhoneNumberState extends State<AddPhoneNumber> {
                         BoxText.body('Häzirki belgini ulan'),
                       ],
                     ),
-                    verticalSpaceMedium,
+                    verticalSpaceRegular,
                     BoxButton.block(
                       title: 'Belgini goş',
                       disabled: !isEnableButton,

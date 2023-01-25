@@ -1,6 +1,6 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
-import 'package:asman_work/app/view/notification_screen/search_work/add_notif_forworker.dart';
+import 'package:asman_work/app/view/notification_screen/search_work/add_notif_forwork.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -39,7 +39,7 @@ class _WorkSectionTabbarState extends State<WorkSectionTabbar> {
               Navigator.push<dynamic>(
                 context,
                 MaterialPageRoute<dynamic>(
-                  builder: (context) => const AddForWorkerNotif(),
+                  builder: (context) => const AddForWorkNotif(),
                 ),
               );
             },

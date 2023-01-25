@@ -6,13 +6,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../helpers.dart';
+import '../../notification_screen/notif_widgets.dart';
 import 'app_draggable_scrollable_sheet.dart.dart';
 
 class DraggableDetailScreen extends StatelessWidget {
-  const DraggableDetailScreen({
-    super.key, required this.scrollController
-  }); 
-   final ScrollController scrollController;
+  const DraggableDetailScreen({super.key, required this.scrollController});
+  final ScrollController scrollController;
   @override
   Widget build(BuildContext context) {
     return SizedBox.expand(
@@ -320,22 +319,23 @@ class DraggableDetailScreen extends StatelessWidget {
                   color: kcPrimaryColor,
                 ),
                 child: Center(
-                    child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(Assets.callIcon),
-                    horizontalSpaceSmall,
-                    horizontalSpaceTiny,
-                    Text(
-                      'Jan et',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    )
-                  ],
-                )),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(Assets.callIcon),
+                      horizontalSpaceSmall,
+                      horizontalSpaceTiny,
+                      Text(
+                        'Jan et',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
             ),
           )
