@@ -39,21 +39,21 @@ class _SearchScreenState extends State<SearchScreen>
           ),
           /*
           Container(
-            height: 50.h,
+            height: 100.h,
             margin: EdgeInsets.only(top: 10.h).r,
             child: TabBarView(
               physics: const NeverScrollableScrollPhysics(),
               controller: tabController,
               children: [
-                SizedBox(
+                Container(
                   width: screenWidth(context),
                   height: screenHeight(context),
-                  // color: Colors.red,
+                  color: Colors.red,
                 ),
-                SizedBox(
+                Container(
                   width: screenWidth(context),
                   height: 400.h,
-                  // color: Colors.green,
+                  color: Colors.green,
                 ),
               ],
             ),
@@ -132,6 +132,7 @@ class _SearchScreenState extends State<SearchScreen>
           ),
           Expanded(
             child: Container(
+              padding: REdgeInsets.only(left: 10, right: 10),
               width: screenWidth(context),
               height: 600.h,
               child: ListView.builder(
@@ -140,12 +141,26 @@ class _SearchScreenState extends State<SearchScreen>
                   return Column(
                     children: [
                       ListTile(
-                        title: BoxText.headline('Satyjy gerek'),
+                        contentPadding: EdgeInsets.zero,
+                        title: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            BoxText.headline('Satyjy gerek'),
+                            Text(
+                              '3 sagat öň',
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w400,
+                                color: kcHardGreyColor,
+                              ),
+                            ),
+                          ],
+                        ),
                         // isThreeLine: true,
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            verticalSpaceSmall,
+                            verticalSpaceTiny,
                             Text(
                               'Zaman market',
                               style: TextStyle(
@@ -154,7 +169,7 @@ class _SearchScreenState extends State<SearchScreen>
                                 fontSize: 12.sp,
                               ),
                             ),
-                            verticalSpaceSmall,
+                            verticalSpaceTiny,
                             Row(
                               children: [
                                 Text(
@@ -165,7 +180,9 @@ class _SearchScreenState extends State<SearchScreen>
                                     fontSize: 10.sp,
                                   ),
                                 ),
-                                horizontalSpaceRegular,
+                                horizontalSpaceTiny,
+                                SvgPicture.asset(Assets.dot),
+                                horizontalSpaceTiny,
                                 Text(
                                   '3 km uzaklykda',
                                   style: TextStyle(
@@ -179,11 +196,12 @@ class _SearchScreenState extends State<SearchScreen>
                           ],
                         ),
                         leading: Image.asset(Assets.avatarImage),
+                        // trailing:
                       ),
                       const Divider(
                         indent: 3,
                         endIndent: 3,
-                        thickness: 2,
+                        thickness: 1,
                       ),
                     ],
                   );
