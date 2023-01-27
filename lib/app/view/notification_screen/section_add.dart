@@ -10,11 +10,19 @@ class AddSection extends StatelessWidget {
     this.onTap,
     this.customHeight = 80,
     this.hasChildren = false,
+    this.bottomPadding = 10,
+    this.topPadding = 10,
+    this.leftPadding = 23,
+    this.rightPadding = 28,
   });
   final Widget? widget;
   final VoidCallback? onTap;
+  final double? bottomPadding;
   final double customHeight;
   final bool hasChildren;
+  final double? topPadding;
+  final double? leftPadding;
+  final double? rightPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +31,12 @@ class AddSection extends StatelessWidget {
       child: Container(
           width: screenWidth(context),
           height: hasChildren ? null : customHeight.h,
-          padding: REdgeInsets.only(top: 10, bottom: 10, left: 23, right: 28),
+          padding: REdgeInsets.only(
+            top: topPadding!,
+            bottom: bottomPadding!,
+            left: leftPadding!,
+            right: rightPadding!,
+          ),
           decoration: const BoxDecoration(
             color: Color.fromRGBO(255, 254, 254, 1),
             boxShadow: [

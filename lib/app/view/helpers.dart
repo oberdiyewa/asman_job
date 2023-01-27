@@ -18,11 +18,17 @@ abstract class Assets {
   static const mapImage = 'assets/images/map.png';
   static const refreshIcon = 'assets/icons/refresh.svg';
   static const profileBig = 'assets/icons/profile_big.svg';
-  static const info = 'assets/icons/help.svg';
+  static const help = 'assets/icons/help.svg';
   static const notif = 'assets/icons/notif.svg';
   static const logout = 'assets/icons/logout_icon.svg';
   static const key = 'assets/icons/key_icon.svg';
   static const about = 'assets/icons/about_yourself.svg';
+  static const setting = 'assets/icons/setting.svg';
+  static const favourites = 'assets/icons/heart.svg';
+  
+
+  
+
 
   static const clear = 'assets/icons/clear.svg';
 
@@ -44,4 +50,6 @@ abstract class Assets {
   static const showLocation = 'assets/icons/show_location.svg';
   static const phone = 'assets/icons/phone_number.svg';
   static const infoIcon = 'assets/icons/info_circle.svg';
+
+  static const arrowForward = 'assets/icons/arrow_forward.svg';
 }
