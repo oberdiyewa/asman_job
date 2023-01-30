@@ -2,6 +2,8 @@ import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
+import 'package:asman_work/app/view/profile/fill_about_yourself/fill_data.dart';
+import 'package:asman_work/app/view/profile/profile_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -14,8 +16,6 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  bool isTapped = false;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -50,116 +50,119 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     rightPadding: 0,
                     leftPadding: 0,
                     bottomPadding: 0,
-                    customHeight: 400,
+                    customHeight: 340,
                     widget: Column(
                       children: [
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              isTapped = !isTapped;
-                            });
-                          },
-                          child: MenuItems(
-                            isTapped: isTapped,
-                            context: context,
-                            title: 'Gizlinlik',
-                            leading: Assets.key,
+                        Material(
+                          child: Ink(
+                            child: InkWell(
+                              splashColor:
+                                  const Color.fromRGBO(239, 246, 255, 1),
+                              onTap: () {},
+                              child: MenuItems(
+                                context: context,
+                                title: 'Gizlinlik',
+                                leading: Assets.key,
+                              ),
+                            ),
                           ),
                         ),
                         const Divider(
                           indent: 20,
                           endIndent: 20,
                         ),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              isTapped = !isTapped;
-                            });
-                          },
-                          child: MenuItems(
-                            context: context,
-                            title: 'Özüň barada maglumat goş',
-                            leading: Assets.about,
+                        Material(
+                          child: Ink(
+                            child: InkWell(
+                              splashColor:
+                                  const Color.fromRGBO(239, 246, 255, 1),
+                              onTap: () {
+                                Navigator.push<dynamic>(
+                                  context,
+                                  MaterialPageRoute<dynamic>(
+                                    builder: (context) =>
+                                        const FillDataAboutYourself(),
+                                  ),
+                                );
+                              },
+                              child: MenuItems(
+                                context: context,
+                                title: 'Özüň barada maglumat goş',
+                                leading: Assets.about,
+                              ),
+                            ),
                           ),
                         ),
                         const Divider(
                           indent: 20,
                           endIndent: 20,
                         ),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              isTapped = !isTapped;
-                            });
-                          },
-                          child: MenuItems(
-                            context: context,
-                            title: 'Tehniki kömek',
-                            leading: Assets.help,
+                        Material(
+                          child: Ink(
+                            child: InkWell(
+                              splashColor:
+                                  const Color.fromRGBO(239, 246, 255, 1),
+                              onTap: () {},
+                              child: MenuItems(
+                                context: context,
+                                title: 'Tehniki kömek',
+                                leading: Assets.help,
+                              ),
+                            ),
                           ),
                         ),
                         const Divider(
                           indent: 20,
                           endIndent: 20,
                         ),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              isTapped = !isTapped;
-                            });
-                          },
-                          child: MenuItems(
-                            context: context,
-                            title: 'Sazlamalar',
-                            leading: Assets.setting,
+                        Material(
+                          child: Ink(
+                            child: InkWell(
+                              splashColor:
+                                  const Color.fromRGBO(239, 246, 255, 1),
+                              onTap: () {},
+                              child: MenuItems(
+                                context: context,
+                                title: 'Sazlamalar',
+                                leading: Assets.setting,
+                              ),
+                            ),
                           ),
                         ),
                         const Divider(
                           indent: 20,
                           endIndent: 20,
                         ),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              isTapped = !isTapped;
-                            });
-                          },
-                          child: MenuItems(
-                            context: context,
-                            title: 'Halanlarym',
-                            leading: Assets.favourites,
+                        Material(
+                          child: Ink(
+                            child: InkWell(
+                              splashColor:
+                                  const Color.fromRGBO(239, 246, 255, 1),
+                              onTap: () {},
+                              child: MenuItems(
+                                context: context,
+                                title: 'Halanlarym',
+                                leading: Assets.favourites,
+                              ),
+                            ),
                           ),
                         ),
                         const Divider(
                           indent: 20,
                           endIndent: 20,
                         ),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              isTapped = !isTapped;
-                            });
-                          },
-                          child: MenuItems(
-                            context: context,
-                            title: 'Halanlarym',
-                            leading: Assets.favourites,
-                          ),
-                        ),
-                        const Divider(
-                          indent: 20,
-                          endIndent: 20,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              isTapped = !isTapped;
-                            });
-                          },
-                          child: MenuItems(
-                            context: context,
-                            title: 'Profilden çykmak',
-                            leading: Assets.logout,
+                        Material(
+                          child: Ink(
+                            child: InkWell(
+                              splashColor:
+                                  const Color.fromRGBO(239, 246, 255, 1),
+                              onTap: () {},
+                              child: MenuItems(
+                                context: context,
+                                title: 'Profilden çykmak',
+                                leading: Assets.logout,
+                              ),
+                            ),
                           ),
                         ),
                       ],
@@ -172,13 +175,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     customHeight: 50,
                     rightPadding: 0,
                     leftPadding: 0,
-                    widget: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isTapped = !isTapped;
-                          });
-                        },
-                        child: MenuItems(context: context, title: 'Türkmençe')),
+                    widget: Material(
+                      child: Ink(
+                        child: InkWell(
+                          splashColor: const Color.fromRGBO(239, 246, 255, 1),
+                          onTap: () {},
+                          child:
+                              MenuItems(context: context, title: 'Türkmençe'),
+                        ),
+                      ),
+                    ),
                   ),
                   verticalSpaceRegular,
                   AddSection(
@@ -250,67 +256,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               )
             ],
           )),
-    );
-  }
-}
-
-class MenuItems extends StatelessWidget {
-  const MenuItems({
-    Key? key,
-    required this.context,
-    this.leading,
-    required this.title,
-    this.trailing,
-    this.isTapped = false,
-  }) : super(key: key);
-
-  final BuildContext context;
-  final String? leading;
-  final String title;
-  final Widget? trailing;
-  final bool? isTapped;
-
-  @override
-  Widget build(BuildContext context) {
-    final Color color = isTapped! ? kcPrimaryColor : Colors.black;
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(13),
-          color: isTapped!
-              ? const Color.fromRGBO(239, 246, 255, 1)
-              : Colors.white),
-      width: screenWidth(
-        context,
-      ),
-      height: 35,
-      padding: REdgeInsets.symmetric(horizontal: 23),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              if (leading != null)
-                SvgPicture.asset(
-                  leading!,
-                  color: color,
-                )
-              else
-                const SizedBox(),
-              SizedBox(
-                width: 11.w,
-              ),
-              BoxText.body(
-                title,
-                color: color,
-              )
-            ],
-          ),
-          if (trailing == null)
-            SvgPicture.asset(Assets.arrowForward)
-          else
-            trailing!
-        ],
-      ),
     );
   }
 }

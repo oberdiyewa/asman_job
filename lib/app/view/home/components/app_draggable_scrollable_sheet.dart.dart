@@ -24,7 +24,7 @@ class AppDraggableScrollableSheet extends StatelessWidget {
         if (tabState == EnumDraggableSheetState.detail) {
           return DraggableScrollableSheet(
             key: const Key('Detail'),
-            initialChildSize: 0.4,
+            initialChildSize: 0.63,
             minChildSize: 0.4,
             maxChildSize: 1,
             builder: (context, scrollController) {
