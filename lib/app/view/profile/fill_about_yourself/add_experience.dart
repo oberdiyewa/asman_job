@@ -65,91 +65,100 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            verticalSpaceSmall,
-            verticalSpaceTiny,
-            AddSection(
-              customHeight: 260,
-              widget: Column(
-                children: [
-                  borderLinedContainer(
-                      width: 339,
-                      widget: TextField(
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Işlän wezipäňiz ',
-                            hintStyle: hintStyle),
-                      )),
-                  verticalSpaceSmall,
-                  borderLinedContainer(
-                      width: 339,
-                      widget: TextField(
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Işlän edaraňyz',
-                          hintStyle: hintStyle,
-                        ),
-                      )),
-                  verticalSpaceSmall,
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      borderLinedContainer(
-                        width: 160,
+            Padding(
+              padding: REdgeInsets.only(top: 15),
+              child: AddSection(
+                customHeight: 260,
+                widget: Column(
+                  children: [
+                    borderLinedContainer(
+                        width: 339,
                         widget: TextField(
-                          // enabled: false,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Işlän wezipäňiz ',
+                              hintStyle: hintStyle),
+                        )),
+                    verticalSpaceSmall,
+                    borderLinedContainer(
+                        width: 339,
+                        widget: TextField(
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'Işe başlan wagty',
-                            suffixIcon: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: InkWell(
-                                  onTap: () => _selectDate(context),
-                                  child: SvgPicture.asset(Assets.calendarIcon)),
+                            hintText: 'Işlän edaraňyz',
+                            hintStyle: hintStyle,
+                          ),
+                        )),
+                    verticalSpaceSmall,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        borderLinedContainer(
+                          width: 160,
+                          widget: TextField(
+                            // enabled: false,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Işe başlan wagty',
+                              suffixIcon: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: InkWell(
+                                    onTap: () => _selectDate(context),
+                                    child:
+                                        SvgPicture.asset(Assets.calendarIcon)),
+                              ),
+                              hintStyle: hintStyle.copyWith(fontSize: 12),
                             ),
-                            hintStyle: hintStyle.copyWith(fontSize: 12),
                           ),
                         ),
-                      ),
-                      horizontalSpaceRegular,
-                      borderLinedContainer(
-                        width: 160,
-                        widget: TextField(
-                          // enabled: false,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Işden çykan wagty',
-                            suffixIcon: Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: InkWell(
-                                  onTap: () => _selectDate(context),
-                                  child: SvgPicture.asset(Assets.calendarIcon)),
+                        horizontalSpaceRegular,
+                        borderLinedContainer(
+                          width: 160,
+                          widget: TextField(
+                            // enabled: false,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Işden çykan wagty',
+                              suffixIcon: Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: InkWell(
+                                    onTap: () => _selectDate(context),
+                                    child:
+                                        SvgPicture.asset(Assets.calendarIcon)),
+                              ),
+                              hintStyle: hintStyle.copyWith(fontSize: 12),
                             ),
-                            hintStyle: hintStyle.copyWith(fontSize: 12),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  verticalSpaceSmall,
-                  Row(
-                    children: [
-                      Checkbox(
-                          activeColor: kcPrimaryColor,
-                          side: const BorderSide(
-                              width: 1.5, color: kcLightGreyColor),
-                          value: isChecked,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              isChecked = value!;
-                            });
-                          }),
-                      BoxText.headline('Entagem işläp ýörn')
-                    ],
-                  )
-                ],
+                      ],
+                    ),
+                    verticalSpaceSmall,
+                    Row(
+                      children: [
+                        Checkbox(
+                            activeColor: kcPrimaryColor,
+                            side: const BorderSide(
+                                width: 1.5, color: kcLightGreyColor),
+                            value: isChecked,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                isChecked = value!;
+                              });
+                            }),
+                        BoxText.headline('Entagem işläp ýörn')
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
+            const AddSection(
+              widget: BoxButton.block(
+                title: 'Ýatda sakla',
+              ),
+            )
           ],
         ));
   }

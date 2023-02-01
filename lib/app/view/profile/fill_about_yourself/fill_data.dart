@@ -4,8 +4,11 @@ import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
 import 'package:asman_work/app/view/notification_screen/search_work/add_phone.dart';
 import 'package:asman_work/app/view/notification_screen/search_work/add_profession.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
+import 'package:asman_work/app/view/profile/fill_about_yourself/add_ability.dart';
+import 'package:asman_work/app/view/profile/fill_about_yourself/add_certificate.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/add_education.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/add_experience.dart';
+import 'package:asman_work/app/view/profile/fill_about_yourself/add_new_language.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -81,15 +84,15 @@ class _FillDataAboutYourselfState extends State<FillDataAboutYourself> {
             widget: Row(
               children: [
                 InkWell(
-                  onTap: () {
-                     Navigator.push<dynamic>(
-                      context,
-                      MaterialPageRoute<dynamic>(
-                        builder: (context) => const AddEducationScreen(),
-                      ),
-                    );
-                  },
-                  child: AddButton()),
+                    onTap: () {
+                      Navigator.push<dynamic>(
+                        context,
+                        MaterialPageRoute<dynamic>(
+                          builder: (context) => const AddEducationScreen(),
+                        ),
+                      );
+                    },
+                    child: AddButton()),
                 horizontalSpaceTiny,
                 VerticalDivider(),
                 horizontalSpaceTiny,
@@ -108,7 +111,14 @@ class _FillDataAboutYourselfState extends State<FillDataAboutYourself> {
             widget: Row(
               children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push<dynamic>(
+                      context,
+                      MaterialPageRoute<dynamic>(
+                        builder: (context) => const AddNewLanguageScreen(),
+                      ),
+                    );
+                  },
                   child: const AddButton(),
                 ),
                 horizontalSpaceTiny,
@@ -129,7 +139,14 @@ class _FillDataAboutYourselfState extends State<FillDataAboutYourself> {
             widget: Row(
               children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push<dynamic>(
+                      context,
+                      MaterialPageRoute<dynamic>(
+                        builder: (context) => const AddCertificateScreen(),
+                      ),
+                    );
+                  },
                   child: const AddButton(),
                 ),
                 horizontalSpaceTiny,
@@ -150,7 +167,14 @@ class _FillDataAboutYourselfState extends State<FillDataAboutYourself> {
             widget: Row(
               children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push<dynamic>(
+                      context,
+                      MaterialPageRoute<dynamic>(
+                        builder: (context) => const AddAbilityScreen(),
+                      ),
+                    );
+                  },
                   child: const AddButton(),
                 ),
                 horizontalSpaceTiny,

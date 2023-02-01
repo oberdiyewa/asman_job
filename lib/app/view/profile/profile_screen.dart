@@ -2,8 +2,10 @@ import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
+import 'package:asman_work/app/view/profile/change_language/change_language.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/fill_data.dart';
 import 'package:asman_work/app/view/profile/profile_widgets.dart';
+import 'package:asman_work/app/view/profile/settings_screen/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -120,7 +122,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: InkWell(
                               splashColor:
                                   const Color.fromRGBO(239, 246, 255, 1),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push<dynamic>(
+                                  context,
+                                  MaterialPageRoute<dynamic>(
+                                    builder: (context) =>
+                                        const SettingsScreen(),
+                                  ),
+                                );
+                              },
                               child: MenuItems(
                                 context: context,
                                 title: 'Sazlamalar',
@@ -156,7 +166,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: InkWell(
                               splashColor:
                                   const Color.fromRGBO(239, 246, 255, 1),
-                              onTap: () {},
+                              onTap: () {
+                                dialog(context,
+                                    button1: const BoxButton.small(
+                                        title: 'Tassykla'),
+                                    button2: BoxButton.small(
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                        },
+                                        title: 'Goýbolsun '),
+                                    contentText: const Text(
+                                      'Profilden çykmak üçin tassyklaň',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ));
+                              },
                               child: MenuItems(
                                 context: context,
                                 title: 'Profilden çykmak',
@@ -179,7 +205,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       child: Ink(
                         child: InkWell(
                           splashColor: const Color.fromRGBO(239, 246, 255, 1),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push<dynamic>(
+                              context,
+                              MaterialPageRoute<dynamic>(
+                                builder: (context) =>
+                                    const ChangeLanguageScreen(),
+                              ),
+                            );
+                          },
                           child:
                               MenuItems(context: context, title: 'Türkmençe'),
                         ),

@@ -75,6 +75,7 @@ class _FilterScreenState extends State<FilterScreen> {
   }
 
   void selectDistrict(ChoiceFilter c) {
+    
     final newList = List<ChoiceFilter>.from(districts);
 
     for (var i = 0; i < newList.length; i++) {

@@ -25,10 +25,6 @@ abstract class Assets {
   static const about = 'assets/icons/about_yourself.svg';
   static const setting = 'assets/icons/setting.svg';
   static const favourites = 'assets/icons/heart.svg';
-  
-
-  
-
 
   static const clear = 'assets/icons/clear.svg';
 
@@ -52,4 +48,9 @@ abstract class Assets {
   static const infoIcon = 'assets/icons/info_circle.svg';
 
   static const arrowForward = 'assets/icons/arrow_forward.svg';
+
+  static const arrowDown = 'assets/icons/arrow_down.svg';
+  static const avatar = 'assets/images/avatar_image.jpg';
+  static const camera = 'assets/icons/camera.svg';
+
 }
