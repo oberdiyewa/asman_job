@@ -3,6 +3,7 @@ import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/home/components/button_widgets.dart';
 import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
+import 'package:asman_work/app/view/profile/fill_about_yourself/add_experience/experience_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -178,5 +179,16 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
         child: widget,
       ),
     );
+  }
+
+  void saveExperience() {
+    final userExp = WorkExperience(
+      'Asmanpay',
+      DateTime.now(),
+      DateTime.now(),
+      true,
+      jobTitle: 'developer',
+    );
+    Navigator.pop(context, userExp);
   }
 }

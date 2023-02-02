@@ -5,6 +5,7 @@ import 'package:asman_work/app/view/notification_screen/section_add.dart';
 import 'package:asman_work/app/view/profile/change_language/change_language.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/fill_data.dart';
 import 'package:asman_work/app/view/profile/profile_widgets.dart';
+import 'package:asman_work/app/view/profile/security/security_screen.dart';
 import 'package:asman_work/app/view/profile/settings_screen/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -60,7 +61,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: InkWell(
                               splashColor:
                                   const Color.fromRGBO(239, 246, 255, 1),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push<dynamic>(
+                                  context,
+                                  MaterialPageRoute<dynamic>(
+                                    builder: (context) =>
+                                        const SecurityScreen(),
+                                  ),
+                                );
+                              },
                               child: MenuItems(
                                 context: context,
                                 title: 'Gizlinlik',

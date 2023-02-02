@@ -7,7 +7,7 @@ import 'package:asman_work/app/view/notification_screen/section_add.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/add_ability.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/add_certificate.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/add_education.dart';
-import 'package:asman_work/app/view/profile/fill_about_yourself/add_experience.dart';
+import 'package:asman_work/app/view/profile/fill_about_yourself/add_experience/add_experience.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/add_new_language.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
