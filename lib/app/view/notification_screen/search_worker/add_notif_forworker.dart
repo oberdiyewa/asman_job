@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../search_work/add_address_worker.dart';
+import '../search_work/add_address/add_address_worker.dart';
 
 class ChoiceWorkType {
   final String name;

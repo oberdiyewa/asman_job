@@ -30,7 +30,7 @@ class DraggableVacancyList extends StatelessWidget {
                 ),
               ),
               backgroundColor: Colors.transparent,
-              elevation: 0,  
+              elevation: 0,
               pinned: true,
               flexibleSpace: slidingPanelAppBar(context),
             ),
@@ -78,10 +78,11 @@ class DraggableVacancyList extends StatelessWidget {
                     return Material(
                       color: Colors.white,
                       child: ListTile(
-                          onTap: () => context
-                              .read<TabControllerCubit>()
-                              .changeTab(EnumDraggableSheetState.detail),
-                          title: const Text('Hello')),
+                        onTap: () => context
+                            .read<TabControllerCubit>()
+                            .changeTab(EnumDraggableSheetState.detail),
+                        title: const Text('Hello'),
+                      ),
                     );
                   },
                   childCount: 3,

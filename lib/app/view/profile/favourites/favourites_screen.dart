@@ -51,9 +51,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
           backgroundColor: kcPrimaryColor,
         ),
         body: ListView(
-          children: [
-            
-          ],
+          children: [Text('data')],
         ));
   }
 }

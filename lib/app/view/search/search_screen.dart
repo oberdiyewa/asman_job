@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../home/components/filter_screen.dart';
+
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
@@ -95,6 +97,20 @@ class _SearchScreenState extends State<SearchScreen>
                     color: kcPrimaryColor,
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w600,
+                  ),
+                  suffixIcon: GestureDetector(
+                    onTap: () {
+                      Navigator.push<dynamic>(
+                        context,
+                        MaterialPageRoute<dynamic>(
+                          builder: (context) => const FilterScreen(),
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(13),
+                      child: SvgPicture.asset(Assets.filter),
+                    ),
                   ),
                 ),
               ),

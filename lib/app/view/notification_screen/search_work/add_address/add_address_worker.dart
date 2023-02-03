@@ -1,6 +1,7 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
+import 'package:asman_work/app/view/notification_screen/search_work/add_address/search_from_map.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -87,15 +88,26 @@ class _AddAddressWorkerState extends State<AddAddressWorker> {
             ),
             Padding(
               padding: REdgeInsets.only(top: 16),
-              child: Row(
-                children: [
-                  SvgPicture.asset(Assets.map),
-                  horizontalSpaceMedium,
-                  const Text(
-                    'Kartada saýla',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-                  )
-                ],
+              child: InkWell(
+                onTap: () {
+                  Navigator.push<dynamic>(
+                    context,
+                    MaterialPageRoute<dynamic>(
+                      builder: (context) => const SearchLocationFromMap(),
+                    ),
+                  );
+                },
+                child: Row(
+                  children: [
+                    SvgPicture.asset(Assets.map),
+                    horizontalSpaceMedium,
+                    const Text(
+                      'Kartada saýla',
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                    )
+                  ],
+                ),
               ),
             ),
             Padding(

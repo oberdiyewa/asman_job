@@ -39,6 +39,7 @@ abstract class Assets {
   static const addIcon = 'assets/icons/+.svg';
 
   static const gps = 'assets/icons/gps.svg';
+  static const changeView = 'assets/icons/change_view.svg';
   static const map = 'assets/icons/map.svg';
   static const dot = 'assets/icons/dot.svg';
   static const liked = 'assets/icons/liked.svg';
@@ -52,5 +53,4 @@ abstract class Assets {
   static const arrowDown = 'assets/icons/arrow_down.svg';
   static const avatar = 'assets/images/avatar_image.jpg';
   static const camera = 'assets/icons/camera.svg';
-
 }
