@@ -1,6 +1,7 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/home/components/button_widgets.dart';
+import 'package:asman_work/components/ui/screens/base_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -75,7 +76,6 @@ class _FilterScreenState extends State<FilterScreen> {
   }
 
   void selectDistrict(ChoiceFilter c) {
-    
     final newList = List<ChoiceFilter>.from(districts);
 
     for (var i = 0; i < newList.length; i++) {
@@ -101,26 +101,7 @@ class _FilterScreenState extends State<FilterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
-        leading: Padding(
-          padding: REdgeInsets.all(20.0),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: SvgPicture.asset(
-              Assets.backIcon,
-            ),
-          ),
-        ),
-        title: BoxText.headline(
-          'Tertiple',
-          color: kcSecondaryTextColor,
-        ),
-        centerTitle: true,
-        backgroundColor: kcPrimaryColor,
-      ),
+      appBar: const BaseAppbar(title: 'Tertiple'),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,

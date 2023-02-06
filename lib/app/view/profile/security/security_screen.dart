@@ -1,8 +1,6 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
-import 'package:asman_work/app/view/home/components/button_widgets.dart';
-import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
-import 'package:asman_work/app/view/notification_screen/section_add.dart';
+import 'package:asman_work/components/ui/screens/base_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -30,26 +28,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color.fromRGBO(241, 241, 241, 1),
-        appBar: AppBar(
-          elevation: 0,
-          leading: Padding(
-            padding: REdgeInsets.all(20.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: SvgPicture.asset(
-                Assets.backIcon,
-              ),
-            ),
-          ),
-          title: BoxText.headline(
-            'Gizlinlik',
-            color: kcSecondaryTextColor,
-          ),
-          centerTitle: true,
-          backgroundColor: kcPrimaryColor,
-        ),
+        appBar: const BaseAppbar(title: 'Gizlinlik'),
         body: Padding(
           padding: const EdgeInsets.only(left: 23, right: 23, top: 16),
           child: Column(

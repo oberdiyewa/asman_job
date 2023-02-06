@@ -3,6 +3,7 @@ import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
 import 'package:asman_work/app/view/profile/change_language/change_language.dart';
+import 'package:asman_work/app/view/profile/favourites/favourites_screen.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/fill_data.dart';
 import 'package:asman_work/app/view/profile/profile_widgets.dart';
 import 'package:asman_work/app/view/profile/security/security_screen.dart';
@@ -157,7 +158,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: InkWell(
                               splashColor:
                                   const Color.fromRGBO(239, 246, 255, 1),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push<dynamic>(
+                                    context,
+                                    MaterialPageRoute<dynamic>(
+                                        builder: (context) =>
+                                            const FavouritesScreen()));
+                              },
                               child: MenuItems(
                                 context: context,
                                 title: 'Halanlarym',
@@ -178,12 +185,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               onTap: () {
                                 dialog(context,
                                     button1: const BoxButton.small(
-                                        title: 'Tassykla'),
+                                      title: 'Tassykla',
+                                    ),
                                     button2: BoxButton.small(
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                        },
-                                        title: 'Goýbolsun '),
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                      title: 'Goýbolsun ',
+                                      style: bodyStyle.copyWith(fontSize: 12),
+                                    ),
                                     contentText: const Text(
                                       'Profilden çykmak üçin tassyklaň',
                                       style: TextStyle(

@@ -124,21 +124,24 @@ class _SliderWidgetState extends State<SliderWidget> {
   }
 }
 
-Future<void> dialog(BuildContext context,
-    {required Widget button1,
-    required Widget contentText,
-    Widget? button2}) async {
+Future<void> dialog(
+  BuildContext context, {
+  required Widget button1,
+  required Widget contentText,
+  Widget? button2,
+}) async {
   return await showDialog(
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
         return AlertDialog(
           shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           content: SizedBox(
-            width: 160,
+            width: 170,
             height: 80,
             child: Center(child: contentText),
           ),

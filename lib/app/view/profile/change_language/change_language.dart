@@ -2,6 +2,7 @@ import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/home/components/button_widgets.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
+import 'package:asman_work/components/ui/screens/base_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -50,7 +51,7 @@ class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(241, 241, 241, 1),
-      appBar: appBar(context),
+      appBar: const BaseAppbar(title: 'Dil saýla'),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,29 +94,6 @@ class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
           )
         ],
       ),
-    );
-  }
-
-  AppBar appBar(BuildContext context) {
-    return AppBar(
-      elevation: 0,
-      leading: Padding(
-        padding: REdgeInsets.all(20.0),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: SvgPicture.asset(
-            Assets.backIcon,
-          ),
-        ),
-      ),
-      title: BoxText.headline(
-        'Dil saýla',
-        color: kcSecondaryTextColor,
-      ),
-      centerTitle: true,
-      backgroundColor: kcPrimaryColor,
     );
   }
 }

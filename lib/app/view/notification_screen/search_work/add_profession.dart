@@ -1,6 +1,7 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
+import 'package:asman_work/components/ui/screens/base_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,26 +21,7 @@ class _AddProfessionState extends State<AddProfession> {
     final _textController = TextEditingController();
     return Scaffold(
       backgroundColor: const Color.fromRGBO(241, 241, 241, 1),
-      appBar: AppBar(
-        elevation: 0,
-        leading: Padding(
-          padding: REdgeInsets.all(20.0),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: SvgPicture.asset(
-              Assets.backIcon,
-            ),
-          ),
-        ),
-        title: BoxText.headline(
-          'Wezipe goş',
-          color: kcSecondaryTextColor,
-        ),
-        centerTitle: true,
-        backgroundColor: kcPrimaryColor,
-      ),
+      appBar: const BaseAppbar(title: 'Wezipe goş'),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -108,8 +90,8 @@ class _AddProfessionState extends State<AddProfession> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       GestureDetector(
-                        onTap: () =>
-                            Navigator.pop<String>(context, 'Iňlis dili mugallym '),
+                        onTap: () => Navigator.pop<String>(
+                            context, 'Iňlis dili mugallym '),
                         child: BoxText.body('Iňlis dili mugallym'),
                       ),
                       const Divider(

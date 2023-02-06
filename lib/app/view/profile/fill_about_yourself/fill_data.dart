@@ -9,6 +9,7 @@ import 'package:asman_work/app/view/profile/fill_about_yourself/add_certificate.
 import 'package:asman_work/app/view/profile/fill_about_yourself/add_education.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/add_experience/add_experience.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/add_new_language.dart';
+import 'package:asman_work/components/ui/screens/base_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -27,26 +28,7 @@ class _FillDataAboutYourselfState extends State<FillDataAboutYourself> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(241, 241, 241, 1),
-      appBar: AppBar(
-        elevation: 0,
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Padding(
-            padding: REdgeInsets.all(20.0),
-            child: SvgPicture.asset(
-              Assets.backIcon,
-            ),
-          ),
-        ),
-        title: BoxText.headline(
-          'Özüm barada maglumat',
-          color: kcSecondaryTextColor,
-        ),
-        centerTitle: true,
-        backgroundColor: kcPrimaryColor,
-      ),
+      appBar: const BaseAppbar(title: 'Özüm barada maglumat'),
       body: ListView(
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
