@@ -64,7 +64,7 @@ class _AddNewLanguageScreenState extends State<AddNewLanguageScreen> {
 
     // update state
     levels = newList;
-    setState(() {});
+    // setState(() {});
   }
 
   @override
@@ -106,71 +106,76 @@ class _AddNewLanguageScreenState extends State<AddNewLanguageScreen> {
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     builder: (BuildContext context) {
-                                      return Container(
-                                        height: 322.h,
-                                        margin: const EdgeInsets.only(
-                                            left: 24, right: 24),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Center(
-                                              child: Container(
-                                                margin: EdgeInsets.only(
-                                                  top: 13.h,
-                                                ),
-                                                width: 50.w,
-                                                height: 5.h,
-                                                decoration: BoxDecoration(
-                                                  color: kcLightGreyColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20.w),
+                                      return StatefulBuilder(
+                                          builder: (context, setState) {
+                                        return Container(
+                                          height: 322.h,
+                                          margin: const EdgeInsets.only(
+                                              left: 24, right: 24),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Center(
+                                                child: Container(
+                                                  margin: EdgeInsets.only(
+                                                    top: 13.h,
+                                                  ),
+                                                  width: 50.w,
+                                                  height: 5.h,
+                                                  decoration: BoxDecoration(
+                                                    color: kcLightGreyColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20.w),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            verticalSpaceMedium,
-                                            verticalSpaceTiny,
-                                            BoxText.headline(
-                                              'Dereje saýlaň',
-                                              color: kcPrimaryColor,
-                                            ),
-                                            verticalSpaceMedium,
-                                            const Divider(
-                                              thickness: 2,
-                                            ),
-                                            Column(
-                                              children: levels.map((e) {
-                                                return Column(
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        CustomRadioWidget<
-                                                            dynamic>(
-                                                          isSelected:
-                                                              e.selected!,
-                                                          onChanged: () =>
-                                                              selectLevel(e),
-                                                        ),
-                                                        horizontalSpaceSmall,
-                                                        Text(e.name),
-                                                      ],
-                                                    ),
-                                                    verticalSpaceTiny
-                                                  ],
-                                                );
-                                              }).toList(),
-                                            ),
-                                            verticalSpaceLarge,
-                                            BoxButton.block(
-                                              onTap: () {
-                                                Navigator.pop(context);
-                                              },
-                                              title: 'Saýla',
-                                            )
-                                          ],
-                                        ),
-                                      );
+                                              verticalSpaceMedium,
+                                              verticalSpaceTiny,
+                                              BoxText.headline(
+                                                'Dereje saýlaň',
+                                                color: kcPrimaryColor,
+                                              ),
+                                              verticalSpaceMedium,
+                                              const Divider(
+                                                thickness: 2,
+                                              ),
+                                              Column(
+                                                children: levels.map((e) {
+                                                  return Column(
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          CustomRadioWidget<
+                                                              dynamic>(
+                                                            isSelected:
+                                                                e.selected!,
+                                                            onChanged: () {
+                                                              selectLevel(e);
+                                                              setState(() {});
+                                                            },
+                                                          ),
+                                                          horizontalSpaceSmall,
+                                                          Text(e.name),
+                                                        ],
+                                                      ),
+                                                      verticalSpaceTiny
+                                                    ],
+                                                  );
+                                                }).toList(),
+                                              ),
+                                              verticalSpaceMedium,
+                                              BoxButton.block(
+                                                onTap: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                title: 'Saýla',
+                                              )
+                                            ],
+                                          ),
+                                        );
+                                      });
                                     },
                                   );
                                 },

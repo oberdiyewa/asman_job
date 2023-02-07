@@ -48,6 +48,12 @@ class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
   }
 
   @override
+  void initState() {
+    _selectLanguage(languages.first);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(241, 241, 241, 1),
@@ -57,36 +63,38 @@ class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AddSection(
-            customHeight: 160,
-            widget: Column(
-              children: [
-                Column(
-                  children: languages.map((e) {
-                    return Column(
-                      children: [
-                        Row(
-                          children: [
-                            CustomRadioWidget<dynamic>(
-                              isSelected: e.selected!,
-                              onChanged: () => _selectLanguage(e),
-                            ),
-                            horizontalSpaceSmall,
-                            BoxText.body(e.name),
-                          ],
-                        ),
-                        verticalSpaceRegular
-                      ],
-                    );
-                  }).toList(),
-                ),
-              ],
+            customHeight: 170,
+            widget: SizedBox.expand(
+              child: Column(
+                children: [
+                  Column(
+                    children: languages.map((e) {
+                      return Column(
+                        children: [
+                          Row(
+                            children: [
+                              CustomRadioWidget<dynamic>(
+                                isSelected: e.selected!,
+                                onChanged: () => _selectLanguage(e),
+                              ),
+                              horizontalSpaceSmall,
+                              BoxText.body(e.name),
+                            ],
+                          ),
+                          verticalSpaceRegular
+                        ],
+                      );
+                    }).toList(),
+                  ),
+                ],
+              ),
             ),
           ),
           Padding(
             padding: REdgeInsets.all(8),
             child: BoxButton.block(
               title: 'Tassykla',
-              disabled: isAnySelected,
+              disabled: !isAnySelected,
               onTap: () {
                 Navigator.pop(context);
               },

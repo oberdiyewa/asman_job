@@ -56,7 +56,6 @@ class _AddAbilityScreenState extends State<AddAbilityScreen> {
 
     // update state
     timeLevels = newList;
-    setState(() {});
   }
 
   @override
@@ -104,68 +103,74 @@ class _AddAbilityScreenState extends State<AddAbilityScreen> {
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 builder: (BuildContext context) {
-                                  return Container(
-                                    height: 430.h,
-                                    margin: const EdgeInsets.only(
-                                        left: 24, right: 24),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Center(
-                                          child: Container(
-                                            margin: EdgeInsets.only(
-                                              top: 13.h,
-                                            ),
-                                            width: 50.w,
-                                            height: 5.h,
-                                            decoration: BoxDecoration(
-                                              color: kcLightGreyColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(20.w),
+                                  return StatefulBuilder(
+                                      builder: (context, setState) {
+                                    return Container(
+                                      height: 430.h,
+                                      margin: const EdgeInsets.only(
+                                          left: 24, right: 24),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Center(
+                                            child: Container(
+                                              margin: EdgeInsets.only(
+                                                top: 13.h,
+                                              ),
+                                              width: 50.w,
+                                              height: 5.h,
+                                              decoration: BoxDecoration(
+                                                color: kcLightGreyColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(20.w),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        verticalSpaceTiny,
-                                        verticalSpaceSmall,
-                                        BoxText.headline(
-                                          'Dereje saýlaň',
-                                          color: kcPrimaryColor,
-                                        ),
-                                        verticalSpaceSmall,
-                                        const Divider(
-                                          thickness: 2,
-                                        ),
-                                        Column(
-                                          children: timeLevels.map((e) {
-                                            return Column(
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    CustomRadioWidget<dynamic>(
-                                                      isSelected: e.selected!,
-                                                      onChanged: () =>
-                                                          selectTimeLevel(e),
-                                                    ),
-                                                    horizontalSpaceSmall,
-                                                    Text(e.name),
-                                                  ],
-                                                ),
-                                                verticalSpaceTiny
-                                              ],
-                                            );
-                                          }).toList(),
-                                        ),
-                                        verticalSpaceRegular,
-                                        BoxButton.block(
-                                          onTap: () {
-                                            Navigator.pop(context);
-                                          },
-                                          title: 'Saýla',
-                                        )
-                                      ],
-                                    ),
-                                  );
+                                          verticalSpaceTiny,
+                                          verticalSpaceSmall,
+                                          BoxText.headline(
+                                            'Dereje saýlaň',
+                                            color: kcPrimaryColor,
+                                          ),
+                                          verticalSpaceSmall,
+                                          const Divider(
+                                            thickness: 2,
+                                          ),
+                                          Column(
+                                            children: timeLevels.map((e) {
+                                              return Column(
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      CustomRadioWidget<
+                                                              dynamic>(
+                                                          isSelected:
+                                                              e.selected!,
+                                                          onChanged: () {
+                                                            selectTimeLevel(e);
+                                                            setState(() {});
+                                                          }),
+                                                      horizontalSpaceSmall,
+                                                      Text(e.name),
+                                                    ],
+                                                  ),
+                                                  verticalSpaceTiny
+                                                ],
+                                              );
+                                            }).toList(),
+                                          ),
+                                          verticalSpaceRegular,
+                                          BoxButton.block(
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                            title: 'Saýla',
+                                          )
+                                        ],
+                                      ),
+                                    );
+                                  });
                                 },
                               );
                             },

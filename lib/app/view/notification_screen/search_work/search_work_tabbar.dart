@@ -19,43 +19,49 @@ class _WorkSectionTabbarState extends State<WorkSectionTabbar> {
   @override
   Widget build(BuildContext context) {
     return notifData != null
-        ? Center(
-            child: Text(notifData!.jobName.toString()),
-          )
-        : Container(
-            color: Color.fromRGBO(241, 241, 241, 1),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(Assets.empty),
-                verticalSpaceLarge,
-                verticalSpaceSmall,
-                Padding(
-                  padding: REdgeInsets.only(left: 60, right: 60, bottom: 40),
-                  child: const Text(
-                    'Siz entek mahabat goýmadyňyz. Mugt gözleýän işiňiz ýa-da işgäriňiz üçin derrew mahabat ýerleşdirip bilersiňiz.',
-                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                BoxButton.large(
-                  title: 'Bildiriş ber',
-                  onTap: () {
-                    debugPrint('bildirish ber');
-                    Navigator.push<NotificationModel>(
-                      context,
-                      MaterialPageRoute<NotificationModel>(
-                        builder: (context) => const AddForWorkNotif(),
-                      ),
-                    ).then((value) {
-                      setState(() {
-                        notifData = value;
-                      });
-                    });
-                  },
-                )
-              ],
+        ? hasDataNotificationScreen()
+        : noDataNotificationScreen(context);
+  }
+
+  Widget hasDataNotificationScreen() {
+    return Text(notifData!.jobName);
+  }
+
+  Container noDataNotificationScreen(BuildContext context) {
+    return Container(
+      color: Color.fromRGBO(241, 241, 241, 1),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(Assets.empty),
+          verticalSpaceLarge,
+          verticalSpaceSmall,
+          Padding(
+            padding: REdgeInsets.only(left: 60, right: 60, bottom: 40),
+            child: const Text(
+              'Siz entek mahabat goýmadyňyz. Mugt gözleýän işiňiz ýa-da işgäriňiz üçin derrew mahabat ýerleşdirip bilersiňiz.',
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+              textAlign: TextAlign.center,
             ),
-          );
+          ),
+          BoxButton.large(
+            title: 'Bildiriş ber',
+            onTap: () {
+              debugPrint('bildirish ber');
+              Navigator.push<NotificationModel>(
+                context,
+                MaterialPageRoute<NotificationModel>(
+                  builder: (context) => const AddForWorkNotif(),
+                ),
+              ).then((value) {
+                setState(() {
+                  notifData = value;
+                });
+              });
+            },
+          )
+        ],
+      ),
+    );
   }
 }

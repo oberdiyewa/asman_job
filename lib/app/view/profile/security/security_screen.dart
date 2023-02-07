@@ -30,79 +30,81 @@ class _SecurityScreenState extends State<SecurityScreen> {
         backgroundColor: const Color.fromRGBO(241, 241, 241, 1),
         appBar: const BaseAppbar(title: 'Gizlinlik'),
         body: Padding(
-          padding: const EdgeInsets.only(left: 23, right: 23, top: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      BoxText.headline('Profil suratymy görkez '),
-                      verticalSpaceTiny,
-                      Text(
-                        'Profildäki suratyňyz ähli ulanyjylara görüner ',
-                        style: subheadingStyle,
-                      )
-                    ],
-                  ),
-                  Switch(
-                    onChanged: (bool value) {
-                      setState(() => _showProfilPicture = value);
-                    },
-                    value: _showProfilPicture,
-                    thumbColor: MaterialStateProperty.resolveWith<Color>(
-                        (Set<MaterialState> states) {
-                      if (states.contains(MaterialState.disabled)) {
+          padding: const EdgeInsets.only(left: 5, right: 2, top: 16),
+          child: SizedBox.expand(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        BoxText.headline('Profil suratymy görkez '),
+                        verticalSpaceTiny,
+                        Text(
+                          'Profildäki suratyňyz ähli ulanyjylara görüner ',
+                          style: subheadingStyle,
+                        )
+                      ],
+                    ),
+                    Switch(
+                      onChanged: (bool value) {
+                        setState(() => _showProfilPicture = value);
+                      },
+                      value: _showProfilPicture,
+                      thumbColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.disabled)) {
+                          return kcPrimaryColor;
+                        }
                         return kcPrimaryColor;
-                      }
-                      return kcPrimaryColor;
-                    }),
-                  ),
-                ],
-              ),
-              const Divider(
-                thickness: 2,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      BoxText.headline('Profilde rezume-ny görkez'),
-                      verticalSpaceTiny,
-                      Text(
-                        'Profildäki rezume-ňiz ähli ulanyjylara görüner  ',
-                        style: subheadingStyle,
-                      )
-                    ],
-                  ),
-                  Switch(
-                    onChanged: (bool value) {
-                      setState(() => _showResume = value);
-                    },
-                    value: _showResume,
-                    thumbColor: MaterialStateProperty.resolveWith<Color>(
-                        (Set<MaterialState> states) {
-                      if (states.contains(MaterialState.disabled)) {
+                      }),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  thickness: 2,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        BoxText.headline('Profilde rezume-ny görkez'),
+                        verticalSpaceTiny,
+                        Text(
+                          'Profildäki rezume-ňiz ähli ulanyjylara görüner  ',
+                          style: subheadingStyle,
+                        )
+                      ],
+                    ),
+                    Switch(
+                      onChanged: (bool value) {
+                        setState(() => _showResume = value);
+                      },
+                      value: _showResume,
+                      thumbColor: MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.disabled)) {
+                          return kcPrimaryColor;
+                        }
                         return kcPrimaryColor;
-                      }
-                      return kcPrimaryColor;
-                    }),
-                  ),
-                ],
-              ),
-              const Divider(
-                thickness: 2,
-              ),
-              Text(
-                ' *Howpsyzlygyňyz ucin öz şahsy maglumatlaryňyzy paylaşmazlyk maslahat berilyar',
-                style: subheadingStyle.copyWith(fontWeight: FontWeight.w400),
-              )
-            ],
+                      }),
+                    ),
+                  ],
+                ),
+                const Divider(
+                  thickness: 2,
+                ),
+                Text(
+                  ' *Howpsyzlygyňyz ucin öz şahsy maglumatlaryňyzy paylaşmazlyk maslahat berilyar',
+                  style: subheadingStyle.copyWith(fontWeight: FontWeight.w400),
+                )
+              ],
+            ),
           ),
         ));
   }
