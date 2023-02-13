@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../profile_widgets.dart';
+
 TextEditingController textController = TextEditingController();
 
 class SettingsScreen extends StatefulWidget {
@@ -102,11 +104,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
             ),
-            const AddSection(
-              widget: BoxButton.block(
-                title: 'Ýatda sakla',
-              ),
-            )
+            const BaseButton(title: 'Ýatda sakla')
           ],
         ));
   }

@@ -41,7 +41,13 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        BoxText.headline('Profil suratymy görkez '),
+                        const Text(
+                          'Profil suratymy görkez ',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                         verticalSpaceTiny,
                         Text(
                           'Profildäki suratyňyz ähli ulanyjylara görüner ',

@@ -4,6 +4,7 @@ import 'package:asman_work/app/view/home/components/button_widgets.dart';
 import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/add_experience/experience_model.dart';
+import 'package:asman_work/app/view/profile/profile_widgets.dart';
 import 'package:asman_work/components/ui/screens/base_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -137,11 +138,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                 ),
               ),
             ),
-            const AddSection(
-              widget: BoxButton.block(
-                title: 'Ýatda sakla',
-              ),
-            )
+            const BaseButton(title: 'Ýatda sakla')
           ],
         ));
   }
@@ -153,7 +150,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
     return Container(
       width: width.w,
       height: 50.h,
-      padding: EdgeInsets.only(left: 10, bottom: 5),
+      padding: const EdgeInsets.only(left: 10, bottom: 5),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           border: Border.all(color: kcLightestGreyColor, width: 2)),

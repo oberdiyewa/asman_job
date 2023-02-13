@@ -23,16 +23,74 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
     fontWeight: FontWeight.w600,
     color: kcHardGreyColor,
   );
+  int itemCount = 6;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: const Color.fromRGBO(241, 241, 241, 1),
         appBar: const BaseAppbar(
-          title: 'Gizlinlik',
+          title: 'Halanlarym',
         ),
-        body: ListView(
-          children: [Text('data')],
+        body: ListView.builder(
+          padding: EdgeInsets.only(left: 10, right: 15, top: 15),
+          itemCount: itemCount,
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      BoxText.headline('Satyjy gerek'),
+                    ],
+                  ),
+                  // isThreeLine: true,
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      verticalSpaceTiny,
+                      Text(
+                        'Zaman market',
+                        style: TextStyle(
+                          color: kcHardGreyColor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                      verticalSpaceTiny,
+                      Row(
+                        children: [
+                          Text(
+                            'Aşgabat, Taslama',
+                            style: TextStyle(
+                              color: kcHardGreyColor,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 10.sp,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  leading: Image.asset(Assets.avatarImage),
+                  trailing: InkWell(
+                      onTap: () {
+                        itemCount--;
+                        print(itemCount);
+                        setState(() {});
+                      },
+                      child: SvgPicture.asset(Assets.liked)),
+                ),
+                const Divider(
+                  indent: 3,
+                  endIndent: 3,
+                  thickness: 1,
+                ),
+              ],
+            );
+          },
         ));
   }
 }

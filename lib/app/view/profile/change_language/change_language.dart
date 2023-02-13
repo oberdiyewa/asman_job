@@ -91,10 +91,11 @@ class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
             ),
           ),
           Padding(
-            padding: REdgeInsets.all(8),
+            padding: REdgeInsets.only(left: 30, right: 30, bottom: 20),
             child: BoxButton.block(
               title: 'Tassykla',
               disabled: !isAnySelected,
+              style: heading2Style.copyWith(fontSize: 16),
               onTap: () {
                 Navigator.pop(context);
               },

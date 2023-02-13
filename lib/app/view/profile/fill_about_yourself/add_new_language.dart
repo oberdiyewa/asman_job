@@ -3,6 +3,7 @@ import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/home/components/button_widgets.dart';
 import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
+import 'package:asman_work/app/view/profile/profile_widgets.dart';
 import 'package:asman_work/components/ui/screens/base_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -189,11 +190,7 @@ class _AddNewLanguageScreenState extends State<AddNewLanguageScreen> {
                 ),
               ),
             ),
-            const AddSection(
-              widget: BoxButton.block(
-                title: 'Ýatda sakla',
-              ),
-            )
+            const BaseButton(title: 'Ýatda sakla')
           ],
         ));
   }

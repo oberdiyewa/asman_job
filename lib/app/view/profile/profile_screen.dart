@@ -5,6 +5,7 @@ import 'package:asman_work/app/view/notification_screen/section_add.dart';
 import 'package:asman_work/app/view/profile/change_language/change_language.dart';
 import 'package:asman_work/app/view/profile/favourites/favourites_screen.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/fill_data.dart';
+import 'package:asman_work/app/view/profile/help_chat/chat_screen.dart';
 import 'package:asman_work/app/view/profile/profile_widgets.dart';
 import 'package:asman_work/app/view/profile/security/security_screen.dart';
 import 'package:asman_work/app/view/profile/settings_screen/settings_screen.dart';
@@ -114,7 +115,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: InkWell(
                               splashColor:
                                   const Color.fromRGBO(239, 246, 255, 1),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push<dynamic>(
+                                  context,
+                                  MaterialPageRoute<dynamic>(
+                                    builder: (context) => const ChatScreen(),
+                                  ),
+                                );
+                              },
                               child: MenuItems(
                                 context: context,
                                 title: 'Tehniki kömek',
@@ -241,6 +249,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   verticalSpaceRegular,
                   AddSection(
+                    leftPadding: 5,
+                    rightPadding: 5,
                     customHeight: 50,
                     widget: MenuItems(
                       context: context,

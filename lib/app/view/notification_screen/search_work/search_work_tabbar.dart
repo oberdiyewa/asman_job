@@ -24,7 +24,46 @@ class _WorkSectionTabbarState extends State<WorkSectionTabbar> {
   }
 
   Widget hasDataNotificationScreen() {
-    return Text(notifData!.jobName);
+    return Container(
+      // width: screenWidth(context),
+      // height: 72.h,
+      color: Color.fromRGBO(241, 241, 241, 1),
+      child: ListView(
+        padding: EdgeInsets.only(top: 10),
+        children: [
+          Container(
+            width: screenWidth(context),
+            height: 72.h,
+            color: Colors.white,
+            child: ListTile(
+              selectedTileColor: Colors.red,
+              leading: CircleAvatar(
+                radius: 25,
+                backgroundColor: Colors.white,
+                child: SvgPicture.asset(Assets.notifAvatar),
+              ),
+              title: BoxText.headline('Iş gözleýän'),
+              subtitle: BoxText.body('Satyjy, Ýarym iş güni'),
+              trailing: SvgPicture.asset(Assets.arrowForward),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 50, left: 30, right: 30),
+            child: BoxButton.large(
+              title: 'Bildiriş ber',
+              onTap: () {
+                Navigator.push<NotificationModel>(
+                  context,
+                  MaterialPageRoute<NotificationModel>(
+                    builder: (context) => const AddForWorkNotif(),
+                  ),
+                );
+              },
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   Container noDataNotificationScreen(BuildContext context) {
@@ -47,7 +86,6 @@ class _WorkSectionTabbarState extends State<WorkSectionTabbar> {
           BoxButton.large(
             title: 'Bildiriş ber',
             onTap: () {
-              debugPrint('bildirish ber');
               Navigator.push<NotificationModel>(
                 context,
                 MaterialPageRoute<NotificationModel>(

@@ -53,4 +53,7 @@ abstract class Assets {
   static const arrowDown = 'assets/icons/arrow_down.svg';
   static const avatar = 'assets/images/avatar_image.jpg';
   static const camera = 'assets/icons/camera.svg';
+  static const notifAvatar = 'assets/icons/notif_avatar.svg';
+
+  static const sendIcon = 'assets/icons/send.svg';
 }
