@@ -17,58 +17,56 @@ class _TabBarWidgetState extends State<TabBarWidget> {
     return Material(
       child: Align(
         alignment: Alignment.topCenter,
-        child: Expanded(
-          child: Container(
-            width: 385.w,
-            height: 40.h,
-            padding: REdgeInsets.only(right: 4, left: 4, top: 4, bottom: 4).w,
-            margin: const EdgeInsets.only(top: 10).w,
-            decoration: BoxDecoration(
-              color: kcSecondaryTextColor,
-              borderRadius: BorderRadius.circular(20).w,
-            ),
-            child: TabBar(
-              labelColor: kcSecondaryColor,
-              unselectedLabelColor: kcHardGreyColor,
-              indicator: ShapeDecoration(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20).w,
-                ),
-                color: kcPrimaryColor,
+        child: Container(
+          width: 385.w,
+          height: 40.h,
+          padding: REdgeInsets.only(right: 4, left: 4, top: 4, bottom: 4).w,
+          margin: const EdgeInsets.only(top: 10).w,
+          decoration: BoxDecoration(
+            color: kcSecondaryTextColor,
+            borderRadius: BorderRadius.circular(20).w,
+          ),
+          child: TabBar(
+            labelColor: kcSecondaryColor,
+            unselectedLabelColor: kcHardGreyColor,
+            indicator: ShapeDecoration(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20).w,
               ),
-              controller: widget.tabController,
-              tabs: [
-                Tab(
-                  // text: 'Iş gözleýän',
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        Assets.searchWorkIcon,
-                        color: widget.tabController!.index == 0
-                            ? kcSecondaryColor
-                            : kcHardGreyColor,
-                      ),
-                      horizontalSpaceRegular,
-                      BoxText.headline('Iş gözleýän')
-                    ],
-                  ),
-                ),
-                Tab(
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        Assets.personGreyIcon,
-                        color: widget.tabController!.index == 1
-                            ? kcSecondaryColor
-                            : kcHardGreyColor,
-                      ),
-                      horizontalSpaceRegular,
-                      BoxText.headline('Işgär gözleýän'),
-                    ],
-                  ),
-                ),
-              ],
+              color: kcPrimaryColor,
             ),
+            controller: widget.tabController,
+            tabs: [
+              Tab(
+                // text: 'Iş gözleýän',
+                child: Row(
+                  children: [
+                    SvgPicture.asset(
+                      Assets.searchWorkIcon,
+                      color: widget.tabController!.index == 0
+                          ? kcSecondaryColor
+                          : kcHardGreyColor,
+                    ),
+                    horizontalSpaceRegular,
+                    BoxText.headline('Iş gözleýän')
+                  ],
+                ),
+              ),
+              Tab(
+                child: Row(
+                  children: [
+                    SvgPicture.asset(
+                      Assets.personGreyIcon,
+                      color: widget.tabController!.index == 1
+                          ? kcSecondaryColor
+                          : kcHardGreyColor,
+                    ),
+                    horizontalSpaceRegular,
+                    BoxText.headline('Işgär gözleýän'),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),

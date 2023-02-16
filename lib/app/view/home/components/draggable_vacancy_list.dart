@@ -147,11 +147,9 @@ class _AppCustomScrollViewState extends State<AppCustomScrollView> {
               alignment: Alignment.center,
               child: Row(
                 children: const [
-                  Expanded(
+                  Center(
                     child: Center(
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
+                      child: CircularProgressIndicator(),
                     ),
                   )
                 ],
