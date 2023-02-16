@@ -55,7 +55,7 @@ class DraggableVacancyList extends StatelessWidget {
                   } else {
                     final vacancyList = state.vacancies;
                     return SliverFixedExtentList(
-                      itemExtent: 100.h,
+                      itemExtent: 110.h,
                       delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
                           final currVacancy = vacancyList[index];

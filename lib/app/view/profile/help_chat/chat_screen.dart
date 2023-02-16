@@ -1,4 +1,5 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
+import 'package:asman_work/app/view/profile/fill_about_yourself/add_experience/add_experience.dart';
 import 'package:asman_work/components/ui/screens/base_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,7 +30,9 @@ class _ChatScreenState extends State<ChatScreen> {
     ChatMessage(
         messageContent: "Bildirish goshup bilemok?", messageType: "sender"),
   ];
-
+  String? newMessage;
+  ScrollController _scrollController = ScrollController();
+  TextEditingController _textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,8 +43,8 @@ class _ChatScreenState extends State<ChatScreen> {
           ListView.builder(
             itemCount: messages.length,
             shrinkWrap: true,
-            padding: EdgeInsets.only(top: 10, bottom: 10),
-            physics: NeverScrollableScrollPhysics(),
+            controller: _scrollController,
+            padding: EdgeInsets.only(top: 10, bottom: 89),
             itemBuilder: (context, index) {
               final isReceiver = messages[index].messageType == 'receiver';
               return Container(
@@ -56,12 +59,19 @@ class _ChatScreenState extends State<ChatScreen> {
                         : MainAxisAlignment.end,
                     children: [
                       if (isReceiver)
-                        const CircleAvatar(
+                        CircleAvatar(
+                          // backgroundImage: AssetImage(Assets.logoAvatar),
                           radius: 20,
+                          backgroundColor: kcPrimaryColor,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset(Assets.logoAvatar),
+                          ),
                         )
                       else
                         const SizedBox(),
                       Container(
+                        constraints: const BoxConstraints(maxWidth: 200),
                         margin: EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -71,16 +81,19 @@ class _ChatScreenState extends State<ChatScreen> {
                         ),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 11),
-                        child: Text(
-                          messages[index].messageContent,
-                          style: const TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.w400),
+                        child: Expanded(
+                          child: Text(
+                            messages[index].messageContent,
+                            style: const TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.w400),
+                          ),
                         ),
                       ),
                       if (isReceiver)
                         const SizedBox()
                       else
                         const CircleAvatar(
+                          backgroundImage: AssetImage(Assets.avatar),
                           radius: 20,
                         ),
                     ],
@@ -92,7 +105,7 @@ class _ChatScreenState extends State<ChatScreen> {
           Align(
             alignment: Alignment.bottomLeft,
             child: Container(
-              padding: const EdgeInsets.only(left: 10, bottom: 10, top: 10),
+              padding: const EdgeInsets.only(left: 10, bottom: 2, top: 2),
               height: 79.h,
               width: double.infinity,
               color: Colors.white,
@@ -100,6 +113,15 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: [
                   Expanded(
                     child: TextField(
+                      maxLines: 3,
+                      minLines: 1,
+                      controller: _textController,
+                      onChanged: (value) {
+                        newMessage = value;
+                      },
+                      onSubmitted: (value) {
+                        newMessage = value;
+                      },
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(7),
@@ -119,7 +141,22 @@ class _ChatScreenState extends State<ChatScreen> {
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                messages.add(
+                                  ChatMessage(
+                                    messageContent: newMessage!,
+                                    messageType: 'sender',
+                                  ),
+                                );
+                                _textController.clear();
+                                _scrollController.animateTo(
+                                  _scrollController.position.maxScrollExtent *
+                                      2,
+                                  duration: Duration(seconds: 2),
+                                  curve: Curves.fastOutSlowIn,
+                                );
+                                setState(() {});
+                              },
                               backgroundColor: kcPrimaryColor.withOpacity(0.5),
                               elevation: 0,
                               // child: const Icon(

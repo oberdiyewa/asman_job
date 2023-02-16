@@ -56,4 +56,5 @@ abstract class Assets {
   static const notifAvatar = 'assets/icons/notif_avatar.svg';
 
   static const sendIcon = 'assets/icons/send.svg';
+  static const logoAvatar = 'assets/images/a.png';
 }

@@ -49,13 +49,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   verticalSpaceRegular,
-                  profileHeadSection(),
-                  verticalSpaceMedium,
+                  // profileHeadSection(),
+                  // verticalSpaceMedium,
                   AddSection(
                     rightPadding: 0,
                     leftPadding: 0,
                     bottomPadding: 0,
-                    customHeight: 340,
+                    customHeight: 290,
                     widget: Column(
                       children: [
                         Material(
@@ -84,32 +84,32 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           indent: 20,
                           endIndent: 20,
                         ),
-                        Material(
-                          child: Ink(
-                            child: InkWell(
-                              splashColor:
-                                  const Color.fromRGBO(239, 246, 255, 1),
-                              onTap: () {
-                                Navigator.push<dynamic>(
-                                  context,
-                                  MaterialPageRoute<dynamic>(
-                                    builder: (context) =>
-                                        const FillDataAboutYourself(),
-                                  ),
-                                );
-                              },
-                              child: MenuItems(
-                                context: context,
-                                title: 'Özüň barada maglumat goş',
-                                leading: Assets.about,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const Divider(
-                          indent: 20,
-                          endIndent: 20,
-                        ),
+                        // Material(
+                        //   child: Ink(
+                        //     child: InkWell(
+                        //       splashColor:
+                        //           const Color.fromRGBO(239, 246, 255, 1),
+                        //       onTap: () {
+                        //         Navigator.push<dynamic>(
+                        //           context,
+                        //           MaterialPageRoute<dynamic>(
+                        //             builder: (context) =>
+                        //                 const FillDataAboutYourself(),
+                        //           ),
+                        //         );
+                        //       },
+                        //       child: MenuItems(
+                        //         context: context,
+                        //         title: 'Özüň barada maglumat goş',
+                        //         leading: Assets.about,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        // const Divider(
+                        //   indent: 20,
+                        //   endIndent: 20,
+                        // ),
                         Material(
                           child: Ink(
                             child: InkWell(
