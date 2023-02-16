@@ -128,27 +128,28 @@ class _SearchScreenState extends State<SearchScreen>
               itemBuilder: (context, index) {
                 return Container(
                   decoration: BoxDecoration(
-                      border: Border.all(color: kcLightGreyColor),
-                      borderRadius: BorderRadius.circular(20).w),
+                    border: Border.all(color: kcLightGreyColor),
+                    borderRadius: BorderRadius.circular(20).w,
+                  ),
                   padding:
                       REdgeInsets.only(left: 15, right: 15, top: 7, bottom: 7),
                   margin: const EdgeInsets.only(left: 5, top: 17, bottom: 3).w,
                   child: Center(
-                      child: Text(
-                    'Programmist $index',
-                    style: TextStyle(
-                      color: kcHardGreyColor,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 12.sp,
+                    child: Text(
+                      'Programmist $index',
+                      style: TextStyle(
+                        color: kcHardGreyColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12.sp,
+                      ),
                     ),
-                  )),
+                  ),
                 );
               },
             ),
           ),
           Expanded(
-            child: Container(
-              padding: REdgeInsets.only(left: 10, right: 10),
+            child: SizedBox(
               width: screenWidth(context),
               height: 600.h,
               child: ListView.builder(

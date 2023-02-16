@@ -41,6 +41,8 @@ class DioClient {
       return response;
     } on DioError {
       rethrow;
+    } catch (e) {
+      rethrow;
     }
   }
 

@@ -9,18 +9,21 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 123.w,
-      height: 40.h,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          color: kcPrimaryColor, borderRadius: BorderRadius.circular(10)),
-      child: const Text(
-        'Salam, Läle!',
-        style: TextStyle(
-          color: kcSecondaryColor,
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
+    return GestureDetector(
+      onTap: (){},
+      child: Container(
+        width: 123.w,
+        height: 40.h,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            color: kcPrimaryColor, borderRadius: BorderRadius.circular(10),),
+        child: const Text(
+          'Salam, Läle!',
+          style: TextStyle(
+            color: kcSecondaryColor,
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );
@@ -32,13 +35,16 @@ class FindMyLocationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 50.w,
-      height: 50.h,
-      padding: REdgeInsets.all(12),
-      decoration:
-          const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-      child: Center(child: SvgPicture.asset(Assets.showLocation)),
+    return GestureDetector(
+      onTap: (){},
+      child: Container(
+        width: 50.w,
+        height: 50.h,
+        padding: REdgeInsets.all(12),
+        decoration:
+            const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+        child: Center(child: SvgPicture.asset(Assets.showLocation)),
+      ),
     );
   }
 }

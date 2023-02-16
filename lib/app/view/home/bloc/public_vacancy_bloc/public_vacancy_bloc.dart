@@ -12,7 +12,9 @@ class PublicVacancyBloc extends Bloc<PublicVacancyEvent, PublicVacancyState> {
     on<PublicVacancyFetchMoreEvent>(_onFetchMoreEvent);
   }
   final VacancyRepository _repository;
+
   late List<Vacancy> vacancies;
+  int page = 1;
 
   Future<void> _onFetchEvent(
     PublicVacancyFetchEvent event,
@@ -20,13 +22,14 @@ class PublicVacancyBloc extends Bloc<PublicVacancyEvent, PublicVacancyState> {
   ) async {
     emit(PublicVacancyLoading());
     try {
-      vacancies = await _repository.publicVacancies();
+      vacancies = await _repository.publicVacancies(page: page);
       emit(
         PublicVacancyLoaded(
           vacancies: vacancies,
           moreVacancies: vacancies,
         ),
       );
+      page++;
     } catch (e) {
       vacancies = [];
       emit(
@@ -42,7 +45,7 @@ class PublicVacancyBloc extends Bloc<PublicVacancyEvent, PublicVacancyState> {
     Emitter<PublicVacancyState> emit,
   ) async {
     try {
-      final loadedMoreVacancies = await _repository.publicVacancies(event.page);
+      final loadedMoreVacancies = await _repository.publicVacancies(page: page);
       if (state.props.last != loadedMoreVacancies) {
         vacancies += loadedMoreVacancies;
       }
@@ -52,11 +55,12 @@ class PublicVacancyBloc extends Bloc<PublicVacancyEvent, PublicVacancyState> {
           moreVacancies: loadedMoreVacancies,
         ),
       );
+      page++;
     } catch (e) {
       emit(
         PublicVacancyLoaded(
           vacancies: vacancies,
-          moreVacancies: const [],
+          moreVacancies: [],
         ),
       );
     }

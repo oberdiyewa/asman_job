@@ -16,7 +16,6 @@ class _DetailInfoJobState extends State<DetailInfoJob> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 

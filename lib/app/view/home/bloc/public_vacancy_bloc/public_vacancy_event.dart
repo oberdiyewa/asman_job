@@ -10,10 +10,5 @@ abstract class PublicVacancyEvent extends Equatable {
 class PublicVacancyFetchEvent extends PublicVacancyEvent {}
 
 class PublicVacancyFetchMoreEvent extends PublicVacancyEvent {
-  const PublicVacancyFetchMoreEvent(this.page);
-
-  final int page;
-
-  @override
-  List<Object> get props => [page];
+  const PublicVacancyFetchMoreEvent();
 }

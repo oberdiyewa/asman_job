@@ -28,6 +28,13 @@ enum EnumVacancyApiFields {
   avatar_url,
   point,
   created_at,
+  // belong to details
+  description,
+  employment_type,
+  contact_phone,
+  address,
+  salary_from,
+  salary_to,
 }
 
 enum EnumVacancyDetailApiFields { address }
@@ -63,4 +70,19 @@ enum EnumExperienceApiFields {
   until_now,
   start,
   end,
+}
+
+enum EnumUserProfilePaths {
+  address,
+  education,
+  experience,
+  language,
+}
+
+enum EnumUserVacancyPaths {
+  address,
+  details,
+  list,
+  none,
+  search,
 }

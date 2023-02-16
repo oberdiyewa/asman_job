@@ -27,7 +27,7 @@ class MapHeaderWidget extends StatelessWidget {
               return Align(
                 alignment: Alignment.topLeft,
                 child: Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(20),
                   child: Material(
                     clipBehavior: Clip.antiAlias,
                     color: Theme.of(context).iconTheme.color,
@@ -41,7 +41,7 @@ class MapHeaderWidget extends StatelessWidget {
                           Icons.keyboard_arrow_left,
                           color: Colors.white,
                           size: 32,
-                        )),
+                        ),),
                   ),
                 ),
               );

@@ -1,3 +1,4 @@
+import 'package:asman_work/app/view/home/bloc/entity_detail_bloc/entity_detail_bloc.dart';
 import 'package:asman_work/app/view/home/bloc/public_vacancy_bloc/public_vacancy_bloc.dart';
 import 'package:asman_work/app/view/home/bloc/tab_controller_cubit/tab_controller_cubit.dart';
 import 'package:asman_work/app/view/main/main_screen.dart';
@@ -25,6 +26,9 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (_) => BottomNavigationProvider(),
+        ),
+        BlocProvider(
+          create: (_) => EntityDetailBloc(VacancyRepository()),
         ),
         BlocProvider(
           lazy: false,

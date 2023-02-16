@@ -113,143 +113,165 @@ class Vacancy {
         createdAt.hashCode;
   }
 }
-//  class Vacancy {
-  
-//   final String title;
-//   final String employerTitle;
-//   final List<String> contactPhone;
-//   final String empType;
-//   final String? description;
-//   final int industryId;
-//   final int? salaryFrom;
-//   final int? salaryTo;
-//   final int expirationDays;
-//   final int? avatarNumber;
-//   final String? image;
-//   const Vacancy({
-//     required this.title,
-//     required this.employerTitle,
-//     required this.contactPhone,
-//     required this.empType,
-//     this.description,
-//     required this.industryId,
-//     this.salaryFrom,
-//     this.salaryTo,
-//     required this.expirationDays,
-//     this.avatarNumber,
-//     this.image,
-//   });
 
-//   Vacancy copyWith({
-//     String? title,
-//     String? employerTitle,
-//     List<String>? contactPhone,
-//     String? empType,
-//     String? description,
-//     int? industryId,
-//     int? salaryFrom,
-//     int? salaryTo,
-//     int? expirationDays,
-//     int? avatarNumber,
-//     String? image,
-//   }) {
-//     return Vacancy(
-//       title: title ?? this.title,
-//       employerTitle: employerTitle ?? this.employerTitle,
-//       contactPhone: contactPhone ?? this.contactPhone,
-//       empType: empType ?? this.empType,
-//       description: description ?? this.description,
-//       industryId: industryId ?? this.industryId,
-//       salaryFrom: salaryFrom ?? this.salaryFrom,
-//       salaryTo: salaryTo ?? this.salaryTo,
-//       expirationDays: expirationDays ?? this.expirationDays,
-//       avatarNumber: avatarNumber ?? this.avatarNumber,
-//       image: image ?? this.image,
-//     );
-//   }
+// ======================    Vacancy Details    ======================
 
-//   Map<String, dynamic> toMap() {
-//     return <String, dynamic>{
-//       EnumVacancyApiFields.title.name: title,
-//       EnumVacancyApiFields.employer_title.name: employerTitle,
-//       EnumVacancyApiFields.contact_phone.name: contactPhone,
-//       EnumVacancyApiFields.emp_type.name: empType,
-//       EnumVacancyApiFields.description.name: description,
-//       EnumVacancyApiFields.industry_id.name: industryId,
-//       EnumVacancyApiFields.salary_from.name: salaryFrom,
-//       EnumVacancyApiFields.salary_to.name: salaryTo,
-//       EnumVacancyApiFields.expiration_days.name: expirationDays,
-//       EnumVacancyApiFields.avatar_number.name: avatarNumber,
-//       EnumVacancyApiFields.image.name: image,
-//     };
-//   }
+@immutable
+class VacancyDetail {
+  final int id;
+  final String title;
+  final String employerTitle;
+  final String region;
+  final String distance;
+  final String avatarUrl;
+  final LatLng point;
+  final String createdAt;
+  final String description;
+  final String? employmentType;
+  final List<String> contactPhone;
+  final String address;
+  final int salaryFrom;
+  final int salaryTo;
+  const VacancyDetail({
+    required this.id,
+    required this.title,
+    required this.employerTitle,
+    required this.region,
+    required this.distance,
+    required this.avatarUrl,
+    required this.point,
+    required this.createdAt,
+    required this.description,
+    this.employmentType,
+    required this.contactPhone,
+    required this.address,
+    required this.salaryFrom,
+    required this.salaryTo,
+  });
 
-//   factory Vacancy.fromMap(Map<String, dynamic> map) {
-//     return Vacancy(
-//       title: map[EnumVacancyApiFields.title.name] as String,
-//       employerTitle: map[EnumVacancyApiFields.employer_title.name] as String,
-//       contactPhone: List<String>.from(
-//         map[EnumVacancyApiFields.contact_phone.name] as List<String>,
-//       ),
-//       empType: map[EnumVacancyApiFields.emp_type.name] as String,
-//       description: map[EnumVacancyApiFields.description.name] != null
-//           ? map[EnumVacancyApiFields.description.name] as String
-//           : null,
-//       industryId: map[EnumVacancyApiFields.industry_id.name] as int,
-//       salaryFrom: map[EnumVacancyApiFields.salary_from.name] != null
-//           ? map[EnumVacancyApiFields.salary_from.name] as int
-//           : null,
-//       salaryTo: map[EnumVacancyApiFields.salary_to.name] != null
-//           ? map[EnumVacancyApiFields.salary_to.name] as int
-//           : null,
-//       expirationDays: map[EnumVacancyApiFields.expiration_days.name] as int,
-//       avatarNumber: map[EnumVacancyApiFields.avatar_number.name] != null
-//           ? map[EnumVacancyApiFields.avatar_number.name] as int
-//           : null,
-//       image: map[EnumVacancyApiFields.image.name] != null
-//           ? map[EnumVacancyApiFields.image.name] as String
-//           : null,
-//     );
-//   }
+  VacancyDetail copyWith({
+    int? id,
+    String? title,
+    String? employerTitle,
+    String? region,
+    String? distance,
+    String? avatarUrl,
+    LatLng? point,
+    String? createdAt,
+    String? description,
+    String? employmentType,
+    List<String>? contactPhone,
+    String? address,
+    int? salaryFrom,
+    int? salaryTo,
+  }) {
+    return VacancyDetail(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      employerTitle: employerTitle ?? this.employerTitle,
+      region: region ?? this.region,
+      distance: distance ?? this.distance,
+      avatarUrl: avatarUrl ?? this.avatarUrl,
+      point: point ?? this.point,
+      createdAt: createdAt ?? this.createdAt,
+      description: description ?? this.description,
+      employmentType: employmentType ?? this.employmentType,
+      contactPhone: contactPhone ?? this.contactPhone,
+      address: address ?? this.address,
+      salaryFrom: salaryFrom ?? this.salaryFrom,
+      salaryTo: salaryTo ?? this.salaryTo,
+    );
+  }
 
-//   String toJson() => json.encode(toMap());
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      EnumVacancyApiFields.id.name: id,
+      EnumVacancyApiFields.title.name: title,
+      EnumVacancyApiFields.employer_title.name: employerTitle,
+      EnumVacancyApiFields.region.name: region,
+      EnumVacancyApiFields.distance.name: distance,
+      EnumVacancyApiFields.avatar_url.name: avatarUrl,
+      EnumVacancyApiFields.point.name: [point.latitude, point.longitude],
+      EnumVacancyApiFields.created_at.name: createdAt,
+      EnumVacancyApiFields.description.name: description,
+      EnumVacancyApiFields.employment_type.name: employmentType,
+      EnumVacancyApiFields.contact_phone.name: contactPhone,
+      EnumVacancyApiFields.address.name: address,
+      EnumVacancyApiFields.salary_from.name: salaryFrom,
+      EnumVacancyApiFields.salary_to.name: salaryTo,
+    };
+  }
 
-//   factory Vacancy.fromJson(String source) =>
-//       Vacancy.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory VacancyDetail.fromMap(Map<String, dynamic> map) {
+    final point =
+        List<double>.from(map[EnumVacancyApiFields.point.name] as List);
+    return VacancyDetail(
+      id: map[EnumVacancyApiFields.id.name] as int,
+      title: map[EnumVacancyApiFields.title.name] as String,
+      employerTitle: map[EnumVacancyApiFields.employer_title.name] as String,
+      region: map[EnumVacancyApiFields.region.name] as String,
+      distance: map[EnumVacancyApiFields.distance.name] as String,
+      avatarUrl: map[EnumVacancyApiFields.avatar_url.name] as String,
+      point: LatLng(point.first, point.last),
+      createdAt: map[EnumVacancyApiFields.created_at.name] as String,
+      description: map[EnumVacancyApiFields.description.name] as String,
+      employmentType: map[EnumVacancyApiFields.employment_type.name] != null
+          ? map[EnumVacancyApiFields.employment_type.name] as String
+          : null,
+      contactPhone: List<String>.from(
+        map[EnumVacancyApiFields.contact_phone.name] as List,
+      ),
+      address: map[EnumVacancyApiFields.address.name] as String,
+      salaryFrom: map[EnumVacancyApiFields.salary_from.name] as int,
+      salaryTo: map[EnumVacancyApiFields.salary_to.name] as int,
+    );
+  }
 
-//   @override
-//   String toString() {
-//     return 'Vacancy(title: $title, employerTitle: $employerTitle, contactPhone: $contactPhone, empType: $empType, descripiton: $description, industryId: $industryId, salaryFrom: $salaryFrom, salaryTo: $salaryTo, expirationDays: $expirationDays, avatarNumber: $avatarNumber, image: $image)';
-//   }
+  String toJson() => json.encode(toMap());
 
-//   @override
-//   bool operator ==(covariant Vacancy other) {
-//     if (identical(this, other)) return true;
-//     return other.title == title &&
-//         other.employerTitle == employerTitle &&
-//         listEquals(other.contactPhone, contactPhone) &&
-//         other.empType == empType &&
-//         other.description == description &&
-//         other.industryId == industryId &&
-//         other.salaryFrom == salaryFrom &&
-//         other.salaryTo == salaryTo &&
-//         other.expirationDays == expirationDays &&
-//         other.avatarNumber == avatarNumber &&
-//         other.image == image;
-//   }
+  factory VacancyDetail.fromJson(String source) =>
+      VacancyDetail.fromMap(json.decode(source) as Map<String, dynamic>);
 
-//   @override
-//   int get hashCode {
-//     return title.hashCode ^
-//         employerTitle.hashCode ^
-//         contactPhone.hashCode ^
-//         empType.hashCode ^
-//         description.hashCode ^
-//         industryId.hashCode ^
-//         salaryFrom.hashCode ^
-//         salaryTo.hashCode ^
-//         expirationDays.hashCode ^
-//         avatarNumber.hashCode ^
-//         image.hashCode;
-//   }
-// }
+  @override
+  String toString() {
+    return 'VacancyDetail(id: $id, title: $title, employerTitle: $employerTitle, region: $region, distance: $distance, avatarUrl: $avatarUrl, point: $point, createdAt: $createdAt, description: $description, employmentType: $employmentType, contactPhone: $contactPhone, address: $address, salaryFrom: $salaryFrom, salaryTo: $salaryTo)';
+  }
+
+  @override
+  bool operator ==(covariant VacancyDetail other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id &&
+        other.title == title &&
+        other.employerTitle == employerTitle &&
+        other.region == region &&
+        other.distance == distance &&
+        other.avatarUrl == avatarUrl &&
+        // point removed from here
+        other.createdAt == createdAt &&
+        other.description == description &&
+        other.employmentType == employmentType &&
+        listEquals(other.contactPhone, contactPhone) &&
+        other.address == address &&
+        other.salaryFrom == salaryFrom &&
+        other.salaryTo == salaryTo;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        title.hashCode ^
+        employerTitle.hashCode ^
+        region.hashCode ^
+        distance.hashCode ^
+        avatarUrl.hashCode ^
+        // point's hashcode removed from here
+        createdAt.hashCode ^
+        description.hashCode ^
+        employmentType.hashCode ^
+        contactPhone.hashCode ^
+        address.hashCode ^
+        salaryFrom.hashCode ^
+        salaryTo.hashCode;
+  }
+}

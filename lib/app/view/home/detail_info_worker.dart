@@ -18,7 +18,6 @@ class _DetailInfoWorkerState extends State<DetailInfoWorker> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -48,7 +47,7 @@ class _DetailInfoWorkerState extends State<DetailInfoWorker> {
               child: DraggableScrollableSheet(
                 initialChildSize: 0.7,
                 minChildSize: 0.5,
-                maxChildSize: 1,
+    
                 // snap: true,
                 builder: (context, scrollController) {
                   return Container(
@@ -344,7 +343,7 @@ class _DetailInfoWorkerState extends State<DetailInfoWorker> {
                         ),
                       )
                     ],
-                  )),
+                  ),),
                 ),
               ),
             )

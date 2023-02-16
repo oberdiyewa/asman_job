@@ -23,7 +23,7 @@ class _AddAddressWorkerState extends State<AddAddressWorker> {
       appBar: AppBar(
         elevation: 0,
         leading: Padding(
-          padding: REdgeInsets.all(20.0),
+          padding: REdgeInsets.all(20),
           child: GestureDetector(
             onTap: () {
               Navigator.pop(context);
@@ -44,7 +44,6 @@ class _AddAddressWorkerState extends State<AddAddressWorker> {
         customHeight: 160,
         widget: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
               padding: REdgeInsets.only(

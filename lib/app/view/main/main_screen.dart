@@ -34,20 +34,21 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   List<NavBarItem> items = [
-    NavBarItem(Assets.homeSelected, Assets.homeUnselected, Home(),
-        label: EnumScreenName.home),
-    NavBarItem(Assets.searchSelected, Assets.searchUnselected, SearchScreen(),
-        label: EnumScreenName.search),
+    NavBarItem(Assets.homeSelected, Assets.homeUnselected, const Home(),
+        label: EnumScreenName.home,),
+    NavBarItem(
+        Assets.searchSelected, Assets.searchUnselected, const SearchScreen(),
+        label: EnumScreenName.search,),
     NavBarItem(
       Assets.notifSelected,
       Assets.notifUnselected,
-      NotificationScreen(),
+      const NotificationScreen(),
       label: EnumScreenName.notifs,
     ),
     NavBarItem(
       Assets.profileSelected,
       Assets.profileUnselected,
-      ProfileScreen(),
+      const ProfileScreen(),
       label: EnumScreenName.profile,
     ),
   ];

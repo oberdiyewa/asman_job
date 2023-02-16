@@ -1,3 +1,8 @@
+import 'package:asman_work/utils/globals/enums.dart';
+
+const token =
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiMmQxNDdjYTgzYmJiNGViMWUwOGExODgzNDdiOWVhYzhkNmE4ZTBiMjllNTcxMjRhZmRlOWZmMGNlYzcwN2JlNmE3ZGMwYWY0ZjhjZjIxOTMiLCJpYXQiOjE2NzIzOTU1OTguMjA2MDU5LCJuYmYiOjE2NzIzOTU1OTguMjA2MDYsImV4cCI6MTY3MzY5MTU5OC4yMDMxMzIsInN1YiI6IjE2Iiwic2NvcGVzIjpbIioiXX0.wYk7NMOfYS3XDVCNBJBaBe9Im7CbpQFqFnzPCga9MS9zZAXmeZR3sWNuTRsjYIaWmPFia8jKsO-nguV3BSpqAWAO5lTim33-EjQzqWk1pkmO0wyfsx164fRuPBaAzJ2TqnYwe2VxlQPFDPNJt8gznEF6Gl9bSS7T98xcUKv1KIFWDXV41C-2NX76oGMEJYWrurXEQ3P0ZRQS2umDq2Op8lbGAz3mzbft0ML9-UPgeoVAapelY_tqqqRIj1hc3UYAn3pISSlI1nptNx-hME72l_y71ak0RwRNJpm02UMSx4w90E_252I_49QSOygu_iHqZ_k4qqsk5ftTPNqj0CVMSN59iPT-hSLGNUZQ7TJ38jnNai3U7ifLYmwveYQXbUVnsKySTRoDcug5S-KrBys_K4jsgg6Ad69br1Goqu5EeZoWZkTfUcY-nJzb7QbbVPJJObeL8wLwMzXuj7NXNFW4qTHIsD_SyTP3Cdqlhm-MjH9yWoxweWUPwao7sdgy22ioxHj-7NEQOarbh_f9bd6XcqCfkYACY4IaUBkZsY6zoX6bDDmibtBpcvugBpRZjiBCmmT5j5MQPPUm52RbXGC6IwL-xUwCgM3ZbbSo0HeEJbb-V5Hy9STt96xhQn9xQ9eiCuYjHCheYedJQKJl2sGXEE7oTauWnE-s2tYjvxmTYOo';
+
 class APIEndPoints {
   APIEndPoints._();
   static const String baseUrlUser = 'https://apingweb.com';
@@ -76,32 +81,15 @@ class APIEndPoints {
   static String kUsersVacancyPath(EnumUserVacancyPaths path, [int? id]) {
     switch (path) {
       case EnumUserVacancyPaths.address:
-        return '$kApiPath/users/vacancy/$id/${path.name}';
+        return '/users/vacancy/$id/${path.name}';
       case EnumUserVacancyPaths.details:
-        return '$kApiPath/users/vacancy/${path.name}/$id';
+        return '/users/vacancy/${path.name}/$id';
       case EnumUserVacancyPaths.list:
       case EnumUserVacancyPaths.search:
         return '/users/vacancy/${path.name}';
       // ignore: no_default_cases
       default:
-        return id == null
-            ? '$kApiPath/users/vacancy'
-            : '$kApiPath/users/vacancy/$id';
+        return id == null ? '/users/vacancy' : '/users/vacancy/$id';
     }
   }
-}
-
-enum EnumUserProfilePaths {
-  address,
-  education,
-  experience,
-  language,
-}
-
-enum EnumUserVacancyPaths {
-  address,
-  details,
-  list,
-  none,
-  search,
 }

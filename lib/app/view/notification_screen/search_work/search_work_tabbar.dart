@@ -4,7 +4,6 @@ import 'package:asman_work/app/view/notification_screen/search_work/add_notif_fo
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 
 class WorkSectionTabbar extends StatefulWidget {
   const WorkSectionTabbar({super.key});
@@ -16,8 +15,8 @@ class WorkSectionTabbar extends StatefulWidget {
 class _WorkSectionTabbarState extends State<WorkSectionTabbar> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color.fromRGBO(241, 241, 241, 1),
+    return ColoredBox(
+      color: const Color.fromRGBO(241, 241, 241, 1),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

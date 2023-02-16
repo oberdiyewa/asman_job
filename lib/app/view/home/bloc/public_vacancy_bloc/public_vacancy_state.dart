@@ -13,7 +13,7 @@ class PublicVacancyLoading extends PublicVacancyState {}
 
 class PublicVacancyLoaded extends PublicVacancyState {
   const PublicVacancyLoaded(
-      {required this.vacancies, required this.moreVacancies});
+      {required this.vacancies, required this.moreVacancies,});
 
   final List<Vacancy> vacancies;
   final List<Vacancy> moreVacancies;

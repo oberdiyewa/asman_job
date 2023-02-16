@@ -1,5 +1,4 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
-import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/data/providers/logic/bottom_navigation_provider.dart';
 import 'package:asman_work/utils/globals/enums.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,7 @@ import 'package:flutter_svg/svg.dart';
 
 class NavBarItem {
   NavBarItem(this.selectedIconPath, this.unSelectedIconPath, this.view,
-      {required this.label});
+      {required this.label,});
 
   final String selectedIconPath;
   final String unSelectedIconPath;
@@ -25,8 +24,8 @@ class CustomBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final bottomData =
         BlocProvider.of<BottomNavigationProvider>(context, listen: true);
-    return Container(
-      decoration: BoxDecoration(
+    return DecoratedBox(
+      decoration: const BoxDecoration(
         // border: Border.all(color: Colors.black),
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(30),
@@ -98,7 +97,7 @@ class CustomBottomBar extends StatelessWidget {
       height: 2.h,
       width: 25.w,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: kcPrimaryColor),
+          borderRadius: BorderRadius.circular(10), color: kcPrimaryColor,),
     );
   }
 }
