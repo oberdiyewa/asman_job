@@ -1,5 +1,4 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
-import 'package:asman_work/app/services/map_service.dart';
 import 'package:asman_work/app/view/home/bloc/entity_detail_bloc/entity_detail_bloc.dart';
 import 'package:asman_work/app/view/home/bloc/tab_controller_cubit/tab_controller_cubit.dart';
 import 'package:asman_work/app/view/home/components/draggable_detail_screen.dart';
@@ -8,7 +7,6 @@ import 'package:asman_work/data/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AppDraggableScrollableSheet extends StatelessWidget {
   const AppDraggableScrollableSheet({super.key});
@@ -74,7 +72,10 @@ class VacancyDetailInfo extends StatelessWidget {
 }
 
 class VacancyListItem extends StatelessWidget {
-  const VacancyListItem({super.key, required this.vacancy});
+  const VacancyListItem({
+    required this.vacancy,
+    super.key,
+  });
   final Vacancy vacancy;
 
   @override
@@ -87,125 +88,126 @@ class VacancyListItem extends StatelessWidget {
         context
             .read<EntityDetailBloc>()
             .add(EntityDetailFetchEvent(vacancy.id));
-        MapService.singleton!.mapController!
-            .animateCamera(
-          CameraUpdate.newCameraPosition(
-            CameraPosition(
-              target: vacancy.point,
-              zoom: 15,
-            ),
-          ),
-        )
-            .then((value) {
-          MapService.singleton!.mapController!.showMarkerInfoWindow(
-            MarkerId(
-              vacancy.id.toString(),
-            ),
-          );
-        });
+        // MapService.singleton!.mapController!
+        //     .animateCamera(
+        //   CameraUpdate.newCameraPosition(
+        //     CameraPosition(
+        //       target: vacancy.point,
+        //       zoom: 15,
+        //     ),
+        //   ),
+        // )
+        //     .then((value) {
+        //   MapService.singleton!.mapController!.showMarkerInfoWindow(
+        //     MarkerId(
+        //       vacancy.id.toString(),
+        //     ),
+        //   );
+        // });
       },
       child: Material(
         color: Colors.white,
         child: Column(
           children: [
             ListTile(
-                title: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(child: BoxText.headline(vacancy.title)),
-                    SizedBox(
-                      width: 80,
-                      child: Text(
-                        vacancy.createdAt,
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w400,
-                          color: kcHardGreyColor,
-                        ),
-                        textAlign: TextAlign.end,
-                      ),
-                    ),
-                  ],
-                ),
-                // isThreeLine: true,
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    verticalSpaceSmall,
-                    Text(
-                      vacancy.employerTitle,
+              title: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(child: BoxText.headline(vacancy.title)),
+                  SizedBox(
+                    width: 80,
+                    child: Text(
+                      vacancy.createdAt,
                       style: TextStyle(
-                        color: kcHardGreyColor,
-                        fontWeight: FontWeight.w600,
                         fontSize: 12.sp,
+                        fontWeight: FontWeight.w400,
+                        color: kcHardGreyColor,
                       ),
+                      textAlign: TextAlign.end,
                     ),
-                    verticalSpaceSmall,
-                    Row(
-                      children: [
-                        Text(
-                          vacancy.region,
-                          style: TextStyle(
-                            color: kcHardGreyColor,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 10.sp,
-                          ),
+                  ),
+                ],
+              ),
+              // isThreeLine: true,
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  verticalSpaceSmall,
+                  Text(
+                    vacancy.employerTitle,
+                    style: TextStyle(
+                      color: kcHardGreyColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12.sp,
+                    ),
+                  ),
+                  verticalSpaceSmall,
+                  Row(
+                    children: [
+                      Text(
+                        vacancy.region,
+                        style: TextStyle(
+                          color: kcHardGreyColor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 10.sp,
                         ),
-                        horizontalSpaceRegular,
-                        Expanded(
-                          child: Row(
-                            children: [
-                              Text(
-                                '•',
+                      ),
+                      horizontalSpaceRegular,
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Text(
+                              '•',
+                              style: TextStyle(
+                                fontSize: 20.sp,
+                                color: kcHardGreyColor,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            horizontalSpaceTiny,
+                            Expanded(
+                              child: Text(
+                                '${vacancy.distance} uzaklykda',
                                 style: TextStyle(
-                                  fontSize: 20.sp,
-                                  color: kcHardGreyColor,
+                                  color: kcPrimaryColor,
                                   fontWeight: FontWeight.w600,
+                                  fontSize: 12.sp,
                                 ),
                               ),
-                              horizontalSpaceTiny,
-                              Expanded(
-                                child: Text(
-                                  '${vacancy.distance} uzaklykda',
-                                  style: TextStyle(
-                                    color: kcPrimaryColor,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 12.sp,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-                leading: Text('${vacancy.id}')
-                // CachedNetworkImage(
-                //   width: 60.w,
-                //   height: 60.w,
-                //   fit: BoxFit.cover,
-                //   imageUrl: vacancy.avatarUrl,
-                //   errorWidget: (context, url, dynamic error) {
-                //     return const Icon(Icons.image_not_supported_rounded);
-                //   },
-                // ),
-                // trailing: SizedBox(
-                //   child: Column(
-                //     children: [
-                //       Text(
-                //         vacancy.createdAt,
-                //         style: TextStyle(
-                //           fontSize: 12.sp,
-                //           fontWeight: FontWeight.w400,
-                //           color: kcHardGreyColor,
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-                ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              leading: Text('${vacancy.id}')
+              // CachedNetworkImage(
+              //   width: 60.w,
+              //   height: 60.w,
+              //   fit: BoxFit.cover,
+              //   imageUrl: vacancy.avatarUrl,
+              //   errorWidget: (context, url, dynamic error) {
+              //     return const Icon(Icons.image_not_supported_rounded);
+              //   },
+              // ),
+              // trailing: SizedBox(
+              //   child: Column(
+              //     children: [
+              //       Text(
+              //         vacancy.createdAt,
+              //         style: TextStyle(
+              //           fontSize: 12.sp,
+              //           fontWeight: FontWeight.w400,
+              //           color: kcHardGreyColor,
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              ,
+            ),
             const Divider(
               indent: 3,
               endIndent: 3,

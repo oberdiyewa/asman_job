@@ -43,9 +43,12 @@ class _TabBarWidgetState extends State<TabBarWidget> {
                   children: [
                     SvgPicture.asset(
                       Assets.searchWorkIcon,
-                      color: widget.tabController!.index == 0
-                          ? kcSecondaryColor
-                          : kcHardGreyColor,
+                      colorFilter: ColorFilter.mode(
+                        widget.tabController!.index == 0
+                            ? kcSecondaryColor
+                            : kcHardGreyColor,
+                        BlendMode.srcIn,
+                      ),
                     ),
                     horizontalSpaceRegular,
                     BoxText.headline('Iş gözleýän')
@@ -57,10 +60,14 @@ class _TabBarWidgetState extends State<TabBarWidget> {
                   children: [
                     SvgPicture.asset(
                       Assets.personGreyIcon,
-                      color: widget.tabController!.index == 1
+                      colorFilter: 
+                      ColorFilter.mode(
+                      widget.tabController!.index == 1
                           ? kcSecondaryColor
                           : kcHardGreyColor,
-                    ),
+                        
+                       BlendMode.srcIn,)
+                    ,),
                     horizontalSpaceRegular,
                     BoxText.headline('Işgär gözleýän'),
                   ],

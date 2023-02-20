@@ -16,9 +16,9 @@ class Experience {
   const Experience({
     required this.companyTitle,
     required this.position,
+    required this.start,
     this.description,
     this.untilNow,
-    required this.start,
     this.end,
   });
 

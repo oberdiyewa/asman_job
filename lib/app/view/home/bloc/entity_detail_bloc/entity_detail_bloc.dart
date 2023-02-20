@@ -1,8 +1,8 @@
 import 'package:asman_work/data/model/model.dart';
 import 'package:asman_work/data/repository/vacancy_repository.dart';
-import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'entity_detail_event.dart';
 part 'entity_detail_state.dart';

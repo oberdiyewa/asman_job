@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:asman_work/utils/globals/enums.dart';
 import 'package:flutter/foundation.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:latlong2/latlong.dart';
 
 @immutable
 class Vacancy {
@@ -142,11 +142,11 @@ class VacancyDetail {
     required this.point,
     required this.createdAt,
     required this.description,
-    this.employmentType,
     required this.contactPhone,
     required this.address,
     required this.salaryFrom,
     required this.salaryTo,
+    this.employmentType,
   });
 
   VacancyDetail copyWith({

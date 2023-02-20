@@ -1,7 +1,7 @@
 import 'package:asman_work/data/model/model.dart';
 import 'package:asman_work/data/repository/vacancy_repository.dart';
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'public_vacancy_event.dart';
 part 'public_vacancy_state.dart';
@@ -60,7 +60,7 @@ class PublicVacancyBloc extends Bloc<PublicVacancyEvent, PublicVacancyState> {
       emit(
         PublicVacancyLoaded(
           vacancies: vacancies,
-          moreVacancies: [],
+          moreVacancies: const [],
         ),
       );
     }

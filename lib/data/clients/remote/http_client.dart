@@ -9,8 +9,8 @@ class DioClient {
   }) : _dio = Dio(
           BaseOptions(
             baseUrl: baseUrl ?? 'your base url',
-            connectTimeout: 5000,
-            receiveTimeout: 5000,
+            connectTimeout: const Duration(milliseconds: 5000),
+            receiveTimeout: const Duration(milliseconds: 5000),
             responseType: type ?? ResponseType.json,
           ),
         )..interceptors.addAll(
@@ -37,6 +37,7 @@ class DioClient {
               headers: headers,
             ),
           )
+          // ignore: body_might_complete_normally_catch_error
           .catchError((dynamic err) {});
       return response;
     } on DioError {

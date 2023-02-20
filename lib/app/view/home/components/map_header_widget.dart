@@ -7,8 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MapHeaderWidget extends StatelessWidget {
   const MapHeaderWidget({
-    super.key,
     required this.tabController,
+    super.key,
   });
 
   final TabController? tabController;

@@ -1,22 +1,21 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/home/components/button_widgets.dart';
-import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ChoiceLevel {
+  ChoiceLevel(this.name, {this.selected = false});
   final String name;
   final bool? selected;
-  ChoiceLevel(this.name, [this.selected = false]);
 
   ChoiceLevel copy({
     String? name,
     bool? selected,
   }) {
-    return ChoiceLevel(name ?? this.name, selected ?? this.selected);
+    return ChoiceLevel(name ?? this.name, selected: selected ?? this.selected);
   }
 }
 
@@ -50,7 +49,7 @@ class _AddNewLanguageScreenState extends State<AddNewLanguageScreen> {
     for (var i = 0; i < newList.length; i++) {
       final item = newList[i];
 
-      if (item.name == c.name && item.selected == true) {
+      if (item.name == c.name && item.selected!) {
         return;
       } else if (item.name == c.name && item.selected == false) {
         newList[i] = item.copy(selected: true);
@@ -73,7 +72,7 @@ class _AddNewLanguageScreenState extends State<AddNewLanguageScreen> {
         appBar: AppBar(
           elevation: 0,
           leading: Padding(
-            padding: REdgeInsets.all(20.0),
+            padding: REdgeInsets.all(20),
             child: GestureDetector(
               onTap: () {
                 Navigator.pop(context);
@@ -106,8 +105,8 @@ class _AddNewLanguageScreenState extends State<AddNewLanguageScreen> {
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Dil',
-                              hintStyle: hintStyle),
-                        )),
+                              hintStyle: hintStyle,),
+                        ),),
                     verticalSpaceSmall,
                     borderLinedContainer(
                         width: 339,
@@ -127,7 +126,7 @@ class _AddNewLanguageScreenState extends State<AddNewLanguageScreen> {
                                       return Container(
                                         height: 322.h,
                                         margin: const EdgeInsets.only(
-                                            left: 24, right: 24),
+                                            left: 24, right: 24,),
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -143,7 +142,7 @@ class _AddNewLanguageScreenState extends State<AddNewLanguageScreen> {
                                                   color: kcLightGreyColor,
                                                   borderRadius:
                                                       BorderRadius.circular(
-                                                          20.w),
+                                                          20.w,),
                                                 ),
                                               ),
                                             ),
@@ -193,11 +192,11 @@ class _AddNewLanguageScreenState extends State<AddNewLanguageScreen> {
                                   );
                                 },
                                 child: Padding(
-                                  padding: const EdgeInsets.all(13.0),
+                                  padding: const EdgeInsets.all(13),
                                   child: SvgPicture.asset(Assets.arrowDown),
                                 ),
-                              )),
-                        )),
+                              ),),
+                        ),),
                   ],
                 ),
               ),
@@ -208,7 +207,7 @@ class _AddNewLanguageScreenState extends State<AddNewLanguageScreen> {
               ),
             )
           ],
-        ));
+        ),);
   }
 
   Container borderLinedContainer({
@@ -218,7 +217,7 @@ class _AddNewLanguageScreenState extends State<AddNewLanguageScreen> {
     return Container(
       width: width.w,
       height: 50.h,
-      padding: EdgeInsets.only(left: 10, bottom: 5),
+      padding: const EdgeInsets.only(left: 10, bottom: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         border: Border.all(color: kcLightestGreyColor, width: 2),

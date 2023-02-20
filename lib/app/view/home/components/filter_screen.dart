@@ -1,7 +1,6 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/home/components/button_widgets.dart';
-import 'package:asman_work/app/view/notification_screen/section_add.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,15 +15,15 @@ enum SelectedPlace {
 }
 
 class ChoiceFilter {
+  ChoiceFilter(this.name, {this.selected = false});
   final String name;
   final bool? selected;
-  ChoiceFilter(this.name, [this.selected = false]);
 
   ChoiceFilter copy({
     String? name,
     bool? selected,
   }) {
-    return ChoiceFilter(name ?? this.name, selected ?? this.selected);
+    return ChoiceFilter(name ?? this.name, selected: selected ?? this.selected);
   }
 }
 
@@ -59,7 +58,7 @@ class _FilterScreenState extends State<FilterScreen> {
     for (var i = 0; i < newList.length; i++) {
       final item = newList[i];
 
-      if (item.name == c.name && item.selected == true) {
+      if (item.name == c.name && item.selected!) {
         return;
       } else if (item.name == c.name && item.selected == false) {
         newList[i] = item.copy(selected: true);
@@ -76,13 +75,12 @@ class _FilterScreenState extends State<FilterScreen> {
   }
 
   void selectDistrict(ChoiceFilter c) {
-    
     final newList = List<ChoiceFilter>.from(districts);
 
     for (var i = 0; i < newList.length; i++) {
       final item = newList[i];
 
-      if (item.name == c.name && item.selected == true) {
+      if (item.name == c.name && item.selected!) {
         return;
       } else if (item.name == c.name && item.selected == false) {
         newList[i] = item.copy(selected: true);
@@ -105,7 +103,7 @@ class _FilterScreenState extends State<FilterScreen> {
       appBar: AppBar(
         elevation: 0,
         leading: Padding(
-          padding: REdgeInsets.all(20.0),
+          padding: REdgeInsets.all(20),
           child: GestureDetector(
             onTap: () {
               Navigator.pop(context);
@@ -134,7 +132,8 @@ class _FilterScreenState extends State<FilterScreen> {
                     children: [
                       Checkbox(
                         activeColor: kcPrimaryColor,
-                        side: BorderSide(width: 1.5, color: kcPrimaryColor),
+                        side:
+                            const BorderSide(width: 1.5, color: kcPrimaryColor),
                         value: choice.selected,
                         onChanged: (v) => _selectChoice(choice),
                       ),
@@ -142,7 +141,9 @@ class _FilterScreenState extends State<FilterScreen> {
                       Text(
                         choice.name,
                         style: TextStyle(
-                            fontWeight: FontWeight.w400, fontSize: 14.sp),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14.sp,
+                        ),
                       ),
                     ],
                   );
@@ -157,7 +158,7 @@ class _FilterScreenState extends State<FilterScreen> {
               Padding(
                 padding: REdgeInsets.only(left: 50),
                 child: Visibility(
-                  visible: choices[2].selected == true,
+                  visible: choices[2].selected!,
                   child: AnimatedSwitcher(
                     duration: const Duration(milliseconds: 500),
                     child: Column(
@@ -184,9 +185,11 @@ class _FilterScreenState extends State<FilterScreen> {
             child: BoxButton.block(
               title: 'Tertiple',
               disabled: isAnySelected,
-              onTap: () {
-                isAnySelected == false ? Navigator.pop(context) : null;
-              },
+              onTap: isAnySelected
+                  ? () {
+                      Navigator.pop(context);
+                    }
+                  : null,
             ),
           )
         ],

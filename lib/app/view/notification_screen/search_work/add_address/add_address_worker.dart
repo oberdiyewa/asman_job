@@ -1,6 +1,5 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
-import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
 import 'package:asman_work/app/view/notification_screen/search_work/add_address/search_from_map.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,7 @@ class AddAddressWorker extends StatefulWidget {
 class _AddAddressWorkerState extends State<AddAddressWorker> {
   @override
   Widget build(BuildContext context) {
-    var _textController = TextEditingController();
+    final _textController = TextEditingController();
     return Scaffold(
       backgroundColor: const Color.fromRGBO(241, 241, 241, 1),
       appBar: AppBar(

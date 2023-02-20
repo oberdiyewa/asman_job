@@ -10,9 +10,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DraggableVacancyList extends StatefulWidget {
   const DraggableVacancyList({
-    super.key,
     required this.tabState,
     required this.screenHeight,
+    super.key,
   });
   final EnumDraggableSheetState tabState;
   final double screenHeight;
@@ -86,9 +86,9 @@ class _DraggableVacancyListState extends State<DraggableVacancyList> {
 
 class AppCustomScrollView extends StatefulWidget {
   const AppCustomScrollView({
-    super.key,
     required this.controller,
     required this.tabState,
+    super.key,
   });
 
   final ScrollController controller;
@@ -243,8 +243,8 @@ class PublicWorkerList extends StatelessWidget {
 
 class PublicVancancyList extends StatelessWidget {
   const PublicVancancyList({
-    super.key,
     required this.isLoading,
+    super.key,
   });
 
   final bool isLoading;

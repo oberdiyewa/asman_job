@@ -1,7 +1,5 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
-import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
-import 'package:asman_work/app/view/notification_screen/section_add.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,7 +19,7 @@ class _SearchLocationFromMapState extends State<SearchLocationFromMap> {
       appBar: AppBar(
         elevation: 0,
         leading: Padding(
-          padding: REdgeInsets.all(20.0),
+          padding: REdgeInsets.all(20),
           child: GestureDetector(
             onTap: () {
               Navigator.pop(context);
@@ -47,7 +45,7 @@ class _SearchLocationFromMapState extends State<SearchLocationFromMap> {
           Positioned(
             top: 15,
             right: 1,
-            child: CircleContainer(
+            child: circleContainer(
               widget: Padding(
                 padding: const EdgeInsets.all(8),
                 child: SvgPicture.asset(Assets.gps),
@@ -57,7 +55,7 @@ class _SearchLocationFromMapState extends State<SearchLocationFromMap> {
           Positioned(
             top: 70,
             right: 1,
-            child: CircleContainer(
+            child: circleContainer(
               widget: Padding(
                 padding: const EdgeInsets.all(8),
                 child: SvgPicture.asset(Assets.changeView),
@@ -71,25 +69,27 @@ class _SearchLocationFromMapState extends State<SearchLocationFromMap> {
             child: BoxButton.block(title: 'Tassykla'),
           ),
           Positioned(
-              left: 10,
-              top: 10,
-              child: InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: CircleContainer(
-                    color: kcPrimaryColor,
-                    widget: Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: SvgPicture.asset(Assets.backIcon),
-                    )),
-              )),
+            left: 10,
+            top: 10,
+            child: InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: circleContainer(
+                color: kcPrimaryColor,
+                widget: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: SvgPicture.asset(Assets.backIcon),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Container CircleContainer({
+  Container circleContainer({
     required Widget widget,
     Color? color = Colors.white,
   }) {

@@ -23,8 +23,8 @@ class SectionName extends StatelessWidget {
 
 class PhoneButton extends StatelessWidget {
   const PhoneButton({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class PhoneButton extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(3),
         color: Colors.white,
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Color.fromRGBO(0, 0, 0, 0.1),
             blurRadius: 1.2,
@@ -99,8 +99,9 @@ class _SliderWidgetState extends State<SliderWidget> {
         ),
         Theme(
           data: Theme.of(context).copyWith(
-              sliderTheme:
-                  const SliderThemeData(valueIndicatorColor: kcPrimaryColor)),
+            sliderTheme:
+                const SliderThemeData(valueIndicatorColor: kcPrimaryColor),
+          ),
           child: Slider(
             value: currentSliderValue,
             max: 60,
@@ -121,34 +122,50 @@ class _SliderWidgetState extends State<SliderWidget> {
   }
 }
 
-Future<void> dialog(BuildContext context,
-    {required Widget button1,
-    required Widget contentText,
-    Widget? button2}) async {
-  return await showDialog(
-      context: context,
-      barrierDismissible: true,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10.0))),
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          content: SizedBox(
-            width: 160,
-            height: 80,
-            child: Center(child: contentText),
-          ),
-          actions: (button2 == null) ? [button1] : [button1, button2],
-          actionsAlignment: MainAxisAlignment.spaceEvenly,
-          actionsPadding: const EdgeInsets.only(bottom: 15),
-          elevation: 5,
-          scrollable: true,
-        );
-      });
+Future<void> dialog(
+  BuildContext context, {
+  required Widget button1,
+  required Widget contentText,
+  Widget? button2,
+}) async {
+  return showDialog(
+    context: context,
+    barrierDismissible: true,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        content: SizedBox(
+          width: 160,
+          height: 80,
+          child: Center(child: contentText),
+        ),
+        actions: (button2 == null) ? [button1] : [button1, button2],
+        actionsAlignment: MainAxisAlignment.spaceEvenly,
+        actionsPadding: const EdgeInsets.only(bottom: 15),
+        elevation: 5,
+        scrollable: true,
+      );
+    },
+  );
 }
 
 class CustomInputField extends StatelessWidget {
+  CustomInputField({
+    required this.controller,
+    this.placeholder = '',
+    this.leading,
+    this.trailing,
+    // this.height = 45,
+    this.width = 85,
+    this.borderColor = kcHardGreyColor,
+    this.trailingtapped,
+    this.password = false,
+    super.key,
+  });
   final TextEditingController controller;
   final String placeholder;
   final Widget? leading;
@@ -162,21 +179,9 @@ class CustomInputField extends StatelessWidget {
     borderRadius: BorderRadius.circular(8),
   );
 
-  CustomInputField(
-      {super.key,
-      required this.controller,
-      this.placeholder = '',
-      this.leading,
-      this.trailing,
-      // this.height = 45,
-      this.width = 85,
-      this.borderColor = kcHardGreyColor,
-      this.trailingtapped,
-      this.password = false});
-
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       //  height: height?.h,
       width: width?.w,
       child: TextField(
@@ -188,6 +193,7 @@ class CustomInputField extends StatelessWidget {
             hintStyle: const TextStyle(
                 color: kcPrimaryTextColor,
                 fontSize: 14,
+                // ignore: require_trailing_commas
                 fontWeight: FontWeight.w400),
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
@@ -207,9 +213,9 @@ class CustomInputField extends StatelessWidget {
               borderSide: const BorderSide(color: Colors.red),
             ),
             focusedBorder: circularBorder.copyWith(
-                borderSide: const BorderSide(color: kcPrimaryColor)),
+                borderSide: const BorderSide(color: kcPrimaryColor),),
             enabledBorder: circularBorder.copyWith(
-                borderSide: const BorderSide(color: kcLightGreyColor))),
+                borderSide: const BorderSide(color: kcLightGreyColor),),),
       ),
     );
   }

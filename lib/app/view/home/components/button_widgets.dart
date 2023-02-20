@@ -51,18 +51,18 @@ class FindMyLocationWidget extends StatelessWidget {
 
 class CustomRadioWidget<T> extends StatelessWidget {
   const CustomRadioWidget({
-    super.key,
+    required this.isSelected,
+    required this.onChanged,
     // required this.value,
     // required this.groupValue,
     // required this.onChanged,
     this.width = 16,
     this.height = 16,
-    required this.isSelected,
-    required this.onChanged,
+    super.key,
   });
   // final T value;
   // final T groupValue;
-  final Function()? onChanged;
+  final VoidCallback? onChanged;
   final double width;
   final double height;
   final bool isSelected;

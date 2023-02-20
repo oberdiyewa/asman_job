@@ -1,8 +1,6 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
-import 'package:asman_work/app/view/notification_screen/search_work/add_phone.dart';
-import 'package:asman_work/app/view/notification_screen/search_work/add_profession.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/add_ability.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/add_certificate.dart';
@@ -22,7 +20,7 @@ class FillDataAboutYourself extends StatefulWidget {
 
 class _FillDataAboutYourselfState extends State<FillDataAboutYourself> {
   TextStyle menuStyle = const TextStyle(
-      fontSize: 12, fontWeight: FontWeight.w600, color: kcPrimaryColor);
+      fontSize: 12, fontWeight: FontWeight.w600, color: kcPrimaryColor,);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +32,7 @@ class _FillDataAboutYourselfState extends State<FillDataAboutYourself> {
             Navigator.pop(context);
           },
           child: Padding(
-            padding: REdgeInsets.all(20.0),
+            padding: REdgeInsets.all(20),
             child: SvgPicture.asset(
               Assets.backIcon,
             ),
@@ -92,9 +90,9 @@ class _FillDataAboutYourselfState extends State<FillDataAboutYourself> {
                         ),
                       );
                     },
-                    child: AddButton()),
+                    child: const AddButton(),),
                 horizontalSpaceTiny,
-                VerticalDivider(),
+                const VerticalDivider(),
                 horizontalSpaceTiny,
                 Text(
                   'Täze Bilim Maglumatyny Goş     ',
@@ -122,7 +120,7 @@ class _FillDataAboutYourselfState extends State<FillDataAboutYourself> {
                   child: const AddButton(),
                 ),
                 horizontalSpaceTiny,
-                VerticalDivider(),
+                const VerticalDivider(),
                 horizontalSpaceTiny,
                 Text(
                   'Täze Dil Goş',
@@ -150,7 +148,7 @@ class _FillDataAboutYourselfState extends State<FillDataAboutYourself> {
                   child: const AddButton(),
                 ),
                 horizontalSpaceTiny,
-                VerticalDivider(),
+                const VerticalDivider(),
                 horizontalSpaceTiny,
                 Text(
                   'Täze Sertifikat Goş',
@@ -178,7 +176,7 @@ class _FillDataAboutYourselfState extends State<FillDataAboutYourself> {
                   child: const AddButton(),
                 ),
                 horizontalSpaceTiny,
-                VerticalDivider(),
+                const VerticalDivider(),
                 horizontalSpaceTiny,
                 Text(
                   'Täze Başarnyk Goş',

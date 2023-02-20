@@ -3,6 +3,7 @@ import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/home/bloc/entity_detail_bloc/entity_detail_bloc.dart';
 import 'package:asman_work/app/view/home/bloc/public_vacancy_bloc/public_vacancy_bloc.dart';
 import 'package:asman_work/app/view/home/components/app_draggable_scrollable_sheet.dart.dart';
+import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
 import 'package:asman_work/data/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,9 +11,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../helpers.dart';
-import '../../notification_screen/notif_widgets.dart';
-import 'app_draggable_scrollable_sheet.dart.dart';
 class DraggableDetailScreen extends StatelessWidget {
   const DraggableDetailScreen({
     super.key,
@@ -165,8 +163,10 @@ class DraggableDetailScreen extends StatelessWidget {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 // Job title
-                                VacancyDetailInfo('Wezipe',
-                                    value: vDetail.title),
+                                VacancyDetailInfo(
+                                  'Wezipe',
+                                  value: vDetail.title,
+                                ),
                                 // Work time
                                 VacancyDetailInfo(
                                   'Iş wagty',
@@ -236,79 +236,82 @@ class DraggableDetailScreen extends StatelessWidget {
                 ),
                 BlocBuilder<EntityDetailBloc, EntityDetailState>(
                   builder: (context, state) {
-                    if (state is! EntityDetailLoaded)
+                    if (state is! EntityDetailLoaded) {
                       return const SizedBox.shrink();
-                    final vDetail = state.entityDetail;
-                    return Positioned(
-                      bottom: 3,
-                      left: 0,
-                      child: GestureDetector(
-                        onTap: () {
-                          dialog(
-                            context,
-                            button1: Column(
-                              children: [
-                                BoxButton.medium(
-                                  title: 'OK',
-                                  onTap: () async {
-                                    debugPrint('basyldy');
-                                    final url = Uri(
-                                      scheme: 'tel',
-                                      path: vDetail.contactPhone.first,
-                                    );
-                                    if (await canLaunchUrl(url))
-                                      await launchUrl(url);
-                                  },
-                                ),
-                                verticalSpaceSmall,
-                              ],
-                            ),
-                            contentText: Center(
-                              child: Text(
-                                'Hormatly musderi, programma upjunciligmiz hic hilli jogapkarcilik cekmeyanligni size duyduryarys ',
-                                style: TextStyle(
-                                  height: 1.5,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: kcHardGreyColor,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          width: 390.w,
-                          height: 40.h,
-                          decoration: const BoxDecoration(
-                            color: kcPrimaryColor,
-                          ),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.asset(Assets.callIcon),
-                                horizontalSpaceSmall,
-                                horizontalSpaceTiny,
-                                Text(
-                                  'Jan et',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16.sp,
-                                    fontWeight: FontWeight.w600,
+                    } else {
+                      final vDetail = state.entityDetail;
+                      return Positioned(
+                        bottom: 3,
+                        left: 0,
+                        child: GestureDetector(
+                          onTap: () {
+                            dialog(
+                              context,
+                              button1: Column(
+                                children: [
+                                  BoxButton.medium(
+                                    title: 'OK',
+                                    onTap: () async {
+                                      debugPrint('basyldy');
+                                      final url = Uri(
+                                        scheme: 'tel',
+                                        path: vDetail.contactPhone.first,
+                                      );
+                                      if (await canLaunchUrl(url)) {
+                                        await launchUrl(url);
+                                      }
+                                    },
                                   ),
-                                )
-                              ],
+                                  verticalSpaceSmall,
+                                ],
+                              ),
+                              contentText: Center(
+                                child: Text(
+                                  'Hormatly musderi, programma upjunciligmiz hic hilli jogapkarcilik cekmeyanligni size duyduryarys ',
+                                  style: TextStyle(
+                                    height: 1.5,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: kcHardGreyColor,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            width: 390.w,
+                            height: 40.h,
+                            decoration: const BoxDecoration(
+                              color: kcPrimaryColor,
+                            ),
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(Assets.callIcon),
+                                  horizontalSpaceSmall,
+                                  horizontalSpaceTiny,
+                                  Text(
+                                    'Jan et',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    );
+                      );
+                    }
                   },
                 )
               ],
             ),
           );
-        });
+        },);
   }
 }

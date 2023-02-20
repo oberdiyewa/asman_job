@@ -1,6 +1,7 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
+import 'package:asman_work/app/view/notification_screen/search_work/add_address/add_address_worker.dart';
 import 'package:asman_work/app/view/notification_screen/search_work/add_phone.dart';
 import 'package:asman_work/app/view/notification_screen/search_work/add_profession.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
@@ -8,18 +9,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'add_address/add_address_worker.dart';
-
 class ChoiceWorkType {
+  ChoiceWorkType(this.name, {this.selected = false});
   final String name;
   final bool? selected;
-  ChoiceWorkType(this.name, [this.selected = false]);
 
   ChoiceWorkType copy({
     String? name,
     bool? selected,
   }) {
-    return ChoiceWorkType(name ?? this.name, selected ?? this.selected);
+    return ChoiceWorkType(
+      name ?? this.name,
+      selected: selected ?? this.selected,
+    );
   }
 }
 
@@ -39,7 +41,7 @@ class _AddForWorkNotifState extends State<AddForWorkNotif> {
   String selectedWorkType = 'Saýlaň (Doly iş güni, Ýarym iş güni we ş.m)';
   String finalResult = 'Wezipe gosh';
   String phoneNumber = 'Telefon belgi goş';
-  bool _customTileExpanded = false;
+  // bool _customTileExpanded = false;
   List<ChoiceWorkType> workTypes = [
     ChoiceWorkType('Doly iş güni'),
     ChoiceWorkType('Ýarym iş güni'),
@@ -56,7 +58,7 @@ class _AddForWorkNotifState extends State<AddForWorkNotif> {
     for (var i = 0; i < newList.length; i++) {
       final item = newList[i];
 
-      if (item.name == c.name && item.selected == true) {
+      if (item.name == c.name && item.selected!) {
         return;
       } else if (item.name == c.name && item.selected == false) {
         newList[i] = item.copy(selected: true);
@@ -79,7 +81,7 @@ class _AddForWorkNotifState extends State<AddForWorkNotif> {
       appBar: AppBar(
         elevation: 0,
         leading: Padding(
-          padding: REdgeInsets.all(20.0),
+          padding: REdgeInsets.all(20),
           child: GestureDetector(
             onTap: () {
               Navigator.pop(context);
@@ -140,7 +142,7 @@ class _AddForWorkNotifState extends State<AddForWorkNotif> {
                           onTap: () {
                             selectProfessionAndReturnResult(context);
                           },
-                          child: const AddButton()),
+                          child: const AddButton(),),
                       horizontalSpaceSmall,
                       horizontalSpaceSmall,
                       BoxText.headline(
@@ -157,10 +159,10 @@ class _AddForWorkNotifState extends State<AddForWorkNotif> {
                     height: 50.h,
                     margin: REdgeInsets.fromLTRB(1, 1, 1, 1),
                     padding: REdgeInsets.only(
-                        top: 10, bottom: 10, left: 23, right: 20),
+                        top: 10, bottom: 10, left: 23, right: 20,),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        border: Border.all(color: kcLightestGreyColor)),
+                        border: Border.all(color: kcLightestGreyColor),),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -220,7 +222,7 @@ class _AddForWorkNotifState extends State<AddForWorkNotif> {
                         Text(
                           choice.name,
                           style: TextStyle(
-                              fontWeight: FontWeight.w400, fontSize: 14.sp),
+                              fontWeight: FontWeight.w400, fontSize: 14.sp,),
                         ),
                       ],
                     );
@@ -262,7 +264,7 @@ class _AddForWorkNotifState extends State<AddForWorkNotif> {
                           onTap: () {
                             getPhoneNumberAndReturnResult(context);
                           },
-                          child: const AddButton()),
+                          child: const AddButton(),),
                       horizontalSpaceSmall,
                       horizontalSpaceSmall,
                       BoxText.headline(
@@ -325,8 +327,8 @@ class _AddForWorkNotifState extends State<AddForWorkNotif> {
                   dialog(
                     context,
                     button2: GestureDetector(
-                        child: BoxButton.small(title: 'Tassykla')),
-                    button1: BoxButton.small(title: 'Goýbolsun'),
+                        child: const BoxButton.small(title: 'Tassykla'),),
+                    button1: const BoxButton.small(title: 'Goýbolsun'),
                     contentText: Column(
                       children: [
                         SvgPicture.asset(Assets.infoIcon),
@@ -354,7 +356,7 @@ class _AddForWorkNotifState extends State<AddForWorkNotif> {
     if (mounted) {
       setState(() {
         isMounted = true;
-        finalResult = result as String;
+        finalResult = result!;
       });
     }
   }
@@ -368,7 +370,7 @@ class _AddForWorkNotifState extends State<AddForWorkNotif> {
     if (mounted) {
       setState(() {
         isMountedforPhone = true;
-        phoneNumber = result as String;
+        phoneNumber = result!;
       });
     }
   }

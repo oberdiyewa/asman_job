@@ -178,19 +178,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               onTap: () {
                                 dialog(context,
                                     button1: const BoxButton.small(
-                                        title: 'Tassykla'),
+                                        title: 'Tassykla',),
                                     button2: BoxButton.small(
                                         onTap: () {
                                           Navigator.pop(context);
                                         },
-                                        title: 'Goýbolsun '),
+                                        title: 'Goýbolsun ',),
                                     contentText: const Text(
                                       'Profilden çykmak üçin tassyklaň',
                                       style: TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600,
                                       ),
-                                    ));
+                                    ),);
                               },
                               child: MenuItems(
                                 context: context,
@@ -298,7 +298,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               )
             ],
-          )),
+          ),),
     );
   }
 }

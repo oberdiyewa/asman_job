@@ -1,12 +1,11 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/home/components/button_widgets.dart';
+import 'package:asman_work/app/view/home/components/filter_screen.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../home/components/filter_screen.dart';
 
 class ChangeLanguageScreen extends StatefulWidget {
   const ChangeLanguageScreen({super.key});
@@ -30,7 +29,7 @@ class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
     for (var i = 0; i < newList.length; i++) {
       final item = newList[i];
 
-      if (item.name == c.name && item.selected == true) {
+      if (item.name == c.name && item.selected!) {
         return;
       } else if (item.name == c.name && item.selected == false) {
         newList[i] = item.copy(selected: true);
@@ -100,7 +99,7 @@ class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
     return AppBar(
       elevation: 0,
       leading: Padding(
-        padding: REdgeInsets.all(20.0),
+        padding: REdgeInsets.all(20),
         child: GestureDetector(
           onTap: () {
             Navigator.pop(context);

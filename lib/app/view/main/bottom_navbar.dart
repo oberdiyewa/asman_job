@@ -7,8 +7,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class NavBarItem {
-  NavBarItem(this.selectedIconPath, this.unSelectedIconPath, this.view,
-      {required this.label,});
+  NavBarItem(
+    this.selectedIconPath,
+    this.unSelectedIconPath,
+    this.view, {
+    required this.label,
+  });
 
   final String selectedIconPath;
   final String unSelectedIconPath;
@@ -17,7 +21,10 @@ class NavBarItem {
 }
 
 class CustomBottomBar extends StatelessWidget {
-  const CustomBottomBar({super.key, required this.items});
+  const CustomBottomBar({
+    required this.items,
+    super.key,
+  });
   // static int selectedIndex = 0;
   final List<NavBarItem> items;
   @override
@@ -97,7 +104,9 @@ class CustomBottomBar extends StatelessWidget {
       height: 2.h,
       width: 25.w,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: kcPrimaryColor,),
+        borderRadius: BorderRadius.circular(10),
+        color: kcPrimaryColor,
+      ),
     );
   }
 }

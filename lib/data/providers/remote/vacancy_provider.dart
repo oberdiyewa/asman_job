@@ -5,7 +5,7 @@ import 'package:asman_work/utils/globals/end_points.dart';
 import 'package:asman_work/utils/globals/enums.dart';
 import 'package:asman_work/utils/globals/my_http_headers.dart';
 import 'package:dio/dio.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:latlong2/latlong.dart';
 
 class VacancyProvider {
   final DioClient _dio =

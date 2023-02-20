@@ -1,8 +1,5 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
-import 'package:asman_work/app/view/home/components/button_widgets.dart';
-import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
-import 'package:asman_work/app/view/notification_screen/section_add.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -33,7 +30,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
         appBar: AppBar(
           elevation: 0,
           leading: Padding(
-            padding: REdgeInsets.all(20.0),
+            padding: REdgeInsets.all(20),
             child: GestureDetector(
               onTap: () {
                 Navigator.pop(context);
@@ -125,6 +122,6 @@ class _SecurityScreenState extends State<SecurityScreen> {
               )
             ],
           ),
-        ));
+        ),);
   }
 }

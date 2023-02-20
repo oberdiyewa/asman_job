@@ -1,7 +1,5 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
-import 'package:asman_work/app/view/home/components/button_widgets.dart';
-import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
 import 'package:asman_work/app/view/notification_screen/section_add.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,7 +28,7 @@ class _AddCertificateScreenState extends State<AddCertificateScreen> {
         appBar: AppBar(
           elevation: 0,
           leading: Padding(
-            padding: REdgeInsets.all(20.0),
+            padding: REdgeInsets.all(20),
             child: GestureDetector(
               onTap: () {
                 Navigator.pop(context);
@@ -63,8 +61,8 @@ class _AddCertificateScreenState extends State<AddCertificateScreen> {
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Sertifikadyň ady',
-                              hintStyle: hintStyle),
-                        )),
+                              hintStyle: hintStyle,),
+                        ),),
                     verticalSpaceSmall,
                     borderLinedContainer(
                       width: 339,
@@ -72,7 +70,7 @@ class _AddCertificateScreenState extends State<AddCertificateScreen> {
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'Haýsy edara tarapyndan berildi',
-                            hintStyle: hintStyle),
+                            hintStyle: hintStyle,),
                       ),
                     ),
                     verticalSpaceSmall,
@@ -103,7 +101,7 @@ class _AddCertificateScreenState extends State<AddCertificateScreen> {
               ),
             )
           ],
-        ));
+        ),);
   }
 
   Container borderLinedContainer({
@@ -113,7 +111,7 @@ class _AddCertificateScreenState extends State<AddCertificateScreen> {
     return Container(
       width: width.w,
       height: 50.h,
-      padding: EdgeInsets.only(left: 10, bottom: 5),
+      padding: const EdgeInsets.only(left: 10, bottom: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         border: Border.all(color: kcLightestGreyColor, width: 2),

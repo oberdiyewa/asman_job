@@ -1,19 +1,17 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
-import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
+import 'package:asman_work/app/view/helpers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../helpers.dart';
-
 class MenuItems extends StatelessWidget {
   const MenuItems({
-    Key? key,
     required this.context,
-    this.leading,
     required this.title,
+    super.key,
+    this.leading,
     this.trailing,
-  }) : super(key: key);
+  });
 
   final BuildContext context;
   final String? leading;
@@ -56,4 +54,3 @@ class MenuItems extends StatelessWidget {
     );
   }
 }
-
