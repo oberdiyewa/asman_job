@@ -1,6 +1,7 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/notification_screen/search_work/add_notif_forwork.dart';
+import 'package:asman_work/app/view/notification_screen/section_add.dart';
 import 'package:asman_work/data/model/notification_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,35 +33,42 @@ class _WorkSectionTabbarState extends State<WorkSectionTabbar> {
         padding: EdgeInsets.only(top: 10),
         children: [
           Container(
-            width: screenWidth(context),
-            height: 72.h,
-            color: Colors.white,
-            child: ListTile(
-              selectedTileColor: Colors.red,
-              leading: CircleAvatar(
-                radius: 25,
-                backgroundColor: Colors.white,
-                child: SvgPicture.asset(Assets.notifAvatar),
-              ),
-              title: BoxText.headline('Iş gözleýän'),
-              subtitle: BoxText.body('Satyjy, Ýarym iş güni'),
-              trailing: SvgPicture.asset(Assets.arrowForward),
+            width: 365.w,
+            height: 113.h,
+            margin: REdgeInsets.only(left: 15, right: 15, bottom: 10),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color.fromRGBO(0, 0, 0, 0.15),
+                  blurRadius: 2,
+                  offset: Offset(2, 2),
+                )
+              ],
+            ),
+            child: Row(
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 43.w,
+                      height: 43.h,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: kcPrimaryColor.withOpacity(0.15),
+                      ),
+                      child: SvgPicture.asset(Assets.notifAvatar),
+                    ),
+
+                  ],
+                ),
+                Row(
+                  children: [],
+                )
+              ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 50, left: 30, right: 30),
-            child: BoxButton.large(
-              title: 'Bildiriş ber',
-              onTap: () {
-                Navigator.push<NotificationModel>(
-                  context,
-                  MaterialPageRoute<NotificationModel>(
-                    builder: (context) => const AddForWorkNotif(),
-                  ),
-                );
-              },
-            ),
-          )
         ],
       ),
     );
@@ -103,3 +111,36 @@ class _WorkSectionTabbarState extends State<WorkSectionTabbar> {
     );
   }
 }
+
+/*
+ Container(
+            width: screenWidth(context),
+            height: 72.h,
+            color: Colors.white,
+            child: ListTile(
+              selectedTileColor: Colors.red,
+              leading: CircleAvatar(
+                radius: 25,
+                backgroundColor: Colors.white,
+                child: SvgPicture.asset(Assets.notifAvatar),
+              ),
+              title: BoxText.headline('Iş gözleýän'),
+              subtitle: BoxText.body('Satyjy, Ýarym iş güni'),
+              trailing: SvgPicture.asset(Assets.arrowForward),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 50, left: 30, right: 30),
+            child: BoxButton.large(
+              title: 'Bildiriş ber',
+              onTap: () {
+                Navigator.push<NotificationModel>(
+                  context,
+                  MaterialPageRoute<NotificationModel>(
+                    builder: (context) => const AddForWorkNotif(),
+                  ),
+                );
+              },
+            ),
+          )
+*/

@@ -192,6 +192,7 @@ Widget slidingPanelAppBar(BuildContext context) {
             ),
           ),
         ),
+        BoxButton.small(title: 'title')
       ],
     ),
   );
@@ -221,6 +222,6 @@ class VacancyDetailInfo extends StatelessWidget {
         verticalSpaceTiny,
       ],
     );
-    ;
+    
   }
 }

@@ -16,7 +16,7 @@ class SecurityScreen extends StatefulWidget {
 
 class _SecurityScreenState extends State<SecurityScreen> {
   TextStyle subheadingStyle = const TextStyle(
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: FontWeight.w600,
     color: kcHardGreyColor,
   );
@@ -30,7 +30,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
         backgroundColor: const Color.fromRGBO(241, 241, 241, 1),
         appBar: const BaseAppbar(title: 'Gizlinlik'),
         body: Padding(
-          padding: const EdgeInsets.only(left: 5, right: 2, top: 16),
+          padding: const EdgeInsets.only(left: 15, right: 15, top: 16),
           child: SizedBox.expand(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,13 +41,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Profil suratymy görkez ',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                        BoxText.headline('Profil suratymy görkez '),
                         verticalSpaceTiny,
                         Text(
                           'Profildäki suratyňyz ähli ulanyjylara görüner ',

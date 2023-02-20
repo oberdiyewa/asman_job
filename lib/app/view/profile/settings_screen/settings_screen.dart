@@ -7,6 +7,7 @@ import 'package:asman_work/components/ui/screens/base_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../profile_widgets.dart';
 
@@ -27,6 +28,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   );
 
   bool isChecked = false;
+  final ImagePicker _picker = ImagePicker();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
