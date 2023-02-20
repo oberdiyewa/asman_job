@@ -55,6 +55,10 @@ abstract class Assets {
   static const arrowDown = 'assets/icons/arrow_down.svg';
   static const avatar = 'assets/images/avatar_image.jpg';
   static const camera = 'assets/icons/camera.svg';
+<<<<<<< HEAD
+=======
+  // static const notifAvatar = 'assets/icons/notif_avatar.svg';
+>>>>>>> 8cb906d (notification result screen modified)
 
 <<<<<<< HEAD
   static const vacancyLocation = 'assets/images/vacancy.png';
@@ -73,5 +77,9 @@ abstract class Assets {
 =======
   static const sendIcon = 'assets/icons/send.svg';
   static const logoAvatar = 'assets/images/a.png';
+<<<<<<< HEAD
 >>>>>>> 4622659 (profile screen modified)
+=======
+  static const notifAvatar = 'assets/icons/avatar_notif.svg';
+>>>>>>> 8cb906d (notification result screen modified)
 }

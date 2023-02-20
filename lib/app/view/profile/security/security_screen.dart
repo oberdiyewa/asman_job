@@ -16,7 +16,11 @@ class SecurityScreen extends StatefulWidget {
 
 class _SecurityScreenState extends State<SecurityScreen> {
   TextStyle subheadingStyle = const TextStyle(
+<<<<<<< HEAD
     fontSize: 10,
+=======
+    fontSize: 11,
+>>>>>>> 8cb906d (notification result screen modified)
     fontWeight: FontWeight.w600,
     color: kcHardGreyColor,
   );

@@ -7,6 +7,7 @@ import 'package:asman_work/components/ui/screens/base_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../profile_widgets.dart';
 
@@ -27,7 +28,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
   );
 
   bool isChecked = false;
+<<<<<<< HEAD
   // final ImagePicker _picker = ImagePicker();
+=======
+  final ImagePicker _picker = ImagePicker();
+>>>>>>> 8cb906d (notification result screen modified)
   @override
   Widget build(BuildContext context) {
     return Scaffold(
