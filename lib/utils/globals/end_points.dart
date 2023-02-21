@@ -5,7 +5,7 @@ const token =
 
 class APIEndPoints {
   APIEndPoints._();
-  static const String baseUrlUser = 'https://apingweb.com';
+  // static const String baseUrlUser = 'https://apingweb.com';
   static const String baseUrlPosts = 'hhttps://jsonplaceholder.typicode.com';
   static const String loginUserPost = '/api/login';
   static const String notesGet = '/posts';
@@ -29,8 +29,8 @@ class APIEndPoints {
   static const String kUserProfilePath = '$kApiPath/users/profile';
   static String kUserProfilePathWithId(int id, {bool needDetails = false}) =>
       needDetails
-          ? '$kUserProfilePath/$id'
-          : '$kUserProfilePath/details/$id'; // Fetch, delete or edit profile by id
+          ? '$kUserProfilePath/details/$id'
+          : '$kUserProfilePath/$id'; // Fetch, delete or edit profile by id
   static const kUserProfileListPath = '$kUserProfilePath/list'; // Profile list
   static const kUserProfileSearchPath =
       '$kUserProfilePath/search'; // Profile search
@@ -81,15 +81,17 @@ class APIEndPoints {
   static String kUsersVacancyPath(EnumUserVacancyPaths path, [int? id]) {
     switch (path) {
       case EnumUserVacancyPaths.address:
-        return '/users/vacancy/$id/${path.name}';
+        return '$kApiPath/users/vacancy/$id/${path.name}';
       case EnumUserVacancyPaths.details:
-        return '/users/vacancy/${path.name}/$id';
+        return '$kApiPath/users/vacancy/${path.name}/$id';
       case EnumUserVacancyPaths.list:
       case EnumUserVacancyPaths.search:
-        return '/users/vacancy/${path.name}';
+        return '$kApiPath/users/vacancy/${path.name}';
       // ignore: no_default_cases
       default:
-        return id == null ? '/users/vacancy' : '/users/vacancy/$id';
+        return id == null
+            ? '$kApiPath/users/vacancy'
+            : '$kApiPath/users/vacancy/$id';
     }
   }
 }

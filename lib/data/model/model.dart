@@ -1,7 +1,12 @@
-export 'address.dart';
 export 'education.dart';
 export 'experience.dart';
 export 'language.dart';
+export 'location.dart';
 export 'profile.dart';
+export 'public_entity.dart';
+export 'public_profile_detail.dart';
+export 'public_vacancy_detail.dart';
 export 'user.dart';
-export 'vacancy.dart';
+export 'user_address.dart';
+export 'user_profile.dart';
+export 'user_vacancy.dart';

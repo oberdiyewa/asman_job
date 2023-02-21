@@ -1,14 +1,18 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:equatable/equatable.dart';
 
-// part 'tab_controller_state.dart';
+part 'tab_controller_state.dart';
 
-class TabControllerCubit extends Cubit<EnumDraggableSheetState> {
-  TabControllerCubit() : super(EnumDraggableSheetState.lookingJob);
+class TabControllerCubit extends Cubit<TabControllerState> {
+  TabControllerCubit() : super(TabControllerInitial());
 
-  void changeTab(EnumDraggableSheetState state) {
-    emit(state);
+  void changeTab(
+    EnumDraggableSheetState state, {
+    int? id,
+    bool? isVacancy,
+  }) {
+    emit(TabControllerSelected(state, id: id, isVacancy: isVacancy));
   }
 }
 
-enum EnumDraggableSheetState { lookingJob, lookingWorker, detail }
+enum EnumDraggableSheetState { none, lookingJob, lookingWorker, detail }

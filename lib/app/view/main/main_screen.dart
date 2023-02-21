@@ -2,7 +2,7 @@ import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/home/bloc/tab_controller_cubit/tab_controller_cubit.dart';
 import 'package:asman_work/app/view/home/home.dart';
 import 'package:asman_work/app/view/main/bottom_navbar.dart';
-import 'package:asman_work/app/view/notification_screen/notif_screen.dart';
+import 'package:asman_work/app/view/notification/notif_screen.dart';
 import 'package:asman_work/app/view/profile/profile_screen.dart';
 import 'package:asman_work/app/view/search/search_screen.dart';
 import 'package:asman_work/data/providers/logic/bottom_navigation_provider.dart';
@@ -33,12 +33,20 @@ class _MainScreenState extends State<MainScreen> {
     }
   }
 
+  
   List<NavBarItem> items = [
-    NavBarItem(Assets.homeSelected, Assets.homeUnselected, const Home(),
-        label: EnumScreenName.home,),
     NavBarItem(
-        Assets.searchSelected, Assets.searchUnselected, const SearchScreen(),
-        label: EnumScreenName.search,),
+      Assets.homeSelected,
+      Assets.homeUnselected,
+      const Home(),
+      label: EnumScreenName.home,
+    ),
+    NavBarItem(
+      Assets.searchSelected,
+      Assets.searchUnselected,
+      const SearchScreen(),
+      label: EnumScreenName.search,
+    ),
     NavBarItem(
       Assets.notifSelected,
       Assets.notifUnselected,
@@ -76,10 +84,10 @@ class _MainScreenState extends State<MainScreen> {
         height: 844.h,
         child: items[getBodyIndex(bottomData.state)].view,
       ),
-      bottomNavigationBar:
-          BlocBuilder<TabControllerCubit, EnumDraggableSheetState>(
+      bottomNavigationBar: BlocBuilder<TabControllerCubit, TabControllerState>(
         builder: (context, state) {
-          if (state == EnumDraggableSheetState.detail) {
+          if ((state as TabControllerSelected).draggableSheetState ==
+              EnumDraggableSheetState.detail) {
             return const SizedBox.shrink();
           } else {
             return CustomBottomBar(
@@ -88,10 +96,11 @@ class _MainScreenState extends State<MainScreen> {
           }
         },
       ),
-      floatingActionButton:
-          BlocBuilder<TabControllerCubit, EnumDraggableSheetState>(
+      floatingActionButton: BlocBuilder<TabControllerCubit, TabControllerState>(
         builder: (context, state) {
-          if (state == EnumDraggableSheetState.detail || keyboardIsOpened) {
+          if ((state as TabControllerSelected).draggableSheetState ==
+                  EnumDraggableSheetState.detail ||
+              keyboardIsOpened) {
             return const SizedBox.shrink();
           } else {
             return customFloatingActionButton();

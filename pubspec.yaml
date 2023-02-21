@@ -13,7 +13,7 @@ dependencies:
       url: https://git.asmantiz.com/Koch/asman_flutter_uikit.git
       ref: c415fb37ee859be67ce0f04980fa08f7507cb756
   cached_network_image: ^3.2.3
-  connectivity_plus: any
+  connectivity_plus: ^3.0.3
   dio: ^5.0.0
   equatable: ^2.0.5
   flutter:
@@ -30,14 +30,16 @@ dependencies:
   intl: ^0.17.0
   latlong2: ^0.8.1
   persistent_bottom_nav_bar: ^5.0.2
+  rxdart: ^0.27.7
+  shared_preferences: ^2.0.17
   url_launcher: ^6.1.9
   
 
   
 dev_dependencies:
   bloc_test: ^9.1.1
-  build_runner:
-  flutter_gen_runner:
+  build_runner: ^2.3.3
+  flutter_gen_runner: ^5.2.0
   flutter_test:
     sdk: flutter
   mocktail: ^0.3.0
@@ -51,6 +53,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/languages/
 
   # fonts:
   #   - family: JobIcons

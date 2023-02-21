@@ -19,25 +19,64 @@ enum EnumScreenName {
   profile,
 }
 
-enum EnumVacancyApiFields {
+enum EnumPublicEntityApiFields {
   id,
   title,
   employer_title,
+  fullname,
   region,
   distance,
   avatar_url,
   point,
   created_at,
-  // belong to details
+  // belong to vacancy details
   description,
   employment_type,
   contact_phone,
   address,
   salary_from,
   salary_to,
+
+  // belong to profile detail
+  user_id,
+  address_id,
+  name,
+  surname,
+  middle_name,
+  birth_date,
+  gender,
+  relocation,
+  phone,
+  email,
+  about_me,
+  avatar_number,
+  status,
+  updated_at,
+  deleted_at,
+  experience,
+  education,
+  language,
 }
 
-enum EnumVacancyDetailApiFields { address }
+enum EnumAddressApiFields {
+  id,
+  addressable_type,
+  addressable_id,
+  title,
+  region,
+  address_type,
+  address,
+  building,
+  floor,
+  door,
+  point,
+  description,
+  meta,
+  created_at,
+  updated_at,
+  deleted_at,
+  coordinates,
+}
 
 enum EnumProfileApiFields {
   name,
@@ -54,22 +93,38 @@ enum EnumProfileApiFields {
 }
 
 enum EnumEducationApiFields {
+  id,
+  profile_id,
   education_type_id,
   time,
   date_type,
   title,
-  organization
+  organization,
+  created_at,
+  updated_at,
 }
 
-enum EnumLanguageApiFields { code, level }
+enum EnumLanguageApiFields {
+  id,
+  profile_id,
+  code,
+  level,
+  created_at,
+  updated_at,
+}
 
 enum EnumExperienceApiFields {
+  id,
+  profile_id,
   company_title,
+  company_id,
   position,
-  description,
-  until_now,
   start,
   end,
+  until_now,
+  description,
+  created_at,
+  updated_at,
 }
 
 enum EnumUserProfilePaths {

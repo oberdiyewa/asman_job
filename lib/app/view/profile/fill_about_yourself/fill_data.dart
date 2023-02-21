@@ -1,7 +1,7 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
-import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
-import 'package:asman_work/app/view/notification_screen/section_add.dart';
+import 'package:asman_work/app/view/notification/notif_widgets.dart';
+import 'package:asman_work/app/view/notification/section_add.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/add_ability.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/add_certificate.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/add_education.dart';
@@ -20,7 +20,10 @@ class FillDataAboutYourself extends StatefulWidget {
 
 class _FillDataAboutYourselfState extends State<FillDataAboutYourself> {
   TextStyle menuStyle = const TextStyle(
-      fontSize: 12, fontWeight: FontWeight.w600, color: kcPrimaryColor,);
+    fontSize: 12,
+    fontWeight: FontWeight.w600,
+    color: kcPrimaryColor,
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +67,9 @@ class _FillDataAboutYourselfState extends State<FillDataAboutYourself> {
                       ),
                     );
                   },
-                  child: const AddButton(),
+                  child: AddButton(
+                    onTap: () {},
+                  ),
                 ),
                 horizontalSpaceTiny,
                 const VerticalDivider(),
@@ -82,15 +87,18 @@ class _FillDataAboutYourselfState extends State<FillDataAboutYourself> {
             widget: Row(
               children: [
                 InkWell(
-                    onTap: () {
-                      Navigator.push<dynamic>(
-                        context,
-                        MaterialPageRoute<dynamic>(
-                          builder: (context) => const AddEducationScreen(),
-                        ),
-                      );
-                    },
-                    child: const AddButton(),),
+                  onTap: () {
+                    Navigator.push<dynamic>(
+                      context,
+                      MaterialPageRoute<dynamic>(
+                        builder: (context) => const AddEducationScreen(),
+                      ),
+                    );
+                  },
+                  child: AddButton(
+                    onTap: () {},
+                  ),
+                ),
                 horizontalSpaceTiny,
                 const VerticalDivider(),
                 horizontalSpaceTiny,
@@ -117,7 +125,9 @@ class _FillDataAboutYourselfState extends State<FillDataAboutYourself> {
                       ),
                     );
                   },
-                  child: const AddButton(),
+                  child: AddButton(
+                    onTap: () {},
+                  ),
                 ),
                 horizontalSpaceTiny,
                 const VerticalDivider(),
@@ -145,7 +155,9 @@ class _FillDataAboutYourselfState extends State<FillDataAboutYourself> {
                       ),
                     );
                   },
-                  child: const AddButton(),
+                  child: AddButton(
+                    onTap: () {},
+                  ),
                 ),
                 horizontalSpaceTiny,
                 const VerticalDivider(),
@@ -173,7 +185,9 @@ class _FillDataAboutYourselfState extends State<FillDataAboutYourself> {
                       ),
                     );
                   },
-                  child: const AddButton(),
+                  child: AddButton(
+                    onTap: () {},
+                  ),
                 ),
                 horizontalSpaceTiny,
                 const VerticalDivider(),

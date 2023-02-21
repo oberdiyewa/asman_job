@@ -7,8 +7,13 @@ abstract class PublicVacancyEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class PublicVacancyFetchEvent extends PublicVacancyEvent {}
+class PublicVacancyFetchEvent extends PublicVacancyEvent {
+
+  const PublicVacancyFetchEvent({this.title});
+  final String? title;
+}
 
 class PublicVacancyFetchMoreEvent extends PublicVacancyEvent {
-  const PublicVacancyFetchMoreEvent();
+  const PublicVacancyFetchMoreEvent({this.title});
+  final String? title;
 }

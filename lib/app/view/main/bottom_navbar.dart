@@ -46,7 +46,7 @@ class CustomBottomBar extends StatelessWidget {
         ),
         child: SizedBox(
           width: screenWidth(context),
-          height: 50.h,
+          height: 70.h,
           child: BottomAppBar(
             color: Colors.white,
             // shape: const CircularNotchedRectangle(),

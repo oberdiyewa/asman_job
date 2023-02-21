@@ -6,53 +6,80 @@ import 'package:flutter/material.dart';
 
 @immutable
 class Education {
+  final int id;
+  final int profileId;
   final int educationTypeId;
-  final int time;
   final String dateType;
-  final String title;
+  final int time;
   final String organization;
+  final String title;
+  final String createdAt;
+  final String? updatedAt;
+
   const Education({
+    required this.id,
+    required this.profileId,
     required this.educationTypeId,
-    required this.time,
     required this.dateType,
-    required this.title,
+    required this.time,
     required this.organization,
+    required this.title,
+    required this.createdAt,
+    this.updatedAt,
   });
 
   Education copyWith({
+    int? id,
+    int? profileId,
     int? educationTypeId,
-    int? time,
     String? dateType,
-    String? title,
+    int? time,
     String? organization,
+    String? title,
+    String? createdAt,
+    String? updatedAt,
   }) {
     return Education(
+      id: id ?? this.id,
+      profileId: profileId ?? this.profileId,
       educationTypeId: educationTypeId ?? this.educationTypeId,
-      time: time ?? this.time,
       dateType: dateType ?? this.dateType,
-      title: title ?? this.title,
+      time: time ?? this.time,
       organization: organization ?? this.organization,
+      title: title ?? this.title,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      // EnumEducationApiFields.created_at.name: createdAt,
+      // EnumEducationApiFields.updated_at.name: updatedAt,
+      // EnumEducationApiFields.id.name: id,
+      // EnumEducationApiFields.profile_id.name: profileId,
+      EnumEducationApiFields.organization.name: organization,
       EnumEducationApiFields.education_type_id.name: educationTypeId,
       EnumEducationApiFields.time.name: time,
       EnumEducationApiFields.date_type.name: dateType,
       EnumEducationApiFields.title.name: title,
-      EnumEducationApiFields.organization.name: organization,
     };
   }
 
   factory Education.fromMap(Map<String, dynamic> map) {
     return Education(
+      id: map[EnumEducationApiFields.id.name] as int,
+      profileId: map[EnumEducationApiFields.profile_id.name] as int,
       educationTypeId:
           map[EnumEducationApiFields.education_type_id.name] as int,
-      time: map[EnumEducationApiFields.time.name] as int,
       dateType: map[EnumEducationApiFields.date_type.name] as String,
-      title: map[EnumEducationApiFields.title.name] as String,
+      time: map[EnumEducationApiFields.time.name] as int,
       organization: map[EnumEducationApiFields.organization.name] as String,
+      title: map[EnumEducationApiFields.title.name] as String,
+      createdAt: map[EnumEducationApiFields.created_at.name] as String,
+      updatedAt: map[EnumEducationApiFields.updated_at.name] != null
+          ? map[EnumEducationApiFields.updated_at.name] as String
+          : null,
     );
   }
 
@@ -63,26 +90,34 @@ class Education {
 
   @override
   String toString() {
-    return 'Education(educationTypeId: $educationTypeId, time: $time, dateType: $dateType, title: $title, organization: $organization)';
+    return 'Education(id: $id, profileId: $profileId, educationTypeId: $educationTypeId, dateType: $dateType, time: $time, organization: $organization, title: $title, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
   bool operator ==(covariant Education other) {
     if (identical(this, other)) return true;
 
-    return other.educationTypeId == educationTypeId &&
-        other.time == time &&
+    return other.id == id &&
+        other.profileId == profileId &&
+        other.educationTypeId == educationTypeId &&
         other.dateType == dateType &&
+        other.time == time &&
+        other.organization == organization &&
         other.title == title &&
-        other.organization == organization;
+        other.createdAt == createdAt &&
+        other.updatedAt == updatedAt;
   }
 
   @override
   int get hashCode {
-    return educationTypeId.hashCode ^
-        time.hashCode ^
+    return id.hashCode ^
+        profileId.hashCode ^
+        educationTypeId.hashCode ^
         dateType.hashCode ^
+        time.hashCode ^
+        organization.hashCode ^
         title.hashCode ^
-        organization.hashCode;
+        createdAt.hashCode ^
+        updatedAt.hashCode;
   }
 }

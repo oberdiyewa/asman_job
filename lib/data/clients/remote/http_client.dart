@@ -1,11 +1,11 @@
 import 'package:asman_work/data/clients/remote/interceptor.dart';
+import 'package:asman_work/data/clients/remote/interceptors/app_interceptors.dart';
 import 'package:dio/dio.dart';
 
 class DioClient {
   DioClient({
     String? baseUrl,
     ResponseType? type,
-    String? token,
   }) : _dio = Dio(
           BaseOptions(
             baseUrl: baseUrl ?? 'your base url',
@@ -15,7 +15,7 @@ class DioClient {
           ),
         )..interceptors.addAll(
             [
-              AuthorizationInterceptor(token),
+              AppInterceptors(),
               LoggerInterceptor(),
               //RetryOnConnectionChangeInterceptor(),
             ],
@@ -28,36 +28,41 @@ class DioClient {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? headers,
   }) async {
-    try {
-      final response = await _dio
-          .get<dynamic>(
-            path,
-            queryParameters: queryParameters,
-            options: Options(
-              headers: headers,
-            ),
-          )
-          // ignore: body_might_complete_normally_catch_error
-          .catchError((dynamic err) {});
-      return response;
-    } on DioError {
-      rethrow;
-    } catch (e) {
-      rethrow;
-    }
+    final response = await _dio.get<dynamic>(
+      path,
+      queryParameters: queryParameters,
+      options: Options(
+        headers: headers,
+      ),
+    );
+    return response;
   }
 
   Future<Response<dynamic>> post({
     required String endPoint,
     dynamic data,
     Map<String, dynamic>? queryParameters,
-    Options? options,
+    Map<String, dynamic>? headers,
   }) async {
     final response = await _dio.post<dynamic>(
       endPoint,
       data: data,
       queryParameters: queryParameters,
-      options: options,
+      options: Options(
+        headers: headers,
+      ),
+    );
+    return response;
+  }
+
+  Future<Response<dynamic>> delete(
+    String path, {
+    Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
+  }) async {
+    final response = await _dio.delete<dynamic>(
+      path,
+      options: Options(headers: headers),
     );
     return response;
   }

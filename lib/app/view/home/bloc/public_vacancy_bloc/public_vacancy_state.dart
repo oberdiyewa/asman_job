@@ -12,11 +12,13 @@ class PublicVacancyInitial extends PublicVacancyState {}
 class PublicVacancyLoading extends PublicVacancyState {}
 
 class PublicVacancyLoaded extends PublicVacancyState {
-  const PublicVacancyLoaded(
-      {required this.vacancies, required this.moreVacancies,});
+  const PublicVacancyLoaded({
+    required this.vacancies,
+    required this.moreVacancies,
+  });
 
-  final List<Vacancy> vacancies;
-  final List<Vacancy> moreVacancies;
+  final List<PublicEntity> vacancies;
+  final List<PublicEntity> moreVacancies;
 
   @override
   List<Object> get props => [vacancies, moreVacancies];

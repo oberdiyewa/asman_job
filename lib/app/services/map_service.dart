@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/plugin_api.dart';
 import 'package:latlong2/latlong.dart';
 
-const Epsg3857 crs = Epsg3857();
-
 typedef MapMoveDelegate = void Function(
   LatLng center,
   double zoom, {
@@ -38,12 +36,12 @@ num calculateRealRadius({
 }
 
 class MapService {
-  factory MapService() {
-    return _singleton ??= MapService._(
-      MapController(),
-    );
-  }
   MapService._(this.mapController);
+  
+  static MapService get instance {
+    _ensureInitialized();
+    return _singleton!;
+  }
 
   static MapService? _singleton;
 
@@ -52,7 +50,7 @@ class MapService {
   // ignore: prefer_final_fields
   MapMoveDelegate moveDelegate = (_, __, {id}) {};
 
-    static void _ensureInitialized() {
+  static void _ensureInitialized() {
     _singleton ??= MapService._(MapController());
   }
 

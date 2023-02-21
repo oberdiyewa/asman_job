@@ -57,4 +57,6 @@ abstract class Assets {
   static const vacancyLocation = 'assets/images/vacancy.png';
   static const myLocation = 'assets/images/my_location.svg';
   static const workerLocation = 'assets/images/worker.png';
+
+  static const languagePath = 'assets/languages';
 }
