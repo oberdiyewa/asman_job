@@ -9,8 +9,8 @@ class DioClient {
   }) : _dio = Dio(
           BaseOptions(
             baseUrl: baseUrl ?? 'your base url',
-            connectTimeout: const Duration(milliseconds: 5000),
-            receiveTimeout: const Duration(milliseconds: 5000),
+            connectTimeout: const Duration(milliseconds: 10000),
+            receiveTimeout: const Duration(milliseconds: 10000),
             responseType: type ?? ResponseType.json,
           ),
         )..interceptors.addAll(

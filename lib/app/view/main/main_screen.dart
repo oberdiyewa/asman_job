@@ -1,11 +1,13 @@
 import 'package:asman_work/app/view/helpers.dart';
-import 'package:asman_work/app/view/home/bloc/tab_controller_cubit/tab_controller_cubit.dart';
-import 'package:asman_work/app/view/home/home.dart';
 import 'package:asman_work/app/view/main/bottom_navbar.dart';
-import 'package:asman_work/app/view/notification/notif_screen.dart';
-import 'package:asman_work/app/view/profile/profile_screen.dart';
-import 'package:asman_work/app/view/search/search_screen.dart';
+import 'package:asman_work/app/view/screens//profile/profile_screen.dart';
+import 'package:asman_work/app/view/screens/home/bloc/tab_controller_cubit/tab_controller_cubit.dart';
+import 'package:asman_work/app/view/screens/home/home.dart';
+import 'package:asman_work/app/view/screens/notification/bloc/bloc.dart';
+import 'package:asman_work/app/view/screens/notification/notif_screen.dart';
+import 'package:asman_work/app/view/screens/search/search_screen.dart';
 import 'package:asman_work/data/providers/logic/bottom_navigation_provider.dart';
+import 'package:asman_work/data/repository/repository.dart';
 import 'package:asman_work/utils/globals/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,7 +35,6 @@ class _MainScreenState extends State<MainScreen> {
     }
   }
 
-  
   List<NavBarItem> items = [
     NavBarItem(
       Assets.homeSelected,
@@ -50,7 +51,21 @@ class _MainScreenState extends State<MainScreen> {
     NavBarItem(
       Assets.notifSelected,
       Assets.notifUnselected,
-      const NotificationScreen(),
+      MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => UserProfileBloc(
+              UserProfileRepository(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => UserVacancyBloc(
+              UserVacancyRepository(),
+            ),
+          ),
+        ],
+        child: const NotificationScreen(),
+      ),
       label: EnumScreenName.notifs,
     ),
     NavBarItem(

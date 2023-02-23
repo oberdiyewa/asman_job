@@ -30,7 +30,8 @@ class AppInterceptors extends Interceptor {
             throw ConflictException(requestOptions: err.requestOptions);
           case 500:
             throw InternalServerErrorException(
-                requestOptions: err.requestOptions,);
+              requestOptions: err.requestOptions,
+            );
         }
         break;
 
@@ -74,7 +75,7 @@ class InternalServerErrorException extends DioError {
   InternalServerErrorException({required super.requestOptions});
 
   @override
-  String toString() => 'Unknown error occured, please try again later';
+  String toString() => 'Serverside error occured, please try again later';
 }
 
 class NoInternetConnectionException extends DioError {
@@ -100,7 +101,6 @@ class UnAuthorizedException extends DioError {
 }
 
 class ServerMessageException implements Exception {
-
   ServerMessageException(this.message);
   final String message;
   @override

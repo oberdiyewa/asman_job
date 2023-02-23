@@ -1,12 +1,12 @@
 import 'package:asman_work/app/services/location_service.dart';
 import 'package:asman_work/app/services/shared_prefs_manager.dart';
-import 'package:asman_work/app/view/home/bloc/home_bloc.dart';
 import 'package:asman_work/app/view/main/bloc/locale_cubit/locale_cubit.dart';
 import 'package:asman_work/app/view/main/bloc/location_bloc/location_bloc.dart';
 import 'package:asman_work/app/view/main/bloc/user_bloc/user_bloc.dart';
 import 'package:asman_work/app/view/main/main_screen.dart';
-import 'package:asman_work/app/view/notification/bloc/bloc.dart';
-import 'package:asman_work/app/view/search/bloc/bloc.dart';
+import 'package:asman_work/app/view/screens/home/bloc/home_bloc.dart';
+import 'package:asman_work/app/view/screens/notification/bloc/bloc.dart';
+import 'package:asman_work/app/view/screens/search/bloc/bloc.dart';
 import 'package:asman_work/data/providers/logic/bottom_navigation_provider.dart';
 import 'package:asman_work/data/repository/repository.dart';
 import 'package:asman_work/l10n/l10n.dart';

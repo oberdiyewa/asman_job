@@ -23,17 +23,21 @@ class APIEndPoints {
   static const String kAddressSearch =
       '$kApiPath/services/address/search'; // Nominatim address lookup
 
-  // User's paths
+  // Catalogue
   static const String kUserCataloguePath =
       '$kApiPath/users/catalogue'; // Shows catalogue information
+
+  // User's Profile
   static const String kUserProfilePath = '$kApiPath/users/profile';
   static String kUserProfilePathWithId(int id, {bool needDetails = false}) =>
       needDetails
           ? '$kUserProfilePath/details/$id'
           : '$kUserProfilePath/$id'; // Fetch, delete or edit profile by id
   static const kUserProfileListPath = '$kUserProfilePath/list'; // Profile list
+
+  // Profile search
   static const kUserProfileSearchPath =
-      '$kUserProfilePath/search'; // Profile search
+      '$kApiPath/users/search/profile'; // Profile search
 
   // User address
   static String kUserProfileAddressPath(int profileId, {int? id}) => id == null
@@ -78,6 +82,8 @@ class APIEndPoints {
 
   // User state
   static const String kUsersStatePath = '$kApiPath/users/state';
+
+  // Vacancy
   static String kUsersVacancyPath(EnumUserVacancyPaths path, [int? id]) {
     switch (path) {
       case EnumUserVacancyPaths.address:
@@ -86,7 +92,7 @@ class APIEndPoints {
         return '$kApiPath/users/vacancy/${path.name}/$id';
       case EnumUserVacancyPaths.list:
       case EnumUserVacancyPaths.search:
-        return '$kApiPath/users/vacancy/${path.name}';
+        return '$kApiPath/users/${path.name}/vacancy';
       // ignore: no_default_cases
       default:
         return id == null

@@ -104,12 +104,12 @@ class UserCatalogue {
 }
 
 // Industry
-
+@immutable
 class CatalogueIndustry {
   final String title;
   final int code;
 
-  CatalogueIndustry(
+  const CatalogueIndustry(
     this.title,
     this.code,
   );
@@ -158,12 +158,12 @@ class CatalogueIndustry {
 }
 
 // Employment type
-
+@immutable
 class CatalogueEmploymentType {
   final String title;
   final String code;
 
-  CatalogueEmploymentType(
+  const CatalogueEmploymentType(
     this.title,
     this.code,
   );
@@ -213,12 +213,12 @@ class CatalogueEmploymentType {
 }
 
 // Language
-
+@immutable
 class CatalogueLanguage {
   final String title;
   final String code;
 
-  CatalogueLanguage(
+  const CatalogueLanguage(
     this.title,
     this.code,
   );
@@ -267,12 +267,12 @@ class CatalogueLanguage {
 }
 
 // Education type
-
+@immutable
 class CatalogueEducationType {
   final String title;
   final String code;
 
-  CatalogueEducationType(
+  const CatalogueEducationType(
     this.title,
     this.code,
   );
@@ -320,3 +320,6 @@ class CatalogueEducationType {
   @override
   int get hashCode => title.hashCode ^ code.hashCode;
 }
+
+
+class CatalogueVacancyAvatar{}

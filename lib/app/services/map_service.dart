@@ -1,5 +1,9 @@
+import 'package:asman_work/app/view/screens/details_screen.dart';
+import 'package:asman_work/app/view/screens/home/bloc/home_bloc.dart';
+import 'package:asman_work/data/model/model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/plugin_api.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -37,7 +41,7 @@ num calculateRealRadius({
 
 class MapService {
   MapService._(this.mapController);
-  
+
   static MapService get instance {
     _ensureInitialized();
     return _singleton!;
@@ -48,14 +52,47 @@ class MapService {
   final MapController mapController;
 
   // ignore: prefer_final_fields
-  MapMoveDelegate moveDelegate = (_, __, {id}) {};
+  MapMoveDelegate? moveDelegate = (_, __, {id}) {};
+
+  void onMarkerTapped(
+    BuildContext ctx, {
+    required PublicEntity entity,
+    required bool isVacancy,
+  }) {
+    Navigator.push(
+      ctx,
+      MaterialPageRoute<dynamic>(
+        builder: (_) => DetailsScreen(
+          publicEntity: entity,
+          isVacancy: isVacancy,
+        ),
+      ),
+    );
+    // if (fromSearch) {
+    //   ctx.read<BottomNavigationProvider>().changeScreen(EnumScreenName.home);
+    // }
+    // ctx.read<TabControllerCubit>().changeTab(
+    //       EnumDraggableSheetState.detail,
+    //       id: publicEntity.id,
+    //       isVacancy: isVacancy,
+    //     );
+    if (isVacancy) {
+      ctx
+          .read<PublicVacancyDetailBloc>()
+          .add(PublicVacancyDetailFetchEvent(entity.id));
+    } else {
+      ctx
+          .read<PublicProfileDetailBloc>()
+          .add(PublicProfileDetailFetchEvent(entity.id));
+    }
+  }
 
   static void _ensureInitialized() {
     _singleton ??= MapService._(MapController());
   }
 
   static void reinitialize() {
-    _singleton = null;
+    // _singleton = null;
     _ensureInitialized();
   }
 }
