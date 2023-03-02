@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-TextEditingController textController = TextEditingController();
+TextEditingController _textController = TextEditingController();
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});

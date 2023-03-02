@@ -15,7 +15,7 @@ class PublicProfileDetailBloc
 
   final PublicProfileRepository repository;
 
-  PublicProfileDetail? _detail;
+  Profile? _detail;
 
   Future<void> _onEntityDetailFetch(
     PublicProfileDetailFetchEvent event,

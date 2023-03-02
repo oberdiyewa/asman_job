@@ -22,20 +22,22 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
     Emitter<LocationState> emit,
   ) async {
     emit(LocationLoadInProceess());
-    final currentLocation = await locationService.myLocation;
-    print('my current location $currentLocation');
+    // final currentLocation = await locationService.myLocation;
+    // print('my current location $currentLocation');
     await _locationSubscription?.cancel();
-    _locationSubscription = Geolocator.getPositionStream().listen(
-      (Position position) => add(
+    _locationSubscription =
+        Geolocator.getPositionStream().listen((Position position) {
+      add(
         LocationChanged(position: position),
-      ),
-    );
+      );
+    });
   }
 
-  void _onChanged(
+  Future<void> _onChanged(
     LocationChanged event,
     Emitter<LocationState> emit,
-  ) {
+  ) async {
+    final currentLocation = await locationService.myLocation;
     emit(LocationLoadSuccess(position: event.position));
   }
 

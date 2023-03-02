@@ -16,6 +16,7 @@ enum EnumScreenName {
   home,
   search,
   notifs,
+  chat,
   profile,
 }
 
@@ -31,11 +32,12 @@ enum EnumPublicEntityApiFields {
   created_at,
   // belong to vacancy details
   description,
-  employment_type,
+  emp_type,
   contact_phone,
   address,
   salary_from,
   salary_to,
+  expiration_days,
 
   // belong to profile detail
   user_id,
@@ -51,8 +53,11 @@ enum EnumPublicEntityApiFields {
   about_me,
   avatar_number,
   status,
+  status_trans,
+  completeness,
   updated_at,
   deleted_at,
+  specializations,
   experience,
   education,
   language,
@@ -140,4 +145,14 @@ enum EnumUserVacancyPaths {
   list,
   none,
   search,
+}
+
+enum EnumUserCatalogueQueries {
+  industry,
+  employment_type,
+  language,
+  education_type,
+  specializations,
+  profile_avatars,
+  vacancy_avatars
 }

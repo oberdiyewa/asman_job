@@ -1,5 +1,6 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
+import 'package:asman_work/app/view/screens/notification/add_profile/add_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -89,7 +90,15 @@ class SliderWidget extends StatefulWidget {
 }
 
 class _SliderWidgetState extends State<SliderWidget> {
-  static double currentSliderValue = 1;
+  late double currentSliderValue;
+  late final ProfileValueNotifiers notifiers;
+
+  @override
+  void initState() {
+    notifiers = ProfileValueNotifiers.instance!;
+    currentSliderValue = notifiers.activeDaysValue.value.toDouble();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +118,7 @@ class _SliderWidgetState extends State<SliderWidget> {
                 const SliderThemeData(valueIndicatorColor: kcPrimaryColor),
           ),
           child: Slider(
-            value: currentSliderValue,
+            value: currentSliderValue as double,
             max: 60,
             divisions: 60,
             thumbColor: kcPrimaryColor,
@@ -119,6 +128,7 @@ class _SliderWidgetState extends State<SliderWidget> {
             onChanged: (double value) {
               setState(() {
                 currentSliderValue = value;
+                notifiers.activeDaysValue.value = value.toInt();
               });
             },
           ),
@@ -128,35 +138,37 @@ class _SliderWidgetState extends State<SliderWidget> {
   }
 }
 
-Future<void> dialog(
-  BuildContext context, {
-  required Widget button1,
-  required Widget contentText,
-  Widget? button2,
-}) async {
-  return showDialog(
-    context: context,
-    barrierDismissible: true,
-    builder: (BuildContext ctx) {
-      return AlertDialog(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-        content: SizedBox(
-          width: 160,
-          height: 80,
-          child: Center(child: contentText),
-        ),
-        actions: (button2 == null) ? [button1] : [button1, button2],
-        actionsAlignment: MainAxisAlignment.spaceEvenly,
-        actionsPadding: const EdgeInsets.only(bottom: 15),
-        elevation: 5,
-        scrollable: true,
-      );
-    },
-  );
+class JobAlertDialog extends StatelessWidget {
+  const JobAlertDialog({
+    required this.button1,
+    required this.contentText,
+    this.button2,
+    super.key,
+  });
+
+  final Widget button1;
+  final Widget contentText;
+  final Widget? button2;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      content: SizedBox(
+        width: 160,
+        height: 80,
+        child: Center(child: contentText),
+      ),
+      actions: (button2 == null) ? [button1] : [button1, button2!],
+      actionsAlignment: MainAxisAlignment.spaceEvenly,
+      actionsPadding: const EdgeInsets.only(bottom: 15),
+      elevation: 5,
+      scrollable: true,
+    );
+  }
 }
 
 class CustomInputField extends StatelessWidget {

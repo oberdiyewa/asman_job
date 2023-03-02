@@ -201,7 +201,7 @@ class _HomeCustomScrollViewState extends State<HomeCustomScrollView> {
                   return _sliverList(profiles, false);
                 } else {
                   return _loadingOrErrorSliver(
-                    state is PublicVacancyLoading
+                    state is PublicProfileLoading
                         ? const CircularProgressIndicator()
                         : Material(
                             clipBehavior: Clip.antiAlias,
@@ -210,8 +210,8 @@ class _HomeCustomScrollViewState extends State<HomeCustomScrollView> {
                             child: IconButton(
                               onPressed: () {
                                 context
-                                    .read<PublicVacancyBloc>()
-                                    .add(const PublicVacancyFetchEvent());
+                                    .read<PublicProfileBloc>()
+                                    .add(const PublicProfileFetchEvent());
                               },
                               icon: const Icon(Icons.refresh),
                             ),

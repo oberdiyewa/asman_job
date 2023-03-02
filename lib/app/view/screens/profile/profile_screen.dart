@@ -176,21 +176,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               splashColor:
                                   const Color.fromRGBO(239, 246, 255, 1),
                               onTap: () {
-                                dialog(context,
+                                showDialog<dynamic>(
+                                  context: context,
+                                  builder: (ctx) => JobAlertDialog(
                                     button1: const BoxButton.small(
-                                        title: 'Tassykla',),
+                                      title: 'Tassykla',
+                                    ),
                                     button2: BoxButton.small(
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                        },
-                                        title: 'Goýbolsun ',),
+                                      onTap: () {
+                                        Navigator.pop(ctx);
+                                      },
+                                      title: 'Goýbolsun ',
+                                    ),
                                     contentText: const Text(
                                       'Profilden çykmak üçin tassyklaň',
                                       style: TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w600,
                                       ),
-                                    ),);
+                                    ),
+                                  ),
+                                );
                               },
                               child: MenuItems(
                                 context: context,
@@ -256,49 +262,50 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return AddSection(
       customHeight: 105,
       widget: Container(
-          width: 322.w,
-          height: 80.h,
-          alignment: Alignment.center,
-          padding: REdgeInsets.symmetric(vertical: 11, horizontal: 15),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            color: kcLightestGreyColor,
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SvgPicture.asset(Assets.profileBig),
-              horizontalSpaceRegular,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BoxText.headline('Berdiyewa Oguljemal'),
-                  // verticalSpaceTiny,
-                  BoxText.subheading(
-                    'Ýetmeýän maglumatlaryňyzy dolduryň',
-                    color: kcHardGreyColor,
-                  ),
-                  verticalSpaceTiny,
-                  SizedBox(
-                    width: 174,
-                    height: 15,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: const SizedBox(
-                        height: 10,
-                        child: LinearProgressIndicator(
-                          value: 0.35, // percent filled
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(kcSecondaryColor),
-                          backgroundColor: Color.fromRGBO(62, 82, 188, 0.13),
-                        ),
+        width: 322.w,
+        height: 80.h,
+        alignment: Alignment.center,
+        padding: REdgeInsets.symmetric(vertical: 11, horizontal: 15),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: kcLightestGreyColor,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SvgPicture.asset(Assets.profileBig),
+            horizontalSpaceRegular,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                BoxText.headline('Berdiyewa Oguljemal'),
+                // verticalSpaceTiny,
+                BoxText.subheading(
+                  'Ýetmeýän maglumatlaryňyzy dolduryň',
+                  color: kcHardGreyColor,
+                ),
+                verticalSpaceTiny,
+                SizedBox(
+                  width: 174,
+                  height: 15,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: const SizedBox(
+                      height: 10,
+                      child: LinearProgressIndicator(
+                        value: 0.35, // percent filled
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(kcSecondaryColor),
+                        backgroundColor: Color.fromRGBO(62, 82, 188, 0.13),
                       ),
                     ),
-                  )
-                ],
-              )
-            ],
-          ),),
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }

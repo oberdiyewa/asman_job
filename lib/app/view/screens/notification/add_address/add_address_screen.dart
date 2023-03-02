@@ -1,16 +1,21 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
+import 'package:asman_work/app/services/location_service.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/main/bloc/user_bloc/user_bloc.dart';
 import 'package:asman_work/app/view/screens/notification/add_address/search_from_map.dart';
 import 'package:asman_work/app/view/screens/notification/add_profile/add_profile_screen.dart';
+import 'package:asman_work/app/view/screens/notification/bloc/address_reverse_bloc/address_reverse_bloc.dart';
 import 'package:asman_work/app/view/screens/notification/bloc/bloc.dart';
 import 'package:asman_work/app/view/screens/notification/section_add.dart';
+import 'package:asman_work/app/view/screens/profile/security/security_screen.dart';
 import 'package:asman_work/app/view/screens/search/search_screen.dart';
 import 'package:asman_work/components/ui/base_appbar.dart';
+import 'package:asman_work/data/repository/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:latlong2/latlong.dart';
 
 class AddAddressScreen extends StatefulWidget {
   const AddAddressScreen({super.key});
@@ -21,10 +26,11 @@ class AddAddressScreen extends StatefulWidget {
 
 class _AddAddressScreenState extends State<AddAddressScreen> {
   late final TextEditingController _textController;
+  final ProfileValueNotifiers notifiers = ProfileValueNotifiers.instance!;
 
   @override
   void initState() {
-    _textController = TextEditingController();
+    _textController = TextEditingController(text: notifiers.addressValue.value);
     super.initState();
   }
 
@@ -43,173 +49,185 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
     });
     return Scaffold(
       backgroundColor: const Color.fromRGBO(241, 241, 241, 1),
-      appBar: const JobBaseAppbar(title: 'Salgy goşmak'),
-      body: Column(
-        children: [
-          AddSection(
-            customHeight: 160,
-            widget: Column(
-              children: [
-                SizedBox(
-                  height: 50.h,
-                  width: 380.w,
-                  child: TextField(
-                    controller: _textController,
-                    onChanged: (value) {
-                      addressValue.value = value;
-                      if (_textController.text.length >= 3) {
-                        throttleOnClick();
-                      }
-                    },
-                    decoration: InputDecoration(
-                      // prefixIcon: Container(
-                      //   width: 17.w,
-                      //   height: 17.h,
-                      //   margin: EdgeInsets.only(
-                      //     right: 14.w,
-                      //     left: 12.w,
-                      //   ),
-                      //   child: SvgPicture.asset(
-                      //     Assets.searchNormalIcon,
-                      //   ),
-                      // ),
-                      // border: OutlineInputBorder(
-                      //   borderRadius: BorderRadius.circular(10).w,
-                      // ),
-                      hintText: 'Salgyny giriz...',
-                      suffixIcon: MaterialButton(
-                        minWidth: 0,
-                        padding: EdgeInsets.zero,
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        clipBehavior: Clip.antiAlias,
-                        onPressed: () {
-                          _textController.clear();
-                          context.read<ServiceAddressBloc>().add(
-                                ServiceAddressClearEvent(),
-                              );
-                          setState(() {});
-                        },
-                        shape: const CircleBorder(),
-                        child: SvgPicture.asset(Assets.clear),
-                      ),
-                      hintStyle: TextStyle(
-                        color: kcHardGreyColor,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400,
+      appBar: JobBaseAppbar(
+        title: 'Salgy goşmak',
+        onBack: () {
+          Navigator.pop(context);
+        },
+      ),
+      body: BlocProvider<AddressReverseBloc>(
+        create: (context) => AddressReverseBloc(ServicesRepository()),
+        child: Column(
+          children: [
+            AddSection(
+              customHeight: 160,
+              widget: Column(
+                children: [
+                  SizedBox(
+                    height: 50.h,
+                    width: 380.w,
+                    child: TextField(
+                      controller: _textController,
+                      onChanged: (value) {
+                        notifiers.addressValue.value = value;
+                        if (_textController.text.length >= 3) {
+                          throttleOnClick();
+                        }
+                      },
+                      decoration: InputDecoration(
+                        // prefixIcon: Container(
+                        //   width: 17.w,
+                        //   height: 17.h,
+                        //   margin: EdgeInsets.only(
+                        //     right: 14.w,
+                        //     left: 12.w,
+                        //   ),
+                        //   child: SvgPicture.asset(
+                        //     Assets.searchNormalIcon,
+                        //   ),
+                        // ),
+                        // border: OutlineInputBorder(
+                        //   borderRadius: BorderRadius.circular(10).w,
+                        // ),
+                        hintText: 'Salgyny giriz...',
+                        suffixIcon: MaterialButton(
+                          minWidth: 0,
+                          padding: EdgeInsets.zero,
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                          clipBehavior: Clip.antiAlias,
+                          onPressed: () {
+                            _textController.clear();
+                            context.read<ServiceAddressBloc>().add(
+                                  ServiceAddressClearEvent(),
+                                );
+                            setState(() {});
+                          },
+                          shape: const CircleBorder(),
+                          child: SvgPicture.asset(Assets.clear),
+                        ),
+                        hintStyle: TextStyle(
+                          color: kcHardGreyColor,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: REdgeInsets.only(top: 16),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push<dynamic>(
-                        context,
-                        MaterialPageRoute<dynamic>(
-                          builder: (context) => const SearchLocationFromMap(),
+
+                  // Choose from map
+                  Padding(
+                    padding: REdgeInsets.only(top: 16),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push<dynamic>(
+                          context,
+                          MaterialPageRoute<dynamic>(
+                            builder: (context) => const SearchLocationFromMap(),
+                          ),
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(Assets.map),
+                          horizontalSpaceMedium,
+                          const Text(
+                            'Kartada saýla',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  // Choose my position
+                  BlocConsumer<AddressReverseBloc, AddressReverseState>(
+                    listener: (context, state) {
+                      if (state is AddressReverseLoaded) {
+                        notifiers.addressValue.value =
+                            state.address.displayName;
+
+                        setState(() {
+                          _textController.text = state.address.displayName;
+                        });
+                      }
+                    },
+                    builder: (context, state) {
+                      return GestureDetector(
+                        onTap: () async {
+                          final position =
+                              LocationRepository.instance!.currentLocation;
+                          context.read<AddressReverseBloc>().add(
+                                AddressReverseFetchEvent(
+                                  LatLng(
+                                    // position!.latitude,
+                                    // position.longitude,
+                                    37.890875,
+                                    58.412073,
+                                  ),
+                                ),
+                              );
+                        },
+                        child: Container(
+                          padding: REdgeInsets.only(top: 16),
+                          color: Colors.transparent,
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(Assets.gps),
+                              horizontalSpaceMedium,
+                              const Text(
+                                'Meniň ýerleşýän ýerim',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       );
                     },
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(Assets.map),
-                        horizontalSpaceMedium,
-                        const Text(
-                          'Kartada saýla',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        )
-                      ],
-                    ),
                   ),
-                ),
-                BlocBuilder<UserBloc, UserState>(
-                  builder: (context, state) {
-                    final user = (state as UserFetchedSuccess).user;
-                    return GestureDetector(
-                      onTap: () {
-                        if (user.addressId == null || user.addressId!.isEmpty) {
-                          showDialog<dynamic>(
-                            context: context,
-                            builder: (ctx) => AlertDialog(
-                              title: const Text('Adres nabelli'),
-                              content: const Text(
-                                'Adres gosmagynyzy hayys edyaris!',
+                ],
+              ),
+            ),
+            BlocBuilder<ServiceAddressBloc, ServiceAddressState>(
+              builder: (context, state) {
+                if (state is ServiceAddressLoaded) {
+                  final addressList = state.addressList;
+                  return Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: ListView(
+                        shrinkWrap: true,
+                        children: List.generate(
+                          addressList.length,
+                          (index) {
+                            final addres = addressList[index].displayName;
+                            return ListTile(
+                              onTap: () {
+                                _textController.text = addres;
+                                notifiers.addressValue.value = addres;
+                              },
+                              title: Text(
+                                addressList[index].displayName,
                               ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(ctx);
-                                  },
-                                  child: const Text('Ok'),
-                                )
-                              ],
-                            ),
-                          );
-                        } else {
-                          addressValue.value = user.addressId.toString();
-                          Navigator.pop(context);
-                        }
-                      },
-                      child: Container(
-                        padding: REdgeInsets.only(top: 16),
-                        color: Colors.transparent,
-                        child: Row(
-                          children: [
-                            SvgPicture.asset(Assets.gps),
-                            horizontalSpaceMedium,
-                            const Text(
-                              'Meniň ýerleşýän ýerim',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            )
-                          ],
+                            );
+                          },
                         ),
                       ),
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-          BlocBuilder<ServiceAddressBloc, ServiceAddressState>(
-            builder: (context, state) {
-              if (state is ServiceAddressLoaded) {
-                final addressList = state.addressList;
-                return Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: ListView(
-                      shrinkWrap: true,
-                      children: List.generate(
-                        addressList.length,
-                        (index) {
-                          final addres = addressList[index].displayName;
-                          return ListTile(
-                            onTap: () {
-                              _textController.text = addres;
-                              addressValue.value = addres;
-                            },
-                            title: Text(
-                              addressList[index].displayName,
-                            ),
-                          );
-                        },
-                      ),
                     ),
-                  ),
-                );
-              } else {
-                return const SizedBox.shrink();
-              }
-            },
-          )
-        ],
+                  );
+                } else {
+                  return const SizedBox.shrink();
+                }
+              },
+            )
+          ],
+        ),
       ),
     );
   }

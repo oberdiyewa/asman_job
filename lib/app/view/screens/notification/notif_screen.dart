@@ -20,6 +20,10 @@ class _NotificationScreenState extends State<NotificationScreen>
   @override
   void initState() {
     super.initState();
+    final catalogueBlocState = context.read<UserCatalogueBloc>().state;
+    if (catalogueBlocState is! UserCatalogueLoaded) {
+      context.read<UserCatalogueBloc>().add(UserCatalogueFetchEvent());
+    }
     context.read<UserVacancyBloc>().add(UserVacancyFetchEvent());
     context.read<UserProfileBloc>().add(UserProfileFetchEvent());
     tabController = TabController(length: 2, vsync: this);

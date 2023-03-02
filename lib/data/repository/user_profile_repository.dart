@@ -14,15 +14,21 @@ class UserProfileRepository {
 
   int userProfileTotalPage = 0;
 
-  Future<List<PublicProfileDetail>> userProfileList({required int page}) async {
-    final profileList = await _provider.getUserProfileList(
-      page,
-    );
+  Future<List<Profile>> userProfileList() async {
+    final profileList = await _provider.getUserProfileList();
     return profileList;
   }
 
-  Future<UserProfile> userProfile(int id) async {
+  Future<Profile> userProfile(int id) async {
     return _provider.getUserProfile(id);
+  }
+
+  Future<bool> userProfileAdd(Map<String, dynamic> data) async {
+    return _provider.addUserProfile(data);
+  }
+
+  Future<bool> userProfileUpdate(Map<String, dynamic> data, int id) async {
+    return _provider.updateUserProfile(data, id);
   }
 
   Future<bool> userProfileDelete(int id) async {

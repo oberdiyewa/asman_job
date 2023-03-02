@@ -6,7 +6,7 @@ const token =
 class APIEndPoints {
   APIEndPoints._();
   // static const String baseUrlUser = 'https://apingweb.com';
-  static const String baseUrlPosts = 'hhttps://jsonplaceholder.typicode.com';
+  static const String baseUrlPosts = 'https://jsonplaceholder.typicode.com';
   static const String loginUserPost = '/api/login';
   static const String notesGet = '/posts';
 
@@ -90,9 +90,10 @@ class APIEndPoints {
         return '$kApiPath/users/vacancy/$id/${path.name}';
       case EnumUserVacancyPaths.details:
         return '$kApiPath/users/vacancy/${path.name}/$id';
-      case EnumUserVacancyPaths.list:
       case EnumUserVacancyPaths.search:
         return '$kApiPath/users/${path.name}/vacancy';
+      case EnumUserVacancyPaths.list:
+        return '$kApiPath/users/vacancy/list';
       // ignore: no_default_cases
       default:
         return id == null

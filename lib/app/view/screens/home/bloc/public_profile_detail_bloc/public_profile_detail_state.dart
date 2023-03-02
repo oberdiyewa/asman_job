@@ -14,7 +14,7 @@ class PublicProfileDetailLoading extends PublicProfileDetailState {}
 class PublicProfileDetailLoaded extends PublicProfileDetailState {
   const PublicProfileDetailLoaded(this.publicProfileDetail);
 
-  final PublicProfileDetail publicProfileDetail;
+  final Profile publicProfileDetail;
 
   @override
   List<Object> get props => [publicProfileDetail];

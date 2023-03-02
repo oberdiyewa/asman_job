@@ -1,12 +1,8 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
-import 'package:asman_work/app/services/location_service.dart';
 import 'package:asman_work/app/services/map_service.dart';
 import 'package:asman_work/app/view/helpers.dart';
-import 'package:asman_work/app/view/main/bloc/locale_cubit/locale_cubit.dart';
 import 'package:asman_work/app/view/main/bloc/location_bloc/location_bloc.dart';
 import 'package:asman_work/app/view/main/bloc/user_bloc/user_bloc.dart';
-import 'package:asman_work/l10n/l10n.dart';
-import 'package:asman_work/utils/globals/consts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -94,7 +90,7 @@ class FindMyLocationWidget extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               context.read<LocationBloc>().add(LocationStarted());
-              print('map move ${MapService.instance.moveDelegate.hashCode}');
+              print('map move ${state.position.latitude}');
               MapService.instance.moveDelegate!(
                 LatLng(state.position.latitude, state.position.longitude),
                 13,

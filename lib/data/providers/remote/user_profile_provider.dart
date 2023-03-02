@@ -7,7 +7,7 @@ import 'package:asman_work/utils/globals/end_points.dart';
 class UserProfileProvider with IProviderMixin {
   final DioClient _dio = DioClient(baseUrl: APIEndPoints.kBaseUrl);
 
-  Future<List<PublicProfileDetail>> getUserProfileList(int page) async {
+  Future<List<Profile>> getUserProfileList() async {
     final response = await _dio.get(
       APIEndPoints.kUserProfileListPath,
       headers: headers,
@@ -28,12 +28,10 @@ class UserProfileProvider with IProviderMixin {
 
     final rawProfileList =
         List<Map<String, dynamic>>.from(responseBody['data'] as List);
-    return rawProfileList
-        .map<PublicProfileDetail>(PublicProfileDetail.fromMap)
-        .toList();
+    return rawProfileList.map<Profile>(Profile.fromMap).toList();
   }
 
-  Future<UserProfile> getUserProfile(int id) async {
+  Future<Profile> getUserProfile(int id) async {
     final response = await _dio.get(
       APIEndPoints.kUserProfilePathWithId(id),
       headers: headers,
@@ -44,18 +42,35 @@ class UserProfileProvider with IProviderMixin {
     checkError(responseBody);
 
     final rawUserProfile = responseBody['data'] as Map<String, dynamic>;
-    return UserProfile.fromMap(rawUserProfile);
+    return Profile.fromMap(rawUserProfile);
   }
 
-  Future<dynamic> addUserProfile() async {
+  Future<bool> addUserProfile(Map<String, dynamic> data) async {
     final response = await _dio.post(
       endPoint: APIEndPoints.kUserProfilePath,
       headers: headers,
+      data: data,
     );
     final responseBody = response.data as Map<String, dynamic>;
 
     // Method from mixin; checks if server gives error message
     checkError(responseBody);
+
+    return responseBody['success'] as bool;
+  }
+
+  Future<bool> updateUserProfile(Map<String, dynamic> data, int id) async {
+    final response = await _dio.patch(
+      endPoint: APIEndPoints.kUserProfilePathWithId(id),
+      headers: headers,
+      data: data,
+    );
+    final responseBody = response.data as Map<String, dynamic>;
+
+    // Method from mixin; checks if server gives error message
+    checkError(responseBody);
+
+    return responseBody['success'] as bool;
   }
 
   Future<bool> deleteUserProfile(int id) async {

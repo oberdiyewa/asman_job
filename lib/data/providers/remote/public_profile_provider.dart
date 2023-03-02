@@ -46,7 +46,7 @@ class PublicProfileProvider with IProviderMixin {
     return rawProfileList.map<PublicEntity>(PublicEntity.fromMap).toList();
   }
 
-  Future<PublicProfileDetail> getProfileDetail(
+  Future<Profile> getProfileDetail(
     LatLng loc,
     int id,
   ) async {
@@ -65,6 +65,6 @@ class PublicProfileProvider with IProviderMixin {
     checkError(responseBody);
 
     final rawProfileDetail = responseBody['data'] as Map<String, dynamic>;
-    return PublicProfileDetail.fromMap(rawProfileDetail);
+    return Profile.fromMap(rawProfileDetail);
   }
 }

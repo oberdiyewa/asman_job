@@ -3,7 +3,13 @@ import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 
 class LocationRepository {
-  LocationRepository() : super();
+
+  factory LocationRepository(){
+    return instance ??= LocationRepository._();
+  }
+  LocationRepository._() : super();
+
+  static LocationRepository? instance;
 
   Future<Position?> get myLocation => _requestLocation();
   Position? currentLocation;

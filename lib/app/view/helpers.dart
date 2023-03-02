@@ -60,4 +60,3 @@ abstract class Assets {
 
   static const languagePath = 'assets/languages';
 }
-

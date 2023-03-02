@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-TextEditingController textController = TextEditingController();
+// TextEditingController textController = TextEditingController();
 
 class SecurityScreen extends StatefulWidget {
   const SecurityScreen({super.key});

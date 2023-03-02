@@ -1,3 +1,4 @@
+import 'package:asman_work/data/model/model.dart';
 import 'package:asman_work/data/model/user_catalogue/user_catalogue.dart';
 import 'package:asman_work/data/repository/repository.dart';
 import 'package:equatable/equatable.dart';
@@ -21,10 +22,11 @@ class UserCatalogueBloc extends Bloc<UserCatalogueEvent, UserCatalogueState> {
       final userCatalogue = await repository.userCatalogue();
       emit(
         UserCatalogueLoaded(
-          educationTypes: userCatalogue.educationType ?? [],
-          employmentTypes: userCatalogue.employmentType ?? [],
-          languages: userCatalogue.language ?? [],
-          industries: userCatalogue.industry ?? [],
+          userCatalogue: userCatalogue,
+          // educationTypes: userCatalogue.educationType ?? [],
+          // employmentTypes: userCatalogue.employmentType ?? [],
+          // languages: userCatalogue.language ?? [],
+          // industries: userCatalogue.industry ?? [],
         ),
       );
     } catch (e) {

@@ -83,7 +83,7 @@ class PublicVacancyDetail{
       EnumPublicEntityApiFields.point.name: [point.latitude, point.longitude],
       EnumPublicEntityApiFields.created_at.name: createdAt,
       EnumPublicEntityApiFields.description.name: description,
-      EnumPublicEntityApiFields.employment_type.name: employmentType,
+      EnumPublicEntityApiFields.emp_type.name: employmentType,
       EnumPublicEntityApiFields.contact_phone.name: contactPhone,
       EnumPublicEntityApiFields.address.name: address,
       EnumPublicEntityApiFields.salary_from.name: salaryFrom,
@@ -106,8 +106,8 @@ class PublicVacancyDetail{
       createdAt: map[EnumPublicEntityApiFields.created_at.name] as String,
       description: map[EnumPublicEntityApiFields.description.name] as String,
       employmentType:
-          map[EnumPublicEntityApiFields.employment_type.name] != null
-              ? map[EnumPublicEntityApiFields.employment_type.name] as String
+          map[EnumPublicEntityApiFields.emp_type.name] != null
+              ? map[EnumPublicEntityApiFields.emp_type.name] as String
               : null,
       contactPhone: List<String>.from(
         map[EnumPublicEntityApiFields.contact_phone.name] as List,

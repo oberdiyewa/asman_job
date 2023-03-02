@@ -94,9 +94,7 @@ class App extends StatelessWidget {
           lazy: false,
           create: (context) => UserCatalogueBloc(
             UserCatalogueRepository(),
-          )..add(
-              UserCatalogueFetchEvent(),
-            ),
+          ),
         ),
         BlocProvider<UserBloc>(
           lazy: false,
@@ -105,6 +103,18 @@ class App extends StatelessWidget {
           )..add(
               UserFetchEvent(isUserRegistred: isUserRegistred),
             ),
+        ),
+        BlocProvider<UserProfileBloc>(
+          lazy: false,
+          create: (context) => UserProfileBloc(
+            UserProfileRepository(),
+          ),
+        ),
+        BlocProvider<UserVacancyBloc>(
+          lazy: false,
+          create: (context) => UserVacancyBloc(
+            UserVacancyRepository(),
+          ),
         ),
       ],
       child: const AppView(),

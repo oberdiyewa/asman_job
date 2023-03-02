@@ -1,10 +1,18 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:flutter/widgets.dart';
+import 'package:latlong2/latlong.dart';
+
+@immutable
 class ServiceAddress {
- final String displayName;
-  ServiceAddress({
+  final String displayName;
+  final String? title;
+  final LatLng? point;
+  const ServiceAddress({
     required this.displayName,
+    this.title,
+    this.point,
   });
   //   "road": "Esgerler (Rostow, 2029) köçesi",
   //  ? "neighbourhood": "30 Etrap",
@@ -16,15 +24,26 @@ class ServiceAddress {
 
   ServiceAddress copyWith({
     String? displayName,
+    String? title,
+    LatLng? point,
   }) {
     return ServiceAddress(
       displayName: displayName ?? this.displayName,
+      title: title ?? this.title,
+      point: point ?? this.point,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'display_name': displayName,
+      'address': displayName,
+      'title': title,
+      'point': [
+        {
+          'lat': point!.latitude,
+          'lng': point!.longitude,
+        }
+      ]
     };
   }
 
@@ -36,7 +55,8 @@ class ServiceAddress {
 
   String toJson() => json.encode(toMap());
 
-  factory ServiceAddress.fromJson(String source) => ServiceAddress.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ServiceAddress.fromJson(String source) =>
+      ServiceAddress.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'ServiceAddress(displayName: $displayName)';
@@ -44,9 +64,8 @@ class ServiceAddress {
   @override
   bool operator ==(covariant ServiceAddress other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.displayName == displayName;
+
+    return other.displayName == displayName;
   }
 
   @override

@@ -28,7 +28,7 @@ class PublicProfileRepository {
     );
   }
 
-  Future<PublicProfileDetail> profileDetail(int id) async {
+  Future<Profile> profileDetail(int id) async {
     return _provider.getProfileDetail(
       LatLng(37.560006, 58.456789),
       id,

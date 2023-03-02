@@ -8,7 +8,6 @@ abstract class ServiceAddressEvent extends Equatable {
 }
 
 class ServiceAddressFetchEvent extends ServiceAddressEvent {
-
   const ServiceAddressFetchEvent(this.street);
   final String street;
 

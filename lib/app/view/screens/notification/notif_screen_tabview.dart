@@ -1,14 +1,11 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/main/bloc/user_bloc/user_bloc.dart';
-import 'package:asman_work/app/view/screens/home/components/draggable_scrollable_sheet/draggable_entity_detail.dart';
 import 'package:asman_work/app/view/screens/notification/add_profile/add_profile_screen.dart';
 import 'package:asman_work/app/view/screens/notification/add_vacancy/add_vacancy_screen.dart';
 import 'package:asman_work/app/view/screens/notification/bloc/bloc.dart';
 import 'package:asman_work/app/view/screens/notification/notif_widgets.dart';
 import 'package:asman_work/components/ui/refresh_button.dart';
 import 'package:asman_work/data/model/model.dart';
-import 'package:asman_work/data/providers/logic/bottom_navigation_provider.dart';
-import 'package:asman_work/utils/globals/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,7 +44,7 @@ class NotifScreenTabView extends StatelessWidget {
                   );
                 } else {
                   return UserAdvertisementsList(
-                    key: const Key('user profile list'),
+                    isVacancy: false,
                     items: profileList,
                     fetchMore: () {
                       context.read<UserProfileBloc>().add(
@@ -85,7 +82,7 @@ class NotifScreenTabView extends StatelessWidget {
                   );
                 } else {
                   return UserAdvertisementsList(
-                    key: const Key('user vacancy list'),
+                    isVacancy: true,
                     items: vacancyList,
                     fetchMore: () {
                       context.read<UserVacancyBloc>().add(
@@ -126,11 +123,13 @@ class UserAdvertisementsList extends StatefulWidget {
   const UserAdvertisementsList({
     required this.fetchMore,
     required this.items,
+    required this.isVacancy,
     super.key,
   });
 
   final VoidCallback fetchMore;
   final List<dynamic> items;
+  final bool isVacancy;
 
   @override
   State<UserAdvertisementsList> createState() => _UserAdvertisementsListState();
@@ -181,41 +180,61 @@ class _UserAdvertisementsListState extends State<UserAdvertisementsList> {
               sliver: SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
-                    final currentVacancy = widget.items[index];
+                    final currentItem = widget.items[index];
                     return ListTile(
-                      title: Text((currentVacancy.title) as String),
-                      trailing: IconButton(
-                        onPressed: () {
-                          showDialog<dynamic>(
-                            context: context,
-                            builder: (ctx) {
-                              return AlertDialog(
-                                title: const Text('Uns berin!'),
-                                content: const Text(
-                                    'Hakykatdan hem su bildirisi pozmak isleyarsinizmi?',),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(ctx);
-                                    },
-                                    child: const Text('Yok'),
+                      title: Text((currentItem.title) as String),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute<dynamic>(
+                                  builder: (context) => AddProfileScreen(
+                                    profile: currentItem as Profile,
                                   ),
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(ctx);
-                                        context.read<UserProfileBloc>().add(
-                                              UserProfileDeleteEvent(
-                                                currentVacancy.id as int,
-                                              ),
-                                            );
-                                      },
-                                      child: const Text('Hawa'),)
-                                ],
+                                ),
                               );
                             },
-                          );
-                        },
-                        icon: const Icon(Icons.remove_circle_outline),
+                            icon: const Icon(Icons.edit),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              showDialog<dynamic>(
+                                context: context,
+                                builder: (ctx) {
+                                  return AlertDialog(
+                                    title: const Text('Uns berin!'),
+                                    content: const Text(
+                                      'Hakykatdan hem su bildirisi pozmak isleyarsinizmi?',
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(ctx);
+                                        },
+                                        child: const Text('Yok'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(ctx);
+                                          context.read<UserProfileBloc>().add(
+                                                UserProfileDeleteEvent(
+                                                  currentItem.id as int,
+                                                ),
+                                              );
+                                        },
+                                        child: const Text('Hawa'),
+                                      )
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                            icon: const Icon(Icons.remove_circle_outline),
+                          ),
+                        ],
                       ),
                     );
                   },
@@ -241,41 +260,40 @@ class _UserAdvertisementsListState extends State<UserAdvertisementsList> {
                   title: 'Bildiriş ber',
                   onTap: () {
                     debugPrint('bildirish ber');
-                    if (user != null) {
-                      if (user!.email == null) {
-                        showDialog<dynamic>(
-                          context: context,
-                          builder: (ctx) {
-                            return AlertDialog(
-                              content: const Text(
-                                'Ilki bilen profilinize degisli kabir maglumatlary doldurmagynyzy hayys edyaris.',
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(ctx);
-                                    context
-                                        .read<BottomNavigationProvider>()
-                                        .changeScreen(EnumScreenName.profile);
-                                  },
-                                  child: const Text('Ok'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }
-                    } else {
-                      Navigator.push<dynamic>(
-                        context,
-                        MaterialPageRoute<dynamic>(
-                          builder: (context) =>
-                              widget.key == const Key('user profile list')
-                                  ? const AddProfileScreen()
-                                  : const AddVacancyScreen(),
-                        ),
-                      );
-                    }
+                    // if (user != null) {
+                    // if (user!.email == null) {
+                    //   showDialog<dynamic>(
+                    //     context: context,
+                    //     builder: (ctx) {
+                    //       return AlertDialog(
+                    //         content: const Text(
+                    //           'Ilki bilen profilinize degisli kabir maglumatlary doldurmagynyzy hayys edyaris.',
+                    //         ),
+                    //         actions: [
+                    //           TextButton(
+                    //             onPressed: () {
+                    //               Navigator.pop(ctx);
+                    //               context
+                    //                   .read<BottomNavigationProvider>()
+                    //                   .changeScreen(EnumScreenName.profile);
+                    //             },
+                    //             child: const Text('Ok'),
+                    //           ),
+                    //         ],
+                    //       );
+                    //     },
+                    //   );
+                    // }
+                    // } else {
+                    Navigator.push<dynamic>(
+                      context,
+                      MaterialPageRoute<dynamic>(
+                        builder: (context) => !widget.isVacancy
+                            ? const AddProfileScreen()
+                            : const AddVacancyScreen(),
+                      ),
+                    );
+                    // }
                   },
                 ),
               ),

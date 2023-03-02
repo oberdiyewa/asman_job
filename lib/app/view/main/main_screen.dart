@@ -1,6 +1,7 @@
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/main/bottom_navbar.dart';
 import 'package:asman_work/app/view/screens//profile/profile_screen.dart';
+import 'package:asman_work/app/view/screens/chat/chat_screen.dart';
 import 'package:asman_work/app/view/screens/home/bloc/tab_controller_cubit/tab_controller_cubit.dart';
 import 'package:asman_work/app/view/screens/home/home.dart';
 import 'package:asman_work/app/view/screens/notification/bloc/bloc.dart';
@@ -30,8 +31,10 @@ class _MainScreenState extends State<MainScreen> {
         return 1;
       case EnumScreenName.notifs:
         return 2;
-      case EnumScreenName.profile:
+      case EnumScreenName.chat:
         return 3;
+      case EnumScreenName.profile:
+        return 4;
     }
   }
 
@@ -41,86 +44,72 @@ class _MainScreenState extends State<MainScreen> {
       Assets.homeUnselected,
       const Home(),
       label: EnumScreenName.home,
+      title: 'Esasy',
     ),
     NavBarItem(
       Assets.searchSelected,
       Assets.searchUnselected,
       const SearchScreen(),
       label: EnumScreenName.search,
+      title: 'Gozleg',
     ),
     NavBarItem(
       Assets.notifSelected,
       Assets.notifUnselected,
-      MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => UserProfileBloc(
-              UserProfileRepository(),
-            ),
-          ),
-          BlocProvider(
-            create: (context) => UserVacancyBloc(
-              UserVacancyRepository(),
-            ),
-          ),
-        ],
-        child: const NotificationScreen(),
-      ),
+      const NotificationScreen(),
       label: EnumScreenName.notifs,
+      title: 'Bildiris ber',
+    ),
+    NavBarItem(
+      Assets.notifSelected,
+      Assets.notifUnselected,
+      const ChatScreen(),
+      label: EnumScreenName.chat,
+      title: 'Chat',
     ),
     NavBarItem(
       Assets.profileSelected,
       Assets.profileUnselected,
       const ProfileScreen(),
       label: EnumScreenName.profile,
+      title: 'Profil',
     ),
   ];
 
-  // List<Widget> bodies = const [
-  //   Home(),
-  //   SearchScreen(),
-  //   AddNotifScreen(),
-  //   ProfileScreen()
-  // ];
-
   @override
   Widget build(BuildContext context) {
-    final bottomData =
-        BlocProvider.of<BottomNavigationProvider>(context, listen: true);
-
     final bottomPadding = MediaQuery.of(context).viewInsets.bottom;
     final keyboardIsOpened = bottomPadding != 0.0;
     return Scaffold(
       extendBody: true,
       backgroundColor: Colors.white,
       // resizeToAvoidBottomInset: false,
-      body: SizedBox(
-        width: 390.w,
-        height: 844.h,
-        child: items[getBodyIndex(bottomData.state)].view,
+      body: BlocBuilder<BottomNavigationProvider, EnumScreenName>(
+        builder: (context, state) {
+          return SizedBox(
+            width: 390.w,
+            height: 844.h,
+            child: items[getBodyIndex(state)].view,
+          );
+        },
       ),
       bottomNavigationBar: BlocBuilder<TabControllerCubit, TabControllerState>(
         builder: (context, state) {
-          if ((state as TabControllerSelected).draggableSheetState ==
-              EnumDraggableSheetState.detail) {
-            return const SizedBox.shrink();
-          } else {
-            return CustomBottomBar(
-              items: items,
-            );
-          }
+          return CustomBottomBar(
+            items: items,
+          );
         },
       ),
-      floatingActionButton: BlocBuilder<TabControllerCubit, TabControllerState>(
-        builder: (context, state) {
-          if ((state as TabControllerSelected).draggableSheetState ==
-                  EnumDraggableSheetState.detail ||
-              keyboardIsOpened) {
-            return const SizedBox.shrink();
-          } else {
-            return customFloatingActionButton();
-          }
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        onPressed: () {
+          context
+              .read<BottomNavigationProvider>()
+              .changeScreen(EnumScreenName.notifs);
         },
+        child: SvgPicture.asset(
+          Assets.notifSelected,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

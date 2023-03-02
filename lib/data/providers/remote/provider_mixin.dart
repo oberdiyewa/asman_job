@@ -10,7 +10,7 @@ mixin IProviderMixin {
   };
 
   void checkError(Map<String, dynamic> responseBody) {
-    if (responseBody.containsKey('error')) {
+    if (responseBody.containsKey('errors')) {
       throw ServerMessageException(responseBody['message'] as String);
     }
   }

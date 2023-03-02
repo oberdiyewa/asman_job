@@ -5,28 +5,36 @@ import 'package:flutter/foundation.dart';
 
 @immutable
 class UserCatalogue {
-  final List<CatalogueIndustry>? industry;
-  final List<CatalogueEmploymentType>? employmentType;
-  final List<CatalogueLanguage>? language;
-  final List<CatalogueEducationType>? educationType;
+  final List<CatalogueType>? industry;
+  final List<CatalogueType>? employmentType;
+  final List<CatalogueType>? language;
+  final List<CatalogueType>? educationType;
+  final List<CatalogueAvatars>? profileAvatars;
+  final List<CatalogueAvatars>? vacancyAvatars;
   const UserCatalogue({
     this.industry,
     this.employmentType,
     this.language,
     this.educationType,
+    this.profileAvatars,
+    this.vacancyAvatars,
   });
 
   UserCatalogue copyWith({
-    List<CatalogueIndustry>? industry,
-    List<CatalogueEmploymentType>? employmentType,
-    List<CatalogueLanguage>? language,
-    List<CatalogueEducationType>? educationType,
+    List<CatalogueType>? industry,
+    List<CatalogueType>? employmentType,
+    List<CatalogueType>? language,
+    List<CatalogueType>? educationType,
+    List<CatalogueAvatars>? profileAvatars,
+    List<CatalogueAvatars>? vacancyAvatars,
   }) {
     return UserCatalogue(
       industry: industry ?? this.industry,
       employmentType: employmentType ?? this.employmentType,
       language: language ?? this.language,
       educationType: educationType ?? this.educationType,
+      profileAvatars: profileAvatars ?? this.profileAvatars,
+      vacancyAvatars: vacancyAvatars ?? this.vacancyAvatars,
     );
   }
 
@@ -36,38 +44,52 @@ class UserCatalogue {
       'employment_type': employmentType?.map((x) => x.toMap()).toList() ?? [],
       'language': language?.map((x) => x.toMap()).toList() ?? [],
       'education_type': educationType?.map((x) => x.toMap()).toList() ?? [],
+      'profile_avatars': profileAvatars?.map((x) => x.toMap()).toList() ?? [],
+      'vacancy_avatars': vacancyAvatars?.map((x) => x.toMap()).toList() ?? [],
     };
   }
 
   factory UserCatalogue.fromMap(Map<String, dynamic> map) {
     return UserCatalogue(
       industry: map['industry'] != null
-          ? List<CatalogueIndustry>.from(
-              (map['industry'] as List).map<CatalogueIndustry?>(
-                (x) => CatalogueIndustry.fromMap(x as Map<String, dynamic>),
+          ? List<CatalogueType>.from(
+              (map['industry'] as List).map<CatalogueType?>(
+                (x) => CatalogueType.fromMap(x as Map<String, dynamic>),
               ),
             )
           : null,
       employmentType: map['employment_type'] != null
-          ? List<CatalogueEmploymentType>.from(
-              (map['employment_type'] as List).map<CatalogueEmploymentType?>(
-                (x) =>
-                    CatalogueEmploymentType.fromMap(x as Map<String, dynamic>),
+          ? List<CatalogueType>.from(
+              (map['employment_type'] as List).map<CatalogueType?>(
+                (x) => CatalogueType.fromMap(x as Map<String, dynamic>),
               ),
             )
           : null,
       language: map['language'] != null
-          ? List<CatalogueLanguage>.from(
-              (map['language'] as List).map<CatalogueLanguage?>(
-                (x) => CatalogueLanguage.fromMap(x as Map<String, dynamic>),
+          ? List<CatalogueType>.from(
+              (map['language'] as List).map<CatalogueType?>(
+                (x) => CatalogueType.fromMap(x as Map<String, dynamic>),
               ),
             )
           : null,
       educationType: map['education_type'] != null
-          ? List<CatalogueEducationType>.from(
-              (map['education_type'] as List).map<CatalogueEducationType?>(
-                (x) =>
-                    CatalogueEducationType.fromMap(x as Map<String, dynamic>),
+          ? List<CatalogueType>.from(
+              (map['education_type'] as List).map<CatalogueType?>(
+                (x) => CatalogueType.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
+      profileAvatars: map['profile_avatars'] != null
+          ? List<CatalogueAvatars>.from(
+              (map['profile_avatars'] as List).map<CatalogueAvatars?>(
+                (x) => CatalogueAvatars.fromMap(x as Map<String, dynamic>),
+              ),
+            )
+          : null,
+      vacancyAvatars: map['vacancy_avatars'] != null
+          ? List<CatalogueAvatars>.from(
+              (map['vacancy_avatars'] as List).map<CatalogueAvatars?>(
+                (x) => CatalogueAvatars.fromMap(x as Map<String, dynamic>),
               ),
             )
           : null,
@@ -81,7 +103,16 @@ class UserCatalogue {
 
   @override
   String toString() {
-    return 'UserCatalogue(industry: $industry, employmentType: $employmentType, language: $language, educationType: $educationType)';
+    return '''
+    UserCatalogue(
+      industry: $industry, 
+      employmentType: $employmentType, 
+      language: $language, 
+      educationType: $educationType, 
+      profileAvatars; $profileAvatars, 
+      vacancyAvatars: $vacancyAvatars,
+      )
+    ''';
   }
 
   @override
@@ -91,7 +122,9 @@ class UserCatalogue {
     return listEquals(other.industry, industry) &&
         listEquals(other.employmentType, employmentType) &&
         listEquals(other.language, language) &&
-        listEquals(other.educationType, educationType);
+        listEquals(other.educationType, educationType) &&
+        listEquals(other.profileAvatars, profileAvatars) &&
+        listEquals(vacancyAvatars, vacancyAvatars);
   }
 
   @override
@@ -99,26 +132,28 @@ class UserCatalogue {
     return industry.hashCode ^
         employmentType.hashCode ^
         language.hashCode ^
-        educationType.hashCode;
+        educationType.hashCode ^
+        profileAvatars.hashCode ^
+        vacancyAvatars.hashCode;
   }
 }
 
 // Industry
 @immutable
-class CatalogueIndustry {
+class CatalogueType {
   final String title;
-  final int code;
+  final String code;
 
-  const CatalogueIndustry(
+  const CatalogueType(
     this.title,
     this.code,
   );
 
-  CatalogueIndustry copyWith({
+  CatalogueType copyWith({
     String? title,
-    int? code,
+    String? code,
   }) {
-    return CatalogueIndustry(
+    return CatalogueType(
       title ?? this.title,
       code ?? this.code,
     );
@@ -131,23 +166,23 @@ class CatalogueIndustry {
     };
   }
 
-  factory CatalogueIndustry.fromMap(Map<String, dynamic> map) {
-    return CatalogueIndustry(
+  factory CatalogueType.fromMap(Map<String, dynamic> map) {
+    return CatalogueType(
       map['title'] as String,
-      map['code'] as int,
+      map['code'] as String,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory CatalogueIndustry.fromJson(String source) =>
-      CatalogueIndustry.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory CatalogueType.fromJson(String source) =>
+      CatalogueType.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'CatalogueIndustry(title: $title, code: $code)';
 
   @override
-  bool operator ==(covariant CatalogueIndustry other) {
+  bool operator ==(covariant CatalogueType other) {
     if (identical(this, other)) return true;
 
     return other.title == title && other.code == code;
@@ -157,169 +192,55 @@ class CatalogueIndustry {
   int get hashCode => title.hashCode ^ code.hashCode;
 }
 
-// Employment type
 @immutable
-class CatalogueEmploymentType {
-  final String title;
-  final String code;
+class CatalogueAvatars {
+  final int number;
+  final String avatarUrl;
+  const CatalogueAvatars({
+    required this.number,
+    required this.avatarUrl,
+  });
 
-  const CatalogueEmploymentType(
-    this.title,
-    this.code,
-  );
-
-  CatalogueEmploymentType copyWith({
-    String? title,
-    String? code,
+  CatalogueAvatars copyWith({
+    int? number,
+    String? avatarUrl,
   }) {
-    return CatalogueEmploymentType(
-      title ?? this.title,
-      code ?? this.code,
+    return CatalogueAvatars(
+      number: number ?? this.number,
+      avatarUrl: avatarUrl ?? this.avatarUrl,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'title': title,
-      'code': code,
+      'number': number,
+      'avatar_url': avatarUrl,
     };
   }
 
-  factory CatalogueEmploymentType.fromMap(Map<String, dynamic> map) {
-    return CatalogueEmploymentType(
-      map['title'] as String,
-      map['code'] as String,
+  factory CatalogueAvatars.fromMap(Map<String, dynamic> map) {
+    return CatalogueAvatars(
+      number: map['number'] as int,
+      avatarUrl: map['avatar_url'] as String,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory CatalogueEmploymentType.fromJson(String source) =>
-      CatalogueEmploymentType.fromMap(
-          json.decode(source) as Map<String, dynamic>);
+  factory CatalogueAvatars.fromJson(String source) =>
+      CatalogueAvatars.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'CatalogueEmploymentType(title: $title, code: $code)';
+  String toString() =>
+      'CatalogueAvatars(number: $number, avatarUrl: $avatarUrl)';
 
   @override
-  bool operator ==(covariant CatalogueEmploymentType other) {
+  bool operator ==(covariant CatalogueAvatars other) {
     if (identical(this, other)) return true;
 
-    return other.title == title && other.code == code;
+    return other.number == number && other.avatarUrl == avatarUrl;
   }
 
   @override
-  int get hashCode => title.hashCode ^ code.hashCode;
+  int get hashCode => number.hashCode ^ avatarUrl.hashCode;
 }
-
-// Language
-@immutable
-class CatalogueLanguage {
-  final String title;
-  final String code;
-
-  const CatalogueLanguage(
-    this.title,
-    this.code,
-  );
-
-  CatalogueLanguage copyWith({
-    String? title,
-    String? code,
-  }) {
-    return CatalogueLanguage(
-      title ?? this.title,
-      code ?? this.code,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'title': title,
-      'code': code,
-    };
-  }
-
-  factory CatalogueLanguage.fromMap(Map<String, dynamic> map) {
-    return CatalogueLanguage(
-      map['title'] as String,
-      map['code'] as String,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory CatalogueLanguage.fromJson(String source) =>
-      CatalogueLanguage.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() => 'CatalogueLanguage(title: $title, code: $code)';
-
-  @override
-  bool operator ==(covariant CatalogueLanguage other) {
-    if (identical(this, other)) return true;
-
-    return other.title == title && other.code == code;
-  }
-
-  @override
-  int get hashCode => title.hashCode ^ code.hashCode;
-}
-
-// Education type
-@immutable
-class CatalogueEducationType {
-  final String title;
-  final String code;
-
-  const CatalogueEducationType(
-    this.title,
-    this.code,
-  );
-
-  CatalogueEducationType copyWith({
-    String? title,
-    String? code,
-  }) {
-    return CatalogueEducationType(
-      title ?? this.title,
-      code ?? this.code,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'title': title,
-      'code': code,
-    };
-  }
-
-  factory CatalogueEducationType.fromMap(Map<String, dynamic> map) {
-    return CatalogueEducationType(
-      map['title'] as String,
-      map['code'] as String,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory CatalogueEducationType.fromJson(String source) =>
-      CatalogueEducationType.fromMap(
-          json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() => 'CatalogueEducationType(title: $title, code: $code)';
-
-  @override
-  bool operator ==(covariant CatalogueEducationType other) {
-    if (identical(this, other)) return true;
-
-    return other.title == title && other.code == code;
-  }
-
-  @override
-  int get hashCode => title.hashCode ^ code.hashCode;
-}
-
-
-class CatalogueVacancyAvatar{}

@@ -14,15 +14,15 @@ class UserProfileLoading extends UserProfileState {}
 class UserProfileLoaded extends UserProfileState {
   const UserProfileLoaded({
     required this.profiles,
-    required this.moreProfiles,
   });
 
-  final List<PublicProfileDetail> profiles;
-  final List<PublicProfileDetail> moreProfiles;
+  final List<Profile> profiles;
 
   @override
-  List<Object?> get props => [profiles, moreProfiles];
+  List<Object?> get props => [profiles];
 }
+
+class UserProfileAddSuccess extends UserProfileState {}
 
 class UserProfileFailure extends UserProfileState {
   const UserProfileFailure(this.errorMessage);

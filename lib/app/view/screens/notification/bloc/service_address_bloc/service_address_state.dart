@@ -12,7 +12,6 @@ class ServiceAddressInitial extends ServiceAddressState {}
 class ServiceAddressLoading extends ServiceAddressState {}
 
 class ServiceAddressLoaded extends ServiceAddressState {
-
   const ServiceAddressLoaded(this.addressList);
   final List<ServiceAddress> addressList;
 
@@ -21,7 +20,6 @@ class ServiceAddressLoaded extends ServiceAddressState {
 }
 
 class ServiceAddressFailure extends ServiceAddressState {
-
   const ServiceAddressFailure(this.errorMessage);
   final String errorMessage;
 

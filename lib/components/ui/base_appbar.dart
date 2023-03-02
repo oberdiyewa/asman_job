@@ -7,23 +7,27 @@ import 'package:flutter_svg/flutter_svg.dart';
 class JobBaseAppbar extends StatelessWidget implements PreferredSizeWidget {
   const JobBaseAppbar({
     required this.title,
+    required this.onBack,
     super.key,
   });
   final String title;
+  final VoidCallback onBack;
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
       leading: GestureDetector(
-        onTap: () {
-          Navigator.pop(context);
-        },
+        onTap: onBack,
         child: ColoredBox(
           color: Colors.transparent,
-          child: Padding(
-            padding: REdgeInsets.all(20),
-            child: SvgPicture.asset(
-              Assets.backIcon,
+          child: Center(
+            child: SizedBox(
+              height: 20,
+              width: 20,
+              child: SvgPicture.asset(
+                Assets.backIcon,
+              ),
             ),
           ),
         ),
@@ -33,7 +37,7 @@ class JobBaseAppbar extends StatelessWidget implements PreferredSizeWidget {
         color: kcSecondaryTextColor,
       ),
       centerTitle: true,
-      backgroundColor: kcPrimaryColor,
+      // backgroundColor: kcPrimaryColor,
     );
   }
 

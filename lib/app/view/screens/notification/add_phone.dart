@@ -1,6 +1,7 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/main/bloc/user_bloc/user_bloc.dart';
 import 'package:asman_work/app/view/screens/home/components/custom_radio_widget.dart';
+import 'package:asman_work/app/view/screens/notification/add_profile/add_profile_screen.dart';
 import 'package:asman_work/app/view/screens/notification/section_add.dart';
 import 'package:asman_work/components/ui/base_appbar.dart';
 import 'package:flutter/material.dart';
@@ -19,9 +20,11 @@ class _AddPhoneNumberState extends State<AddPhoneNumber> {
   bool isEnableButton = false;
 
   late final TextEditingController _textController;
+  late final ProfileValueNotifiers notifiers;
 
   @override
   void initState() {
+    notifiers = ProfileValueNotifiers.instance!;
     _textController = TextEditingController();
     super.initState();
   }
@@ -37,8 +40,11 @@ class _AddPhoneNumberState extends State<AddPhoneNumber> {
     // debugPrint(isEnableButton.toString());
     return Scaffold(
       backgroundColor: const Color.fromRGBO(241, 241, 241, 1),
-      appBar: const JobBaseAppbar(
+      appBar: JobBaseAppbar(
         title: 'Telefon belgi goş ',
+        onBack: () {
+          Navigator.pop(context);
+        },
       ),
       body: Column(
         children: [
@@ -74,6 +80,7 @@ class _AddPhoneNumberState extends State<AddPhoneNumber> {
                                   ? isEnableButton = true
                                   : isEnableButton = false;
                               debugPrint('isEnableButton:$isEnableButton');
+                              notifiers.phoneValue.value = phoneNumber;
                               setState(() {});
                             },
                             decoration: const InputDecoration(
@@ -109,7 +116,7 @@ class _AddPhoneNumberState extends State<AddPhoneNumber> {
                                 isCurrentNumber.toString() +
                                     isEnableButton.toString(),
                               );
-                              _textController.text = user.phone;
+                              _textController.text = user.phone.substring(3);
                               setState(() {});
                             },
                           );
@@ -125,7 +132,8 @@ class _AddPhoneNumberState extends State<AddPhoneNumber> {
                     title: 'Belgini goş',
                     disabled: !isEnableButton,
                     onTap: () {
-                      Navigator.pop(context, _textController.text);
+                      notifiers.phoneValue.value = '993${_textController.text}';
+                      Navigator.pop(context);
                     },
                   )
                 ],

@@ -12,12 +12,14 @@ class NavBarItem {
     this.unSelectedIconPath,
     this.view, {
     required this.label,
+    required this.title,
   });
 
   final String selectedIconPath;
   final String unSelectedIconPath;
   final Widget view;
   final EnumScreenName label;
+  final String title;
 }
 
 class CustomBottomBar extends StatelessWidget {
@@ -25,12 +27,12 @@ class CustomBottomBar extends StatelessWidget {
     required this.items,
     super.key,
   });
+
   // static int selectedIndex = 0;
   final List<NavBarItem> items;
+
   @override
   Widget build(BuildContext context) {
-    final bottomData =
-        BlocProvider.of<BottomNavigationProvider>(context, listen: true);
     return DecoratedBox(
       decoration: const BoxDecoration(
         // border: Border.all(color: Colors.black),
@@ -46,52 +48,83 @@ class CustomBottomBar extends StatelessWidget {
         ),
         child: SizedBox(
           width: screenWidth(context),
-          height: 70.h,
+          height: 80.h,
           child: BottomAppBar(
             color: Colors.white,
             // shape: const CircularNotchedRectangle(),
             // notchMargin: 2,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: items.map((navBar) {
-                final index = items.indexOf(navBar);
-                final isSelected = bottomData.state == navBar.label;
-                // debugPrint('bottomData: ${bottomData.state}');
-                final icon = isSelected
-                    ? navBar.selectedIconPath
-                    : navBar.unSelectedIconPath;
-                return Padding(
-                  padding: EdgeInsets.only(
-                    right: index == 1 ? 30 : 0,
-                    left: index == 2 ? 30 : 0,
-                  ),
-                  child: GestureDetector(
-                    onTap: () {
-                      if (!isSelected) {
-                        context
-                            .read<BottomNavigationProvider>()
-                            .changeScreen(navBar.label);
-                      }
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (isSelected == true) verticalSpaceTiny,
-                        SvgPicture.asset(
-                          icon,
-                          width: 24.w,
-                          height: 24.h,
-                        ),
-                        if (isSelected == true)
-                          SizedBox(
-                            height: 7.h,
-                          ),
-                        if (isSelected == true) makeUnderline(),
-                      ],
-                    ),
-                  ),
+            child: BlocBuilder<BottomNavigationProvider, EnumScreenName>(
+              builder: (context, state) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: items.map((navBar) {
+                    final index = items.indexOf(navBar);
+                    final isSelected = state == navBar.label;
+                    // debugPrint('bottomData: ${bottomData.state}');
+                    final icon = isSelected
+                        ? navBar.selectedIconPath
+                        : navBar.unSelectedIconPath;
+                    return navBar.label == EnumScreenName.notifs
+                        ? Expanded(
+                            flex: 3,
+                            child: GestureDetector(
+                              child: ColoredBox(
+                                color: Colors.grey[100]!,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 5),
+                                      child: Text(
+                                        navBar.title,
+                                        style: TextStyle(
+                                          color: isSelected
+                                              ? kcPrimaryColor
+                                              : Colors.grey[700],
+                                          fontSize: isSelected ? 18 : 16,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ))
+                        : Expanded(
+                            flex: 2,
+                            child: GestureDetector(
+                              onTap: () {
+                                if (!isSelected) {
+                                  context
+                                      .read<BottomNavigationProvider>()
+                                      .changeScreen(navBar.label);
+                                }
+                              },
+                              child: ColoredBox(
+                                  color: Colors.grey[100]!,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      if (isSelected == true) verticalSpaceTiny,
+                                      SvgPicture.asset(
+                                        icon,
+                                        width: 24.w,
+                                        height: 24.h,
+                                      ),
+                                      Text(
+                                        navBar.title,
+                                        style: TextStyle(
+                                          color: isSelected
+                                              ? kcPrimaryColor
+                                              : Colors.grey[700],
+                                        ),
+                                      )
+                                    ],
+                                  )),
+                            ),
+                          );
+                  }).toList(),
                 );
-              }).toList(),
+              },
             ),
           ),
         ),
