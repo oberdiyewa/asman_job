@@ -3,6 +3,7 @@ import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/notification/notif_widgets.dart';
 import 'package:asman_work/app/view/notification/section_add.dart';
 import 'package:asman_work/app/view/profile/change_language/change_language.dart';
+import 'package:asman_work/app/view/profile/favourites/favourites_screen.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/fill_data.dart';
 import 'package:asman_work/app/view/profile/profile_widgets.dart';
 import 'package:asman_work/app/view/profile/security/security_screen.dart';
@@ -26,17 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            width: screenWidth(context),
-            height: 50.h,
-            color: kcPrimaryColor,
-            child: Center(
-              child: BoxText.headline(
-                'Profile',
-                color: kcSecondaryTextColor,
-              ),
-            ),
-          ),
+          profileHeader(context),
           Expanded(
             child: Container(
               width: screenWidth(context),
@@ -47,13 +38,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   verticalSpaceRegular,
-                  profileHeadSection(),
-                  verticalSpaceMedium,
+                  AddSection(
+                    customHeight: 60,
+                    topPadding: 0,
+                    bottomPadding: 0,
+                    leftPadding: 0,
+                    rightPadding: 0,
+                    widget: Material(
+                      child: Ink(
+                        child: InkWell(
+                          splashColor: kcPrimaryColor.withOpacity(0.25),
+                          onTap: () {
+                            Navigator.push<dynamic>(
+                              context,
+                              MaterialPageRoute<dynamic>(
+                                builder: (context) => SettingsScreen(),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            margin: REdgeInsets.symmetric(vertical: 5),
+                            padding: EdgeInsets.only(left: 20),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Row(
+                              children: [
+                                SvgPicture.asset(
+                                  Assets.profilScreenAvatar,
+                                  color: Colors.black,
+                                  width: 22,
+                                  height: 22,
+                                ),
+                                horizontalSpaceSmall,
+                                BoxText.body(
+                                  'Berdiyewa Oguljemal',
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  verticalSpaceRegular,
                   AddSection(
                     rightPadding: 0,
                     leftPadding: 0,
                     bottomPadding: 0,
-                    customHeight: 340,
+                    customHeight: 170,
                     widget: Column(
                       children: [
                         Material(
@@ -82,6 +115,76 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           indent: 20,
                           endIndent: 20,
                         ),
+                        // Material(
+                        //   child: Ink(
+                        //     child: InkWell(
+                        //       splashColor:
+                        //           const Color.fromRGBO(239, 246, 255, 1),
+                        //       onTap: () {
+                        //         Navigator.push<dynamic>(
+                        //           context,
+                        //           MaterialPageRoute<dynamic>(
+                        //             builder: (context) =>
+                        //                 const FillDataAboutYourself(),
+                        //           ),
+                        //         );
+                        //       },
+                        //       child: MenuItems(
+                        //         context: context,
+                        //         title: 'Özüň barada maglumat goş',
+                        //         leading: Assets.about,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        // const Divider(
+                        //   indent: 20,
+                        //   endIndent: 20,
+                        // ),
+                        // Material(
+                        //   child: Ink(
+                        //     child: InkWell(
+                        //       splashColor:
+                        //           const Color.fromRGBO(239, 246, 255, 1),
+                        //       onTap: () {},
+                        //       child: MenuItems(
+                        //         context: context,
+                        //         title: 'Tehniki kömek',
+                        //         leading: Assets.help,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        // const Divider(
+                        //   indent: 20,
+                        //   endIndent: 20,
+                        // ),
+                        // Material(
+                        //   child: Ink(
+                        //     child: InkWell(
+                        //       splashColor:
+                        //           const Color.fromRGBO(239, 246, 255, 1),
+                        //       onTap: () {
+                        //         Navigator.push<dynamic>(
+                        //           context,
+                        //           MaterialPageRoute<dynamic>(
+                        //             builder: (context) =>
+                        //                 const SettingsScreen(),
+                        //           ),
+                        //         );
+                        //       },
+                        //       child: MenuItems(
+                        //         context: context,
+                        //         title: 'Sazlamalar',
+                        //         leading: Assets.setting,
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
+                        // const Divider(
+                        //   indent: 20,
+                        //   endIndent: 20,
+                        // ),
                         Material(
                           child: Ink(
                             child: InkWell(
@@ -89,75 +192,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   const Color.fromRGBO(239, 246, 255, 1),
                               onTap: () {
                                 Navigator.push<dynamic>(
-                                  context,
-                                  MaterialPageRoute<dynamic>(
-                                    builder: (context) =>
-                                        const FillDataAboutYourself(),
-                                  ),
-                                );
+                                    context,
+                                    MaterialPageRoute<dynamic>(
+                                        builder: (context) =>
+                                            const FavouritesScreen()));
                               },
-                              child: MenuItems(
-                                context: context,
-                                title: 'Özüň barada maglumat goş',
-                                leading: Assets.about,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const Divider(
-                          indent: 20,
-                          endIndent: 20,
-                        ),
-                        Material(
-                          child: Ink(
-                            child: InkWell(
-                              splashColor:
-                                  const Color.fromRGBO(239, 246, 255, 1),
-                              onTap: () {},
-                              child: MenuItems(
-                                context: context,
-                                title: 'Tehniki kömek',
-                                leading: Assets.help,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const Divider(
-                          indent: 20,
-                          endIndent: 20,
-                        ),
-                        Material(
-                          child: Ink(
-                            child: InkWell(
-                              splashColor:
-                                  const Color.fromRGBO(239, 246, 255, 1),
-                              onTap: () {
-                                Navigator.push<dynamic>(
-                                  context,
-                                  MaterialPageRoute<dynamic>(
-                                    builder: (context) =>
-                                        const SettingsScreen(),
-                                  ),
-                                );
-                              },
-                              child: MenuItems(
-                                context: context,
-                                title: 'Sazlamalar',
-                                leading: Assets.setting,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const Divider(
-                          indent: 20,
-                          endIndent: 20,
-                        ),
-                        Material(
-                          child: Ink(
-                            child: InkWell(
-                              splashColor:
-                                  const Color.fromRGBO(239, 246, 255, 1),
-                              onTap: () {},
                               child: MenuItems(
                                 context: context,
                                 title: 'Halanlarym',
@@ -176,21 +215,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               splashColor:
                                   const Color.fromRGBO(239, 246, 255, 1),
                               onTap: () {
-                                dialog(context,
-                                    button1: const BoxButton.small(
-                                        title: 'Tassykla',),
-                                    button2: BoxButton.small(
-                                        onTap: () {
-                                          Navigator.pop(context);
-                                        },
-                                        title: 'Goýbolsun ',),
-                                    contentText: const Text(
-                                      'Profilden çykmak üçin tassyklaň',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),);
+                                dialog(
+                                  context,
+                                  button1: const BoxButton.small(
+                                    title: 'Tassykla',
+                                  ),
+                                  button2: BoxButton.small(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                    title: 'Goýbolsun ',
+                                    textColor: kcPrimaryTextColor,
+                                    style: bodyStyle.copyWith(fontSize: 12),
+                                    outline: true,
+                                  ),
+                                  contentText: const Text(
+                                    'Profilden çykmak üçin tassyklaň',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                );
                               },
                               child: MenuItems(
                                 context: context,
@@ -231,6 +277,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   verticalSpaceRegular,
                   AddSection(
+                    leftPadding: 3,
                     customHeight: 50,
                     widget: MenuItems(
                       context: context,
@@ -252,53 +299,68 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  Container profileHeader(BuildContext context) {
+    return Container(
+      width: screenWidth(context),
+      height: 50.h,
+      color: kcPrimaryColor,
+      child: Center(
+        child: BoxText.headline(
+          'Profile',
+          color: kcSecondaryTextColor,
+        ),
+      ),
+    );
+  }
+
   AddSection profileHeadSection() {
     return AddSection(
       customHeight: 105,
       widget: Container(
-          width: 322.w,
-          height: 80.h,
-          alignment: Alignment.center,
-          padding: REdgeInsets.symmetric(vertical: 11, horizontal: 15),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            color: kcLightestGreyColor,
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SvgPicture.asset(Assets.profileBig),
-              horizontalSpaceRegular,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BoxText.headline('Berdiyewa Oguljemal'),
-                  // verticalSpaceTiny,
-                  BoxText.subheading(
-                    'Ýetmeýän maglumatlaryňyzy dolduryň',
-                    color: kcHardGreyColor,
-                  ),
-                  verticalSpaceTiny,
-                  SizedBox(
-                    width: 174,
-                    height: 15,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: const SizedBox(
-                        height: 10,
-                        child: LinearProgressIndicator(
-                          value: 0.35, // percent filled
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(kcSecondaryColor),
-                          backgroundColor: Color.fromRGBO(62, 82, 188, 0.13),
-                        ),
+        width: 322.w,
+        height: 80.h,
+        alignment: Alignment.center,
+        padding: REdgeInsets.symmetric(vertical: 11, horizontal: 15),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: kcLightestGreyColor,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SvgPicture.asset(Assets.profileBig),
+            horizontalSpaceRegular,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                BoxText.headline('Berdiyewa Oguljemal'),
+                // verticalSpaceTiny,
+                BoxText.subheading(
+                  'Ýetmeýän maglumatlaryňyzy dolduryň',
+                  color: kcHardGreyColor,
+                ),
+                verticalSpaceTiny,
+                SizedBox(
+                  width: 174,
+                  height: 15,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: const SizedBox(
+                      height: 10,
+                      child: LinearProgressIndicator(
+                        value: 0.35, // percent filled
+                        valueColor:
+                            AlwaysStoppedAnimation<Color>(kcSecondaryColor),
+                        backgroundColor: Color.fromRGBO(62, 82, 188, 0.13),
                       ),
                     ),
-                  )
-                ],
-              )
-            ],
-          ),),
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }

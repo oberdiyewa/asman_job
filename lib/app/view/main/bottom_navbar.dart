@@ -31,18 +31,75 @@ class CustomBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final bottomData =
         BlocProvider.of<BottomNavigationProvider>(context, listen: true);
+
+    final children = items.map<Widget>((navBar) {
+      final isSelected = bottomData.state == navBar.label;
+      // debugPrint('bottomData: ${bottomData.state}');
+      final icon =
+          isSelected ? navBar.selectedIconPath : navBar.unSelectedIconPath;
+
+      return navBar.label == EnumScreenName.notifs
+          ? Expanded(
+              flex: 3,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Text(
+                      'Bildiriş goş',
+                      style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          color: kcPrimaryColor),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          : Expanded(
+              flex: 2,
+              child: GestureDetector(
+                onTap: () {
+                  print('tapped yeah');
+                  if (!isSelected) {
+                    context
+                        .read<BottomNavigationProvider>()
+                        .changeScreen(navBar.label);
+                  }
+                },
+                child: ColoredBox(
+                  color: Colors.transparent,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      //if (isSelected == true) verticalSpaceTiny,
+                      SvgPicture.asset(
+                        icon,
+                        width: 31.w,
+                        height: 34.h,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+    }).toList();
+
     return DecoratedBox(
       decoration: const BoxDecoration(
-        // border: Border.all(color: Colors.black),
+        boxShadow: [
+          BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.25), blurRadius: 2)
+        ],
         borderRadius: BorderRadius.only(
-          topRight: Radius.circular(30),
-          topLeft: Radius.circular(30),
+          topRight: Radius.circular(20),
+          topLeft: Radius.circular(20),
         ),
       ),
       child: ClipRRect(
         borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
         ),
         child: SizedBox(
           width: screenWidth(context),
@@ -51,61 +108,15 @@ class CustomBottomBar extends StatelessWidget {
             color: Colors.white,
             // shape: const CircularNotchedRectangle(),
             // notchMargin: 2,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: items.map((navBar) {
-                final index = items.indexOf(navBar);
-                final isSelected = bottomData.state == navBar.label;
-                // debugPrint('bottomData: ${bottomData.state}');
-                final icon = isSelected
-                    ? navBar.selectedIconPath
-                    : navBar.unSelectedIconPath;
-                return Padding(
-                  padding: EdgeInsets.only(
-                    right: index == 1 ? 30 : 0,
-                    left: index == 2 ? 30 : 0,
-                  ),
-                  child: GestureDetector(
-                    onTap: () {
-                      if (!isSelected) {
-                        context
-                            .read<BottomNavigationProvider>()
-                            .changeScreen(navBar.label);
-                      }
-                    },
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (isSelected == true) verticalSpaceTiny,
-                        SvgPicture.asset(
-                          icon,
-                          width: 24.w,
-                          height: 24.h,
-                        ),
-                        if (isSelected == true)
-                          SizedBox(
-                            height: 7.h,
-                          ),
-                        if (isSelected == true) makeUnderline(),
-                      ],
-                    ),
-                  ),
-                );
-              }).toList(),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: children,
+              ),
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Container makeUnderline() {
-    return Container(
-      height: 2.h,
-      width: 25.w,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: kcPrimaryColor,
       ),
     );
   }

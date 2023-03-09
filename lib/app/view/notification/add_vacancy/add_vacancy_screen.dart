@@ -1,14 +1,17 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/notification/add_address/add_address_screen.dart';
-import 'package:asman_work/app/view/notification/add_phone.dart';
 import 'package:asman_work/app/view/notification/add_profession.dart';
-import 'package:asman_work/app/view/notification/notif_widgets.dart';
 import 'package:asman_work/app/view/notification/section_add.dart';
-import 'package:asman_work/components/ui/base_appbar.dart';
+import 'package:asman_work/app/view/notification_screen/notif_widgets.dart';
+import 'package:asman_work/app/view/notification_screen/search_work/add_phone.dart';
+import 'package:asman_work/components/ui/screens/base_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+// import '../../profile/fill_about_yourself/add_ability.dart';
+// import '../section_add.dart';
 
 class ChoiceWorkType {
   ChoiceWorkType(this.name, {this.selected = false});
@@ -79,9 +82,7 @@ class _AddVacancyScreenState extends State<AddVacancyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(241, 241, 241, 1),
-      appBar: const JobBaseAppbar(
-        title: 'Bildiriş ber',
-      ),
+      appBar: const BaseAppbar(title: 'Bildiriş ber'),
       body: Stack(
         children: [
           ListView(

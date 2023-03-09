@@ -28,25 +28,26 @@ class AddSection extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-          width: screenWidth(context),
-          height: hasChildren ? null : customHeight.h,
-          padding: REdgeInsets.only(
-            top: topPadding!,
-            bottom: bottomPadding!,
-            left: leftPadding!,
-            right: rightPadding!,
-          ),
-          decoration: const BoxDecoration(
-            color: Color.fromRGBO(255, 254, 254, 1),
-            boxShadow: [
-              BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.1),
-                blurRadius: 2,
-                offset: Offset(0, 1),
-              )
-            ],
-          ),
-          child: widget,),
+        width: screenWidth(context),
+        height: hasChildren ? null : customHeight.h,
+        padding: REdgeInsets.only(
+          top: topPadding!,
+          bottom: bottomPadding!,
+          left: leftPadding!,
+          right: rightPadding!,
+        ),
+        decoration: const BoxDecoration(
+          color: Color.fromRGBO(255, 254, 254, 1),
+          boxShadow: [
+            BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, 0.1),
+              blurRadius: 2,
+              offset: Offset(0, 1),
+            )
+          ],
+        ),
+        child: widget,
+      ),
     );
   }
 }

@@ -29,7 +29,9 @@ abstract class Assets {
   static const clear = 'assets/icons/clear.svg';
 
   static const searchNormalIcon = 'assets/icons/search-normal.svg';
-  static const empty = 'assets/icons/empty.svg';
+  static const notifEmpty = 'assets/icons/notif_empty.svg';
+  static const empty = 'assets/images/empty.png';
+
   static const favouriteIcon = 'assets/icons/favourite.svg';
   static const backIcon = 'assets/icons/arrow_back.svg';
   static const calendarIcon = 'assets/icons/calendar.svg';
@@ -59,4 +61,12 @@ abstract class Assets {
   static const workerLocation = 'assets/images/worker.png';
 
   static const languagePath = 'assets/languages';
+
+  static const chatSelected = 'assets/icons/chat_selected.svg';
+  static const chatUnselected = 'assets/icons/chat_unselected.svg';
+  static const menuUnselected = 'assets/icons/menu_unselected1.svg';
+  static const menuSelected = 'assets/icons/menu_selected.svg';
+
+  static const arrowForwardGrey = 'assets/icons/arrow_forward_grey.svg';
+  static const profilScreenAvatar = 'assets/icons/profil_screen_avatar.svg';
 }

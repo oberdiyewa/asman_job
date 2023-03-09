@@ -14,6 +14,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rxdart/rxdart.dart';
 
+import '../home/components/filter_screen/filter_screen.dart';
+
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
@@ -172,7 +174,7 @@ class SearchField extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10).w,
                 ),
                 hintText:
-                    isVacancy ? 'Iň ýakyn işi tap' : 'Iň ýakyn işgari tap',
+                    isVacancy ? 'Iň ýakyn işi tap' : 'Iň amatly işgari tap',
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10).w,
                   borderSide: const BorderSide(
@@ -180,9 +182,23 @@ class SearchField extends StatelessWidget {
                   ),
                 ),
                 hintStyle: TextStyle(
-                  color: kcPrimaryColor,
+                  color: Color.fromRGBO(149, 149, 149, 1),
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
+                ),
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    Navigator.push<dynamic>(
+                      context,
+                      MaterialPageRoute<dynamic>(
+                        builder: (context) => const FilterScreen(),
+                      ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(13),
+                    child: SvgPicture.asset(Assets.filter),
+                  ),
                 ),
               ),
             );
@@ -266,12 +282,15 @@ class _SearchItemList extends State<SearchItemList> {
   }
 }
 
-void Function() throttle(int timeInMillis,void Function() function) {
+void Function() throttle(int timeInMillis, void Function() function) {
   final throttler = PublishSubject<void Function()>();
 
   throttler
-      .throttleTime(Duration(milliseconds: timeInMillis),
-          trailing: true, leading: false,)
+      .throttleTime(
+    Duration(milliseconds: timeInMillis),
+    trailing: true,
+    leading: false,
+  )
       .forEach((element) {
     element();
   });
@@ -309,7 +328,7 @@ class SearchedVacancyList extends StatelessWidget {
         if (state is SearchVacancyLoaded) {
           final _vacancyList = state.searchedVacancies;
           return SliverPadding(
-            padding:  EdgeInsets.zero,
+            padding: EdgeInsets.zero,
             sliver: SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {

@@ -1,6 +1,6 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
-import 'package:asman_work/app/view/home/components/filter_screen.dart';
+import 'package:asman_work/app/view/home/components/filter_screen/filter_screen.dart';
 import 'package:asman_work/data/providers/logic/bottom_navigation_provider.dart';
 import 'package:asman_work/utils/globals/enums.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +87,7 @@ class SlidingPanelAppBar extends StatelessWidget {
                     ),
                   ),
                   hintStyle: TextStyle(
-                    color: kcPrimaryColor,
+                    color: Color.fromRGBO(149, 149, 149, 1),
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w600,
                   ),

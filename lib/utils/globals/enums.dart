@@ -16,6 +16,7 @@ enum EnumScreenName {
   home,
   search,
   notifs,
+  chat,
   profile,
 }
 

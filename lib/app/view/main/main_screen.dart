@@ -1,16 +1,22 @@
+import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/home/bloc/tab_controller_cubit/tab_controller_cubit.dart';
 import 'package:asman_work/app/view/home/home.dart';
 import 'package:asman_work/app/view/main/bottom_navbar.dart';
+import 'package:asman_work/app/view/main/main_widgets.dart/hexagon.dart';
+import 'package:asman_work/app/view/notification/bloc/bloc.dart';
 import 'package:asman_work/app/view/notification/notif_screen.dart';
 import 'package:asman_work/app/view/profile/profile_screen.dart';
 import 'package:asman_work/app/view/search/search_screen.dart';
 import 'package:asman_work/data/providers/logic/bottom_navigation_provider.dart';
+import 'package:asman_work/data/repository/repository.dart';
 import 'package:asman_work/utils/globals/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../chat_screen/chat_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -28,12 +34,13 @@ class _MainScreenState extends State<MainScreen> {
         return 1;
       case EnumScreenName.notifs:
         return 2;
-      case EnumScreenName.profile:
+      case EnumScreenName.chat:
         return 3;
+      case EnumScreenName.profile:
+        return 4;
     }
   }
 
-  
   List<NavBarItem> items = [
     NavBarItem(
       Assets.homeSelected,
@@ -50,8 +57,26 @@ class _MainScreenState extends State<MainScreen> {
     NavBarItem(
       Assets.notifSelected,
       Assets.notifUnselected,
-      const NotificationScreen(),
+      MultiBlocProvider(
+        providers: [
+          BlocProvider<UserVacancyBloc>(
+            create: (_) => UserVacancyBloc(UserVacancyRepository()),
+          ),
+          BlocProvider<UserProfileBloc>(
+            create: (_) => UserProfileBloc(
+              UserProfileRepository(),
+            ),
+          ),
+        ],
+        child: const NotificationScreen(),
+      ),
       label: EnumScreenName.notifs,
+    ),
+    NavBarItem(
+      Assets.chatSelected,
+      Assets.chatUnselected,
+      const ChatScreen(),
+      label: EnumScreenName.chat,
     ),
     NavBarItem(
       Assets.profileSelected,
@@ -67,7 +92,7 @@ class _MainScreenState extends State<MainScreen> {
   //   AddNotifScreen(),
   //   ProfileScreen()
   // ];
-
+  bool isSelected = false;
   @override
   Widget build(BuildContext context) {
     final bottomData =
@@ -103,31 +128,44 @@ class _MainScreenState extends State<MainScreen> {
               keyboardIsOpened) {
             return const SizedBox.shrink();
           } else {
-            return customFloatingActionButton();
+            return BlocBuilder<BottomNavigationProvider, EnumScreenName>(
+              builder: (context, state) {
+                return GestureDetector(
+                  // splashColor: kcPrimaryColor.withOpacity(0.25),
+                  onTap: () {
+                    context
+                        .read<BottomNavigationProvider>()
+                        .changeScreen(EnumScreenName.notifs);
+                  },
+                  child: CenteredFloatingActionButton(
+                    isSelected: state == EnumScreenName.notifs,
+                  ),
+                );
+              },
+            );
           }
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
+}
 
-  Container customFloatingActionButton() {
-    return Container(
-      width: 80.w,
-      height: 80.h,
-      alignment: Alignment.bottomCenter,
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        image: DecorationImage(image: AssetImage(Assets.menuIcon)),
-      ),
-      child: FittedBox(
-        child: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          child: SvgPicture.asset(Assets.menuIcon),
-        ),
-      ),
+class CenteredFloatingActionButton extends StatelessWidget {
+  final bool isSelected;
+  const CenteredFloatingActionButton({
+    super.key,
+    required this.isSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return HexagonFAB(
+      size: 70,
+      icon: isSelected ? Assets.menuSelected : Assets.menuUnselected,
+      radiusColor: kcLightGreyColor,
+      elevation: 2,
+      elevationColor: kcLightGreyColor,
     );
   }
 }
