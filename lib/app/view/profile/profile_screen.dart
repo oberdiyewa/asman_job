@@ -38,6 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   verticalSpaceRegular,
+<<<<<<< HEAD
                   AddSection(
                     customHeight: 60,
                     topPadding: 0,
@@ -82,11 +83,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   verticalSpaceRegular,
+=======
+                  // profileHeadSection(),
+                  // verticalSpaceMedium,
+>>>>>>> 4622659 (profile screen modified)
                   AddSection(
                     rightPadding: 0,
                     leftPadding: 0,
                     bottomPadding: 0,
+<<<<<<< HEAD
                     customHeight: 170,
+=======
+                    customHeight: 290,
+>>>>>>> 4622659 (profile screen modified)
                     widget: Column(
                       children: [
                         Material(
@@ -141,6 +150,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         //   indent: 20,
                         //   endIndent: 20,
                         // ),
+<<<<<<< HEAD
                         // Material(
                         //   child: Ink(
                         //     child: InkWell(
@@ -185,6 +195,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         //   indent: 20,
                         //   endIndent: 20,
                         // ),
+=======
+                        Material(
+                          child: Ink(
+                            child: InkWell(
+                              splashColor:
+                                  const Color.fromRGBO(239, 246, 255, 1),
+                              onTap: () {
+                                Navigator.push<dynamic>(
+                                  context,
+                                  MaterialPageRoute<dynamic>(
+                                    builder: (context) => const ChatScreen(),
+                                  ),
+                                );
+                              },
+                              child: MenuItems(
+                                context: context,
+                                title: 'Tehniki kömek',
+                                leading: Assets.help,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Divider(
+                          indent: 20,
+                          endIndent: 20,
+                        ),
+                        Material(
+                          child: Ink(
+                            child: InkWell(
+                              splashColor:
+                                  const Color.fromRGBO(239, 246, 255, 1),
+                              onTap: () {
+                                Navigator.push<dynamic>(
+                                  context,
+                                  MaterialPageRoute<dynamic>(
+                                    builder: (context) =>
+                                        const SettingsScreen(),
+                                  ),
+                                );
+                              },
+                              child: MenuItems(
+                                context: context,
+                                title: 'Sazlamalar',
+                                leading: Assets.setting,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Divider(
+                          indent: 20,
+                          endIndent: 20,
+                        ),
+>>>>>>> 4622659 (profile screen modified)
                         Material(
                           child: Ink(
                             child: InkWell(

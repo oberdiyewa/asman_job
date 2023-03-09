@@ -56,6 +56,7 @@ abstract class Assets {
   static const avatar = 'assets/images/avatar_image.jpg';
   static const camera = 'assets/icons/camera.svg';
 
+<<<<<<< HEAD
   static const vacancyLocation = 'assets/images/vacancy.png';
   static const myLocation = 'assets/images/my_location.svg';
   static const workerLocation = 'assets/images/worker.png';
@@ -69,4 +70,8 @@ abstract class Assets {
 
   static const arrowForwardGrey = 'assets/icons/arrow_forward_grey.svg';
   static const profilScreenAvatar = 'assets/icons/profil_screen_avatar.svg';
+=======
+  static const sendIcon = 'assets/icons/send.svg';
+  static const logoAvatar = 'assets/images/a.png';
+>>>>>>> 4622659 (profile screen modified)
 }
