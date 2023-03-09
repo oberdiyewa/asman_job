@@ -1,15 +1,13 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/services/location_service.dart';
 import 'package:asman_work/app/view/helpers.dart';
-import 'package:asman_work/app/view/main/bloc/user_bloc/user_bloc.dart';
 import 'package:asman_work/app/view/screens/notification/add_address/search_from_map.dart';
-import 'package:asman_work/app/view/screens/notification/add_profile/add_profile_screen.dart';
 import 'package:asman_work/app/view/screens/notification/bloc/address_reverse_bloc/address_reverse_bloc.dart';
 import 'package:asman_work/app/view/screens/notification/bloc/bloc.dart';
 import 'package:asman_work/app/view/screens/notification/section_add.dart';
-import 'package:asman_work/app/view/screens/profile/security/security_screen.dart';
 import 'package:asman_work/app/view/screens/search/search_screen.dart';
 import 'package:asman_work/components/ui/base_appbar.dart';
+import 'package:asman_work/data/model/model.dart';
 import 'package:asman_work/data/repository/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +16,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:latlong2/latlong.dart';
 
 class AddAddressScreen extends StatefulWidget {
-  const AddAddressScreen({super.key});
+  const AddAddressScreen({
+    required this.valueNotifier,
+    this.id,
+    this.addressId,
+    super.key,
+  });
+
+  final ValueNotifier<dynamic> valueNotifier;
+  final int? id;
+  final String? addressId;
 
   @override
   State<AddAddressScreen> createState() => _AddAddressScreenState();
@@ -26,11 +33,12 @@ class AddAddressScreen extends StatefulWidget {
 
 class _AddAddressScreenState extends State<AddAddressScreen> {
   late final TextEditingController _textController;
-  final ProfileValueNotifiers notifiers = ProfileValueNotifiers.instance!;
+  LatLng? point;
 
   @override
   void initState() {
-    _textController = TextEditingController(text: notifiers.addressValue.value);
+    _textController =
+        TextEditingController(text: widget.valueNotifier.value as String);
     super.initState();
   }
 
@@ -54,6 +62,24 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
         onBack: () {
           Navigator.pop(context);
         },
+        actions: [
+          IconButton(
+              onPressed: () {
+                if (_textController.text.isNotEmpty) {
+                  context.read<ServiceAddressBloc>().add(
+                        ServiceAddressAddEvent(
+                          ServiceAddress(
+                            displayName: _textController.text,
+                            title: 'Ish salgym',
+                            point: point,
+                          ),
+                          widget.id!,
+                        ),
+                      );
+                }
+              },
+              icon: const Icon(Icons.add))
+        ],
       ),
       body: BlocProvider<AddressReverseBloc>(
         create: (context) => AddressReverseBloc(ServicesRepository()),
@@ -69,26 +95,12 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                     child: TextField(
                       controller: _textController,
                       onChanged: (value) {
-                        notifiers.addressValue.value = value;
+                        widget.valueNotifier.value = value;
                         if (_textController.text.length >= 3) {
                           throttleOnClick();
                         }
                       },
                       decoration: InputDecoration(
-                        // prefixIcon: Container(
-                        //   width: 17.w,
-                        //   height: 17.h,
-                        //   margin: EdgeInsets.only(
-                        //     right: 14.w,
-                        //     left: 12.w,
-                        //   ),
-                        //   child: SvgPicture.asset(
-                        //     Assets.searchNormalIcon,
-                        //   ),
-                        // ),
-                        // border: OutlineInputBorder(
-                        //   borderRadius: BorderRadius.circular(10).w,
-                        // ),
                         hintText: 'Salgyny giriz...',
                         suffixIcon: MaterialButton(
                           minWidth: 0,
@@ -101,7 +113,6 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                             context.read<ServiceAddressBloc>().add(
                                   ServiceAddressClearEvent(),
                                 );
-                            setState(() {});
                           },
                           shape: const CircleBorder(),
                           child: SvgPicture.asset(Assets.clear),
@@ -123,7 +134,15 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         Navigator.push<dynamic>(
                           context,
                           MaterialPageRoute<dynamic>(
-                            builder: (context) => const SearchLocationFromMap(),
+                            builder: (context) {
+                              context
+                                  .read<AddressReverseBloc>()
+                                  .add(AddressReverseInitialEvent());
+                              return SearchLocationFromMap(
+                                id: widget.id!,
+                                valueNotifier: widget.valueNotifier,
+                              );
+                            },
                           ),
                         );
                       },
@@ -147,11 +166,10 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                   BlocConsumer<AddressReverseBloc, AddressReverseState>(
                     listener: (context, state) {
                       if (state is AddressReverseLoaded) {
-                        notifiers.addressValue.value =
-                            state.address.displayName;
-
+                        widget.valueNotifier.value = state.address.displayName;
                         setState(() {
                           _textController.text = state.address.displayName;
+                          point = state.address.point;
                         });
                       }
                     },
@@ -206,11 +224,13 @@ class _AddAddressScreenState extends State<AddAddressScreen> {
                         children: List.generate(
                           addressList.length,
                           (index) {
-                            final addres = addressList[index].displayName;
+                            final address = addressList[index];
                             return ListTile(
                               onTap: () {
-                                _textController.text = addres;
-                                notifiers.addressValue.value = addres;
+                                point = address.point;
+                                _textController.text = address.displayName;
+                                widget.valueNotifier.value =
+                                    address.displayName;
                               },
                               title: Text(
                                 addressList[index].displayName,

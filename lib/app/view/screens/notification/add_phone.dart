@@ -9,22 +9,28 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddPhoneNumber extends StatefulWidget {
-  const AddPhoneNumber({super.key});
+  const AddPhoneNumber({
+    required this.valueNotifier,
+    super.key,
+  });
+  final ValueNotifier<dynamic> valueNotifier;
 
   @override
   State<AddPhoneNumber> createState() => _AddPhoneNumberState();
 }
 
 class _AddPhoneNumberState extends State<AddPhoneNumber> {
+  _AddPhoneNumberState();
+
   bool isCurrentNumber = false;
   bool isEnableButton = false;
 
   late final TextEditingController _textController;
-  late final ProfileValueNotifiers notifiers;
+  // late final ProfileValueNotifiers notifiers;
 
   @override
   void initState() {
-    notifiers = ProfileValueNotifiers.instance!;
+    // notifiers = ProfileValueNotifiers.instance!;
     _textController = TextEditingController();
     super.initState();
   }
@@ -80,7 +86,7 @@ class _AddPhoneNumberState extends State<AddPhoneNumber> {
                                   ? isEnableButton = true
                                   : isEnableButton = false;
                               debugPrint('isEnableButton:$isEnableButton');
-                              notifiers.phoneValue.value = phoneNumber;
+                              widget.valueNotifier.value = phoneNumber;
                               setState(() {});
                             },
                             decoration: const InputDecoration(
@@ -132,7 +138,7 @@ class _AddPhoneNumberState extends State<AddPhoneNumber> {
                     title: 'Belgini goş',
                     disabled: !isEnableButton,
                     onTap: () {
-                      notifiers.phoneValue.value = '993${_textController.text}';
+                      widget.valueNotifier.value = '993${_textController.text}';
                       Navigator.pop(context);
                     },
                   )

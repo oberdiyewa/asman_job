@@ -7,6 +7,7 @@ abstract class AddressReverseEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class AddressReverseInitialEvent extends AddressReverseEvent{}
 class AddressReverseFetchEvent extends AddressReverseEvent {
   const AddressReverseFetchEvent(this.point);
 

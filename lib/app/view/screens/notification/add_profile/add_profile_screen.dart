@@ -35,18 +35,24 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
   late final UserFetchedSuccess userState;
 
   void initValues() {
-    notifiers.clearNotifiers();
+    ProfileValueNotifiers();
+    ProfileValueNotifiers.reInitializeNotifiers();
+    notifiers = ProfileValueNotifiers.instance!;
     if (widget.profile != null) {
-      notifiers.setInitialValues(widget.profile!);
-      print('expdays ${widget.profile!.expirationDays}');
+      final userCatalogueState = context.read<UserCatalogueBloc>().state;
+      final employmentType = (userCatalogueState as UserCatalogueLoaded)
+          .userCatalogue
+          .employmentType!
+          .firstWhere((element) => element.code == widget.profile!.empType);
+
+      notifiers.setInitialValues(widget.profile!, employmentType.title);
     }
   }
 
   @override
   void initState() {
-    ProfileValueNotifiers();
-    notifiers = ProfileValueNotifiers.instance!;
     initValues();
+
     middleNameController = TextEditingController(
       text: widget.profile != null ? widget.profile!.middleName : null,
     );
@@ -137,6 +143,7 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                       catalogueState: state,
                       section: EnumProfileAddSections.values[index],
                       sectionText: sectionTextList[index],
+                      profile: widget.profile,
                     ),
                   ),
                   const SectionName(
@@ -236,10 +243,8 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
       title: notifiers.professionValue.value,
       aboutMe: descriptionController.text,
       avatarNumber: notifiers.avatarValue.value!,
-      // empType: notifiers.empCodeValue.value,
-      empType: 'FT',
-      // expirationDays: notifiers.activeDaysValue.value,
-      expirationDays: 60,
+      empType: notifiers.empCodeValue.value,
+      expirationDays: notifiers.activeDaysValue.value,
       createdAt: '',
     ).toMap();
     if (widget.profile == null) {
@@ -266,12 +271,14 @@ class AddProfileSection extends StatefulWidget {
     required this.section,
     required this.sectionText,
     required this.catalogueState,
+    this.profile,
     super.key,
   });
 
   final EnumProfileAddSections section;
   final Map<String, String> sectionText;
   final UserCatalogueState catalogueState;
+  final Profile? profile;
 
   @override
   State<AddProfileSection> createState() => _AddProfileSectionState();
@@ -305,7 +312,6 @@ class _AddProfileSectionState extends State<AddProfileSection> {
     if (widget.section == EnumProfileAddSections.employmentType) {
       notifiers.empTypeValue.value = element.name;
       notifiers.empCodeValue.value = element.code!;
-      print(notifiers.empCodeValue.value);
     }
     if (widget.section == EnumProfileAddSections.image) {
       notifiers.imageValue.value = element.name;
@@ -369,7 +375,9 @@ class _AddProfileSectionState extends State<AddProfileSection> {
   void initState() {
     notifiers = ProfileValueNotifiers.instance!;
     if (widget.section == EnumProfileAddSections.employmentType) {
-      selectedExpansionValue = widget.sectionText['helperText']!;
+      selectedExpansionValue = notifiers.empTypeValue.value.isNotEmpty
+          ? notifiers.empTypeValue.value
+          : widget.sectionText['helperText']!;
       if (widget.catalogueState is UserCatalogueLoaded) {
         final employmentTypeList =
             (widget.catalogueState as UserCatalogueLoaded)
@@ -395,8 +403,11 @@ class _AddProfileSectionState extends State<AddProfileSection> {
             [];
         expansionTileElements = [
           for (var e in avatarList)
-            ExpansionTileElement('Avatar ${e.number}',
-                avatarUrl: e.avatarUrl, avatarNumber: e.number)
+            ExpansionTileElement(
+              'Avatar ${e.number}',
+              avatarUrl: e.avatarUrl,
+              avatarNumber: e.number,
+            )
         ];
       }
     }
@@ -522,9 +533,11 @@ class _AddProfileSectionState extends State<AddProfileSection> {
               ]),
         );
       case EnumProfileAddSections.activeDays:
-        return const AddSection(
+        return AddSection(
           customHeight: 100,
-          widget: SliderWidget(),
+          widget: SliderWidget(
+            valueNotifier: notifiers.activeDaysValue,
+          ),
         );
 
 ////////////// ------------------ -/////////// --------- //////////////
@@ -561,7 +574,9 @@ class _AddProfileSectionState extends State<AddProfileSection> {
                 Navigator.push(
                   context,
                   newRoute<dynamic>(
-                    const AddProfession(),
+                    AddProfession(
+                      valueNotifier: notifiers.professionValue,
+                    ),
                   ),
                 );
               }),
@@ -576,7 +591,11 @@ class _AddProfileSectionState extends State<AddProfileSection> {
               Navigator.push(
                 context,
                 newRoute<dynamic>(
-                  const AddAddressScreen(),
+                  AddAddressScreen(
+                    valueNotifier: notifiers.addressValue,
+                    id: widget.profile?.id,
+                    addressId: widget.profile?.address?.id,
+                  ),
                 ),
               );
             },
@@ -594,7 +613,9 @@ class _AddProfileSectionState extends State<AddProfileSection> {
                 Navigator.push(
                   context,
                   newRoute<dynamic>(
-                    const AddPhoneNumber(),
+                    AddPhoneNumber(
+                      valueNotifier: notifiers.phoneValue,
+                    ),
                   ),
                 );
               }),
@@ -715,27 +736,17 @@ class ProfileValueNotifiers {
   ValueNotifier<String> birthDateValue = ValueNotifier('');
   ValueNotifier<int> activeDaysValue = ValueNotifier(1);
 
-  void clearNotifiers() {
-    middleNameValue.value = '';
-    professionValue.value = '';
-    empTypeValue.value = '';
-    empCodeValue.value = '';
-    experienceValue.value = '';
-    addressValue.value = '';
-    phoneValue.value = '';
-    avatarValue.value = null;
-    imageValue.value = '';
-    birthDateValue.value = '';
-    activeDaysValue.value = 1;
+  static void reInitializeNotifiers() {
+    instance = ProfileValueNotifiers._();
   }
 
-  void setInitialValues(Profile profile) {
+  void setInitialValues(Profile profile, String? employmentTitle) {
     middleNameValue.value = profile.middleName ?? '';
     professionValue.value = profile.title;
-    empTypeValue.value = profile.empType ?? '';
+    empTypeValue.value = employmentTitle ?? '';
     empCodeValue.value = profile.empType ?? '';
     experienceValue.value = '';
-    addressValue.value = '';
+    addressValue.value = profile.address?.address ?? '';
     phoneValue.value = profile.phone;
     avatarValue.value = profile.avatarNumber;
     imageValue.value = profile.avatarUrl ?? '';

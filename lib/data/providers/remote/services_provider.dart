@@ -1,5 +1,6 @@
 import 'package:asman_work/data/clients/remote/http_client.dart';
 import 'package:asman_work/data/model/service_adress.dart';
+import 'package:asman_work/data/model/user_address.dart';
 import 'package:asman_work/data/providers/remote/provider_mixin.dart';
 import 'package:asman_work/utils/globals/end_points.dart';
 import 'package:latlong2/latlong.dart';
@@ -37,11 +38,31 @@ class ServicesProvider with IProviderMixin {
     return ServiceAddress.fromMap(rawData);
   }
 
-  Future<bool> addAddress(Map<String, dynamic> data, int profileId) async {
+  Future<bool> addAddress(ServiceAddress address, int profileId) async {
+    print('333333333 ${address.toMap()}');
     final response = await _dio.post(
       endPoint: APIEndPoints.kUserProfileAddressPath(profileId),
       headers: headers,
-      data: data,
+      data: address.toMap(),
+    );
+
+    final responseBody = response.data as Map<String, dynamic>;
+
+    // Method from mixin; checks if server gives error message
+    checkError(responseBody);
+
+    return responseBody['success'] as bool;
+  }
+
+  Future<bool> updateAddress(
+    ServiceAddress address, {
+    required int profileId,
+    required int addressId,
+  }) async {
+    final response = await _dio.patch(
+      endPoint: APIEndPoints.kUserProfileAddressPath(profileId, id: addressId),
+      headers: headers,
+      data: address.toMap(),
     );
 
     final responseBody = response.data as Map<String, dynamic>;

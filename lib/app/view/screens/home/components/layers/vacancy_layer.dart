@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/plugin_api.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
-import 'package:latlong2/latlong.dart';
-
 class VacancyLayer extends StatefulWidget {
   const VacancyLayer({
     required this.mapMoveDelegate,

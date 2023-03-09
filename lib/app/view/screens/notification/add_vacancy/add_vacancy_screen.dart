@@ -9,6 +9,7 @@ import 'package:asman_work/app/view/screens/notification/notif_widgets.dart';
 import 'package:asman_work/app/view/screens/notification/section_add.dart';
 import 'package:asman_work/components/ui/base_appbar.dart';
 import 'package:asman_work/data/model/model.dart';
+import 'package:asman_work/utils/settings/extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -72,6 +73,9 @@ class AddVacancyScreen extends StatefulWidget {
 
 class _AddVacancyScreenState extends State<AddVacancyScreen> {
   late final TextEditingController descriptionController;
+  late final TextEditingController organizationTitleController;
+  late final TextEditingController salaryFromController;
+  late final TextEditingController salaryToController;
 
   List<Map<String, String>> sectionTextList = [];
 
@@ -80,25 +84,46 @@ class _AddVacancyScreenState extends State<AddVacancyScreen> {
   late final UserFetchedSuccess userState;
 
   void initValues() {
-    notifiers.clearNotifiers();
+    VacancyValueNotifiers();
+    VacancyValueNotifiers.reInitializeNotifiers();
+    notifiers = VacancyValueNotifiers.instance!;
     if (widget.vacancy != null) {
-      notifiers.setInitialValues(widget.vacancy!);
+      print(widget.vacancy!.empType);
+      final userCatalogueState = context.read<UserCatalogueBloc>().state;
+      final employmentType = (userCatalogueState as UserCatalogueLoaded)
+          .userCatalogue
+          .employmentType!
+          .firstWhere((element) => element.code == widget.vacancy!.empType);
+
+      notifiers.setInitialValues(widget.vacancy!, employmentType.title);
     }
   }
 
   @override
   void initState() {
-    VacancyValueNotifiers();
-    notifiers = VacancyValueNotifiers.instance!;
     initValues();
     descriptionController = TextEditingController(
       text: widget.vacancy != null ? widget.vacancy!.description : null,
     );
+    organizationTitleController = TextEditingController(
+      text: widget.vacancy != null ? widget.vacancy!.employerTitle : null,
+    );
+    salaryFromController = TextEditingController(
+      text:
+          widget.vacancy != null ? widget.vacancy!.salaryFrom.toString() : null,
+    );
+    salaryToController = TextEditingController(
+      text: widget.vacancy != null ? widget.vacancy!.salaryTo.toString() : null,
+    );
     userState = context.read<UserBloc>().state as UserFetchedSuccess;
     sectionTextList = [
       {
-        'sectionName': 'Doglan senesi',
-        'helperText': 'Doglan senanizi bellan',
+        'sectionName': 'Giňişleýin adresiňiz',
+        'helperText': 'Salgy goş',
+      },
+      {
+        'sectionName': 'Telefon belgi goş',
+        'helperText': 'Telefon belgi goş',
       },
       {
         'sectionName': 'Wezipe',
@@ -108,18 +133,7 @@ class _AddVacancyScreenState extends State<AddVacancyScreen> {
         'sectionName': 'Iş tertibi saýla',
         'helperText': 'Saýlaň (Doly iş güni, Ýarym iş güni we ş.m)',
       },
-      {
-        'sectionName': 'Iş tejribesini goşuň',
-        'helperText': 'Iş tejribesi goş',
-      },
-      {
-        'sectionName': 'Giňişleýin adresiňiz',
-        'helperText': 'Salgy goş',
-      },
-      {
-        'sectionName': 'Telefon belgi goş',
-        'helperText': 'Telefon belgi goş',
-      },
+      {},
       {
         'sectionName': 'Surat goş',
         'helperText': 'Surat goşuň',
@@ -144,7 +158,7 @@ class _AddVacancyScreenState extends State<AddVacancyScreen> {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(241, 241, 241, 1),
       appBar: JobBaseAppbar(
-        title: 'Iş gozleyan',
+        title: 'Işgar gozleyan',
         onBack: () {
           Navigator.pop(context);
         },
@@ -155,14 +169,64 @@ class _AddVacancyScreenState extends State<AddVacancyScreen> {
             children: [
               ListView(
                 children: [
-                  ...List.generate(
-                    EnumProfileAddSections.values.length,
-                    (index) => AddProfileSection(
-                      catalogueState: state,
-                      section: EnumProfileAddSections.values[index],
-                      sectionText: sectionTextList[index],
+                  const SectionName(
+                    headlineWord: 'Organizasiya ady',
+                  ),
+                  AddSection(
+                    widget: TextField(
+                      controller: organizationTitleController,
+                      decoration: const InputDecoration(
+                        hintText: 'Yazyn...',
+                        hintStyle: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: kcHardGreyColor,
+                        ),
+                        border: OutlineInputBorder(),
+                      ),
                     ),
                   ),
+                  ...List.generate(EnumVacancyAddSections.values.length,
+                      (index) {
+                    if (EnumVacancyAddSections.values[index] ==
+                        EnumVacancyAddSections.salary) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SectionName(
+                            headlineWord: 'Aylyk haky',
+                          ),
+                          AddSection(
+                            widget: Row(
+                              children: [
+                                CustomInputField(
+                                  controller: salaryFromController,
+                                  borderColor: kcLightestGreyColor,
+                                ),
+                                5.boxW,
+                                BoxText.body('-dan'),
+                                const Spacer(),
+                                CustomInputField(
+                                  controller: salaryToController,
+                                  borderColor: kcLightestGreyColor,
+                                ),
+                                5.boxW,
+                                BoxText.body('-çenli'),
+                                const Spacer(),
+                              ],
+                            ),
+                          ),
+                        ],
+                      );
+                    } else {
+                      return AddVacancySection(
+                        catalogueState: state,
+                        section: EnumVacancyAddSections.values[index],
+                        sectionText: sectionTextList[index],
+                        vacancy: widget.vacancy,
+                      );
+                    }
+                  }),
                   const SectionName(
                     headlineWord: 'Bildiriş barada goşmaça maglumaty',
                   ),
@@ -190,47 +254,50 @@ class _AddVacancyScreenState extends State<AddVacancyScreen> {
               Positioned(
                 bottom: 1,
                 child: AddSection(
-                  widget: BlocConsumer<UserProfileBloc, UserProfileState>(
+                  widget: BlocConsumer<UserVacancyBloc, UserVacancyState>(
                     listener: (context, state) {
-                      if (state is UserProfileAddSuccess) {
+                      if (state is UserVacancyAddSuccess) {
                         Navigator.pop(context);
                       }
                     },
                     builder: (context, state) {
                       return BoxButton.block(
                         title: confirmButtonTitle,
-                        busy: state is UserProfileLoading,
+                        busy: state is UserVacancyLoading,
                         onTap: () {
-                          FocusScope.of(context).unfocus();
-                          showDialog<dynamic>(
-                            context: context,
-                            builder: (BuildContext ctx) {
-                              return JobAlertDialog(
-                                button2: GestureDetector(
-                                  child: BoxButton.small(
-                                    title: 'Tassykla',
-                                    onTap: () {
-                                      onConfirm(user);
-                                      Navigator.pop(ctx);
-                                    },
+                          if (state is! UserVacancyLoading) {
+                            FocusScope.of(context).unfocus();
+                            showDialog<dynamic>(
+                              context: context,
+                              builder: (BuildContext ctx) {
+                                return JobAlertDialog(
+                                  button2: GestureDetector(
+                                    child: BoxButton.small(
+                                      title: 'Tassykla',
+                                      onTap: () {
+                                        onConfirm(user);
+                                        Navigator.pop(ctx);
+                                      },
+                                    ),
                                   ),
-                                ),
-                                button1: BoxButton.small(
-                                    title: 'Goýbolsun',
-                                    onTap: () {
-                                      Navigator.pop(ctx);
-                                    }),
-                                contentText: Column(
-                                  children: [
-                                    SvgPicture.asset(Assets.infoIcon),
-                                    verticalSpaceSmall,
-                                    BoxText.headline('Bildirişiňizi tassyklaň'),
-                                    const Divider(),
-                                  ],
-                                ),
-                              );
-                            },
-                          );
+                                  button1: BoxButton.small(
+                                      title: 'Goýbolsun',
+                                      onTap: () {
+                                        Navigator.pop(ctx);
+                                      }),
+                                  contentText: Column(
+                                    children: [
+                                      SvgPicture.asset(Assets.infoIcon),
+                                      verticalSpaceSmall,
+                                      BoxText.headline(
+                                          'Bildirişiňizi tassyklaň'),
+                                      const Divider(),
+                                    ],
+                                  ),
+                                );
+                              },
+                            );
+                          }
                         },
                       );
                     },
@@ -245,27 +312,30 @@ class _AddVacancyScreenState extends State<AddVacancyScreen> {
   }
 
   void onConfirm(User user) {
-    final profile = Profile(
+    final vacancy = UserVacancy(
       id: 0,
       userId: 0,
-      name: user.firstname,
-      surname: user.lastname,
-      middleName: '',
-      phone: notifiers.phoneValue.value,
-      birthDate: notifiers.birthDateValue.value,
       title: notifiers.professionValue.value,
-      aboutMe: descriptionController.text,
+      employerTitle: organizationTitleController.text,
+      contactPhone: [notifiers.phoneValue.value],
+      empType: notifiers.empCodeValue.value,
+      description: descriptionController.text,
+      industryId: 1,
+      salaryFrom: int.tryParse(salaryFromController.text),
+      salaryTo: int.tryParse(salaryToController.text),
+      expirationDays: notifiers.activeDaysValue.value,
       avatarNumber: notifiers.avatarValue.value,
       createdAt: '',
+      expiresAt: '',
     ).toMap();
     if (widget.vacancy == null) {
-      context.read<UserProfileBloc>().add(
-            UserProfileAddEvent(profile),
+      context.read<UserVacancyBloc>().add(
+            UserVacancyAddEvent(vacancy),
           );
     } else {
-      context.read<UserProfileBloc>().add(
-            UserProfileUpdateEvent(
-              profile,
+      context.read<UserVacancyBloc>().add(
+            UserVacancyUpdateEvent(
+              vacancy,
               widget.vacancy!.id,
             ),
           );
@@ -277,23 +347,25 @@ class _AddVacancyScreenState extends State<AddVacancyScreen> {
   }
 }
 
-class AddProfileSection extends StatefulWidget {
-  const AddProfileSection({
+class AddVacancySection extends StatefulWidget {
+  const AddVacancySection({
     required this.section,
     required this.sectionText,
     required this.catalogueState,
+    this.vacancy,
     super.key,
   });
 
-  final EnumProfileAddSections section;
+  final EnumVacancyAddSections section;
   final Map<String, String> sectionText;
   final UserCatalogueState catalogueState;
+  final UserVacancy? vacancy;
 
   @override
-  State<AddProfileSection> createState() => _AddProfileSectionState();
+  State<AddVacancySection> createState() => _AddVacancySectionState();
 }
 
-class _AddProfileSectionState extends State<AddProfileSection> {
+class _AddVacancySectionState extends State<AddVacancySection> {
   bool isExpand = false;
 
   String selectedExpansionValue = '';
@@ -318,10 +390,11 @@ class _AddProfileSectionState extends State<AddProfileSection> {
       newList[i] = item.copy(selected: false);
     }
     selectedExpansionValue = element.name;
-    if (widget.section == EnumProfileAddSections.employmentType) {
+    if (widget.section == EnumVacancyAddSections.employmentType) {
       notifiers.empTypeValue.value = element.name;
+      notifiers.empCodeValue.value = element.code!;
     }
-    if (widget.section == EnumProfileAddSections.image) {
+    if (widget.section == EnumVacancyAddSections.image) {
       notifiers.imageValue.value = element.name;
     }
     // update state
@@ -330,7 +403,7 @@ class _AddProfileSectionState extends State<AddProfileSection> {
     setState(() {});
   }
 
-  Widget expansionTitle(bool _isExpand) {
+  Widget expansionTitle(bool _isExpand, {required bool isImageField}) {
     if (_isExpand) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -343,18 +416,49 @@ class _AddProfileSectionState extends State<AddProfileSection> {
         ],
       );
     } else {
-      return BoxText.headline(
-        selectedExpansionValue,
-        color: kcPrimaryColor,
-      );
+      if (isImageField) {
+        return ValueListenableBuilder<int?>(
+          valueListenable: notifiers.avatarValue,
+          builder: (context, value, child) {
+            if (value != null) {
+              return Row(
+                children: [
+                  Image.network(
+                    expansionTileElements[value - 1].avatarUrl!,
+                    height: 40,
+                    width: 40,
+                  ),
+                  10.boxW,
+                  BoxText.headline(
+                    selectedExpansionValue,
+                    color: kcPrimaryColor,
+                  ),
+                ],
+              );
+            } else {
+              return BoxText.headline(
+                selectedExpansionValue,
+                color: kcPrimaryColor,
+              );
+            }
+          },
+        );
+      } else {
+        return BoxText.headline(
+          selectedExpansionValue,
+          color: kcPrimaryColor,
+        );
+      }
     }
   }
 
   @override
   void initState() {
     notifiers = VacancyValueNotifiers.instance!;
-    if (widget.section == EnumProfileAddSections.employmentType) {
-      selectedExpansionValue = widget.sectionText['helperText']!;
+    if (widget.section == EnumVacancyAddSections.employmentType) {
+      selectedExpansionValue = notifiers.empTypeValue.value.isNotEmpty
+          ? notifiers.empTypeValue.value
+          : widget.sectionText['helperText']!;
       if (widget.catalogueState is UserCatalogueLoaded) {
         final employmentTypeList =
             (widget.catalogueState as UserCatalogueLoaded)
@@ -362,23 +466,28 @@ class _AddProfileSectionState extends State<AddProfileSection> {
                     .employmentType ??
                 [];
         expansionTileElements = employmentTypeList
-            .map<ExpansionTileElement>((e) => ExpansionTileElement(e.title))
+            .map<ExpansionTileElement>(
+              (e) => ExpansionTileElement(e.title, code: e.code),
+            )
             .toList();
       }
     }
 
-    if (widget.section == EnumProfileAddSections.image) {
-      selectedExpansionValue = widget.sectionText['helperText']!;
+    if (widget.section == EnumVacancyAddSections.image) {
+      selectedExpansionValue = notifiers.avatarValue.value != null
+          ? 'Avatar ${notifiers.avatarValue.value}'
+          : widget.sectionText['helperText']!;
       if (widget.catalogueState is UserCatalogueLoaded) {
         final avatarList = (widget.catalogueState as UserCatalogueLoaded)
                 .userCatalogue
-                .profileAvatars ??
+                .vacancyAvatars ??
             [];
         expansionTileElements = [
-          for (var i = 0; i < avatarList.length; i++)
+          for (var e in avatarList)
             ExpansionTileElement(
-              'Avatar ${i + 1}',
-              avatarUrl: avatarList[i].avatarUrl,
+              'Avatar ${e.number}',
+              avatarUrl: e.avatarUrl,
+              avatarNumber: e.number,
             )
         ];
       }
@@ -402,9 +511,9 @@ class _AddProfileSectionState extends State<AddProfileSection> {
     );
   }
 
-  Widget sectionwidget(EnumProfileAddSections section) {
+  Widget sectionwidget(EnumVacancyAddSections section) {
     switch (section) {
-      case EnumProfileAddSections.employmentType:
+      case EnumVacancyAddSections.employmentType:
         return AddSection(
           hasChildren: true,
           widget: ExpansionTile(
@@ -413,7 +522,7 @@ class _AddProfileSectionState extends State<AddProfileSection> {
                 isExpand = isExapnd;
               });
             },
-            title: expansionTitle(isExpand),
+            title: expansionTitle(isExpand, isImageField: false),
             children: expansionTileElements.map((choice) {
               return Row(
                 children: [
@@ -438,7 +547,7 @@ class _AddProfileSectionState extends State<AddProfileSection> {
             }).toList(),
           ),
         );
-      case EnumProfileAddSections.image:
+      case EnumVacancyAddSections.image:
         return AddSection(
           hasChildren: true,
           widget: ExpansionTile(
@@ -447,7 +556,7 @@ class _AddProfileSectionState extends State<AddProfileSection> {
                   isExpand = isExapnd;
                 });
               },
-              title: expansionTitle(isExpand),
+              title: expansionTitle(isExpand, isImageField: true),
               children: [
                 Wrap(
                   spacing: 10,
@@ -458,8 +567,7 @@ class _AddProfileSectionState extends State<AddProfileSection> {
                         return GestureDetector(
                           onTap: () {
                             _selectedElement(choice);
-                            notifiers.avatarValue.value =
-                                expansionTileElements.indexOf(choice) + 1;
+                            notifiers.avatarValue.value = choice.avatarNumber;
                           },
                           child: Column(
                             children: [
@@ -505,38 +613,18 @@ class _AddProfileSectionState extends State<AddProfileSection> {
                 )
               ]),
         );
-      case EnumProfileAddSections.activeDays:
-        return const AddSection(
+      case EnumVacancyAddSections.activeDays:
+        return AddSection(
           customHeight: 100,
-          widget: SliderWidget(),
+          widget: SliderWidget(
+            valueNotifier: notifiers.activeDaysValue,
+          ),
         );
 
 ////////////// ------------------ -/////////// --------- //////////////
       ///
-      case EnumProfileAddSections.birthDate:
-        return AddSection(
-          widget: AddSectionValue(
-            valueNotifier: notifiers.birthDateValue,
-            sectionText: widget.sectionText,
-            onTap: () {
-              showDatePicker(
-                context: context,
-                initialDate: notifiers.birthDateValue.value.isNotEmpty
-                    ? dateFromString()
-                    : DateTime(2013),
-                firstDate: DateTime(
-                  1960,
-                ),
-                lastDate: DateTime.now(),
-              ).then((value) {
-                if (value != null) {
-                  formattedDate(value);
-                }
-              });
-            },
-          ),
-        );
-      case EnumProfileAddSections.profession:
+
+      case EnumVacancyAddSections.profession:
         return AddSection(
           widget: AddSectionValue(
               valueNotifier: notifiers.professionValue,
@@ -545,13 +633,15 @@ class _AddProfileSectionState extends State<AddProfileSection> {
                 Navigator.push(
                   context,
                   newRoute<dynamic>(
-                    const AddProfession(),
+                    AddProfession(
+                      valueNotifier: notifiers.professionValue,
+                    ),
                   ),
                 );
               }),
         );
 
-      case EnumProfileAddSections.address:
+      case EnumVacancyAddSections.address:
         return AddSection(
           widget: AddSectionValue(
             valueNotifier: notifiers.addressValue,
@@ -560,14 +650,17 @@ class _AddProfileSectionState extends State<AddProfileSection> {
               Navigator.push(
                 context,
                 newRoute<dynamic>(
-                  const AddAddressScreen(),
+                  AddAddressScreen(
+                    id : widget.vacancy?.id,
+                    valueNotifier: notifiers.addressValue,
+                  ),
                 ),
               );
             },
           ),
         );
 
-      case EnumProfileAddSections.phone:
+      case EnumVacancyAddSections.phone:
       // ignore: no_default_cases
       default:
         return AddSection(
@@ -578,7 +671,9 @@ class _AddProfileSectionState extends State<AddProfileSection> {
                 Navigator.push(
                   context,
                   newRoute<dynamic>(
-                    const AddPhoneNumber(),
+                    AddPhoneNumber(
+                      valueNotifier: notifiers.phoneValue,
+                    ),
                   ),
                 );
               }),
@@ -590,24 +685,6 @@ class _AddProfileSectionState extends State<AddProfileSection> {
     return MaterialPageRoute<T>(
       builder: (context) => widget,
     );
-  }
-
-  DateTime dateFromString() {
-    final dateString = notifiers.birthDateValue.value;
-    final splitted = dateString.split('-');
-
-    return DateTime(
-      int.parse(splitted[0]),
-      int.parse(splitted[1]),
-      int.parse(splitted[2]),
-    );
-  }
-
-  void formattedDate(DateTime value) {
-    final month = value.month < 10 ? '0${value.month}' : '${value.month}';
-    final day = value.day < 10 ? '0${value.day}' : '${value.day}';
-    final formattedDate = '${value.year}-$month-$day';
-    notifiers.birthDateValue.value = formattedDate;
   }
 }
 
@@ -668,18 +745,15 @@ class AddSectionValue extends StatelessWidget {
   }
 }
 
-enum EnumProfileAddSections {
-  birthDate,
-  profession,
-  employmentType,
-  experience,
+enum EnumVacancyAddSections {
   address,
   phone,
+  profession,
+  employmentType,
+  salary,
   image,
   activeDays,
 }
-
-typedef ValueEntered<T> = void Function(T a, EnumProfileAddSections b);
 
 class VacancyValueNotifiers {
   factory VacancyValueNotifiers() => instance ??= VacancyValueNotifiers._();
@@ -687,41 +761,30 @@ class VacancyValueNotifiers {
 
   static VacancyValueNotifiers? instance;
 
-  ValueNotifier<String> middleNameValue = ValueNotifier('');
-  ValueNotifier<String> professionValue = ValueNotifier('');
-  ValueNotifier<String> empTypeValue = ValueNotifier('');
-  ValueNotifier<String> experienceValue = ValueNotifier('');
+  ValueNotifier<String> employerTitle = ValueNotifier('');
   ValueNotifier<String> addressValue = ValueNotifier('');
   ValueNotifier<String> phoneValue = ValueNotifier('');
-  ValueNotifier<int> avatarValue = ValueNotifier(0);
+  ValueNotifier<String> professionValue = ValueNotifier('');
+  ValueNotifier<String> empTypeValue = ValueNotifier('');
+  ValueNotifier<String> empCodeValue = ValueNotifier('');
+  ValueNotifier<int?> avatarValue = ValueNotifier(null);
   ValueNotifier<String> imageValue = ValueNotifier('');
-  ValueNotifier<String> birthDateValue = ValueNotifier('');
-  ValueNotifier<double> activeDaysValue = ValueNotifier(1);
+  ValueNotifier<int> activeDaysValue = ValueNotifier(1);
 
-  void clearNotifiers() {
-    middleNameValue.value = '';
-    professionValue.value = '';
-    empTypeValue.value = '';
-    experienceValue.value = '';
-    addressValue.value = '';
-    phoneValue.value = '';
-    avatarValue.value = 0;
-    imageValue.value = '';
-    birthDateValue.value = '';
-    activeDaysValue.value = 1;
+  static void reInitializeNotifiers() {
+    instance = VacancyValueNotifiers._();
   }
 
-  void setInitialValues(UserVacancy vacancy) {
-    middleNameValue.value = '';
+  void setInitialValues(UserVacancy vacancy, String? employmentTitle) {
+    employerTitle.value = vacancy.employerTitle;
     professionValue.value = vacancy.title;
-    empTypeValue.value = '';
-    experienceValue.value = '';
+    empTypeValue.value = employmentTitle ?? '';
+    empCodeValue.value = vacancy.empType;
     addressValue.value = '';
     phoneValue.value = vacancy.contactPhone[0];
     avatarValue.value = vacancy.avatarNumber ?? 1;
     imageValue.value = '';
-    birthDateValue.value = '';
-    activeDaysValue.value = 1;
+    activeDaysValue.value = vacancy.expirationDays ?? 1;
   }
 }
 

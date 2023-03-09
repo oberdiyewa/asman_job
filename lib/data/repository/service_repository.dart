@@ -1,4 +1,4 @@
-import 'package:asman_work/data/model/service_adress.dart';
+import 'package:asman_work/data/model/model.dart';
 import 'package:asman_work/data/providers/remote/services_provider.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -13,7 +13,19 @@ class ServicesRepository {
     return _provider.getAddressByPoint(point);
   }
 
-  Future<bool> addAddress(Map<String, dynamic> data, int prodileId) async {
-    return _provider.addAddress(data, prodileId);
+  Future<bool> addAddress(ServiceAddress address, int id) async {
+    return _provider.addAddress(address, id);
+  }
+
+  Future<bool> updateAddress(
+    ServiceAddress address, {
+    required int id,
+    required int addressId,
+  }) async {
+    return _provider.updateAddress(
+      address,
+      profileId: id,
+      addressId: addressId,
+    );
   }
 }

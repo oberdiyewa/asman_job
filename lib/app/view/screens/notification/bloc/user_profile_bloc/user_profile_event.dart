@@ -11,13 +11,6 @@ class UserProfileFetchEvent extends UserProfileEvent {}
 
 class UserProfileFetchMoreEvent extends UserProfileEvent {}
 
-class UserProfileDeleteEvent extends UserProfileEvent {
-  const UserProfileDeleteEvent(this.id);
-  final int id;
-
-  @override
-  List<Object?> get props => [id];
-}
 
 class UserProfileAddEvent extends UserProfileEvent {
   const UserProfileAddEvent(this.data);
@@ -36,4 +29,12 @@ class UserProfileUpdateEvent extends UserProfileEvent {
 
   @override
   List<Object?> get props => [data, id];
+} 
+
+class UserProfileDeleteEvent extends UserProfileEvent {
+  const UserProfileDeleteEvent(this.id);
+  final int id;
+
+  @override
+  List<Object?> get props => [id];
 }

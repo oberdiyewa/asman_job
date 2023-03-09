@@ -11,6 +11,8 @@ class ServiceAddressInitial extends ServiceAddressState {}
 
 class ServiceAddressLoading extends ServiceAddressState {}
 
+class ServiceAddressAddSuccess extends ServiceAddressState {}
+
 class ServiceAddressLoaded extends ServiceAddressState {
   const ServiceAddressLoaded(this.addressList);
   final List<ServiceAddress> addressList;

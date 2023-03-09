@@ -54,6 +54,8 @@ class MapService {
   // ignore: prefer_final_fields
   MapMoveDelegate? moveDelegate = (_, __, {id}) {};
 
+  ValueNotifier<LatLng?> selectedPoint = ValueNotifier(null);
+
   void onMarkerTapped(
     BuildContext ctx, {
     required PublicEntity entity,

@@ -1,8 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'user_vacancy_bloc.dart';
 
 abstract class UserVacancyEvent extends Equatable {
   const UserVacancyEvent();
+
   @override
   List<Object?> get props => [];
 }
@@ -10,3 +10,30 @@ abstract class UserVacancyEvent extends Equatable {
 class UserVacancyFetchEvent extends UserVacancyEvent {}
 
 class UserVacancyFetchMoreEvent extends UserVacancyEvent {}
+
+class UserVacancyAddEvent extends UserVacancyEvent {
+  const UserVacancyAddEvent(this.data);
+
+  final Map<String, dynamic> data;
+
+  @override
+  List<Object?> get props => [data];
+}
+
+class UserVacancyUpdateEvent extends UserVacancyEvent {
+  const UserVacancyUpdateEvent(this.data, this.id);
+
+  final Map<String, dynamic> data;
+  final int id;
+
+  @override
+  List<Object?> get props => [data, id];
+}
+
+class UserVacancyDeleteEvent extends UserVacancyEvent {
+  const UserVacancyDeleteEvent(this.id);
+  final int id;
+
+  @override
+  List<Object?> get props => [id];
+}

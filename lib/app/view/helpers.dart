@@ -5,6 +5,9 @@ abstract class Assets {
   static const searchSelected = 'assets/icons/search_selected.svg';
   static const searchUnselected = 'assets/icons/search_unselected.svg';
 
+  static const chatSelected = 'assets/icons/chat_selected.svg';
+  static const chatUnselected = 'assets/icons/chat_unselected.svg';
+
   static const notifSelected = 'assets/icons/notif_selected.svg';
   static const notifUnselected = 'assets/icons/notif_unselected.svg';
 

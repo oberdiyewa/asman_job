@@ -6,6 +6,7 @@ import 'package:asman_work/app/view/screens/home/bloc/home_bloc.dart';
 import 'package:asman_work/app/view/screens/home/components/draggable_scrollable_sheet/public_entity_list_item.dart';
 import 'package:asman_work/app/view/screens/search/bloc/bloc.dart';
 import 'package:asman_work/components/ui/refresh_button.dart';
+import 'package:asman_work/data/repository/repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -88,9 +89,8 @@ class _SearchScreenBodyState extends State<SearchScreenBody> {
           const SizedBox(
             height: 10,
           ),
-          // const SearchSuggestionsWidget(),
           SearchItemList(
-            // key: Key('${widget.isVacancy}1'),
+            isVacancy: widget.isVacancy,
             fetchMore: widget.isVacancy
                 ? () {
                     context.read<SearchVacancyBloc>().add(
@@ -195,10 +195,12 @@ class SearchField extends StatelessWidget {
 class SearchItemList extends StatefulWidget {
   const SearchItemList({
     required this.fetchMore,
+    required this.isVacancy,
     super.key,
   });
 
   final VoidCallback fetchMore;
+  final bool isVacancy;
 
   @override
   State<SearchItemList> createState() => _SearchItemList();
@@ -213,20 +215,30 @@ class _SearchItemList extends State<SearchItemList> {
     super.initState();
   }
 
+  int page = 1;
   bool isLoading = false;
 
   void _scrollListener() {
     if (scrollController.offset >= scrollController.position.maxScrollExtent &&
         !isLoading) {
-      setState(() {
-        isLoading = true;
-      });
-      Future<dynamic>.delayed(
-        const Duration(seconds: 1),
-      ).then((dynamic value) {
-        widget.fetchMore();
-        isLoading = false;
-      });
+      int totalPage;
+      if (widget.isVacancy) {
+        totalPage = PublicVacancyRepository().totalPage;
+      } else {
+        totalPage = PublicProfileRepository().totalPage;
+      }
+      if (page < totalPage) {
+        page++;
+        setState(() {
+          isLoading = true;
+        });
+        Future<dynamic>.delayed(
+          const Duration(seconds: 1),
+        ).then((dynamic value) {
+          widget.fetchMore();
+          isLoading = false;
+        });
+      }
     }
   }
 
@@ -256,6 +268,10 @@ class _SearchItemList extends State<SearchItemList> {
                     alignment: Alignment.topCenter,
                     child: const CircularProgressIndicator(),
                   ),
+                ),
+              if (!isLoading)
+                const SliverPadding(
+                  padding: EdgeInsets.only(bottom: 100),
                 ),
             ],
           );

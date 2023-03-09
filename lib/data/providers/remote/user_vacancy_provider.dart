@@ -45,4 +45,45 @@ class UserVacancyProvider with IProviderMixin {
     final rawUserVacancy = responseBody['data'] as Map<String, dynamic>;
     return UserVacancy.fromMap(rawUserVacancy);
   }
+
+  Future<bool> addUserVacancy(Map<String, dynamic> data) async {
+    final response = await _dio.post(
+      endPoint: APIEndPoints.kUsersVacancyPath(EnumUserVacancyPaths.none),
+      headers: headers,
+      data: data,
+    );
+    final responseBody = response.data as Map<String, dynamic>;
+
+    // Method from mixin; checks if server gives error message
+    checkError(responseBody);
+
+    return responseBody['success'] as bool;
+  }
+
+  Future<bool> updateUserVacancy(Map<String, dynamic> data, int id) async {
+    final response = await _dio.patch(
+      endPoint: APIEndPoints.kUsersVacancyPath(EnumUserVacancyPaths.none, id),
+      headers: headers,
+      data: data,
+    );
+    final responseBody = response.data as Map<String, dynamic>;
+
+    // Method from mixin; checks if server gives error message
+    checkError(responseBody);
+
+    return responseBody['success'] as bool;
+  }
+
+  Future<bool> deleteUserVacancy(int id) async {
+    final response = await _dio.delete(
+      APIEndPoints.kUsersVacancyPath(EnumUserVacancyPaths.none, id),
+      headers: headers,
+    );
+    final responseBody = response.data as Map<String, dynamic>;
+
+    // Method from mixin; checks if server gives error message
+    checkError(responseBody);
+
+    return responseBody['success'] as bool;
+  }
 }

@@ -10,8 +10,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class AddProfession extends StatefulWidget {
   const AddProfession({
+    required this.valueNotifier,
     super.key,
   });
+  final ValueNotifier<dynamic> valueNotifier;
 
   @override
   State<AddProfession> createState() => _AddProfessionState();
@@ -19,13 +21,11 @@ class AddProfession extends StatefulWidget {
 
 class _AddProfessionState extends State<AddProfession> {
   late final TextEditingController _textController;
-  late final ProfileValueNotifiers notifiers;
 
   @override
   void initState() {
-    notifiers = ProfileValueNotifiers.instance!;
     _textController =
-        TextEditingController(text: notifiers.professionValue.value);
+        TextEditingController(text: widget.valueNotifier.value as String);
     super.initState();
   }
 
@@ -83,7 +83,7 @@ class _AddProfessionState extends State<AddProfession> {
                           ),
                         ),
                         onChanged: (value) {
-                          notifiers.professionValue.value = value;
+                          widget.valueNotifier.value = value;
                         },
                       ),
                     ),
@@ -109,8 +109,7 @@ class _AddProfessionState extends State<AddProfession> {
                         GestureDetector(
                           onTap: () {
                             _textController.text = professions[index];
-                            notifiers.professionValue.value =
-                                _textController.text;
+                            widget.valueNotifier.value = _textController.text;
                           },
                           child: BoxText.body(professions[index]),
                         ),

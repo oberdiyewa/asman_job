@@ -107,17 +107,9 @@ class CustomBottomBar extends StatelessWidget {
                                       if (isSelected == true) verticalSpaceTiny,
                                       SvgPicture.asset(
                                         icon,
-                                        width: 24.w,
-                                        height: 24.h,
+                                        width: 40.w,
+                                        height: 40.h,
                                       ),
-                                      Text(
-                                        navBar.title,
-                                        style: TextStyle(
-                                          color: isSelected
-                                              ? kcPrimaryColor
-                                              : Colors.grey[700],
-                                        ),
-                                      )
                                     ],
                                   )),
                             ),

@@ -49,7 +49,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           children: [
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.6,
-              child: const MapWidget(),
+              child: const MapWidget(forChoosingAddress: false,),
             ),
             Padding(
               padding: const EdgeInsets.all(20),

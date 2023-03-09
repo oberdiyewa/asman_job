@@ -2,6 +2,7 @@ part of 'user_vacancy_bloc.dart';
 
 abstract class UserVacancyState extends Equatable {
   const UserVacancyState();
+
   @override
   List<Object?> get props => [];
 }
@@ -22,6 +23,8 @@ class UserVacancyLoaded extends UserVacancyState {
   @override
   List<Object?> get props => [vacancies, moreVacancies];
 }
+
+class UserVacancyAddSuccess extends UserVacancyState{}
 
 class UserVacancyFailure extends UserVacancyState {
   const UserVacancyFailure(this.errorMessage);

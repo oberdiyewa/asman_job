@@ -23,4 +23,16 @@ class UserVacancyRepository {
   Future<UserVacancy> userVacancy(int id) async {
     return _provider.getUserVacancy(id);
   }
+
+  Future<bool> userVacancyAdd(Map<String, dynamic> data) async {
+    return _provider.addUserVacancy(data);
+  }
+
+  Future<bool> userVacancyUpdate(Map<String, dynamic> data, int id) async {
+    return _provider.updateUserVacancy(data, id);
+  }
+
+  Future<bool> userVacancyDelete(int id) async {
+    return _provider.deleteUserVacancy(id);
+  }
 }

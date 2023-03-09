@@ -75,7 +75,7 @@ class NotifScreenTabView extends StatelessWidget {
                 );
                 // If Loaded successfully
               } else if (state is UserVacancyLoaded) {
-                final vacancyList = state.moreVacancies;
+                final vacancyList = state.vacancies;
                 if (state.vacancies.isEmpty) {
                   return const NotificationEmptyScreen(
                     widget: AddVacancyScreen(),
@@ -182,7 +182,7 @@ class _UserAdvertisementsListState extends State<UserAdvertisementsList> {
                   (BuildContext context, int index) {
                     final currentItem = widget.items[index];
                     return ListTile(
-                      title: Text((currentItem.title) as String),
+                      title: Text(currentItem.title as String),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
@@ -191,9 +191,15 @@ class _UserAdvertisementsListState extends State<UserAdvertisementsList> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute<dynamic>(
-                                  builder: (context) => AddProfileScreen(
-                                    profile: currentItem as Profile,
-                                  ),
+                                  builder: (context) {
+                                    return widget.isVacancy
+                                        ? AddVacancyScreen(
+                                            vacancy: currentItem as UserVacancy,
+                                          )
+                                        : AddProfileScreen(
+                                            profile: currentItem as Profile,
+                                          );
+                                  },
                                 ),
                               );
                             },
@@ -219,11 +225,20 @@ class _UserAdvertisementsListState extends State<UserAdvertisementsList> {
                                       TextButton(
                                         onPressed: () {
                                           Navigator.pop(ctx);
-                                          context.read<UserProfileBloc>().add(
-                                                UserProfileDeleteEvent(
-                                                  currentItem.id as int,
-                                                ),
-                                              );
+                                          if (widget.isVacancy) {
+                                            context.read<UserVacancyBloc>().add(
+                                                  UserVacancyDeleteEvent(
+                                                      (currentItem
+                                                              as UserVacancy)
+                                                          .id),
+                                                );
+                                          } else {
+                                            context.read<UserProfileBloc>().add(
+                                                  UserProfileDeleteEvent(
+                                                    (currentItem as Profile).id,
+                                                  ),
+                                                );
+                                          }
                                         },
                                         child: const Text('Hawa'),
                                       )

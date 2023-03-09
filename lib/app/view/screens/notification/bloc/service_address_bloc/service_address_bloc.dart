@@ -11,6 +11,8 @@ class ServiceAddressBloc
   ServiceAddressBloc(this._repository) : super(ServiceAddressInitial()) {
     on<ServiceAddressFetchEvent>(_onFetchEvent);
     on<ServiceAddressClearEvent>(_onClearEvent);
+    on<ServiceAddressAddEvent>(_onAddEvent);
+    on<ServiceAddressUpdateEvent>(_onUpdateEvent);
   }
   final ServicesRepository _repository;
 
@@ -42,5 +44,44 @@ class ServiceAddressBloc
   ) async {
     emit(ServiceAddressLoading());
     emit(const ServiceAddressLoaded([]));
+  }
+
+  Future<void> _onAddEvent(
+    ServiceAddressAddEvent event,
+    Emitter<ServiceAddressState> emit,
+  ) async {
+    emit(ServiceAddressLoading());
+    try {
+      await _repository.addAddress(event.address, event.id);
+      emit(ServiceAddressAddSuccess());
+      emit(const ServiceAddressLoaded([]));
+    } catch (e) {
+      emit(
+        ServiceAddressFailure(
+          e.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> _onUpdateEvent(
+    ServiceAddressUpdateEvent event,
+    Emitter<ServiceAddressState> emit,
+  ) async {
+    emit(ServiceAddressLoading());
+    try {
+      final response = await _repository.updateAddress(
+        event.address,
+        id: event.id,
+        addressId: event.addressId,
+      );
+      emit(const ServiceAddressLoaded([]));
+    } catch (e) {
+      emit(
+        ServiceAddressFailure(
+          e.toString(),
+        ),
+      );
+    }
   }
 }

@@ -3,7 +3,9 @@ import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/main/bloc/location_bloc/location_bloc.dart';
 import 'package:asman_work/app/view/screens/home/bloc/home_bloc.dart';
 import 'package:asman_work/app/view/screens/home/components/layers/profile_layer.dart';
+import 'package:asman_work/app/view/screens/home/components/layers/select_address_layer.dart';
 import 'package:asman_work/app/view/screens/home/components/layers/vacancy_layer.dart';
+import 'package:asman_work/app/view/screens/notification/bloc/address_reverse_bloc/address_reverse_bloc.dart';
 import 'package:asman_work/utils/globals/consts.dart';
 import 'package:asman_work/utils/settings/extentions.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +15,18 @@ import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 
 class MapWidget extends StatefulWidget {
-  const MapWidget({super.key});
+  const MapWidget({
+    required this.forChoosingAddress,
+    super.key,
+  });
+  final bool forChoosingAddress;
 
   @override
   State<MapWidget> createState() => _MapWidgetState();
 }
 
-class _MapWidgetState extends State<MapWidget> with TickerProviderStateMixin {
+class _MapWidgetState extends State<MapWidget>
+    with SingleTickerProviderStateMixin {
   Position? currentPositionOfTheUser;
 
   LatLng get currentLatLngCenter {
@@ -31,62 +38,98 @@ class _MapWidgetState extends State<MapWidget> with TickerProviderStateMixin {
     }
   }
 
+  bool isPointerDown = false;
+
   @override
   void initState() {
-    super.initState();
     initializeMap();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     print(MapService.instance.hashCode);
-    return FlutterMap(
-      mapController: MapService.instance.mapController,
-      options: MapOptions(
-          center: currentLatLngCenter,
-          zoom: 8,
-          maxZoom: 18,
-          minZoom: 2,
-          onTap: (position, latlong) {
-            print(latlong);
-          }),
+    return Stack(
       children: [
-        TileLayer(
-          urlTemplate: 'http://geo.asmantiz.com/tile/{z}/{x}/{y}.png',
-          tileProvider: CachedTileProvider(),
-        ),
-        BlocBuilder<TabControllerCubit, TabControllerState>(
-          builder: (context, state) {
-            final tabState = state as TabControllerSelected;
-            if (tabState.draggableSheetState == EnumDraggableSheetState.none ||
-                tabState.draggableSheetState ==
-                    EnumDraggableSheetState.lookingJob ||
-                (tabState.isVacancy ?? false)) {
-              return VacancyLayer(mapMoveDelegate: _animatedMapMove);
-            } else {
-              return ProfileLayer(mapMoveDelegate: _animatedMapMove);
-            }
-          },
-        ),
-        BlocConsumer<LocationBloc, LocationState>(
-          listener: (context, state) {
-            if (state is LocationLoadSuccess) {
-              currentPositionOfTheUser = state.position;
-            }
-          },
-          builder: (context, state) {
-            return MarkerLayer(
-              markers: [
-                Marker(
-                  rotate: true,
-                  height: 40,
-                  width: 40,
-                  point: currentLatLngCenter,
-                  builder: (context) => Image.asset(Assets.myLocation),
-                )
-              ],
-            );
-          },
+        FlutterMap(
+          mapController: MapService.instance.mapController,
+          options: MapOptions(
+            center: currentLatLngCenter,
+            zoom: 8,
+            maxZoom: 18,
+            minZoom: 2,
+            onPointerDown: (event, point) {
+              if (widget.forChoosingAddress) {
+                setState(() {
+                  isPointerDown = true;
+                });
+              }
+            },
+            onPointerUp: (event, point) {
+              if (widget.forChoosingAddress) {
+                setState(() {
+                  isPointerDown = false;
+                });
+                MapService.instance.selectedPoint.value = point;
+                context.read<AddressReverseBloc>().add(
+                      AddressReverseFetchEvent(
+                        point,
+                      ),
+                    );
+                print(MapService.instance.selectedPoint.value);
+              }
+            },
+            onTap: (position, latlong) {
+              // print(latlong);
+            },
+          ),
+          children: [
+            TileLayer(
+              urlTemplate: 'http://geo.asmantiz.com/tile/{z}/{x}/{y}.png',
+              tileProvider: CachedTileProvider(),
+            ),
+            if (!widget.forChoosingAddress)
+              BlocBuilder<TabControllerCubit, TabControllerState>(
+                builder: (context, state) {
+                  final tabState = state as TabControllerSelected;
+                  if (tabState.draggableSheetState ==
+                          EnumDraggableSheetState.none ||
+                      tabState.draggableSheetState ==
+                          EnumDraggableSheetState.lookingJob ||
+                      (tabState.isVacancy ?? false)) {
+                    return VacancyLayer(mapMoveDelegate: _animatedMapMove);
+                  } else {
+                    return ProfileLayer(mapMoveDelegate: _animatedMapMove);
+                  }
+                },
+              ),
+            BlocConsumer<LocationBloc, LocationState>(
+              listener: (context, state) {
+                if (state is LocationLoadSuccess) {
+                  currentPositionOfTheUser = state.position;
+                }
+              },
+              builder: (context, state) {
+                return MarkerLayer(
+                  markers: [
+                    Marker(
+                      rotate: true,
+                      height: 40,
+                      width: 40,
+                      point: currentLatLngCenter,
+                      builder: (context) => Image.asset(Assets.myLocation),
+                    )
+                  ],
+                );
+              },
+            ),
+            if (widget.forChoosingAddress)
+              Align(
+                child: SelectedAddressLayer(
+                  isPointerDown: isPointerDown,
+                ),
+              )
+          ],
         ),
       ],
     );
@@ -109,7 +152,9 @@ class _MapWidgetState extends State<MapWidget> with TickerProviderStateMixin {
         );
 
         final controller = AnimationController(
-            duration: const Duration(milliseconds: 700), vsync: this);
+          duration: const Duration(milliseconds: 700),
+          vsync: this,
+        );
         final animation =
             CurvedAnimation(parent: controller, curve: Curves.ease);
 

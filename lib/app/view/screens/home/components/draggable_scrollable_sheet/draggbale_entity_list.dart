@@ -3,6 +3,7 @@ import 'package:asman_work/app/view/screens/home/components/draggable_scrollable
 import 'package:asman_work/app/view/screens/home/components/draggable_scrollable_sheet/public_entity_list_item.dart';
 import 'package:asman_work/app/view/screens/home/components/user_name_and_location_widgets.dart';
 import 'package:asman_work/data/model/public_entity.dart';
+import 'package:asman_work/data/repository/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,7 +25,6 @@ class _DraggableEntityListState extends State<DraggableEntityList> {
   final panelHeightClosed = 0.5;
   double notificationExtent = 0.5;
   late double fabHeight;
-  int page = 1;
 
   @override
   void initState() {
@@ -97,6 +97,8 @@ class HomeCustomScrollView extends StatefulWidget {
 }
 
 class _HomeCustomScrollViewState extends State<HomeCustomScrollView> {
+  int page = 1;
+
   @override
   void initState() {
     widget.controller.addListener(_scrollListener);
@@ -109,15 +111,25 @@ class _HomeCustomScrollViewState extends State<HomeCustomScrollView> {
     if (widget.controller.offset >=
             widget.controller.position.maxScrollExtent &&
         !isLoading) {
-      setState(() {
-        isLoading = true;
-      });
-      Future<dynamic>.delayed(
-        const Duration(seconds: 1),
-      ).then((dynamic value) {
-        _fetchEvent();
-        isLoading = false;
-      });
+      int totalPage;
+      if (widget.tabState == EnumDraggableSheetState.none ||
+          widget.tabState == EnumDraggableSheetState.lookingJob) {
+        totalPage = PublicVacancyRepository().totalPage;
+      } else {
+        totalPage = PublicProfileRepository().totalPage;
+      }
+      if (page < totalPage) {
+        page++;
+        setState(() {
+          isLoading = true;
+        });
+        Future<dynamic>.delayed(
+          const Duration(seconds: 1),
+        ).then((dynamic value) {
+          _fetchEvent();
+          isLoading = false;
+        });
+      }
     }
   }
 
@@ -157,10 +169,14 @@ class _HomeCustomScrollViewState extends State<HomeCustomScrollView> {
           if (widget.tabState == EnumDraggableSheetState.none ||
               widget.tabState == EnumDraggableSheetState.lookingJob)
             BlocConsumer<PublicVacancyBloc, PublicVacancyState>(
+              listener: (context, state) {
+                if (state is PublicVacancyFailure) {
+                  errorDialog(context, state.errorMessage);
+                }
+              },
               builder: (context, state) {
                 if (state is PublicVacancyLoaded) {
                   final vacancies = state.vacancies;
-
                   return _sliverList(vacancies, true);
                 } else {
                   return _loadingOrErrorSliver(
@@ -180,11 +196,6 @@ class _HomeCustomScrollViewState extends State<HomeCustomScrollView> {
                             ),
                           ),
                   );
-                }
-              },
-              listener: (context, state) {
-                if (state is PublicVacancyFailure) {
-                  errorDialog(context, state.errorMessage);
                 }
               },
             ),
@@ -229,6 +240,10 @@ class _HomeCustomScrollViewState extends State<HomeCustomScrollView> {
                 alignment: Alignment.topCenter,
                 child: const CircularProgressIndicator(),
               ),
+            ),
+          if (!isLoading)
+            const SliverPadding(
+              padding: EdgeInsets.only(bottom: 100),
             ),
         ],
       ),

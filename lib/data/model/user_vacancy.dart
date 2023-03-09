@@ -108,34 +108,31 @@ class UserVacancy {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'user_id': userId,
-      'address_id': addressId,
       'industry_id': industryId,
       'title': title,
       'employer_title': employerTitle,
       'description': description,
       'salary_from': salaryFrom,
       'salary_to': salaryTo,
-      'by_agreement': byAgreement,
-      'disability_people': disabilityPeople,
+      // 'by_agreement': byAgreement,
       'emp_type': empType,
+      // 'disability_people': disabilityPeople,
       'contact_phone': contactPhone,
-      'contact_email': contactEmail,
-      'status': status,
-      'publish_at': publishAt,
-      'expires_at': expiresAt,
+      // 'contact_email': contactEmail,
+      // 'status': status,
+      // 'publish_at': publishAt,
+      // 'expires_at': expiresAt,
       'expiration_days': expirationDays,
       'avatar_number': avatarNumber,
-      'created_at': createdAt,
-      'updated_at': updatedAt,
-      'deleted_at': deletedAt,
-      'address': address,
+      // 'created_at': createdAt,
+      // 'updated_at': updatedAt,
+      // 'deleted_at': deletedAt,
+      // 'address': address,
     };
   }
 
   factory UserVacancy.fromMap(Map<String, dynamic> map) {
-    final phone = (map['contact_phone'] as List)[0];
+    final phone = map['contact_phone'] as List;
     return UserVacancy(
       id: map['id'] as int,
       userId: map['user_id'] as int,
@@ -153,7 +150,7 @@ class UserVacancy {
           ? map['disability_people'] as bool
           : null,
       empType: map['emp_type'] as String,
-      contactPhone: List<String>.from(phone as List),
+      contactPhone: List<String>.from(phone),
       contactEmail:
           map['contact_email'] != null ? map['contact_email'] as String : null,
       status: map['status'] != null ? map['status'] as String : null,

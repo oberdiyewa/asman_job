@@ -79,8 +79,18 @@ class UserNameWidget extends StatelessWidget {
   }
 }
 
-class FindMyLocationWidget extends StatelessWidget {
+class FindMyLocationWidget extends StatefulWidget {
   const FindMyLocationWidget({super.key});
+
+  @override
+  State<FindMyLocationWidget> createState() => _FindMyLocationWidgetState();
+}
+
+class _FindMyLocationWidgetState extends State<FindMyLocationWidget> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +100,6 @@ class FindMyLocationWidget extends StatelessWidget {
           return GestureDetector(
             onTap: () {
               context.read<LocationBloc>().add(LocationStarted());
-              print('map move ${state.position.latitude}');
               MapService.instance.moveDelegate!(
                 LatLng(state.position.latitude, state.position.longitude),
                 13,

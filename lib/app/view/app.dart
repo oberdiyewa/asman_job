@@ -5,6 +5,7 @@ import 'package:asman_work/app/view/main/bloc/location_bloc/location_bloc.dart';
 import 'package:asman_work/app/view/main/bloc/user_bloc/user_bloc.dart';
 import 'package:asman_work/app/view/main/main_screen.dart';
 import 'package:asman_work/app/view/screens/home/bloc/home_bloc.dart';
+import 'package:asman_work/app/view/screens/notification/bloc/address_reverse_bloc/address_reverse_bloc.dart';
 import 'package:asman_work/app/view/screens/notification/bloc/bloc.dart';
 import 'package:asman_work/app/view/screens/search/bloc/bloc.dart';
 import 'package:asman_work/data/providers/logic/bottom_navigation_provider.dart';
@@ -26,6 +27,9 @@ class App extends StatelessWidget {
     final isUserRegistred = TokenRepository().getAccessToken.isNotEmpty;
     return MultiBlocProvider(
       providers: <BlocProvider>[
+        BlocProvider<AddressReverseBloc>(
+          create: (_) => AddressReverseBloc(ServicesRepository()),
+        ),
         BlocProvider<BottomNavigationProvider>(
           create: (context) => BottomNavigationProvider(),
         ),

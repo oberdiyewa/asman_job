@@ -61,8 +61,8 @@ class _MainScreenState extends State<MainScreen> {
       title: 'Bildiris ber',
     ),
     NavBarItem(
-      Assets.notifSelected,
-      Assets.notifUnselected,
+      Assets.chatSelected,
+      Assets.chatUnselected,
       const ChatScreen(),
       label: EnumScreenName.chat,
       title: 'Chat',
@@ -100,16 +100,21 @@ class _MainScreenState extends State<MainScreen> {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.white,
-        onPressed: () {
-          context
-              .read<BottomNavigationProvider>()
-              .changeScreen(EnumScreenName.notifs);
+      floatingActionButton:
+          BlocBuilder<BottomNavigationProvider, EnumScreenName>(
+        builder: (context, state) {
+          return FloatingActionButton(
+            backgroundColor: Colors.white,
+            onPressed: () {
+              context
+                  .read<BottomNavigationProvider>()
+                  .changeScreen(EnumScreenName.notifs);
+            },
+            child: SvgPicture.asset(
+              Assets.notifSelected,
+            ),
+          );
         },
-        child: SvgPicture.asset(
-          Assets.notifSelected,
-        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

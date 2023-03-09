@@ -1,7 +1,6 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class JobBaseAppbar extends StatelessWidget implements PreferredSizeWidget {
@@ -9,9 +8,13 @@ class JobBaseAppbar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     required this.onBack,
     super.key,
+    this.actions,
+    this.bottom,
   });
   final String title;
   final VoidCallback onBack;
+  final List<Widget>? actions;
+  final Widget? bottom;
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +40,15 @@ class JobBaseAppbar extends StatelessWidget implements PreferredSizeWidget {
         color: kcSecondaryTextColor,
       ),
       centerTitle: true,
-      // backgroundColor: kcPrimaryColor,
+      actions: actions,
+      // ignore: prefer_const_constructors
+      bottom: bottom == null
+          ? null
+          : PreferredSize(preferredSize: preferredSize, child: bottom!),
     );
   }
 
   @override
-  Size get preferredSize => AppBar().preferredSize;
+  Size get preferredSize =>
+      bottom == null ? AppBar().preferredSize : AppBar().preferredSize * 2;
 }

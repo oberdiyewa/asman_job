@@ -41,7 +41,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         children: [
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.6,
-            child: const MapWidget(),
+            child: const MapWidget(forChoosingAddress: false,),
           ),
           const MapHeaderWidget(),
           const Positioned.fill(

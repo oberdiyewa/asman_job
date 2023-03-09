@@ -1,6 +1,5 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
-import 'package:asman_work/app/view/screens/notification/add_profile/add_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -82,54 +81,51 @@ class AddButton extends StatelessWidget {
   }
 }
 
-class SliderWidget extends StatefulWidget {
-  const SliderWidget({super.key});
+class SliderWidget extends StatelessWidget {
+  const SliderWidget({
+    required this.valueNotifier,
+    super.key,
+  });
 
-  @override
-  State<SliderWidget> createState() => _SliderWidgetState();
-}
-
-class _SliderWidgetState extends State<SliderWidget> {
-  late double currentSliderValue;
-  late final ProfileValueNotifiers notifiers;
-
-  @override
-  void initState() {
-    notifiers = ProfileValueNotifiers.instance!;
-    currentSliderValue = notifiers.activeDaysValue.value.toDouble();
-    super.initState();
-  }
+  final ValueNotifier<int> valueNotifier;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 5),
-          child: BoxText.headline(
-            '${currentSliderValue.round()} gün',
-            color: kcPrimaryColor,
-          ),
+        ValueListenableBuilder<int>(
+          valueListenable: valueNotifier,
+          builder: (context, value, child) {
+            return Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: BoxText.headline(
+                '$value gün',
+                color: kcPrimaryColor,
+              ),
+            );
+          },
         ),
         Theme(
           data: Theme.of(context).copyWith(
             sliderTheme:
                 const SliderThemeData(valueIndicatorColor: kcPrimaryColor),
           ),
-          child: Slider(
-            value: currentSliderValue as double,
-            max: 60,
-            divisions: 60,
-            thumbColor: kcPrimaryColor,
-            activeColor: kcPrimaryColor,
-            min: 1,
-            label: '${currentSliderValue.round()} gün',
-            onChanged: (double value) {
-              setState(() {
-                currentSliderValue = value;
-                notifiers.activeDaysValue.value = value.toInt();
-              });
+          child: ValueListenableBuilder<int>(
+            valueListenable: valueNotifier,
+            builder: (context, value, child) {
+              return Slider(
+                value: value.toDouble(),
+                max: 60,
+                divisions: 60,
+                thumbColor: kcPrimaryColor,
+                activeColor: kcPrimaryColor,
+                min: 1,
+                label: '$value gün',
+                onChanged: (double value) {
+                  valueNotifier.value = value.toInt();
+                },
+              );
             },
           ),
         ),

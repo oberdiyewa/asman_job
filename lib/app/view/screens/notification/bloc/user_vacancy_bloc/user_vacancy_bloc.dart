@@ -10,6 +10,9 @@ class UserVacancyBloc extends Bloc<UserVacancyEvent, UserVacancyState> {
   UserVacancyBloc(this._repository) : super(UserVacancyInitial()) {
     on<UserVacancyFetchEvent>(_onFetchEvent);
     on<UserVacancyFetchMoreEvent>(_onFetchMoreEvent);
+    on<UserVacancyAddEvent>(_onAddEvent);
+    on<UserVacancyUpdateEvent>(_onUpdateEvent);
+    on<UserVacancyDeleteEvent>(_onDeleteEvent);
   }
   final UserVacancyRepository _repository;
 
@@ -20,7 +23,7 @@ class UserVacancyBloc extends Bloc<UserVacancyEvent, UserVacancyState> {
     UserVacancyFetchEvent event,
     Emitter<UserVacancyState> emit,
   ) async {
-    if (page <= _repository.userVacancyTotalPage) {}
+    page = 1;
     emit(UserVacancyLoading());
     try {
       vacancies = await _repository.userVacancyList(page: page);
@@ -67,6 +70,78 @@ class UserVacancyBloc extends Bloc<UserVacancyEvent, UserVacancyState> {
           ),
         );
       }
+    }
+  }
+
+  Future<void> _onAddEvent(
+    UserVacancyAddEvent event,
+    Emitter<UserVacancyState> emit,
+  ) async {
+    try {
+      emit(UserVacancyLoading());
+      await _repository.userVacancyAdd(event.data);
+      emit(UserVacancyAddSuccess());
+      add(UserVacancyFetchEvent());
+    } catch (e) {
+      emit(
+        UserVacancyFailure(
+          e.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> _onUpdateEvent(
+    UserVacancyUpdateEvent event,
+    Emitter<UserVacancyState> emit,
+  ) async {
+    // final Vacancys = (state as UserVacancyLoaded).vacancies;
+    try {
+      emit(UserVacancyLoading());
+      await _repository.userVacancyUpdate(event.data, event.id);
+      emit(UserVacancyAddSuccess());
+      add(UserVacancyFetchEvent());
+    } catch (e) {
+      emit(
+        UserVacancyFailure(
+          e.toString(),
+        ),
+      );
+    }
+  }
+
+  Future<void> _onDeleteEvent(
+    UserVacancyDeleteEvent event,
+    Emitter<UserVacancyState> emit,
+  ) async {
+    final vacancies = (state as UserVacancyLoaded).vacancies;
+    print(vacancies.length);
+    try {
+      emit(UserVacancyLoading());
+      final response = await _repository.userVacancyDelete(event.id);
+      if (response) {
+        final updatedVacancyList =
+            vacancies.where((e) => e.id != event.id).toList();
+        emit(
+          UserVacancyLoaded(
+            vacancies: updatedVacancyList,
+            moreVacancies: const [],
+          ),
+        );
+      } else {
+        emit(
+          UserVacancyLoaded(
+            vacancies: vacancies,
+            moreVacancies: const [],
+          ),
+        );
+      }
+    } catch (e) {
+      emit(
+        UserVacancyFailure(
+          e.toString(),
+        ),
+      );
     }
   }
 }

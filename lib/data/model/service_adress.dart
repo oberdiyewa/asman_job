@@ -38,18 +38,17 @@ class ServiceAddress {
     return <String, dynamic>{
       'address': displayName,
       'title': title,
-      'point': [
-        {
-          'lat': point!.latitude,
-          'lng': point!.longitude,
-        }
-      ]
+      'point': {'lat': point!.latitude, 'lng': point!.longitude}
     };
   }
 
   factory ServiceAddress.fromMap(Map<String, dynamic> map) {
     return ServiceAddress(
       displayName: map['display_name'] as String,
+      point: LatLng(
+        double.tryParse(map['lat'] as String) ?? 0.0,
+        double.tryParse(map['lon'] as String) ?? 0.0,
+      ),
     );
   }
 
@@ -59,7 +58,8 @@ class ServiceAddress {
       ServiceAddress.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'ServiceAddress(displayName: $displayName)';
+  String toString() =>
+      'ServiceAddress(displayName: $displayName, point: $point)';
 
   @override
   bool operator ==(covariant ServiceAddress other) {
