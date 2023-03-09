@@ -64,7 +64,7 @@ class _AddNewLanguageScreenState extends State<AddNewLanguageScreen> {
 
     // update state
     levels = newList;
-    setState(() {});
+    // setState(() {});
   }
 
   @override
