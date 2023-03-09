@@ -11,12 +11,9 @@ abstract class Assets {
   static const profileSelected = 'assets/icons/profile_selected.svg';
   static const profileUnselected = 'assets/icons/profile_unselected.svg';
 
-  static const menuIcon = 'assets/images/menu_button.png';
-  static const personGreyIcon = 'assets/icons/person_grey.svg';
   static const avatarImage = 'assets/images/avatar.png';
   static const searchWorkIcon = 'assets/icons/search_work.svg';
   static const mapImage = 'assets/images/map.png';
-  static const refreshIcon = 'assets/icons/refresh.svg';
   static const profileBig = 'assets/icons/profile_big.svg';
   static const help = 'assets/icons/help.svg';
   static const notif = 'assets/icons/notif.svg';
