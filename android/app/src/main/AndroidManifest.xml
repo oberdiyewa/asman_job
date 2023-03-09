@@ -34,7 +34,11 @@
                android:value="AIzaSyBEyUHQuUW44UQ0hafd43pooV-Z9YszHgg"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+=======
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+>>>>>>> 3b494ec (version updated)
 </manifest>
