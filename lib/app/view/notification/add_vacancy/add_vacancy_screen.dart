@@ -82,26 +82,7 @@ class _AddVacancyScreenState extends State<AddVacancyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(241, 241, 241, 1),
-      appBar: AppBar(
-        elevation: 0,
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Padding(
-            padding: REdgeInsets.all(20.0),
-            child: SvgPicture.asset(
-              Assets.backIcon,
-            ),
-          ),
-        ),
-        title: BoxText.headline(
-          'Bildiriş ber',
-          color: kcSecondaryTextColor,
-        ),
-        centerTitle: true,
-        backgroundColor: kcPrimaryColor,
-      ),
+      appBar: const BaseAppbar(title: 'Bildiriş ber'),
       body: Stack(
         children: [
           ListView(

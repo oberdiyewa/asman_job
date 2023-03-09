@@ -301,7 +301,8 @@ class _AddForWorkNotifState extends State<AddForWorkNotif> {
                 headlineWord: 'Bildiriş barada goşmaça maglumaty',
               ),
               const AddSection(
-                customHeight: 120,
+                customHeight: 150,
+                bottomPadding: 50,
                 widget: TextField(
                   maxLines: 8,
                   decoration: InputDecoration.collapsed(

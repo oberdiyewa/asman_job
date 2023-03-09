@@ -34,14 +34,18 @@ class MenuItems extends StatelessWidget {
           Row(
             children: [
               if (leading != null)
-                SvgPicture.asset(
-                  leading!,
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      leading!,
+                    ),
+                    SizedBox(
+                      width: 11.w,
+                    ),
+                  ],
                 )
               else
                 const SizedBox(),
-              SizedBox(
-                width: 11.w,
-              ),
               BoxText.body(
                 title,
               )

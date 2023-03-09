@@ -5,6 +5,7 @@ import 'package:asman_work/app/view/notification/section_add.dart';
 import 'package:asman_work/app/view/profile/change_language/change_language.dart';
 import 'package:asman_work/app/view/profile/favourites/favourites_screen.dart';
 import 'package:asman_work/app/view/profile/fill_about_yourself/fill_data.dart';
+import 'package:asman_work/app/view/profile/help_chat/chat_screen.dart';
 import 'package:asman_work/app/view/profile/profile_widgets.dart';
 import 'package:asman_work/app/view/profile/security/security_screen.dart';
 import 'package:asman_work/app/view/profile/settings_screen/settings_screen.dart';
@@ -38,64 +39,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   verticalSpaceRegular,
-<<<<<<< HEAD
-                  AddSection(
-                    customHeight: 60,
-                    topPadding: 0,
-                    bottomPadding: 0,
-                    leftPadding: 0,
-                    rightPadding: 0,
-                    widget: Material(
-                      child: Ink(
-                        child: InkWell(
-                          splashColor: kcPrimaryColor.withOpacity(0.25),
-                          onTap: () {
-                            Navigator.push<dynamic>(
-                              context,
-                              MaterialPageRoute<dynamic>(
-                                builder: (context) => SettingsScreen(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            margin: REdgeInsets.symmetric(vertical: 5),
-                            padding: EdgeInsets.only(left: 20),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Row(
-                              children: [
-                                SvgPicture.asset(
-                                  Assets.profilScreenAvatar,
-                                  color: Colors.black,
-                                  width: 22,
-                                  height: 22,
-                                ),
-                                horizontalSpaceSmall,
-                                BoxText.body(
-                                  'Berdiyewa Oguljemal',
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  verticalSpaceRegular,
-=======
-                  // profileHeadSection(),
-                  // verticalSpaceMedium,
->>>>>>> 4622659 (profile screen modified)
+                  profileHeadSection(),
+                  verticalSpaceMedium,
                   AddSection(
                     rightPadding: 0,
                     leftPadding: 0,
                     bottomPadding: 0,
-<<<<<<< HEAD
-                    customHeight: 170,
-=======
-                    customHeight: 290,
->>>>>>> 4622659 (profile screen modified)
+                    customHeight: 340,
                     widget: Column(
                       children: [
                         Material(
@@ -124,78 +74,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           indent: 20,
                           endIndent: 20,
                         ),
-                        // Material(
-                        //   child: Ink(
-                        //     child: InkWell(
-                        //       splashColor:
-                        //           const Color.fromRGBO(239, 246, 255, 1),
-                        //       onTap: () {
-                        //         Navigator.push<dynamic>(
-                        //           context,
-                        //           MaterialPageRoute<dynamic>(
-                        //             builder: (context) =>
-                        //                 const FillDataAboutYourself(),
-                        //           ),
-                        //         );
-                        //       },
-                        //       child: MenuItems(
-                        //         context: context,
-                        //         title: 'Özüň barada maglumat goş',
-                        //         leading: Assets.about,
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                        // const Divider(
-                        //   indent: 20,
-                        //   endIndent: 20,
-                        // ),
-<<<<<<< HEAD
-                        // Material(
-                        //   child: Ink(
-                        //     child: InkWell(
-                        //       splashColor:
-                        //           const Color.fromRGBO(239, 246, 255, 1),
-                        //       onTap: () {},
-                        //       child: MenuItems(
-                        //         context: context,
-                        //         title: 'Tehniki kömek',
-                        //         leading: Assets.help,
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                        // const Divider(
-                        //   indent: 20,
-                        //   endIndent: 20,
-                        // ),
-                        // Material(
-                        //   child: Ink(
-                        //     child: InkWell(
-                        //       splashColor:
-                        //           const Color.fromRGBO(239, 246, 255, 1),
-                        //       onTap: () {
-                        //         Navigator.push<dynamic>(
-                        //           context,
-                        //           MaterialPageRoute<dynamic>(
-                        //             builder: (context) =>
-                        //                 const SettingsScreen(),
-                        //           ),
-                        //         );
-                        //       },
-                        //       child: MenuItems(
-                        //         context: context,
-                        //         title: 'Sazlamalar',
-                        //         leading: Assets.setting,
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
-                        // const Divider(
-                        //   indent: 20,
-                        //   endIndent: 20,
-                        // ),
-=======
                         Material(
                           child: Ink(
                             child: InkWell(
@@ -205,10 +83,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 Navigator.push<dynamic>(
                                   context,
                                   MaterialPageRoute<dynamic>(
-                                    builder: (context) => const ChatScreen(),
+                                    builder: (context) =>
+                                        const FillDataAboutYourself(),
                                   ),
                                 );
                               },
+                              child: MenuItems(
+                                context: context,
+                                title: 'Özüň barada maglumat goş',
+                                leading: Assets.about,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Divider(
+                          indent: 20,
+                          endIndent: 20,
+                        ),
+                        Material(
+                          child: Ink(
+                            child: InkWell(
+                              splashColor:
+                                  const Color.fromRGBO(239, 246, 255, 1),
+                              onTap: () {},
                               child: MenuItems(
                                 context: context,
                                 title: 'Tehniki kömek',
@@ -247,19 +144,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           indent: 20,
                           endIndent: 20,
                         ),
->>>>>>> 4622659 (profile screen modified)
                         Material(
                           child: Ink(
                             child: InkWell(
                               splashColor:
                                   const Color.fromRGBO(239, 246, 255, 1),
-                              onTap: () {
-                                Navigator.push<dynamic>(
-                                    context,
-                                    MaterialPageRoute<dynamic>(
-                                        builder: (context) =>
-                                            const FavouritesScreen()));
-                              },
+                              onTap: () {},
                               child: MenuItems(
                                 context: context,
                                 title: 'Halanlarym',
@@ -278,28 +168,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               splashColor:
                                   const Color.fromRGBO(239, 246, 255, 1),
                               onTap: () {
-                                dialog(
-                                  context,
-                                  button1: const BoxButton.small(
-                                    title: 'Tassykla',
-                                  ),
-                                  button2: BoxButton.small(
-                                    onTap: () {
-                                      Navigator.pop(context);
-                                    },
-                                    title: 'Goýbolsun ',
-                                    textColor: kcPrimaryTextColor,
-                                    style: bodyStyle.copyWith(fontSize: 12),
-                                    outline: true,
-                                  ),
-                                  contentText: const Text(
-                                    'Profilden çykmak üçin tassyklaň',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                );
+                                dialog(context,
+                                    button1: const BoxButton.small(
+                                        title: 'Tassykla'),
+                                    button2: BoxButton.small(
+                                        onTap: () {
+                                          Navigator.pop(context);
+                                        },
+                                        title: 'Goýbolsun '),
+                                    contentText: const Text(
+                                      'Profilden çykmak üçin tassyklaň',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ));
                               },
                               child: MenuItems(
                                 context: context,
@@ -340,7 +223,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   verticalSpaceRegular,
                   AddSection(
-                    leftPadding: 3,
                     customHeight: 50,
                     widget: MenuItems(
                       context: context,

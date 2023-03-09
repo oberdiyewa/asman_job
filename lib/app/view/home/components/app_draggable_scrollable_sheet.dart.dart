@@ -11,7 +11,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'draggable_detail_screen.dart';
 import 'draggable_vacancy_list.dart';
 
 class AppDraggableScrollableSheet extends StatelessWidget {
