@@ -2,11 +2,12 @@ import 'dart:async';
 
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/services/map_service.dart';
-import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/screens/home/bloc/home_bloc.dart';
 import 'package:asman_work/app/view/screens/home/components/draggable_scrollable_sheet/public_entity_list_item.dart';
 import 'package:asman_work/app/view/screens/home/components/map_widget.dart';
+import 'package:asman_work/app/view/screens/notification/bloc/bloc.dart';
 import 'package:asman_work/app/view/screens/notification/notif_widgets.dart';
+import 'package:asman_work/components/ui/base_appbar.dart';
 import 'package:asman_work/components/ui/refresh_button.dart';
 import 'package:asman_work/data/model/model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -14,8 +15,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+ValueNotifier<String> _appBarText = ValueNotifier('');
 
 class DetailsScreen extends StatefulWidget {
   const DetailsScreen({
@@ -32,50 +34,50 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+  String _appBarTitle = '';
+
+  void toogleAppBarTitile(String title) {
+    setState(() {
+      _appBarTitle = title;
+    });
+  }
+
   @override
   void initState() {
     Timer(const Duration(milliseconds: 200), () {
       MapService.instance.moveDelegate!(widget.publicEntity.point, 13);
     });
+    final catalogueBlocState = context.read<UserCatalogueBloc>().state;
+    if (catalogueBlocState is! UserCatalogueLoaded) {
+      context.read<UserCatalogueBloc>().add(UserCatalogueFetchEvent());
+    }
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.only(top: MediaQuery.of(context).viewPadding.top),
-        child: Stack(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.6,
-              child: const MapWidget(forChoosingAddress: false,),
+      appBar: JobBaseAppbar(
+        title: _appBarTitle,
+        onBack: () => Navigator.pop(context),
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.favorite_border))
+        ],
+      ),
+      body: Stack(
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.6,
+            child: const MapWidget(
+              forChoosingAddress: false,
             ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Material(
-                clipBehavior: Clip.antiAlias,
-                color: Theme.of(context).iconTheme.color,
-                shape: const CircleBorder(),
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.keyboard_arrow_left,
-                    color: Colors.white,
-                    size: 32,
-                  ),
-                ),
-              ),
-            ),
-            // const MapHeaderWidget(),
-            DraggableEntityDetail(
-              id: widget.publicEntity.id,
-              isVacancy: widget.isVacancy,
-            )
-          ],
-        ),
+          ),
+          DraggableEntityDetail(
+            id: widget.publicEntity.id,
+            isVacancy: widget.isVacancy,
+            callBack: toogleAppBarTitile,
+          )
+        ],
       ),
     );
   }
@@ -85,122 +87,137 @@ class DraggableEntityDetail extends StatelessWidget {
   const DraggableEntityDetail({
     required this.id,
     required this.isVacancy,
+    required this.callBack,
     super.key,
   });
 
   final int id;
   final bool isVacancy;
+  final ValueChanged<String> callBack;
+
   @override
   Widget build(BuildContext context) {
-    return DraggableScrollableSheet(
-      key: const Key('Detail'),
-      initialChildSize: 0.4,
-      minChildSize: 0.4,
-      maxChildSize: 0.9,
-      builder: (context, scrollController) {
-        return Stack(
-          children: [
-            Container(
-              color: const Color.fromRGBO(241, 241, 241, 1),
-              padding: REdgeInsets.only(
-                left: 13,
-                top: 16,
-                right: 14,
-                bottom: 25,
-              ),
-              child: isVacancy
-                  ? BlocConsumer<PublicVacancyDetailBloc,
-                      PublicVacancyDetailState>(
-                      listener: (ctx, state) {
-                        if (state is PublicVacancyDetailFailure) {
-                          showErrorDialog(ctx, state.errorMessage);
-                        }
-                      },
-                      builder: (context, state) {
-                        if (state is PublicVacancyDetailFailure) {
-                          return JobRefreshButton(
-                            onTap: () {
-                              context
-                                  .read<PublicVacancyDetailBloc>()
-                                  .add(PublicVacancyDetailFetchEvent(id));
-                            },
-                          );
-                        } else if (state is PublicVacancyDetailLoaded) {
-                          final vDetail = state.publicVacancyDetail;
-                          return EntityDetailListView(
-                            vDetail: vDetail,
-                            pDetail: null,
-                            isVacancy: isVacancy,
-                            scrollController: scrollController,
-                          );
-                        } else {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      },
-                    )
-                  : BlocConsumer<PublicProfileDetailBloc,
-                      PublicProfileDetailState>(
-                      listener: (ctx, state) {
-                        if (state is PublicProfileDetailFailure) {
-                          showErrorDialog(ctx, state.errorMessage);
-                        }
-                      },
-                      builder: (context, state) {
-                        if (state is PublicProfileDetailFailure) {
-                          return JobRefreshButton(
-                            onTap: () {
-                              print(id);
-                              context
-                                  .read<PublicProfileDetailBloc>()
-                                  .add(PublicProfileDetailFetchEvent(id));
-                            },
-                          );
-                        } else if (state is PublicProfileDetailLoaded) {
-                          final pDetail = state.publicProfileDetail;
-                          return EntityDetailListView(
-                            pDetail: pDetail,
-                            vDetail: null,
-                            isVacancy: isVacancy,
-                            scrollController: scrollController,
-                          );
-                        } else {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      },
-                    ),
-            ),
-
-            // Call to advertiser button
-
-            if (isVacancy)
-              BlocBuilder<PublicVacancyDetailBloc, PublicVacancyDetailState>(
-                builder: (context, state) {
-                  if (state is! PublicVacancyDetailLoaded) {
-                    return const SizedBox.shrink();
-                  } else {
-                    final vDetail = state.publicVacancyDetail;
-                    return CallerButton(phone: vDetail.contactPhone.first);
-                  }
-                },
-              )
-            else
-              BlocBuilder<PublicProfileDetailBloc, PublicProfileDetailState>(
-                builder: (context, state) {
-                  if (state is! PublicProfileDetailLoaded) {
-                    return const SizedBox.shrink();
-                  } else {
-                    final pDetail = state.publicProfileDetail;
-                    return CallerButton(phone: pDetail.phone);
-                  }
-                },
-              )
-          ],
-        );
+    print('set State called');
+    return NotificationListener<DraggableScrollableNotification>(
+      onNotification: (notification) {
+        if (notification.extent == 1) {
+          callBack(_appBarText.value);
+        } else {
+          callBack('');
+        }
+        return true;
       },
+      child: DraggableScrollableSheet(
+        key: const Key('Detail'),
+        initialChildSize: 0.4,
+        minChildSize: 0.4,
+        builder: (context, scrollController) {
+          return Stack(
+            children: [
+              Container(
+                color: Colors.white,
+                padding: REdgeInsets.only(
+                  left: 13,
+                  top: 16,
+                  right: 14,
+                  bottom: 25,
+                ),
+                child: isVacancy
+                    ? BlocConsumer<PublicVacancyDetailBloc,
+                        PublicVacancyDetailState>(
+                        listener: (ctx, state) {
+                          if (state is PublicVacancyDetailFailure) {
+                            showErrorDialog(ctx, state.errorMessage);
+                          }
+                        },
+                        builder: (context, state) {
+                          if (state is PublicVacancyDetailFailure) {
+                            return JobRefreshButton(
+                              onTap: () {
+                                context
+                                    .read<PublicVacancyDetailBloc>()
+                                    .add(PublicVacancyDetailFetchEvent(id));
+                              },
+                            );
+                          } else if (state is PublicVacancyDetailLoaded) {
+                            final vDetail = state.publicVacancyDetail;
+                            _appBarText.value = vDetail.title;
+                            return EntityDetailListView(
+                              vDetail: vDetail,
+                              pDetail: null,
+                              isVacancy: isVacancy,
+                              scrollController: scrollController,
+                            );
+                          } else {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        },
+                      )
+                    : BlocConsumer<PublicProfileDetailBloc,
+                        PublicProfileDetailState>(
+                        listener: (ctx, state) {
+                          if (state is PublicProfileDetailFailure) {
+                            showErrorDialog(ctx, state.errorMessage);
+                          }
+                        },
+                        builder: (context, state) {
+                          if (state is PublicProfileDetailFailure) {
+                            return JobRefreshButton(
+                              onTap: () {
+                                print(id);
+                                context
+                                    .read<PublicProfileDetailBloc>()
+                                    .add(PublicProfileDetailFetchEvent(id));
+                              },
+                            );
+                          } else if (state is PublicProfileDetailLoaded) {
+                            final pDetail = state.publicProfileDetail;
+                            _appBarText.value = pDetail.title;
+                            return EntityDetailListView(
+                              pDetail: pDetail,
+                              vDetail: null,
+                              isVacancy: isVacancy,
+                              scrollController: scrollController,
+                            );
+                          } else {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        },
+                      ),
+              ),
+
+              // Call to advertiser button
+
+              if (isVacancy)
+                BlocBuilder<PublicVacancyDetailBloc, PublicVacancyDetailState>(
+                  builder: (context, state) {
+                    if (state is! PublicVacancyDetailLoaded) {
+                      return const SizedBox.shrink();
+                    } else {
+                      final vDetail = state.publicVacancyDetail;
+                      return CallerButton(phone: vDetail.contactPhone.first);
+                    }
+                  },
+                )
+              else
+                BlocBuilder<PublicProfileDetailBloc, PublicProfileDetailState>(
+                  builder: (context, state) {
+                    if (state is! PublicProfileDetailLoaded) {
+                      return const SizedBox.shrink();
+                    } else {
+                      final pDetail = state.publicProfileDetail;
+                      return CallerButton(phone: pDetail.phone);
+                    }
+                  },
+                )
+            ],
+          );
+        },
+      ),
     );
   }
 
@@ -245,7 +262,7 @@ class EntityDetailListView extends StatelessWidget {
         Row(
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // verticalSpaceTiny,
+            verticalSpaceTiny,
             if (isVacancy)
               CachedNetworkImage(
                 imageUrl: vDetail!.avatarUrl,
@@ -253,10 +270,22 @@ class EntityDetailListView extends StatelessWidget {
                 width: 80,
               )
             else
-              Image.asset(
-                Assets.workerLocation,
-                width: 80.w,
-                height: 80.h,
+              BlocBuilder<UserCatalogueBloc, UserCatalogueState>(
+                builder: (context, state) {
+                  final profileAvatarList = (state as UserCatalogueLoaded)
+                      .userCatalogue
+                      .profileAvatars;
+                  final profileAvatar = profileAvatarList!
+                      .where((e) => e.number == pDetail!.avatarNumber)
+                      .toList();
+                  return CachedNetworkImage(
+                    imageUrl: profileAvatar[0].avatarUrl,
+                    height: 80,
+                    width: 80,
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.image),
+                  );
+                },
               ),
             horizontalSpaceMedium,
             Expanded(
@@ -316,11 +345,6 @@ class EntityDetailListView extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-            Padding(
-              padding: REdgeInsets.only(left: 40),
-              // alignment: Alignment.,
-              child: SvgPicture.asset(Assets.favouriteIcon),
             ),
           ],
         ),
@@ -478,12 +502,12 @@ class CallerButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      bottom: 3,
-      left: 0,
+    return Align(
+      alignment: Alignment.bottomCenter,
+      // bottom: 3,
       child: GestureDetector(
         onTap: () {
-          showDialog(
+          showDialog<dynamic>(
             context: context,
             builder: (ctx) => JobAlertDialog(
               button1: Column(
@@ -491,6 +515,7 @@ class CallerButton extends StatelessWidget {
                   BoxButton.medium(
                     title: 'OK',
                     onTap: () async {
+                      Navigator.pop(ctx);
                       if (kReleaseMode) {
                         final url = Uri(
                           scheme: 'tel',
@@ -523,28 +548,26 @@ class CallerButton extends StatelessWidget {
           );
         },
         child: Container(
-          width: 390.w,
-          height: 40.h,
-          decoration: const BoxDecoration(
+          // width: 390.w,
+          width: MediaQuery.of(context).size.width - 40,
+          margin: const EdgeInsets.symmetric(vertical: 15),
+          height: 46.h,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
             color: kcPrimaryColor,
           ),
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(Assets.callIcon),
-                horizontalSpaceSmall,
-                horizontalSpaceTiny,
-                Text(
-                  'Jan et',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                )
-              ],
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Jan et',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+              )
+            ],
           ),
         ),
       ),
