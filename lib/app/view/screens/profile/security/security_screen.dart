@@ -30,7 +30,7 @@ class _SecurityScreenState extends State<SecurityScreen> {
         appBar: AppBar(
           elevation: 0,
           leading: Padding(
-            padding: REdgeInsets.all(20),
+            padding: REdgeInsets.all(20.0),
             child: GestureDetector(
               onTap: () {
                 Navigator.pop(context);
@@ -122,6 +122,6 @@ class _SecurityScreenState extends State<SecurityScreen> {
               )
             ],
           ),
-        ),);
+        ));
   }
 }

@@ -1,12 +1,15 @@
+import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/main/bottom_navbar.dart';
-import 'package:asman_work/app/view/screens//profile/profile_screen.dart';
-import 'package:asman_work/app/view/screens/chat/chat_screen.dart';
-import 'package:asman_work/app/view/screens/home/bloc/tab_controller_cubit/tab_controller_cubit.dart';
+import 'package:asman_work/app/view/main/main_widgets.dart/hexagon.dart';
+import 'package:asman_work/app/view/screens/chat_screen/chat_screen.dart';
+import 'package:asman_work/app/view/screens/home/bloc/home_bloc.dart';
 import 'package:asman_work/app/view/screens/home/home.dart';
 import 'package:asman_work/app/view/screens/notification/bloc/bloc.dart';
 import 'package:asman_work/app/view/screens/notification/notif_screen.dart';
+import 'package:asman_work/app/view/screens/profile/profile_screen.dart';
 import 'package:asman_work/app/view/screens/search/search_screen.dart';
+
 import 'package:asman_work/data/providers/logic/bottom_navigation_provider.dart';
 import 'package:asman_work/data/repository/repository.dart';
 import 'package:asman_work/utils/globals/enums.dart';
@@ -56,7 +59,19 @@ class _MainScreenState extends State<MainScreen> {
     NavBarItem(
       Assets.notifSelected,
       Assets.notifUnselected,
-      const NotificationScreen(),
+      MultiBlocProvider(
+        providers: [
+          BlocProvider<UserVacancyBloc>(
+            create: (_) => UserVacancyBloc(UserVacancyRepository()),
+          ),
+          BlocProvider<UserProfileBloc>(
+            create: (_) => UserProfileBloc(
+              UserProfileRepository(),
+            ),
+          ),
+        ],
+        child: const NotificationScreen(),
+      ),
       label: EnumScreenName.notifs,
       title: 'Bildiris ber',
     ),
@@ -76,6 +91,7 @@ class _MainScreenState extends State<MainScreen> {
     ),
   ];
 
+  bool isSelected = false;
   @override
   Widget build(BuildContext context) {
     final bottomPadding = MediaQuery.of(context).viewInsets.bottom;
@@ -83,7 +99,6 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       extendBody: true,
       backgroundColor: Colors.white,
-      // resizeToAvoidBottomInset: false,
       body: BlocBuilder<BottomNavigationProvider, EnumScreenName>(
         builder: (context, state) {
           return SizedBox(
@@ -104,14 +119,15 @@ class _MainScreenState extends State<MainScreen> {
           BlocBuilder<BottomNavigationProvider, EnumScreenName>(
         builder: (context, state) {
           return FloatingActionButton(
-            backgroundColor: Colors.white,
+            elevation: 0,
+            backgroundColor: Colors.transparent,
             onPressed: () {
               context
                   .read<BottomNavigationProvider>()
                   .changeScreen(EnumScreenName.notifs);
             },
-            child: SvgPicture.asset(
-              Assets.notifSelected,
+            child: CenteredFloatingActionButton(
+              isSelected: state == EnumScreenName.notifs,
             ),
           );
         },
@@ -119,24 +135,23 @@ class _MainScreenState extends State<MainScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
+}
 
-  Container customFloatingActionButton() {
-    return Container(
-      width: 80.w,
-      height: 80.h,
-      alignment: Alignment.bottomCenter,
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        image: DecorationImage(image: AssetImage(Assets.menuIcon)),
-      ),
-      child: FittedBox(
-        child: FloatingActionButton(
-          onPressed: () {},
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          child: SvgPicture.asset(Assets.menuIcon),
-        ),
-      ),
+class CenteredFloatingActionButton extends StatelessWidget {
+  const CenteredFloatingActionButton({
+    required this.isSelected,
+    super.key,
+  });
+  final bool isSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return HexagonFAB(
+      size: 70,
+      icon: isSelected ? Assets.menuSelected : Assets.menuUnselected,
+      radiusColor: kcLightGreyColor,
+      elevation: 2,
+      elevationColor: kcLightGreyColor,
     );
   }
 }

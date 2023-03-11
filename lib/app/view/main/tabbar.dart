@@ -82,7 +82,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                       BlendMode.srcIn,
                     ),
                   ),
-                  horizontalSpaceRegular,
+                  horizontalSpaceSmall,
                   BoxText.headline('Iş gözleýän')
                 ],
               ),
@@ -95,7 +95,7 @@ class _TabBarWidgetState extends State<TabBarWidget>
                     Icons.person,
                     size: 20,
                   ),
-                  horizontalSpaceRegular,
+                  horizontalSpaceSmall,
                   BoxText.headline('Işgär gözleýän'),
                 ],
               ),

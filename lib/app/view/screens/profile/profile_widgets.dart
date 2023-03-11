@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../notification/section_add.dart';
+
 class MenuItems extends StatelessWidget {
   const MenuItems({
     required this.context,
@@ -32,14 +34,18 @@ class MenuItems extends StatelessWidget {
           Row(
             children: [
               if (leading != null)
-                SvgPicture.asset(
-                  leading!,
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      leading!,
+                    ),
+                    SizedBox(
+                      width: 11.w,
+                    ),
+                  ],
                 )
               else
                 const SizedBox(),
-              SizedBox(
-                width: 11.w,
-              ),
               BoxText.body(
                 title,
               )
@@ -50,6 +56,30 @@ class MenuItems extends StatelessWidget {
           else
             trailing!
         ],
+      ),
+    );
+  }
+}
+
+class BaseButton extends StatelessWidget {
+  const BaseButton({
+    super.key,
+    required this.title,
+  });
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return AddSection(
+      widget: Padding(
+        padding: REdgeInsets.only(bottom: 5),
+        child: BoxButton.block(
+          title: title,
+          style: heading2Style.copyWith(fontSize: 16),
+          onTap: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
     );
   }

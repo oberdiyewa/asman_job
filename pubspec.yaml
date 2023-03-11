@@ -11,7 +11,7 @@ dependencies:
   asman_flutter_uikit:
     git:
       url: https://git.asmantiz.com/Koch/asman_flutter_uikit.git
-      ref: c415fb37ee859be67ce0f04980fa08f7507cb756
+      ref: dev_oguljemal
   cached_network_image: ^3.2.3
   connectivity_plus: ^3.0.3
   dio: ^5.0.0
@@ -24,7 +24,7 @@ dependencies:
   flutter_map: ^3.1.0
   flutter_map_marker_cluster: ^1.0.2
   flutter_screenutil: ^5.6.1
-  flutter_svg: ^2.0.1
+  flutter_svg: ^2.0.3
   geolocator: ^9.0.2
   get_storage: ^2.0.3
   go_router: ^6.0.9

@@ -4,6 +4,7 @@ import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/main/tabbar.dart';
 import 'package:asman_work/app/view/screens/home/bloc/home_bloc.dart';
 import 'package:asman_work/app/view/screens/home/components/draggable_scrollable_sheet/public_entity_list_item.dart';
+import 'package:asman_work/app/view/screens/home/components/filter_screen.dart';
 import 'package:asman_work/app/view/screens/search/bloc/bloc.dart';
 import 'package:asman_work/components/ui/refresh_button.dart';
 import 'package:asman_work/data/repository/repository.dart';
@@ -171,7 +172,7 @@ class SearchField extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10).w,
                 ),
                 hintText:
-                    isVacancy ? 'Iň ýakyn işi tap' : 'Iň ýakyn işgari tap',
+                    isVacancy ? 'Iň ýakyn işi tap' : 'Iň amatly işgari tap',
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10).w,
                   borderSide: const BorderSide(
@@ -179,9 +180,26 @@ class SearchField extends StatelessWidget {
                   ),
                 ),
                 hintStyle: TextStyle(
-                  color: kcPrimaryColor,
+                  color: const Color.fromRGBO(149, 149, 149, 1),
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
+                ),
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    Navigator.push<dynamic>(
+                      context,
+                      MaterialPageRoute<dynamic>(
+                        builder: (context) => const FilterScreen(),
+                      ),
+                    );
+                  },
+                  child: ColoredBox(
+                    color: Colors.transparent,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: SvgPicture.asset(Assets.filter),
+                    ),
+                  ),
                 ),
               ),
             );

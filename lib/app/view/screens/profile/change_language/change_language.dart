@@ -1,8 +1,8 @@
 import 'package:asman_flutter_uikit/box_ui2.dart';
 import 'package:asman_work/app/view/helpers.dart';
 import 'package:asman_work/app/view/screens/home/components/custom_radio_widget.dart';
-import 'package:asman_work/app/view/screens/home/components/filter_screen.dart';
 import 'package:asman_work/app/view/screens/notification/section_add.dart';
+import 'package:asman_work/data/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -17,19 +17,19 @@ class ChangeLanguageScreen extends StatefulWidget {
 class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
   bool isAnySelected = true;
 
-  List<ChoiceFilter> languages = [
-    ChoiceFilter('Türkmençe'),
-    ChoiceFilter('Русский '),
-    ChoiceFilter('English'),
+  List<ExpansionTileElement> languages = [
+    ExpansionTileElement('Türkmençe'),
+    ExpansionTileElement('Русский '),
+    ExpansionTileElement('English'),
   ];
 
-  void _selectLanguage(ChoiceFilter c) {
-    final newList = List<ChoiceFilter>.from(languages);
+  void _selectLanguage(ExpansionTileElement c) {
+    final newList = List<ExpansionTileElement>.from(languages);
 
     for (var i = 0; i < newList.length; i++) {
       final item = newList[i];
 
-      if (item.name == c.name && item.selected!) {
+      if (item.name == c.name && item.selected) {
         return;
       } else if (item.name == c.name && item.selected == false) {
         newList[i] = item.copy(selected: true);
@@ -65,7 +65,7 @@ class _ChangeLanguageScreenState extends State<ChangeLanguageScreen> {
                         Row(
                           children: [
                             CustomRadioWidget<dynamic>(
-                              isSelected: e.selected!,
+                              isSelected: e.selected,
                               onChanged: () => _selectLanguage(e),
                             ),
                             horizontalSpaceSmall,

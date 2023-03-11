@@ -75,9 +75,12 @@ class SlidingPanelAppBar extends StatelessWidget {
                         ),
                       );
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.all(13),
-                      child: SvgPicture.asset(Assets.filter),
+                    child: ColoredBox(
+                      color: Colors.transparent,
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: SvgPicture.asset(Assets.filter),
+                      ),
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(

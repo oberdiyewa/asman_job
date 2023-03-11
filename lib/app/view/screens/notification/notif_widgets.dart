@@ -253,7 +253,7 @@ class NotificationEmptyScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgPicture.asset(Assets.empty),
+          Image.asset(Assets.empty),
           verticalSpaceLarge,
           verticalSpaceSmall,
           Padding(

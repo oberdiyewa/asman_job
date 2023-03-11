@@ -2,7 +2,8 @@ class WorkExperience {
   WorkExperience(
     this.company,
     this.startsAt,
-    this.endsAt, {
+    this.endsAt,
+   {
     required this.currentlyWorking,
     required this.jobTitle,
   });

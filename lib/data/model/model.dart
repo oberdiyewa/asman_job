@@ -1,4 +1,5 @@
 export 'education.dart';
+export 'expansion_tile_element.dart';
 export 'experience.dart';
 export 'language.dart';
 export 'location.dart';

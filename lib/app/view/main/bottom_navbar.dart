@@ -33,18 +33,78 @@ class CustomBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bottomData =
+        BlocProvider.of<BottomNavigationProvider>(context, listen: true);
+
+    final children = items.map<Widget>((navBar) {
+      final isSelected = bottomData.state == navBar.label;
+      // debugPrint('bottomData: ${bottomData.state}');
+      final icon =
+          isSelected ? navBar.selectedIconPath : navBar.unSelectedIconPath;
+
+      return navBar.label == EnumScreenName.notifs
+          ? Expanded(
+              flex: 3,
+              child: Column(
+                children: const [
+                  Spacer(
+                    flex: 2,
+                  ),
+                  Text(
+                    'Bildiriş goş',
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                      color: kcPrimaryColor,
+                    ),
+                  ),
+                  Spacer()
+                ],
+              ),
+            )
+          : Expanded(
+              flex: 2,
+              child: GestureDetector(
+                onTap: () {
+                  print('tapped yeah');
+                  if (!isSelected) {
+                    context
+                        .read<BottomNavigationProvider>()
+                        .changeScreen(navBar.label);
+                  }
+                },
+                child: ColoredBox(
+                  color: Colors.transparent,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      //if (isSelected == true) verticalSpaceTiny,
+                      SvgPicture.asset(
+                        icon,
+                        width: 31.w,
+                        height: 34.h,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+    }).toList();
+
     return DecoratedBox(
       decoration: const BoxDecoration(
-        // border: Border.all(color: Colors.black),
+        boxShadow: [
+          BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.25), blurRadius: 2)
+        ],
         borderRadius: BorderRadius.only(
-          topRight: Radius.circular(30),
-          topLeft: Radius.circular(30),
+          topRight: Radius.circular(20),
+          topLeft: Radius.circular(20),
         ),
       ),
       child: ClipRRect(
         borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
         ),
         child: SizedBox(
           width: screenWidth(context),
@@ -53,84 +113,15 @@ class CustomBottomBar extends StatelessWidget {
             color: Colors.white,
             // shape: const CircularNotchedRectangle(),
             // notchMargin: 2,
-            child: BlocBuilder<BottomNavigationProvider, EnumScreenName>(
-              builder: (context, state) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: items.map((navBar) {
-                    final index = items.indexOf(navBar);
-                    final isSelected = state == navBar.label;
-                    // debugPrint('bottomData: ${bottomData.state}');
-                    final icon = isSelected
-                        ? navBar.selectedIconPath
-                        : navBar.unSelectedIconPath;
-                    return navBar.label == EnumScreenName.notifs
-                        ? Expanded(
-                            flex: 3,
-                            child: GestureDetector(
-                              child: ColoredBox(
-                                color: Colors.grey[100]!,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(bottom: 5),
-                                      child: Text(
-                                        navBar.title,
-                                        style: TextStyle(
-                                          color: isSelected
-                                              ? kcPrimaryColor
-                                              : Colors.grey[700],
-                                          fontSize: isSelected ? 18 : 16,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ))
-                        : Expanded(
-                            flex: 2,
-                            child: GestureDetector(
-                              onTap: () {
-                                if (!isSelected) {
-                                  context
-                                      .read<BottomNavigationProvider>()
-                                      .changeScreen(navBar.label);
-                                }
-                              },
-                              child: ColoredBox(
-                                  color: Colors.grey[100]!,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      if (isSelected == true) verticalSpaceTiny,
-                                      SvgPicture.asset(
-                                        icon,
-                                        width: 40.w,
-                                        height: 40.h,
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                          );
-                  }).toList(),
-                );
-              },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: children,
+              ),
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Container makeUnderline() {
-    return Container(
-      height: 2.h,
-      width: 25.w,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: kcPrimaryColor,
       ),
     );
   }
